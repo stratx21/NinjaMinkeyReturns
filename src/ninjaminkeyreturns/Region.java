@@ -18,7 +18,9 @@ public class Region {
     
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
-    public ArrayList<int> type=new ArrayList<>();//type of terrain/etc
+    
+    //V - array of rectangles for side view, int by int array for top down
+    //public ArrayList<int> type=new ArrayList<>();//type of terrain/etc
     
     //public ArrayList<  - - -- - -arraylist for houses ?
     
