@@ -35,7 +35,7 @@ public class GraphicsAssets {
      * @return
      * @throws IOException 
      */
-    private static BufferedImage importFromString(String loc) throws IOException{
+    private static BufferedImage importFromString(String loc){
         try{
         InputStream in=GraphicsAssets.class.getResource(loc).openStream();
         if(in!=null)
