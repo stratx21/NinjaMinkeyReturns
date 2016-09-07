@@ -11,6 +11,10 @@ package ninjaminkeyreturns;
  */
 public class TopDownPlayer extends Player{
     
+    public byte directionFacing=0;//   0
+    //                               1   2
+    //                                 3
+    
     public boolean disabled=false;//for AI purposes , but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
     
     
