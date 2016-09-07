@@ -6,6 +6,7 @@
 package ninjaminkeyreturns;
 
 import java.util.ArrayList;
+import java.awt.Graphics;
 
 /**
  *
@@ -15,9 +16,11 @@ public class TopDownRegion extends Region{
     
     public ArrayList<TopDownAI> AIs=new ArrayList<>();
     
+    public int[][] types=new int[0][0];
+    
     public TopDownRegion(int regn){
         super(regn);
-        importRegionImages
+        changeRegion(regn);
     }
     
     /**
@@ -26,4 +29,15 @@ public class TopDownRegion extends Region{
     public void changeRegion(int newRegion){
         images=GraphicsAssets.importRegionImagesTopDown(newRegion);
     }
+    
+    /**
+     * 
+     */
+     public void draw(Graphics g){
+        
+     }
+    
+    
+    
+    
 }
