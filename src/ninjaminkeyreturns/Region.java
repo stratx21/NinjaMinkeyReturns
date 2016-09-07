@@ -18,4 +18,12 @@ public class Region {
     
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
+    public ArrayList<int> type=new ArrayList<>();//type of terrain/etc
+    
+    //public ArrayList<  - - -- - -arraylist for houses ?
+    
+    public Region(int regn){
+        REGION_ID=regn;
+    }
+    
 }
