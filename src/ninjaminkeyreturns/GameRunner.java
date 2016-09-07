@@ -15,6 +15,9 @@ public class GameRunner implements KeyListener{
     
     public static char[] controls=new char[6]; //to change controls change them in Profile then evoke the resetControls function
     
+    /**
+     * 
+     */
     public CListener done=null;
     
     public GameRunner(){
