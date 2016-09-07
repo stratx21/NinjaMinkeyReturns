@@ -5,10 +5,28 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Josh
  */
 public class SideViewPlayer extends Player{
+    
+    public Rectangle span=new Rectangle();
+    
+    public SideViewPlayer(int[] loc){
+        super(loc);
+    }
+    
+    /**
+     * @param loc
+     * @param spanX pixels
+     * @param spanY pixels
+     */ 
+    public SideViewPlayer(int[] loc,int spanX,int spanY){
+        super(loc);
+        span=new Rectangle(location[0],location[1],spanX,spanY);
+    }
     
 }
