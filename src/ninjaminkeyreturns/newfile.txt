@@ -1,0 +1,3 @@
+18 x length
+10 y length
+50x50 pixels per square (for original pixel dimensions)
