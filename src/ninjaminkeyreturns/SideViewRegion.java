@@ -5,10 +5,12 @@
  */
 package ninjaminkeyreturns;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Josh
  */
 public class SideViewRegion extends Region{
-    
+    public ArrayList<SideViewAI> AIs=new ArrayList<>();
 }

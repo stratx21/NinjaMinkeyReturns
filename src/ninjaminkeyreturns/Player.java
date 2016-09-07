@@ -11,4 +11,6 @@ package ninjaminkeyreturns;
  */
 public class Player {
     
+    public double health=0.00;
+    
 }

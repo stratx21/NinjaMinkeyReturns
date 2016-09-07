@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +23,9 @@ public class CPanel extends JPanel{
     public CPanel(){
         this.setLayout(null);
     }
+    
+    @Override
+    public void paintComponent(Graphics g){}
     
     /**
      * take the original measurements used and translate them to the new sizes

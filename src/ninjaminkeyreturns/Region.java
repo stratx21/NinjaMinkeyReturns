@@ -5,10 +5,17 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 /**
  *
  * @author Josh
  */
 public class Region {
+    
+    public int REGION_ID=0;
+    
+    public ArrayList<BufferedImage> images=new ArrayList<>();
     
 }

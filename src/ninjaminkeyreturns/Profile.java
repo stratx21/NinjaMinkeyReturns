@@ -19,6 +19,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Profile {
     
+    public static char[] controls=new char[]{ 
+        'W','S','A','D','J','K'//DEFAULT
+    };
+    
     public static boolean soundEffectsOn=true,musicOn=true;
     
     public static boolean[] completedMissions=new boolean[16];//expand on this

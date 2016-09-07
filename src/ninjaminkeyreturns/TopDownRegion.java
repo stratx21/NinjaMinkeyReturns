@@ -5,10 +5,13 @@
  */
 package ninjaminkeyreturns;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Josh
  */
 public class TopDownRegion extends Region{
     
+    public ArrayList<TopDownAI> AIs=new ArrayList<>();
 }

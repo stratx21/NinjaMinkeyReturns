@@ -12,4 +12,5 @@ package ninjaminkeyreturns;
 public class CListener {
     public void actionPerformed(){}
     public void actionPerformed(boolean a){}
+    public void actionPerformed(int a){}
 }
