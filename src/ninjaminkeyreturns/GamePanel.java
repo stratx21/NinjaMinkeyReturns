@@ -31,6 +31,7 @@ public class GamePanel extends CPanel{
     public GamePanel(CListener c){
         this();
         backToMenu=c;
+        this.addKeyListener(runner);
     }
     
     @Override

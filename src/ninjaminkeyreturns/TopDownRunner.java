@@ -67,7 +67,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     }
     
     /**
-     * PRE:: (this is for all the key... flow functions here) 
+     * PRE::
      * @param typed 
      */
     @Override
