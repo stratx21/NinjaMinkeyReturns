@@ -16,7 +16,7 @@ public class GameRunner implements KeyListener{
     public static char[] controls=new char[6]; //to change controls change them in Profile then evoke the resetControls function
     
     /**
-     * 
+     * CListener evoked to exit the game mode or to finish gameplay
      */
     public CListener done=null;
     
