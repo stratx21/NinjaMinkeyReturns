@@ -16,6 +16,10 @@ public class TopDownPlayer extends Player{
     //                                 3
     
     public boolean disabled=false;//for AI purposes , but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
+
+    public TopDownPlayer(int[] loc) {
+        super(loc);
+    }
     
     
     

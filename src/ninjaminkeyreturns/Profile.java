@@ -125,7 +125,7 @@ public class Profile {
      * the user through the JFileChooser
      */
     public static int[][] importRegionDataTopDown(int region) throws Exception{
-        int[][] data;
+        int[][] data=null;
         String[][] input;
         int a,b;
         inputSaveFile=new File("src/RegionData/TopDown/R"+region);
@@ -137,7 +137,9 @@ public class Profile {
             for(int i=0;i<b;i++){
                 
             }
+            return data;
         }
+        return data;
     }
     
 }

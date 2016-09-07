@@ -13,9 +13,9 @@ import java.awt.Graphics;
  */
 public class TopDownRunner extends GameRunner{
     
-    private TopDownPlayer player=new TopDownPlayer();
+    private TopDownPlayer player=new TopDownPlayer(null);
     
-    private TopDownRegion region=new TopDownRegion();
+    private TopDownRegion region=new TopDownRegion(0);
     
     public TopDownRunner(){
         super();

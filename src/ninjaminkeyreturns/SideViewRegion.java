@@ -13,4 +13,8 @@ import java.util.ArrayList;
  */
 public class SideViewRegion extends Region{
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
+
+    public SideViewRegion(int regn) {
+        super(regn);
+    }
 }

@@ -12,7 +12,7 @@ import java.awt.Graphics;
  */
 public class SideViewRunner extends GameRunner{
     
-    private SideViewPlayer player=new SideViewPlayer();
+    private SideViewPlayer player=new SideViewPlayer(null);
     
     public SideViewRunner(){
         super();
