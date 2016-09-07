@@ -11,7 +11,16 @@ package ninjaminkeyreturns;
  */
 public class TopDownPlayer extends Player{
     
-    public boolean disabled=false;
+    public boolean disabled=false;//for AI purposes , but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
+    
+    
+    
+    public void calculate(){
+        
+    }
+    
+    
+    /////////////force looks:: (for AI purposes primarily)
     
     public void forceLookUp(){
         
@@ -25,8 +34,27 @@ public class TopDownPlayer extends Player{
         
     }
     
-    public forceLookRight(){
+    public void forceLookRight(){
         
     }
+    ///////////////to move in different directions (one square at a time)
+    //^note:: PRE:: (?) not disabled
+    
+    public void moveUp(){
+        
+    }
+    
+    public void moveDown(){
+        
+    }
+    
+    public void moveLeft(){
+        
+    }
+    
+    public void moveRight(){
+        
+    }
+    
     
 }
