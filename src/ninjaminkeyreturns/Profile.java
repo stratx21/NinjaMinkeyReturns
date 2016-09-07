@@ -116,5 +116,29 @@ public class Profile {
         }
     }
     
+     /**
+     * 
+     * opens 
+     * 
+     * @throws Exception Exception thrown if the file is not found for the 
+     * Scanner "in" uses to import the data from the save file specified by
+     * the user through the JFileChooser
+     */
+    public static int[][] importRegionDataTopDown(int region) throws Exception{
+        int[][] data;
+        String[][] input;
+        int a,b;
+        inputSaveFile=new File("src/RegionData/TopDown/R"+region);
+        if(inputSaveFile!=null){
+            String[] in=new Scanner(inputSaveFile).nextLine().split(":");//import size of array
+            data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];
+            input=new String[a][b];
+            
+            for(int i=0;i<b;i++){
+                
+            }
+        }
+    }
+    
 }
 
