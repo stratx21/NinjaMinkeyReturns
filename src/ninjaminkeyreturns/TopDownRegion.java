@@ -14,4 +14,16 @@ import java.util.ArrayList;
 public class TopDownRegion extends Region{
     
     public ArrayList<TopDownAI> AIs=new ArrayList<>();
+    
+    public TopDownRegion(int regn){
+        super(regn);
+        importRegionImages
+    }
+    
+    /**
+     * process to change to another region in top-down mode::
+     */ 
+    public void changeRegion(int newRegion){
+        images=GraphicsAssets.importRegionImagesTopDown(newRegion);
+    }
 }
