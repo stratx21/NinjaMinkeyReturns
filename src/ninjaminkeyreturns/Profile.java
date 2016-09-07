@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Profile {
     
-    public static char[] controls=new char[]{ 
+    public static char[] controls=new char[]{ //up down left right attack other attack
         'W','S','A','D','J','K'//DEFAULT
     };
     
@@ -124,22 +125,67 @@ public class Profile {
      * Scanner "in" uses to import the data from the save file specified by
      * the user through the JFileChooser
      */
-    public static int[][] importRegionDataTopDown(int region) throws Exception{
-        int[][] data=null;
-        String[][] input;
-        int a,b;
-        inputSaveFile=new File("src/RegionData/TopDown/R"+region);
-        if(inputSaveFile!=null){
-            String[] in=new Scanner(inputSaveFile).nextLine().split(":");//import size of array
-            data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];
-            input=new String[a][b];
-            
-            for(int i=0;i<b;i++){
+    public static int[][] importRegionDataTopDown(int region){
+        try{
+            Scanner scan=new Scanner(inputSaveFile);
+            int[][] data=null;
+            String[][] input;// note:: [x][y]
+            int a,b;
+            inputSaveFile=new File("src/RegionData/TopDown/R"+region);
+            if(inputSaveFile!=null){
+                String[] in=scan.nextLine().split(",");//import size of array
+                data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
+                input=new String[b][a];//[y][x]
+
+                for(int i=0;i<b;i++){
+                    input[i]=scan.nextLine().split(":");
+                }
                 
+                //put into the data array but also reverse the [y][x] to be [x][y]
+                for(int y=0;y<input.length;y++)
+                    for(int x=0;x<input[y].length;x++){
+                        data[x][y]=Integer.parseInt(input[y][x]);
+                    }
+                
+                
+                return data;
             }
             return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importRegionDataTopDown");
         }
-        return data;
+        return null;
+    }
+    
+    public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
+        try{
+            Scanner scan=new Scanner(inputSaveFile);
+            ArrayList data=new ArrayList<TriggerSpot>();
+            int[] a=new int[0];
+            inputSaveFile=new File("src/RegionData/TopDown/T"+newRegion);
+            if(inputSaveFile!=null){
+                int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
+                
+                String[] input=new String[0];
+                
+                for(int i=0;i<triggers;i++){
+                    input=scan.nextLine().split(",");
+                    for(int j=0;j<input.length;j++)
+                        a[j]=Integer.parseInt(input[j]);
+                    data.add(new TriggerSpot(a[1],a[2],a[3],a[4],a[0]));
+                    
+                }
+                
+                
+                
+                
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importTriggerSpotsTopDown");
+        }
+        return null;
     }
     
 }

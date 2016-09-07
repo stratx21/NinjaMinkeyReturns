@@ -5,6 +5,9 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 /**
  *
  * @author Josh
@@ -14,6 +17,8 @@ public class Player {
     public double health=0.00;
     
     public int[] location=new int[2];
+    
+    public ArrayList<BufferedImage> images=new ArrayList<>();
     
     public Player(int[] loc){
         location=loc;

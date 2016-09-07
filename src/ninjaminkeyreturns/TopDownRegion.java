@@ -16,6 +16,8 @@ public class TopDownRegion extends Region{
     
     public ArrayList<TopDownAI> AIs=new ArrayList<>();
     
+    public ArrayList<TriggerSpot> triggerSpotsData=new ArrayList<>();
+    
     public int[][] types=new int[0][0];
     
     public TopDownRegion(int regn){
@@ -28,6 +30,12 @@ public class TopDownRegion extends Region{
      */ 
     public void changeRegion(int newRegion){
         images=GraphicsAssets.importRegionImagesTopDown(newRegion);
+        types=Profile.importRegionDataTopDown(newRegion);
+        if(types==null){
+            ErrorLogger.logError(null,"Region change - failed to import data");
+            System.out.println("Region change - failed to import data");
+        }
+        triggerSpotsData=Profile.importTriggerSpotsTopDown(newRegion);
     }
     
     /**
@@ -35,6 +43,14 @@ public class TopDownRegion extends Region{
      */
      public void draw(Graphics g){
         
+     }
+     
+     private void drawBackRegion(){
+         
+     }
+     
+     public int getType(int getx,int gety){
+         return types[getx][gety];
      }
     
     

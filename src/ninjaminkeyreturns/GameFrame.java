@@ -45,6 +45,8 @@ public class GameFrame extends JFrame{
         
         //only here because of testing/developing purposes::
         
+        CPanel.calculateTopDownGameSize();
+        
         currentPanel=new GamePanel(new CListener(){
             @Override
             public void actionPerformed(){
@@ -58,8 +60,8 @@ public class GameFrame extends JFrame{
     }
     
     private void setSIZE(){
-        FRAME_SIZE[0]=this.getWidth();
-        FRAME_SIZE[1]=this.getHeight();
+        CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=this.getWidth();
+        CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=this.getHeight();
         CPanel.FRAME_SIZE=FRAME_SIZE;
         this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
     }

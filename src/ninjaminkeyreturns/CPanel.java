@@ -6,6 +6,7 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 /**
@@ -16,7 +17,9 @@ public class CPanel extends JPanel{
 //    public int DELAY=40;
 
     public static int[] FRAME_SIZE=new int[2];
-    public static int[] GAME_SIZE=new int[2];
+    public static Rectangle GAME_SPAN=new Rectangle();
+    
+    //public static int[] gameStartPoint=new int[2];
 
 
 
@@ -53,5 +56,18 @@ public class CPanel extends JPanel{
 //    public int getNewSizeY(double a){
 //        return (int)(a*1.42857*FRAME_SIZE[1]);
 //    }
+    
+    /**
+     * PRE:: FRAME_SIZE is set to the correct size of the full-screen 
+     */
+    public static void calculateTopDownGameSize(){
+        int tempX,tempY;
+        boolean xLesY;
+        int xPixelMax=(FRAME_SIZE[0]-5)/17,
+            yPixelMax=(FRAME_SIZE[1]-5)/9;// each is the max pixels that could be used going in that direction
+        GAME_SPAN=(xLesY=xPixelMax<yPixelMax)?new Rectangle(FRAME_SIZE[0]/2-(tempX=xPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=xPixelMax*9)/2,tempX,tempY)
+                :new Rectangle(FRAME_SIZE[0]/2-(tempX=yPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=yPixelMax*9)/2,tempX,tempY);
+        TopDownRunner.SQUARE_SIZE=xLesY?xPixelMax:yPixelMax;
+    }
     
 }

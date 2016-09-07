@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Josh
@@ -16,7 +18,11 @@ public class TopDownPlayer extends Player{
     //                                 3
     
     public boolean disabled=false;//for AI purposes , but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
-
+    
+    public boolean travelling=false;
+    
+    public static int SQUARE_SIZE=0;
+    
     public TopDownPlayer(int[] loc) {
         super(loc);
     }
@@ -24,6 +30,10 @@ public class TopDownPlayer extends Player{
     
     
     public void calculate(){
+        
+    }
+    
+    public void Draw(Graphics g){
         
     }
     

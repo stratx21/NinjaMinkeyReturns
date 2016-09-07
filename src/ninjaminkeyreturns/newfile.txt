@@ -1,3 +1,22 @@
-18 x length
-10 y length
+17 x length
+9 y length
 50x50 pixels per square (for original pixel dimensions)
+
+
+for map::
+00=regular ground
+01=tree(unwalkable) 
+02=trigger spot*
+
+
+* - for checking trigger spots, if the player walks into the trigger spot then go through an arraylist of triggers to check which one
+
+note to self for near future:: add in more txt file data for each region, and add data for trigger spots (maybe add on the current one with map info)
+
+
+Trigger spots data txt info::
+1st: int: region to go to (if not a region trigger then the value is -1
+2nd: int: x location value 1
+3rd: int: y location value 1
+4th: int: x location value 2
+5th: int: y location value 2
