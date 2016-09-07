@@ -11,4 +11,22 @@ package ninjaminkeyreturns;
  */
 public class TopDownPlayer extends Player{
     
+    public boolean disabled=false;
+    
+    public void forceLookUp(){
+        
+    }
+    
+    public void forceLookDown(){
+        
+    }
+    
+    public void forceLookLeft(){
+        
+    }
+    
+    public forceLookRight(){
+        
+    }
+    
 }
