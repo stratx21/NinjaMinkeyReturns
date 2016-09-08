@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package ninjaminkeyreturns;
+
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 /**
@@ -14,6 +16,9 @@ import java.awt.event.KeyListener;
 public class GameRunner implements KeyListener{
     
     public static char[] controls=new char[6]; //to change controls change them in Profile then evoke the resetControls function
+    
+    public static Rectangle GAME_SPAN=new Rectangle();
+    public static int SQUARE_SIZE=0;
     
     /**
      * CListener evoked to exit the game mode or to finish gameplay

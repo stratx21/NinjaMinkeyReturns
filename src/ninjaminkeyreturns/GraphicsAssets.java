@@ -64,8 +64,10 @@ public class GraphicsAssets {
     
     public static ArrayList<BufferedImage> importRegionImagesTopDown(int regionID){
         ArrayList<BufferedImage> img=new ArrayList<>();
-        img.add(importFromString(""));
-        return null;
+        img.add(importFromString("Graphics/TopDown/grass.png"));
+        img.add(importFromString("Graphics/TopDown/tree.png"));
+        img.add(importFromString("Graphics/TopDown/redish.png"));
+        return img;
     }
     
     

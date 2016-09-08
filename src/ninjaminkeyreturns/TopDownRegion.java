@@ -41,12 +41,19 @@ public class TopDownRegion extends Region{
     /**
      * 
      */
-     public void draw(Graphics g){
-        
+     public void draw(Graphics g,int x,int y){
+        drawBackRegion(g,x,y);
+        System.out.println("drew back");
      }
      
-     private void drawBackRegion(){
-         
+     private void drawBackRegion(Graphics g,int xs,int ys){
+         for(int x=0;x<17;x++){
+             for(int y=0;y<9;y++){
+//                 System.out.println(types[x][y]);
+                 g.drawImage(images.get(types[x+xs-8][y+ys-4]),GAME_SPAN.x+x*SQUARE_SIZE,GAME_SPAN.y+y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
+             }
+         }
+             
      }
      
      public int getType(int getx,int gety){

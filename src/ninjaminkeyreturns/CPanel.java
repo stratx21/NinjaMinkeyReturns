@@ -65,7 +65,7 @@ public class CPanel extends JPanel{
         boolean xLesY;
         int xPixelMax=(FRAME_SIZE[0]-5)/17,
             yPixelMax=(FRAME_SIZE[1]-5)/9;// each is the max pixels that could be used going in that direction
-        GAME_SPAN=(xLesY=xPixelMax<yPixelMax)?new Rectangle(FRAME_SIZE[0]/2-(tempX=xPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=xPixelMax*9)/2,tempX,tempY)
+        GameRunner.GAME_SPAN=GAME_SPAN=(xLesY=xPixelMax<yPixelMax)?new Rectangle(FRAME_SIZE[0]/2-(tempX=xPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=xPixelMax*9)/2,tempX,tempY)
                 :new Rectangle(FRAME_SIZE[0]/2-(tempX=yPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=yPixelMax*9)/2,tempX,tempY);
         TopDownRunner.SQUARE_SIZE=xLesY?xPixelMax:yPixelMax;
     }

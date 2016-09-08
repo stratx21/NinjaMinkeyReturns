@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 public class Region {
     
     public int REGION_ID=0;
+    
+    public static Rectangle GAME_SPAN=new Rectangle();
+    public static int SQUARE_SIZE=0;
     
     public ArrayList<BufferedImage> images=new ArrayList<>();
     

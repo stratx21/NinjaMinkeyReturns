@@ -15,7 +15,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     public static int SQUARE_SIZE=0;
     
-    private TopDownPlayer player=new TopDownPlayer(null);
+    private TopDownPlayer player=new TopDownPlayer(new int[]{19,20});
     
     private TopDownRegion region=new TopDownRegion(0);
     
@@ -23,11 +23,20 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     public TopDownRunner(){
         super();
-        player.SQUARE_SIZE=SQUARE_SIZE;
+        setup();
     }
     
     public TopDownRunner(CListener dn){
         super(dn);
+        setup();
+    }
+    
+    /**
+     * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
+     */
+    private void setup(){
+        Region.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;
+        Region.GAME_SPAN=CPanel.GAME_SPAN;
     }
     
     /**
@@ -36,7 +45,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     @Override
     public void draw(Graphics g){
-        region.draw(g);
+//        System.out.println("reached top down draw");
+        region.draw(g,player.getX(),player.getY());
         player.Draw(g);
     }
     

@@ -127,15 +127,17 @@ public class Profile {
      */
     public static int[][] importRegionDataTopDown(int region){
         try{
-            Scanner scan=new Scanner(inputSaveFile);
             int[][] data=null;
             String[][] input;// note:: [x][y]
             int a,b;
-            inputSaveFile=new File("src/RegionData/TopDown/R"+region);
+            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/R"+region+".txt").toURI());
+            Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
                 input=new String[b][a];//[y][x]
+                
+                System.out.println(in[0]+","+in[0]);
 
                 for(int i=0;i<b;i++){
                     input[i]=scan.nextLine().split(":");
@@ -159,14 +161,18 @@ public class Profile {
     
     public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
         try{
-            Scanner scan=new Scanner(inputSaveFile);
+//            System.out.println("NEW REGION=="+newRegion);
+            
             ArrayList data=new ArrayList<TriggerSpot>();
-            int[] a=new int[0];
-            inputSaveFile=new File("src/RegionData/TopDown/T"+newRegion);
+            int[] a=new int[5];
+            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
+            Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
                 
                 String[] input=new String[0];
+                
+//                System.out.println("past input creation");
                 
                 for(int i=0;i<triggers;i++){
                     input=scan.nextLine().split(",");
@@ -175,6 +181,8 @@ public class Profile {
                     data.add(new TriggerSpot(a[1],a[2],a[3],a[4],a[0]));
                     
                 }
+                
+//                System.out.println("past create triggers");
                 
                 
                 
