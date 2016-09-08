@@ -41,17 +41,39 @@ public class TopDownRegion extends Region{
     /**
      * 
      */
-     public void draw(Graphics g,int x,int y){
-        drawBackRegion(g,x,y);
-        System.out.println("drew back");
+     public void draw(Graphics g,int x,int y,int offX,int offY){
+        drawBackRegion(g,x,y,offX,offY);
+//        System.out.println("drew back");
      }
      
-     private void drawBackRegion(Graphics g,int xs,int ys){
-         for(int x=0;x<17;x++){
-             for(int y=0;y<9;y++){
-//                 System.out.println(types[x][y]);
-                 g.drawImage(images.get(types[x+xs-8][y+ys-4]),GAME_SPAN.x+x*SQUARE_SIZE,GAME_SPAN.y+y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
-             }
+     private void drawBackRegion(Graphics g,int xs,int ys,int offX,int offY){
+         if(offX!=0||offY!=0){//player is still
+            for(int x=0;x<17;x++){
+                for(int y=0;y<9;y++){
+                    g.drawImage(images.get(types[x+xs-8][y+ys-4]),GAME_SPAN.x+x*SQUARE_SIZE,GAME_SPAN.y+y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
+            }
+         } else{ //player is not still
+            for(int x=0;x<17;x++){//draw images for original rectangle, but modified with the off-setting::
+                for(int y=0;y<9;y++){
+                    g.drawImage(images.get(types[x+xs-8][y+ys-4]),GAME_SPAN.x+x*SQUARE_SIZE+offX,GAME_SPAN.y+y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
+            }
+            
+            //drawing parts coming into the visibility range::
+            if(offX>0){//player is going left
+                for(int y=0;y<9;y++)//          (V)-1 more because of the x left 1 more,(V)similar here for SQUARE_SIZE
+                    g.drawImage(images.get(types[xs-9][y+ys-4]),GAME_SPAN.x-SQUARE_SIZE+offX,GAME_SPAN.y+y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+            } else if(offX<0){//player is going right
+                for(int y=0;y<9;y++)//remember to put in height***********
+                    g.drawImage(images.get(types[xs+9][y+ys-4]),GAME_SPAN.x+GAME_SPAN.width+offX,GAME_SPAN.y+y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+            } else if(offY>0){//player is going up
+                for(int x=0;x<9;x++)
+                    g.drawImage(images.get(types[x+xs-8][ys-5]),GAME_SPAN.x+x*SQUARE_SIZE+offX,GAME_SPAN.y-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+            } else if(offY<0){//player is going down
+                for(int x=0;x<9;x++)
+                    g.drawImage(images.get(types[x+xs-8][ys+5]),GAME_SPAN.x+x*SQUARE_SIZE+offX,GAME_SPAN.y+GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+            }
          }
              
      }

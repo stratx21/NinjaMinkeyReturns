@@ -19,7 +19,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private TopDownRegion region=new TopDownRegion(0);
     
-    private boolean[] currentKey=new boolean[6];
+    private boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
     
     public TopDownRunner(){
         super();
@@ -35,7 +35,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
      */
     private void setup(){
-        Region.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;
+        Region.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
         Region.GAME_SPAN=CPanel.GAME_SPAN;
     }
     
@@ -46,8 +46,29 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     @Override
     public void draw(Graphics g){
 //        System.out.println("reached top down draw");
-        region.draw(g,player.getX(),player.getY());
+        region.draw(g,player.getX(),player.getY(),player.getOffCenterX(),player.getOffCenterY());
         player.Draw(g);
+        
+        //calculate:: (may be moved into another recursion/timer later)::
+        
+//        player.calculate();
+        playerKeysFlow();
+    }
+    
+    private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
+        if(currentKey[0]){
+            
+        }else if(currentKey[1]){
+        
+        }else if(currentKey[2]){
+            
+        }else if(currentKey[3]){
+            
+        }else if(currentKey[4]){
+            
+        }else if(currentKey[5]){
+            
+        }
     }
     
     private void moveToNewRegion(int newRegion){
