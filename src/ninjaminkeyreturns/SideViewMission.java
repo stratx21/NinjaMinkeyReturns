@@ -9,6 +9,6 @@ package ninjaminkeyreturns;
  *
  * @author Josh
  */
-public class Mission {
+public class SideViewMission {
     
 }
