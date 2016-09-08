@@ -64,19 +64,22 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         //System.out.println("painting!");
     }
-    
+    //PRE:not travelling
     //up, down, left, right, attack, other attack
     private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
         //System.out.println("to playerkeysflow");
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
-            System.out.println("started move 0");
-            player.moveStart(0);
+            if(region.canMoveToSpace(player.getX(),player.getY()-1))
+                player.moveStart(0);
         }else if(currentKey[1]){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
-            player.moveStart(3);
+            if(region.canMoveToSpace(player.getX(),player.getY()+1))
+                player.moveStart(3);
         }else if(currentKey[2]){
-            player.moveStart(1);
+            if(region.canMoveToSpace(player.getX()-1,player.getY()))
+                player.moveStart(1);
         }else if(currentKey[3]){
-            player.moveStart(2);
+            if(region.canMoveToSpace(player.getX()+1,player.getY()))
+                player.moveStart(2);
         }else if(currentKey[4]){//SETUP   *   future work
             
         }else if(currentKey[5]){//SETUP   *   future work

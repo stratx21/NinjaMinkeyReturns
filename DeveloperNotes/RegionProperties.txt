@@ -1,0 +1,21 @@
+Region properties:: R[#] :: 
+See previous ones
+Two numbers with a comma for size; width and height
+If any changes are made make sure to change these numbers as well
+The single digit numbers have a zero in front of them for the purpose of making it visually easy to understand (somewhat)
+for map::
+00=regular ground
+01=tree(unwalkable) 
+02=trigger spot*
+* - for checking trigger spots, if the player walks into the trigger spot then go through an arraylist of triggers to check which one
+
+** IMPORTANT:: put trees out in the map on the edges so that the player can go to the edges and there wont be an indexOutOfBounds Exception
+
+note to self for near future:: add in more txt file data for each region, and add data for trigger spots (maybe add on the current one with map info)
+
+
+Image info:: (imported for each Region)
+0: background terrain tile
+1: tree, etc
+2: trigger spot
+

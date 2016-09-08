@@ -82,6 +82,11 @@ public class TopDownRegion extends Region{
      public int getType(int getx,int gety){
          return types[getx][gety];
      }
+     
+     public boolean canMoveToSpace(int x,int y){
+         int t;
+         return (t=getType(x,y))==00||t==02;
+     }
     
     
     
