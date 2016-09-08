@@ -44,10 +44,11 @@ public class TopDownRegion extends Region{
      public void draw(Graphics g,int x,int y,int offX,int offY){
         drawBackRegion(g,x,y,offX*-1,offY*-1);//make sure to invert offX and offY !!!
 //        System.out.println("drew back");
+//        System.out.println("offX:"+offX+" offY:"+offY);
      }
      
      private void drawBackRegion(Graphics g,int xs,int ys,int offX,int offY){
-         if(offX!=0||offY!=0){//player is still
+         if(offX==0&&offY==0){//player is still
             for(int x=0;x<17;x++){
                 for(int y=0;y<9;y++){
                     g.drawImage(images.get(types[x+xs-8][y+ys-4]),GAME_SPAN.x+x*SQUARE_SIZE,GAME_SPAN.y+y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
@@ -68,10 +69,10 @@ public class TopDownRegion extends Region{
                 for(int y=0;y<9;y++)//remember to put in height***********
                     g.drawImage(images.get(types[xs+9][y+ys-4]),GAME_SPAN.x+GAME_SPAN.width+offX,GAME_SPAN.y+y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             } else if(offY>0){//player is going up
-                for(int x=0;x<9;x++)
+                for(int x=0;x<17;x++)
                     g.drawImage(images.get(types[x+xs-8][ys-5]),GAME_SPAN.x+x*SQUARE_SIZE+offX,GAME_SPAN.y-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             } else if(offY<0){//player is going down
-                for(int x=0;x<9;x++)
+                for(int x=0;x<17;x++)
                     g.drawImage(images.get(types[x+xs-8][ys+5]),GAME_SPAN.x+x*SQUARE_SIZE+offX,GAME_SPAN.y+GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             }
          }

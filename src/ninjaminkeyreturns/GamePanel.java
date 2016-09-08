@@ -17,7 +17,7 @@ import javax.swing.Timer;
  */
 public class GamePanel extends CPanel{
     
-    private GameRunner runner=new GameRunner();
+    //public GameRunner runner=null;
     
     public final int FRAME_DELAY=20;
     
@@ -35,7 +35,7 @@ public class GamePanel extends CPanel{
             }
         });
         this.addKeyListener(runner);
-        
+        System.out.println("ADDED KEYLISTENER...");
     }
     
     public GamePanel(CListener c){

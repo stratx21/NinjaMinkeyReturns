@@ -85,7 +85,10 @@ public class TopDownPlayer extends Player{
     
     public void draw(Graphics g){
         if(travelling){
-            g.drawImage(images.get(directionFacing*5+imageSequence+5),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+            g.drawImage(images.get(directionFacing*5+imageSequence+4),
+                    GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,
+                    GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,
+                    SQUARE_SIZE,SQUARE_SIZE,null);
         }else{
             g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
         }
@@ -115,7 +118,14 @@ public class TopDownPlayer extends Player{
      */
     public void continueMove(){
         switch(directionFacing){
-            
+            case 0: moveUp();
+                break;
+            case 1: moveLeft();
+                break;
+            case 2: moveRight();
+                break;
+            case 3: moveDown();
+                break;
         }
     }
         
@@ -146,8 +156,10 @@ public class TopDownPlayer extends Player{
     //                               1   2
     //                                 3
     
+    private final int frameDivide=24;
+    
     private void moveUp(){
-        offCenter[1]-=SQUARE_SIZE/6;
+        offCenter[1]-=SQUARE_SIZE/frameDivide;
         if(offCenter[1]<=-1*SQUARE_SIZE){//should stop moving
             location[1]-=1;
             offCenter[1]=0;
@@ -161,7 +173,7 @@ public class TopDownPlayer extends Player{
     }
     
     private void moveDown(){
-        offCenter[1]+=SQUARE_SIZE/6;
+        offCenter[1]+=SQUARE_SIZE/frameDivide;
         if(offCenter[1]>=SQUARE_SIZE){//should stop moving
             location[1]+=1;
             offCenter[1]=0;
@@ -175,7 +187,7 @@ public class TopDownPlayer extends Player{
     }
     
     private void moveLeft(){
-        offCenter[0]-=SQUARE_SIZE/6;
+        offCenter[0]-=SQUARE_SIZE/frameDivide;
         if(offCenter[0]<=-1*SQUARE_SIZE){//should stop moving
             location[0]-=1;
             offCenter[0]=0;
@@ -189,7 +201,7 @@ public class TopDownPlayer extends Player{
     }
     
     private void moveRight(){
-        offCenter[0]+=SQUARE_SIZE/6;
+        offCenter[0]+=SQUARE_SIZE/frameDivide;
         if(offCenter[0]>=SQUARE_SIZE){//should stop moving
             location[0]+=1;
             offCenter[0]=0;

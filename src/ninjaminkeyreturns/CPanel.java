@@ -7,6 +7,7 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 /**
@@ -20,6 +21,7 @@ public class CPanel extends JPanel{
     public static Rectangle GAME_SPAN=new Rectangle();
     
     //public static int[] gameStartPoint=new int[2];
+    GameRunner runner=null;
 
 
 

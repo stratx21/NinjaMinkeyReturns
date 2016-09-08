@@ -55,6 +55,7 @@ public class GameFrame extends JFrame{
         });
         
         this.add(currentPanel);
+        this.addKeyListener(currentPanel.runner);
         super.setVisible(true);
         this.repaint();
     }

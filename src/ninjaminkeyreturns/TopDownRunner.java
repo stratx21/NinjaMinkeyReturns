@@ -6,12 +6,15 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  *
  * @author Josh
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
+    
     
     public static int SQUARE_SIZE=0;
     
@@ -54,13 +57,19 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //        player.calculate();
         if(!player.travelling)
             playerKeysFlow();
+        else
+            player.continueMove();
         
         player.draw(g);
+        
+        //System.out.println("painting!");
     }
     
     //up, down, left, right, attack, other attack
     private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
+        //System.out.println("to playerkeysflow");
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
+            System.out.println("started move 0");
             player.moveStart(0);
         }else if(currentKey[1]){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
             player.moveStart(3);
@@ -94,11 +103,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     }
     
     
-    
-    public void drawBackgroundTiles(Graphics g){
-        
-    }
-    
+    //////////////////
     
     @Override
     public void keyTypedFlow(char typed){
@@ -111,6 +116,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     @Override
     public void keyPressedFlow(char typed){
+//        System.out.println("key pressed:: "+typed);
         if(typed==controls[0]){
             currentKey[0]=true;
             setOtherKeysFalse(0);//in here to change it only if it is a valid key
@@ -134,6 +140,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     @Override
     public void keyReleasedFlow(char typed){
+//        System.out.println("key released:: "+typed);
         if(typed==controls[0]){
             currentKey[0]=false;
         }else if(typed==controls[1]){
