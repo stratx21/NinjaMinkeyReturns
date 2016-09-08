@@ -6,6 +6,7 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
@@ -23,12 +24,18 @@ public class TopDownPlayer extends Player{
     
     public boolean travelling=false;
     
+    private int IMG_SEQUENCE_MAX=4 ;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
+    private int imageSequence=0;
+    
+    public Rectangle GAME_SPAN=new Rectangle();
+    
     public int[] offCenter=new int[2];
     
     public static int SQUARE_SIZE=0;
     
     public TopDownPlayer(int[] loc) {
         super(loc);
+        images=GraphicsAssets.importTopDownPlayerImages();
     }
     //////////////////////////////
     
@@ -76,13 +83,43 @@ public class TopDownPlayer extends Player{
         
     }
     
-    public void Draw(Graphics g){
-        
+    public void draw(Graphics g){
+        if(travelling){
+            g.drawImage(images.get(directionFacing*5+imageSequence+5),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+        }else{
+            g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+        }
     }
     
-    public void move(int direction){
-        
+    public void moveStart(int direction){
+        if(!travelling&&!disabled){
+            if(directionFacing!=direction){//is not facing the direction it is about to move in, so face it before moving...
+                directionFacing=(byte)direction;
+            }else{
+                travelling=true;
+                switch(direction){//start moving
+                    case 0: moveUp();
+                        break;
+                    case 1: moveLeft();
+                        break;
+                    case 2: moveRight();
+                        break;
+                    case 3: moveDown();
+                        break;
+                }
+            }
+        }
     }
+    /**
+     * PRE:: the boolean travelling has been checked as true
+     */
+    public void continueMove(){
+        switch(directionFacing){
+            
+        }
+    }
+        
+    
     
     
     /////////////force looks:: (for AI purposes primarily)
@@ -110,19 +147,59 @@ public class TopDownPlayer extends Player{
     //                                 3
     
     private void moveUp(){
-        
+        offCenter[1]-=SQUARE_SIZE/6;
+        if(offCenter[1]<=-1*SQUARE_SIZE){//should stop moving
+            location[1]-=1;
+            offCenter[1]=0;
+            travelling=false;
+            imageSequence=0;
+        }else{
+            imageSequence++;
+            if(imageSequence>IMG_SEQUENCE_MAX)
+                imageSequence=0;
+        }
     }
     
     private void moveDown(){
-        
+        offCenter[1]+=SQUARE_SIZE/6;
+        if(offCenter[1]>=SQUARE_SIZE){//should stop moving
+            location[1]+=1;
+            offCenter[1]=0;
+            travelling=false;
+            imageSequence=0;
+        }else{
+            imageSequence++;
+            if(imageSequence>IMG_SEQUENCE_MAX)
+                imageSequence=0;
+        }
     }
     
     private void moveLeft(){
-        
+        offCenter[0]-=SQUARE_SIZE/6;
+        if(offCenter[0]<=-1*SQUARE_SIZE){//should stop moving
+            location[0]-=1;
+            offCenter[0]=0;
+            travelling=false;
+            imageSequence=0;
+        }else{
+            imageSequence++;
+            if(imageSequence>IMG_SEQUENCE_MAX)
+                imageSequence=0;
+        }
     }
     
     private void moveRight(){
-        
+        offCenter[0]+=SQUARE_SIZE/6;
+        if(offCenter[0]>=SQUARE_SIZE){//should stop moving
+            location[0]+=1;
+            offCenter[0]=0;
+            travelling=false;
+            imageSequence=0;
+        }else{
+            imageSequence++;
+            if(imageSequence>IMG_SEQUENCE_MAX)
+                imageSequence=0;
+        }
     }
     
     ////////////////
@@ -131,6 +208,8 @@ public class TopDownPlayer extends Player{
     //                                 0
     //                               1   2
     //                                 3
+    
+    //add more?
     
     private void lookUp(){
         directionFacing=0;

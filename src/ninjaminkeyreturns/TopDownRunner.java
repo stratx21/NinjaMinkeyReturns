@@ -36,7 +36,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     private void setup(){
         Region.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
-        Region.GAME_SPAN=CPanel.GAME_SPAN;
+        Region.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
     }
     
     /**
@@ -47,28 +47,36 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     public void draw(Graphics g){
 //        System.out.println("reached top down draw");
         region.draw(g,player.getX(),player.getY(),player.getOffCenterX(),player.getOffCenterY());
-        player.Draw(g);
+        player.draw(g);
         
         //calculate:: (may be moved into another recursion/timer later)::
         
 //        player.calculate();
-        playerKeysFlow();
+        if(!player.travelling)
+            playerKeysFlow();
+        
+        player.draw(g);
     }
     
+    //up, down, left, right, attack, other attack
     private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
-        if(currentKey[0]){
-            
-        }else if(currentKey[1]){
-        
+        if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
+            player.moveStart(0);
+        }else if(currentKey[1]){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
+            player.moveStart(3);
         }else if(currentKey[2]){
-            
+            player.moveStart(1);
         }else if(currentKey[3]){
+            player.moveStart(2);
+        }else if(currentKey[4]){//SETUP   *   future work
             
-        }else if(currentKey[4]){
-            
-        }else if(currentKey[5]){
+        }else if(currentKey[5]){//SETUP   *   future work
             
         }
+        
+        //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
+        // carry on the above process for keys inside the player class? (depends on future
+        // changes)
     }
     
     private void moveToNewRegion(int newRegion){

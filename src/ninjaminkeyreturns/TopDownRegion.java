@@ -42,7 +42,7 @@ public class TopDownRegion extends Region{
      * 
      */
      public void draw(Graphics g,int x,int y,int offX,int offY){
-        drawBackRegion(g,x,y,offX,offY);
+        drawBackRegion(g,x,y,offX*-1,offY*-1);//make sure to invert offX and offY !!!
 //        System.out.println("drew back");
      }
      

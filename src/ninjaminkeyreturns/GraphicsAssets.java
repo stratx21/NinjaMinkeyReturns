@@ -70,6 +70,40 @@ public class GraphicsAssets {
         return img;
     }
     
+    public static ArrayList<BufferedImage> importTopDownPlayerImages(){
+        ArrayList<BufferedImage> img=new ArrayList<>();
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle up
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle down
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle left
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle right
+        
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 1 - 5
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 2
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 3
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 4
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 5
+        
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 1 - 10
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 2
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 3
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 4
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 5
+        
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 1 - 15
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 2
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 3
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 4
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 5
+        
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 1 - 20
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 2
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 3
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 4
+        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 5
+        
+        
+        return img;
+    }    
     
     
 }
