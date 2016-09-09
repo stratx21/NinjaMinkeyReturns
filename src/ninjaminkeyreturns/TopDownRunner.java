@@ -38,8 +38,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
      */
     private void setup(){
-        Region.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
-        Region.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
+        Region.SQUARE_SIZE=TopDownAI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
+        Region.GAME_SPAN=TopDownAI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
     }
     
     /**
@@ -55,10 +55,31 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         //calculate:: (may be moved into another recursion/timer later)::
         
 //        player.calculate();
-        if(!player.travelling)
-            playerKeysFlow();
-        else
-            player.continueMove();
+        
+        if(player.finishedMoving){//finished moving to the square
+            int a=region.getTriggerSpotHit(player.getX(),player.getY());
+            if(a!=-1){
+                player.setDisabled(true);
+                TriggerSpot hit=region.getTriggerSpot(a);
+                if(hit.toRegion){//is going to a different region
+                    
+                    //move to another region....
+                    
+                } else if(hit.AI_Triggered>-1){
+                    //call on the triggered AI
+                    region.triggerAI(hit.AI_Triggered,player.getX(),player.getY());
+//                    player.forceLookUp();
+                }
+            }
+            player.finishedMoving=true;
+        }
+        
+        if(!player.getDisabled()){
+            if(!player.travelling)
+                playerKeysFlow();
+            else
+                player.continueMove();
+        }
         
         player.draw(g);
         

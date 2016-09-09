@@ -24,6 +24,8 @@ public class TopDownPlayer extends Player{
     
     public boolean travelling=false;
     
+    public boolean finishedMoving=false;
+    
     private int IMG_SEQUENCE_MAX=4 ;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
@@ -161,6 +163,7 @@ public class TopDownPlayer extends Player{
     private void moveUp(){
         offCenter[1]-=SQUARE_SIZE/frameDivide;
         if(offCenter[1]<=-1*SQUARE_SIZE){//should stop moving
+            finishedMoving=true;
             location[1]-=1;
             offCenter[1]=0;
             travelling=false;
@@ -175,6 +178,7 @@ public class TopDownPlayer extends Player{
     private void moveDown(){
         offCenter[1]+=SQUARE_SIZE/frameDivide;
         if(offCenter[1]>=SQUARE_SIZE){//should stop moving
+            finishedMoving=true;
             location[1]+=1;
             offCenter[1]=0;
             travelling=false;
@@ -189,6 +193,7 @@ public class TopDownPlayer extends Player{
     private void moveLeft(){
         offCenter[0]-=SQUARE_SIZE/frameDivide;
         if(offCenter[0]<=-1*SQUARE_SIZE){//should stop moving
+            finishedMoving=true;
             location[0]-=1;
             offCenter[0]=0;
             travelling=false;
@@ -203,6 +208,7 @@ public class TopDownPlayer extends Player{
     private void moveRight(){
         offCenter[0]+=SQUARE_SIZE/frameDivide;
         if(offCenter[0]>=SQUARE_SIZE){//should stop moving
+            finishedMoving=true;
             location[0]+=1;
             offCenter[0]=0;
             travelling=false;

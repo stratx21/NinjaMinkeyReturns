@@ -1,0 +1,1 @@
+in the draw function, under finished moving, then under hit.toRegion then it is going to a new region. get the int of the region from the hit instance 

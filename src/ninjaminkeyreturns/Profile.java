@@ -210,9 +210,9 @@ public class Profile {
                 
                 for(int i=0;i<AIs;i++){
                     input=scan.nextLine().split(",");
-                    for(int j=0;j<input.length-2;j++)
+                    for(int j=0;j<input.length-3;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[4],input[5]));
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[4],input[5]));
                     
                 }
                 

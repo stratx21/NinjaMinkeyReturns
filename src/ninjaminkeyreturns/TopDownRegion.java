@@ -37,6 +37,8 @@ public class TopDownRegion extends Region{
         }
         triggerSpotsData=Profile.importTriggerSpotsTopDown(newRegion);
         AIs=Profile.importAIDataTopDown(newRegion);
+        for(int i=0;i<AIs.size();i++)
+            System.out.println(AIs.get(i));
     }
     
     /**
@@ -46,6 +48,10 @@ public class TopDownRegion extends Region{
         drawBackRegion(g,x,y,offX*-1,offY*-1);//make sure to invert offX and offY !!!
 //        System.out.println("drew back");
 //        System.out.println("offX:"+offX+" offY:"+offY);
+        
+        for(TopDownAI ai:AIs){//draw all AIs
+            ai.draw(g);
+        }
      }
      
      private void drawBackRegion(Graphics g,int xs,int ys,int offX,int offY){
@@ -114,6 +120,16 @@ public class TopDownRegion extends Region{
      public TriggerSpot getTriggerSpot(int index){
          return triggerSpotsData.get(index);
      }
+     
+     
+     public void triggerAI(int ai,int playerX,int playerY){
+         TopDownAI a=AIs.get(ai);
+         a.visible=true;
+         a.walkingToPlayer=true;
+         a.travelling=true;
+         a.calcToGo(playerX,playerY);
+     }
+     
     
     
     
