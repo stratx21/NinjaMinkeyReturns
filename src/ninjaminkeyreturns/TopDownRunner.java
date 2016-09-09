@@ -84,6 +84,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         player.draw(g);
         
+//        System.out.println(player.getX()+","+player.getY());
+        
         //System.out.println("painting!");
     }
     //PRE:not travelling

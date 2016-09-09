@@ -42,7 +42,7 @@ public class TopDownAI extends AI{
     private int IMG_SEQUENCE_MAX=4;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
-//    private int[] playerLocApproaching=new int[2];
+    private int[] playerLocApproaching=new int[2];
     
     
     public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter){
@@ -56,34 +56,37 @@ public class TopDownAI extends AI{
     
     public void draw(Graphics g){
         if(visible){
-            if(walkingToPlayer){
-                if(toGo[1]>1){
+            if(walkingToPlayer){//flow
+                if(toGo[1]<-1){
                     walkDown();
-                }else if(toGo[1]<-1){
+                }else if(toGo[1]>1){
                     walkUp();
-                }else if(toGo[0]>1){
-                    walkRight();
                 }else if(toGo[0]<-1){
+                    walkRight();
+                }else if(toGo[0]>1){
                     walkLeft();
                 } else//has reached player
                     finishedMoving=true;
             }
             
-            System.out.println(location[0]+","+location[1]);
-            
             if(travelling){
             g.drawImage(images.get(directionFacing*5+imageSequence+4),
-                    GAME_SPAN.x+SQUARE_SIZE*toGo[0]+offCenter[0],
-                    GAME_SPAN.y+SQUARE_SIZE*toGo[1]+offCenter[1],
+                    GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2+offCenter[0],
+                    GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                     SQUARE_SIZE,SQUARE_SIZE,null);
             }else{
-                g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+                g.drawImage(images.get(directionFacing),
+                        GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2,
+                        GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2
+                        ,SQUARE_SIZE,SQUARE_SIZE,null);
             }
-            }
+//            System.out.println(location[0]+","+location[1]+"togo:: "+toGo[0]+","+toGo[1]);
+        }
     }
     
     public void calcToGo(int pX,int pY){
-        toGo=new int[]{pX-location[0],pY-location[1]};
+        toGo=new int[]{location[0]-pX,location[1]-pY};
+        playerLocApproaching=new int[]{pX,pY};
     }
     
     private final int frameDivide=24;

@@ -125,7 +125,6 @@ public class TopDownRegion extends Region{
      
      
      public void triggerAI(int ai,int playerX,int playerY){
-         System.out.println("AI "+ai+" triggered  -- - -- - -- - - - -- - - -- - -");
          TopDownAI a=AIs.get(ai);
          a.visible=true;
          a.walkingToPlayer=true;
