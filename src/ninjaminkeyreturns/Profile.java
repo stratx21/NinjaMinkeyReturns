@@ -26,9 +26,7 @@ public class Profile {
     
     public static boolean soundEffectsOn=true,musicOn=true;
     
-    public static boolean[] completedMissions=new boolean[16];//expand on this
-    
-    public static boolean[][] defeatedAIs=new boolean[9][9];
+    public static boolean[][] completedMissions=new boolean[9][16];//expand on this
     
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
@@ -166,7 +164,7 @@ public class Profile {
 //            System.out.println("NEW REGION=="+newRegion);
             
             ArrayList data=new ArrayList<TriggerSpot>();
-            int[] a=new int[5];
+            int[] a=new int[7];
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
@@ -180,13 +178,43 @@ public class Profile {
                     input=scan.nextLine().split(",");
                     for(int j=0;j<input.length;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TriggerSpot(a[1],a[2],a[3],a[4],a[0]));
+                    data.add(new TriggerSpot(a[1],a[2],a[3],a[4],a[0],a[5]==1,a[6]));
                     
                 }
                 
 //                System.out.println("past create triggers");
                 
                 
+                
+                
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importTriggerSpotsTopDown");
+        }
+        return null;
+    }
+    
+    public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
+        try{
+            ArrayList data=new ArrayList<TopDownAI>();
+            int[] a=new int[6];
+            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/AI"+newRegion+".txt").toURI());
+            
+            if(inputSaveFile!=null){
+                Scanner scan=new Scanner(inputSaveFile);
+                int AIs=Integer.parseInt(scan.nextLine());//number of AI spots in this list
+                
+                String[] input=new String[0];
+                
+                for(int i=0;i<AIs;i++){
+                    input=scan.nextLine().split(",");
+                    for(int j=0;j<input.length-2;j++)
+                        a[j]=Integer.parseInt(input[j]);
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[4],input[5]));
+                    
+                }
                 
                 
                 return data;

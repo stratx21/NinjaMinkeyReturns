@@ -36,6 +36,7 @@ public class TopDownRegion extends Region{
             System.out.println("Region change - failed to import data");
         }
         triggerSpotsData=Profile.importTriggerSpotsTopDown(newRegion);
+        AIs=Profile.importAIDataTopDown(newRegion);
     }
     
     /**
@@ -85,7 +86,33 @@ public class TopDownRegion extends Region{
      
      public boolean canMoveToSpace(int x,int y){
          int t;
-         return (t=getType(x,y))==00||t==02;
+         return !hasAI(x,y)&&((t=getType(x,y))==00||t==02);
+     }
+     
+     public boolean hasAI(int x,int y){
+         boolean h=false;
+         for(int i=0;i<AIs.size()&&!h;i++){
+             TopDownAI ai=AIs.get(i);
+             h=ai.getX()==x&&ai.getY()==y;
+         }
+         return h;
+     }
+     
+     public int getTriggerSpotHit(int x,int y){
+         int r=-1;
+         boolean done=false;
+         for(int i=0;i<triggerSpotsData.size()&&!done;i++){
+             TriggerSpot t=triggerSpotsData.get(i);
+             if(t.getX()==x&&t.getY()==y){
+                 r=i;
+                 done=true;
+             }
+         }
+         return r;
+     }
+     
+     public TriggerSpot getTriggerSpot(int index){
+         return triggerSpotsData.get(index);
      }
     
     

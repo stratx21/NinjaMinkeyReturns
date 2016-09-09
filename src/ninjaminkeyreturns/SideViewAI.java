@@ -9,6 +9,6 @@ package ninjaminkeyreturns;
  *
  * @author Josh
  */
-public class SideViewAI {
+public class SideViewAI extends AI{
     
 }

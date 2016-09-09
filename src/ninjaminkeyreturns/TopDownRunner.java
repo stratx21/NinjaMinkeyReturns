@@ -97,6 +97,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         //** code for fading out, then showing the next biome/region pic, then going back....
     }
     
+    
+    ///////////////////
+    
+    private void AIApproachPlayer(){
+        
+    }
+    
     /**
      *
      */

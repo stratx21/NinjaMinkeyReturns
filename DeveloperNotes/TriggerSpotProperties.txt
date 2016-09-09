@@ -6,3 +6,5 @@ One number for how many trigger spots are stored
 3rd: int: y location value 1
 4th: int: x location value 2
 5th: int: y location value 2
+6th: int: 1 if true if is visible
+8th: int: which AI appears (-1 if not applicable)
