@@ -49,7 +49,9 @@ public class TopDownRegion extends Region{
 //        System.out.println("drew back");
 //        System.out.println("offX:"+offX+" offY:"+offY);
         
+//        System.out.println("bout to draw AIs......");
         for(TopDownAI ai:AIs){//draw all AIs
+//            System.out.println("drawing AIs...");
             ai.draw(g);
         }
      }
@@ -123,6 +125,7 @@ public class TopDownRegion extends Region{
      
      
      public void triggerAI(int ai,int playerX,int playerY){
+         System.out.println("AI "+ai+" triggered  -- - -- - -- - - - -- - - -- - -");
          TopDownAI a=AIs.get(ai);
          a.visible=true;
          a.walkingToPlayer=true;

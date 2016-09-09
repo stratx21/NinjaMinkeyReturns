@@ -35,6 +35,8 @@ public class TriggerSpot {
         visible=vsble;
         if(aiTriggrd>-1)
             AI_Triggered=aiTriggrd;
+        
+        System.out.println("trigger at:: "+x+","+y+" :: toRegion=="+toRegion);
     }
     
     public int getX(){

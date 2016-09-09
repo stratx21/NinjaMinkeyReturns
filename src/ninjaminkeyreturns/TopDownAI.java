@@ -69,15 +69,17 @@ public class TopDownAI extends AI{
                     finishedMoving=true;
             }
             
+            System.out.println(location[0]+","+location[1]);
+            
             if(travelling){
             g.drawImage(images.get(directionFacing*5+imageSequence+4),
-                    GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,
-                    GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,
+                    GAME_SPAN.x+SQUARE_SIZE*toGo[0]+offCenter[0],
+                    GAME_SPAN.y+SQUARE_SIZE*toGo[1]+offCenter[1],
                     SQUARE_SIZE,SQUARE_SIZE,null);
-        }else{
-            g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
-        }
-        }
+            }else{
+                g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+            }
+            }
     }
     
     public void calcToGo(int pX,int pY){
@@ -99,6 +101,7 @@ public class TopDownAI extends AI{
             if(imageSequence>IMG_SEQUENCE_MAX)
                 imageSequence=0;
         }
+        directionFacing=0;
     }
     
     public void walkDown(){
@@ -115,6 +118,7 @@ public class TopDownAI extends AI{
             if(imageSequence>IMG_SEQUENCE_MAX)
                 imageSequence=0;
         }
+        directionFacing=3;
     }
     
     public void walkLeft(){
@@ -131,6 +135,7 @@ public class TopDownAI extends AI{
             if(imageSequence>IMG_SEQUENCE_MAX)
                 imageSequence=0;
         }
+        directionFacing=1;
     }
     
     public void walkRight(){
@@ -147,6 +152,7 @@ public class TopDownAI extends AI{
             if(imageSequence>IMG_SEQUENCE_MAX)
                 imageSequence=0;
         }
+        directionFacing=2;
     }
     
     
