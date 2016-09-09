@@ -6,10 +6,6 @@
             <name>NinjaMinkeyReturns</name>
             <source-roots>
                 <root id="src.dir"/>
-                <root id="src.Graphics.dir"/>
-                <root id="src.SideViewMissionData.dir"/>
-                <root id="src.RegionData.dir"/>
-                <root id="src.AIData.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

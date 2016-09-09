@@ -61,9 +61,11 @@ public class TopDownAI extends AI{
                     walkDown();
                 }else if(toGo[1]>1){
                     walkUp();
-                }else if(toGo[0]<-1){
+                }else if(toGo[0]<-1
+                        ||(toGo[0]<0&&(toGo[1]!=0))){//second condition: move under or over if not at the same y
                     walkRight();
-                }else if(toGo[0]>1){
+                }else if(toGo[0]>1
+                        ||(toGo[0]>0&&(toGo[1]!=0))){//second condition: move under or over if not at the same y
                     walkLeft();
                 } else//has reached player
                     finishedMoving=true;
@@ -74,11 +76,13 @@ public class TopDownAI extends AI{
                     GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2+offCenter[0],
                     GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                     SQUARE_SIZE,SQUARE_SIZE,null);
+//            System.out.println("travelling");
             }else{
                 g.drawImage(images.get(directionFacing),
                         GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2,
                         GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2
                         ,SQUARE_SIZE,SQUARE_SIZE,null);
+//                System.out.println("NOT    travelling");
             }
 //            System.out.println(location[0]+","+location[1]+"togo:: "+toGo[0]+","+toGo[1]);
         }
@@ -97,7 +101,7 @@ public class TopDownAI extends AI{
             location[1]-=1;
             toGo[1]-=1;
             offCenter[1]=0;
-            travelling=false;
+            //travelling=false;
             imageSequence=0;
         }else{
             imageSequence++;
@@ -114,7 +118,7 @@ public class TopDownAI extends AI{
             location[1]+=1;
             toGo[1]+=1;
             offCenter[1]=0;
-            travelling=false;
+            //travelling=false;
             imageSequence=0;
         }else{
             imageSequence++;
@@ -131,7 +135,7 @@ public class TopDownAI extends AI{
             location[0]-=1;
             toGo[0]-=1;
             offCenter[0]=0;
-            travelling=false;
+            //travelling=false;
             imageSequence=0;
         }else{
             imageSequence++;
@@ -148,7 +152,7 @@ public class TopDownAI extends AI{
             location[0]+=1;
             toGo[0]+=1;
             offCenter[0]=0;
-            travelling=false;
+            //travelling=false;
             imageSequence=0;
         }else{
             imageSequence++;
