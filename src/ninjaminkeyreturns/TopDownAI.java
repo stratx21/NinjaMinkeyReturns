@@ -28,6 +28,8 @@ public class TopDownAI extends AI{
     
     public int directionFacing=0;
     
+    public CListener done=null;
+    
     public int[] toGo=new int[2];
     
     public int[] offCenter=new int[2];

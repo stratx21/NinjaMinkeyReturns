@@ -20,6 +20,8 @@ public class TopDownRegion extends Region{
     
     public int[][] types=new int[0][0];
     
+    public CListener AIApproachDone=null;
+    
     public TopDownRegion(int regn){
         super(regn);
         changeRegion(regn);
@@ -124,12 +126,18 @@ public class TopDownRegion extends Region{
      }
      
      
-     public void triggerAI(int ai,int playerX,int playerY){
+     public void triggerAI(int ai,int playerX,int playerY,CListener c){
          TopDownAI a=AIs.get(ai);
          a.visible=true;
          a.walkingToPlayer=true;
          a.travelling=true;
          a.calcToGo(playerX,playerY);
+         AIApproachDone=a.done=new CListener(){
+             @Override
+             public void actionPerformed(){
+                 c.actionPerformed();
+             }
+         };
      }
      
     

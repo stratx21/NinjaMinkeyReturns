@@ -22,6 +22,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private TopDownRegion region=new TopDownRegion(0);
     
+    private CListener AIdone=null;
+    
     private boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
     
     public TopDownRunner(){
@@ -62,13 +64,18 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 player.setDisabled(true);
                 TriggerSpot hit=region.getTriggerSpot(a);
                 if(hit.toRegion){//is going to a different region
-                    System.out.println("to region????");
+//                    System.out.println("to region????");
                     //move to another region....
                     
                 } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
-                    System.out.println("triggering AI from runner.... ");
-                    region.triggerAI(hit.AI_Triggered,player.getX(),player.getY());
+//                    System.out.println("triggering AI from runner.... ");
+                    region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
+                        @Override
+                        public void actionPerformed(){
+                            
+                        }
+                    });
 //                    player.forceLookUp();
                 }
             }
@@ -81,8 +88,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             else
                 player.continueMove();
         }
-        
-        player.draw(g);
         
 //        System.out.println(player.getX()+","+player.getY());
         
