@@ -113,7 +113,8 @@ public class TopDownRegion extends Region{
          boolean done=false;
          for(int i=0;i<triggerSpotsData.size()&&!done;i++){
              TriggerSpot t=triggerSpotsData.get(i);
-             if(t.getX()==x&&t.getY()==y){
+             if(t.getX()<=x&&t.getX()+t.getWidth()>=x
+                     &&t.getY()<=y&&t.getY()+t.getHeight()>=y){
                  r=i;
                  done=true;
              }

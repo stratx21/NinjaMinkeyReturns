@@ -65,7 +65,7 @@ public class GraphicsAssets {
     public static ArrayList<BufferedImage> importRegionImagesTopDown(int regionID){
         ArrayList<BufferedImage> img=new ArrayList<>();
         img.add(importFromString("Graphics/TopDown/grass.png"));
-        img.add(importFromString("Graphics/TopDown/tree.png"));
+        img.add(importFromString("Graphics/TopDown/ForestTree.png"));
         img.add(importFromString("Graphics/TopDown/redish.png"));
         return img;
     }
@@ -107,34 +107,34 @@ public class GraphicsAssets {
     
     public static ArrayList<BufferedImage> importTopDownPlayerImages(){
         ArrayList<BufferedImage> img=new ArrayList<>();
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle up
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle down
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle left
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//idle right
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//idle up
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//idle down
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//idle left
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//idle right
         
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 1 - 5
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 2
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 3
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 4
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel up 5
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel up 1 - 5
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel up 2
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel up 3
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel up 4
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel up 5
         
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 1 - 10
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 2
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 3
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 4
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel down 5
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel down 1 - 10
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel down 2
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel down 3
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel down 4
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel down 5
         
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 1 - 15
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 2
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 3
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 4
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel left 5
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel left 1 - 15
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel left 2
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel left 3
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel left 4
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel left 5
         
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 1 - 20
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 2
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 3
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 4
-        img.add(importFromString("Graphics/TopDown/Player/playertesting.png"));//travel right 5
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel right 1 - 20
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel right 2
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel right 3
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel right 4
+        img.add(importFromString("Graphics/TopDown/Player/DownIdle.png"));//travel right 5
         
         
         return img;

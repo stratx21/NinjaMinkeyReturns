@@ -17,7 +17,7 @@ public class TriggerSpot {
     
     public int AI_Triggered=-1;
     
-    public int length=0,height=0;
+    private int width=0,height=0;
     
     public boolean visible=true;
     
@@ -27,8 +27,8 @@ public class TriggerSpot {
     
     public TriggerSpot(int x,int y,int lngth,int hght,int rgnToGoTo,boolean vsble,int aiTriggrd){
         location=new int[]{x,y};
-        length=lngth;
-        height=hght;
+        width=lngth-x;
+        height=hght-y;
         if(toRegion=(rgnToGoTo>-1)){
             regionToGoTo=rgnToGoTo;
         }
@@ -37,6 +37,14 @@ public class TriggerSpot {
             AI_Triggered=aiTriggrd;
         
 //        System.out.println("trigger at:: "+x+","+y+" :: toRegion=="+toRegion);
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public int getHeight(){
+        return height;
     }
     
     public int getX(){

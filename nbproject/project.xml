@@ -5,6 +5,7 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>NinjaMinkeyReturns</name>
             <source-roots>
+                <root id="src.Graphics.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
