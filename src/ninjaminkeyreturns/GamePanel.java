@@ -45,6 +45,7 @@ public class GamePanel extends CPanel{
     
     @Override
     public void paintComponent(Graphics g){
+        long firstTime=System.currentTimeMillis();
 //        System.out.println("drawing.."+c);
         
 //        c++;
@@ -58,7 +59,8 @@ public class GamePanel extends CPanel{
         runner.draw(g);
         
 //        System.out.println("end draw");
-        try{Thread.sleep(FRAME_DELAY);}catch(Exception e){}
+        long finalTime=System.currentTimeMillis()-firstTime;
+        try{Thread.sleep(FRAME_DELAY-finalTime);}catch(Exception e){}
         this.repaint();
         
     }
