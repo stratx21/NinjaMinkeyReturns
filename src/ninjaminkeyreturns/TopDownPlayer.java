@@ -14,9 +14,17 @@ import java.awt.Rectangle;
  */
 public class TopDownPlayer extends Player{
     
-    public byte directionFacing=0;//   0
+    private byte directionFacing=0;//  0
     //                               1   2
     //                                 3
+    
+    public void setDirectionFacing(byte n){
+        directionFacing=n;
+    }
+    
+    public byte getDirectionFacing(){
+        return directionFacing;
+    }
     
     public int distanceMoved=0;
     

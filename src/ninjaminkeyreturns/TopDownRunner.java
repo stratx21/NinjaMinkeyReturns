@@ -72,7 +72,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //                    System.out.println("triggering AI from runner.... ");
                     region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
                         @Override
-                        public void actionPerformed(){
+                        public void actionPerformed(byte facing){//after the AI has approached the player::
+                            player.setDirectionFacing(facing);
                             
                         }
                     });
@@ -199,6 +200,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         for(int i=0;i<6;i++)
             if(i!=doNotChange)
                 currentKey[i]=false;
+    }
+    
+    private void showPrompt(String prompt){
+        
     }
     
 }

@@ -13,4 +13,5 @@ public class CListener {
     public void actionPerformed(){}
     public void actionPerformed(boolean a){}
     public void actionPerformed(int a){}
+    public void actionPerformed(byte a){}
 }

@@ -28,17 +28,19 @@ public class TopDownAI extends AI{
     
     public int directionFacing=0;
     
-    public CListener done=null;
+    public CListener done=null;//for after the AI approaches the player or is triggered by the player coming to it, etc
     
     public int[] toGo=new int[2];
     
     public int[] offCenter=new int[2];
     
-    public boolean finishedMoving=false;
+    public boolean finishedMoving=false;// - is this variable actually ever used? besides just set?
     
     public boolean visible=true;
     
     public boolean walkingToPlayer=false;//////
+    
+    public boolean defeated=false;
     
     
     private int IMG_SEQUENCE_MAX=4;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
@@ -69,8 +71,20 @@ public class TopDownAI extends AI{
                 }else if(toGo[0]>1
                         ||(toGo[0]>0&&(toGo[1]!=0))){//second condition: move under or over if not at the same y
                     walkLeft();
-                } else//has reached player
+                } else{//has reached player
                     finishedMoving=true;
+                    byte directionToFace=0;
+                    if(playerLocApproaching[0]>location[0])//player needs to face right to face the AI
+                        directionToFace=2;
+                    else if(playerLocApproaching[0]<location[0])//player needs to face left
+                        directionToFace=1;
+                    if(playerLocApproaching[1]>location[1])//player needs to face down
+                        directionToFace=3;
+                    else if(playerLocApproaching[1]<location[1])//player needs to face up
+                        directionToFace=0;
+                    
+                    done.actionPerformed(directionToFace);
+                }
             }
             
             if(travelling){
