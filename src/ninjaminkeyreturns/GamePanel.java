@@ -59,8 +59,7 @@ public class GamePanel extends CPanel{
         runner.draw(g);
         
 //        System.out.println("end draw");
-        long finalTime=System.currentTimeMillis()-firstTime;
-        try{Thread.sleep(FRAME_DELAY-finalTime);}catch(Exception e){}
+        try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
         this.repaint();
         
     }
