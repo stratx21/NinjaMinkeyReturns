@@ -34,7 +34,7 @@ public class TopDownPlayer extends Player{
     
     public boolean finishedMoving=false;
     
-    private int IMG_SEQUENCE_MAX=4 ;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
+    private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
     public Rectangle GAME_SPAN=new Rectangle();
@@ -95,7 +95,7 @@ public class TopDownPlayer extends Player{
     
     public void draw(Graphics g){
         if(travelling){
-            g.drawImage(images.get(directionFacing*5+imageSequence+4),
+            g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
                     GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,
                     GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,
                     SQUARE_SIZE,SQUARE_SIZE,null);
@@ -108,8 +108,11 @@ public class TopDownPlayer extends Player{
         if(!travelling&&!disabled){
             if(directionFacing!=direction){//is not facing the direction it is about to move in, so face it before moving...
                 directionFacing=(byte)direction;
+//                System.out.println("changed direction");
             }else{
                 travelling=true;
+//                System.out.println("started travel");
+                        
                 switch(direction){//start moving
                     case 0: moveUp();
                         break;

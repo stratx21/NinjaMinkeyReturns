@@ -107,8 +107,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             if(region.canMoveToSpace(player.getX(),player.getY()+1))
                 player.moveStart(3);
         }else if(currentKey[2]){
-            if(region.canMoveToSpace(player.getX()-1,player.getY()))
+            if(region.canMoveToSpace(player.getX()-1,player.getY())){
                 player.moveStart(1);
+//                System.out.println("move");
+            }
         }else if(currentKey[3]){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
