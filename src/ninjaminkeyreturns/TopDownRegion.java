@@ -127,7 +127,7 @@ public class TopDownRegion extends Region{
      }
      
      
-     public void triggerAI(int ai,int playerX,int playerY,CListener c){
+     public TopDownAI triggerAI(int ai,int playerX,int playerY,CListener c){
          TopDownAI a=AIs.get(ai);
          a.visible=true;
          a.walkingToPlayer=true;
@@ -139,6 +139,7 @@ public class TopDownRegion extends Region{
                  c.actionPerformed();
              }
          };
+         return a;
      }
      
     

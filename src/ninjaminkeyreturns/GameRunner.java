@@ -68,6 +68,10 @@ public class GameRunner implements KeyListener{
     public void keyReleasedFlow(char typed){}
     
     
+    public void showPrompt(String prompt){
+        
+    }
+    
     ////////
     
 }

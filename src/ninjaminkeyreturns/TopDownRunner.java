@@ -24,6 +24,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private CListener AIdone=null;
     
+    private TopDownAI focusedAI=null;
+    
     private boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
     
     public TopDownRunner(){
@@ -70,7 +72,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
 //                    System.out.println("triggering AI from runner.... ");
-                    region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
+                    focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
                             player.setDirectionFacing(facing);
@@ -200,10 +202,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         for(int i=0;i<6;i++)
             if(i!=doNotChange)
                 currentKey[i]=false;
-    }
-    
-    private void showPrompt(String prompt){
-        
     }
     
 }
