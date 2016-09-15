@@ -113,9 +113,9 @@ public class GraphicsAssets {
         img.add(importFromString("Graphics/TopDown/Player/D0.png"));//idle down
         
         img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 1 - 5
-        img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 2
-        img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 3
-        img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 4
+        img.add(importFromString("Graphics/TopDown/Player/U1.png"));//travel up 2
+        img.add(importFromString("Graphics/TopDown/Player/U2.png"));//travel up 3
+        img.add(importFromString("Graphics/TopDown/Player/U3.png"));//travel up 4
         img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 5
         
         for(int i=0;i<5;i++)
