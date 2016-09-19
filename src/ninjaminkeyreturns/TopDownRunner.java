@@ -42,8 +42,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
      */
     private void setup(){
-        Region.SQUARE_SIZE=TopDownAI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
-        Region.GAME_SPAN=TopDownAI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
+        Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
+        Region.GAME_SPAN=AI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
     }
     
     /**
@@ -76,7 +76,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
                             player.setDirectionFacing(facing);
-                            
                         }
                     });
 //                    player.forceLookUp();

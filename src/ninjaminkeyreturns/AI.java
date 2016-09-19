@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -13,6 +14,10 @@ import java.util.ArrayList;
  * @author Josh
  */
 public class AI {
+    
+    public static int SQUARE_SIZE=0;
+    
+    public static Rectangle GAME_SPAN=new Rectangle();
     
     public int AI_ID=0;
     

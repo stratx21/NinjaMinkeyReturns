@@ -16,12 +16,14 @@ import javax.swing.JPanel;
  */
 public class CPanel extends JPanel{
 //    public int DELAY=40;
+    
+    public GameRunner runner=null;
 
     public static int[] FRAME_SIZE=new int[2];
     public static Rectangle GAME_SPAN=new Rectangle();
     
     //public static int[] gameStartPoint=new int[2];
-    GameRunner runner=null;
+    
 
 
 

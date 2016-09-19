@@ -14,13 +14,11 @@ import java.awt.Rectangle;
  */
 public class TopDownAI extends AI{
     
-    public static int SQUARE_SIZE=0;
+    
     
     public int REGION_ID=0;
     
     public int MISSION_GIVEN_ID=0;
-    
-    public static Rectangle GAME_SPAN=new Rectangle();
     
     public boolean travelling=false;
     
@@ -78,9 +76,9 @@ public class TopDownAI extends AI{
                         directionToFace=2;
                     else if(playerLocApproaching[0]<location[0])//player needs to face left
                         directionToFace=1;
-                    if(playerLocApproaching[1]>location[1])//player needs to face down
+                    if(playerLocApproaching[1]<location[1])//player needs to face down
                         directionToFace=3;
-                    else if(playerLocApproaching[1]<location[1])//player needs to face up
+                    else if(playerLocApproaching[1]>location[1])//player needs to face up
                         directionToFace=0;
                     
                     done.actionPerformed(directionToFace);

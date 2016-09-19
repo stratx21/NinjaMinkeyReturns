@@ -135,8 +135,8 @@ public class TopDownRegion extends Region{
          a.calcToGo(playerX,playerY);
          AIApproachDone=a.done=new CListener(){
              @Override
-             public void actionPerformed(){
-                 c.actionPerformed();
+             public void actionPerformed(byte a){
+                 c.actionPerformed(a);
              }
          };
          return a;

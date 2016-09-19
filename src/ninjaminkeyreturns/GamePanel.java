@@ -25,12 +25,12 @@ public class GamePanel extends CPanel{
     
 //    private int c=0;
     
-    public GamePanel(){
+    public GamePanel(){///initial startup, only from initial call to start the game
 //        timer.start();
         this.repaint();
         runner=new TopDownRunner(new CListener(){
             @Override
-            public void actionPerformed(){
+            public void actionPerformed(int sideViewRegionID){//now about to fight an AI or move through a side view mission
                 
             }
         });
@@ -41,6 +41,10 @@ public class GamePanel extends CPanel{
     public GamePanel(CListener c){
         this();
         backToMenu=c;
+    }
+    
+    private void switchToSideView(){
+        
     }
     
     @Override
