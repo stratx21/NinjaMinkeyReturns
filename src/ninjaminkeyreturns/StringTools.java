@@ -28,8 +28,75 @@ public class StringTools {
      *      be displayed based on how long each line is in pixels
      */
     public ArrayList<String> formatString(String text,Font font,int maxPixelWidth){
-        ArrayList<String> r=new ArrayList<String>();
+        ////
+        //// Note progamer doesn't work if any single words are londer than the maxPixelWidth
+        ////
         
+        ////
+        //// Note untested removde this upon testing
+        ////
+        
+        ////
+        //// Note FAIL DANGEROUS
+        ////
+        
+        ////
+        //// JOSH DELETE WHEN YOU READ THIS 9/19
+        ////
+        ArrayList<String> r=new ArrayList<String>();
+        int ll=0;
+        if(getPixelWidth(text,font)<=maxPixelWidth){ //defualt case just works
+            r.add(text);
+            return r;
+        }
+        while(getPixelWidth(text,font)>maxPixelWidth){
+            
+            if(ll!=0){ //first restet of text
+                
+                if(getPixelWidth((text.substring(0,text.lastIndexOf(" "))),font)>maxPixelWidth){ //if removing one letter fails
+                    
+                    ll=text.lastIndexOf(" ")-1;
+                    
+                }else{//removing one word works
+                    
+                
+                    r.add(text.substring(0,text.lastIndexOf(" ")));
+                    
+                    if(text.lastIndexOf(" ")+1<=text.length()){// prevents out of bound in cse of the string ending in a space
+                        
+                        text=text.substring(text.lastIndexOf(" ")+1);//restart chain for removed words
+                    
+                    }
+                    else{
+                    
+                        text=text.substring(text.lastIndexOf(" ")); //restart chain for removed words
+                    
+                    }
+                    ll=0; 
+                            if(getPixelWidth(text,font)<=maxPixelWidth){//removed section is short enough
+                                r.add(text);
+                                return r;
+                            }
+                }
+                }else{ //if more than one word needs to be removed
+                
+            
+                if(getPixelWidth((text.substring(0,text.lastIndexOf(" ",ll))),font)>maxPixelWidth){
+                    ll=text.lastIndexOf(" ",ll)-1;
+                    
+                }else{
+                    
+                    r.add(text.substring(0,text.lastIndexOf(" ",ll)));
+                    text=text.substring(text.lastIndexOf(" ",ll)+1);
+                    ll=0;
+                            if(getPixelWidth(text,font)<=maxPixelWidth){
+                                r.add(text);
+                                return r;
+                            }
+            }
+            
+        }
+        }
         return r;
     }
     
