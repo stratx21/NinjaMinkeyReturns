@@ -8,6 +8,7 @@ package ninjaminkeyreturns;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     private TopDownRegion region=new TopDownRegion(0);
     
     private CListener AIdone=null;
+    
+    private ArrayList<String> promptShowing=new ArrayList<>();
+    
+//    private boolean showingPrompt=false;
     
     private TopDownAI focusedAI=null;
     
@@ -71,11 +76,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                     
                 } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
-//                    System.out.println("triggering AI from runner.... ");
+                    System.out.println("triggering AI from runner.... ");
                     focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
                             player.setDirectionFacing(facing);
+//                            showingPrompt=true;
+                            
                         }
                     });
 //                    player.forceLookUp();
@@ -95,7 +102,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         //System.out.println("painting!");
     }
-    //PRE:not travelling
+    
+    //PRE: player.travelling is false (player is not already moving between tiles)
     //up, down, left, right, attack, other attack
     private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
         //System.out.println("to playerkeysflow");
@@ -128,13 +136,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         region.changeRegion(newRegion);
         
         //** code for fading out, then showing the next biome/region pic, then going back....
-    }
-    
-    
-    ///////////////////
-    
-    private void AIApproachPlayer(){
-        
     }
     
     /**
