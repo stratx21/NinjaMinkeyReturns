@@ -27,7 +27,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private ArrayList<String> promptShowing=new ArrayList<>();
     
-//    private boolean showingPrompt=false;
+    private boolean showingPrompt=false;
     
     private TopDownAI focusedAI=null;
     
@@ -81,11 +81,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
                             player.setDirectionFacing(facing);
-//                            showingPrompt=true;
+                            showingPrompt=true;
                             
                         }
                     });
-//                    player.forceLookUp();
+                    promptShowing=StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getX()*0.9));
                 }
             }
             player.finishedMoving=false;
@@ -96,6 +96,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 playerKeysFlow();
             else
                 player.continueMove();
+        }else if(showingPrompt){
+            
         }
         
 //        System.out.println(player.getX()+","+player.getY());

@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -19,6 +20,8 @@ public class GameRunner implements KeyListener{
     
     public static Rectangle GAME_SPAN=new Rectangle();
     public static int SQUARE_SIZE=0;
+    
+    public static Font font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getX()*0.01));
     
     /**
      * CListener evoked to exit the game mode or to finish gameplay
