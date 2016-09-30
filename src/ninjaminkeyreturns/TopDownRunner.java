@@ -19,7 +19,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     public static int SQUARE_SIZE=0;
     
-    private TopDownPlayer player=new TopDownPlayer(new int[]{19,20});
+    private TopDownPlayer player=null;//new TopDownPlayer(new int[]{19,20});
     
     private TopDownRegion region=new TopDownRegion(0);
     
@@ -38,9 +38,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         setup();
     }
     
-    public TopDownRunner(CListener dn){
+    public TopDownRunner(CListener dn,int playerStartX,int playerStartY){
         super(dn);
         setup();
+        player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
     }
     
     /**
@@ -98,9 +99,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 player.continueMove();
         }
         
-//        System.out.println(player.getX()+","+player.getY());
-        
-        //System.out.println("painting!");
+//      
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)
