@@ -136,5 +136,9 @@ public class GraphicsAssets {
         return img;
     }    
     
+    public static BufferedImage getTopDownPromptImage(){
+        return importFromString("Graphics/Prompt.png");
+    }
+    
     
 }

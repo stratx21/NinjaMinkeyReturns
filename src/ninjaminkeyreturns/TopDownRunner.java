@@ -25,9 +25,16 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private CListener AIdone=null;
     
+    
+    //prompt components::
     private ArrayList<String> promptShowing=new ArrayList<>();
     
-    private boolean showingPrompt=false;
+    private boolean showingPrompt=false,waitingForInput=false;
+    
+    public int textSpeed=3;//inversed; the higher the number the slower it will be
+    
+    private java.awt.image.BufferedImage promptImage=null;
+    /////////////////
     
     private TopDownAI focusedAI=null;
     
@@ -50,6 +57,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     private void setup(){
         Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
         Region.GAME_SPAN=AI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
+        promptImage=GraphicsAssets.getTopDownPromptImage(); 
     }
     
     /**
@@ -97,11 +105,40 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 playerKeysFlow();
             else
                 player.continueMove();
-        }else if(showingPrompt){
-            
+        }else if(showingPrompt){//loop components for each redraw
+            showingPromptFlow(g);
         }
         
 //      
+    }
+    
+    private int characterNum=0,lineNum=0;
+    private boolean secondLine=false,promptEnded=false;
+    
+    /**
+     * 
+     */
+    private void showingPromptFlow(Graphics g){
+        String currentString=promptShowing.get(lineNum),
+                toDraw;
+        toDraw=currentString;
+        if(!waitingForInput){
+            characterNum++;
+            if(characterNum/textSpeed<currentString.length()){//still drawing the string out
+                toDraw=currentString.substring(0,characterNum/textSpeed+1);
+                characterNum++;
+            }else{//the string has been completely drawn and it is now waiting for user input
+                waitingForInput=true;
+            }
+        }else{//is waiting for player input (done with that line)
+            if(currentKey[4]){
+                lineNum++;
+                characterNum=0;
+                waitingForInput=false;
+            }
+        }
+        
+        g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+GAME_SPAN.getHeight()/2),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()/2),null);
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)
