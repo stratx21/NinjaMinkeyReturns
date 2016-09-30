@@ -47,11 +47,8 @@ public class TopDownRegion extends Region{
      * 
      */
      public void draw(Graphics g,int x,int y,int offX,int offY){
-        drawBackRegion(g,x,y,offX*-1,offY*-1);//make sure to invert offX and offY !!!
-//        System.out.println("drew back");
-//        System.out.println("offX:"+offX+" offY:"+offY);
+        drawBackRegion(g,x,y,offX*-1,offY*-1);//invert offX and offY
         
-//        System.out.println("bout to draw AIs......");
         for(TopDownAI ai:AIs){//draw all AIs
 //            System.out.println("drawing AIs...");
             ai.draw(g);

@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Josh
@@ -14,4 +16,6 @@ public class CListener {
     public void actionPerformed(boolean a){}
     public void actionPerformed(int a){}
     public void actionPerformed(byte a){}
+    public void actionPerformed(BufferedImage player,BufferedImage AI,String text){}
+    public void actionPerformed(BufferedImage player,BufferedImage AI,String text,int id){}
 }

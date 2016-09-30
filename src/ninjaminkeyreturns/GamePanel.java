@@ -33,7 +33,7 @@ public class GamePanel extends CPanel{
             public void actionPerformed(int sideViewRegionID){//now about to fight an AI or move through a side view mission
                 
             }
-        });
+        },19,20);
         this.addKeyListener(runner);
         System.out.println("ADDED KEYLISTENER...");
     }
