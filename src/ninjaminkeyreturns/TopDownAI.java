@@ -22,7 +22,7 @@ public class TopDownAI extends AI{
     
     public boolean travelling=false;
     
-    public String promptBefore="",promptAfter="";
+    private String promptBefore="",promptAfter="";
     
     public int directionFacing=0;
     
@@ -54,6 +54,14 @@ public class TopDownAI extends AI{
         promptBefore=prmptBefore;
         promptAfter=prmptAfter;
         visible=vsble==1;
+    }
+    
+    public String getBeforePrompt(){
+        return promptBefore;
+    }
+    
+    public String getAfterPrompt(){
+        return promptAfter;
     }
     
     public void draw(Graphics g){

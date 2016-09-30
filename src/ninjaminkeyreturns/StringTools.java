@@ -27,7 +27,7 @@ public class StringTools {
      * @return an ArrayList of type String that contains each line that should
      *      be displayed based on how long each line is in pixels
      */
-    public ArrayList<String> formatString(String text,Font font,int maxPixelWidth){
+    public static ArrayList<String> formatString(String text,Font font,int maxPixelWidth){
         ////
         //// Note progamer doesn't work if any single words are londer than the maxPixelWidth
         ////
@@ -109,7 +109,7 @@ public class StringTools {
      * @param font the font that is being used to draw the String text
      * @return the integer value of how long in pixels the String will be
      */
-    private int getPixelWidth(String text,Font font){
+    private static int getPixelWidth(String text,Font font){
         AffineTransform affinetransform = new AffineTransform();     
         FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
         return (int)(font.getStringBounds(text,frc).getWidth());
