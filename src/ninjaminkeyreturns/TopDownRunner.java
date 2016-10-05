@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -42,22 +43,24 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     public TopDownRunner(){
         super();
-        setup();
+        setup(0,0);
     }
     
     public TopDownRunner(CListener dn,int playerStartX,int playerStartY){
         super(dn);
-        setup();
-        player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
+        setup(playerStartX,playerStartY);
     }
     
     /**
      * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
      */
-    private void setup(){
+    private void setup(int playerStartX,int playerStartY){
+        player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
+        
         Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
         Region.GAME_SPAN=AI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
         promptImage=GraphicsAssets.getTopDownPromptImage(); 
+        resetFont();
     }
     
     /**
@@ -137,8 +140,12 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 waitingForInput=false;
             }
         }
+        System.out.println(toDraw+"toDraw"+currentString);
         
         g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+GAME_SPAN.getHeight()/2),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()/2),null);
+        g.setColor(Color.white);
+        g.setFont(font);
+        g.drawString(toDraw,(int)(0.05*GAME_SPAN.x),(int)(0.65*GAME_SPAN.y));
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)

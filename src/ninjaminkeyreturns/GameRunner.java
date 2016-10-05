@@ -37,6 +37,10 @@ public class GameRunner implements KeyListener{
         done=dn;
     }
     
+    public void resetFont(){
+        font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getX()*0.01));
+    }
+    
     public void resetControls(){
         controls=Profile.controls;
     }

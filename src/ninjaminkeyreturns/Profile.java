@@ -212,8 +212,8 @@ public class Profile {
                     input=scan.nextLine().split(",");
                     for(int j=0;j<input.length-3;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[4],input[5]));
-                    
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6]));
+                    //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
                 }
                 
                 

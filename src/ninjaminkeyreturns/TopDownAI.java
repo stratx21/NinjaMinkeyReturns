@@ -51,7 +51,7 @@ public class TopDownAI extends AI{
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         MISSION_GIVEN_ID=mssnGivenID;
-        promptBefore=prmptBefore;
+        promptBefore=prmptBefore;//System.out.println(prmptBefore+"promptBefore"+promptAfter+"promptAfter");
         promptAfter=prmptAfter;
         visible=vsble==1;
     }
