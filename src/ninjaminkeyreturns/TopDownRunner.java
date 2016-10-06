@@ -97,7 +97,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             
                         }
                     });
-                    promptShowing=StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getX()*0.9));
+                    promptShowing=StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getWidth()*0.9));
                 }
             }
             player.finishedMoving=false;
@@ -140,12 +140,12 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 waitingForInput=false;
             }
         }
-        System.out.println(toDraw+"toDraw"+currentString);
+        System.out.println(font.getSize());
         
         g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+GAME_SPAN.getHeight()/2),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()/2),null);
         g.setColor(Color.white);
         g.setFont(font);
-        g.drawString(toDraw,(int)(0.05*GAME_SPAN.x),(int)(0.65*GAME_SPAN.y));
+        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width),(int)(0.65*GAME_SPAN.height));
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)

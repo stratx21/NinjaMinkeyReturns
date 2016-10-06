@@ -80,8 +80,9 @@ public class StringTools {
                 }
                 }else{ //if more than one word needs to be removed
                 
-            
-                if(getPixelWidth((text.substring(0,text.lastIndexOf(" ",ll))),font)>maxPixelWidth){
+                
+                if(getPixelWidth(
+                        (text.substring(0,text.lastIndexOf(" ",ll))),font)>maxPixelWidth){
                     ll=text.lastIndexOf(" ",ll)-1;
                     
                 }else{
