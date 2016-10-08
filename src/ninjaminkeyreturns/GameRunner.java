@@ -21,7 +21,7 @@ public class GameRunner implements KeyListener{
     public static Rectangle GAME_SPAN=new Rectangle();
     public static int SQUARE_SIZE=0;
     
-    public static Font font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getX()*0.01));
+    public static Font font=null;
     
     /**
      * CListener evoked to exit the game mode or to finish gameplay
@@ -38,7 +38,7 @@ public class GameRunner implements KeyListener{
     }
     
     public void resetFont(){
-        font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getWidth()/7));
+        font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getWidth()/15));
     }
     
     public void resetControls(){
