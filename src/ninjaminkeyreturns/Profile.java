@@ -199,7 +199,7 @@ public class Profile {
     public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
         try{
             ArrayList data=new ArrayList<TopDownAI>();
-            int[] a=new int[6];
+            int[] a=new int[7];
             inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/AI"+newRegion+".txt").toURI());
             
             if(inputSaveFile!=null){
@@ -210,9 +210,11 @@ public class Profile {
                 
                 for(int i=0;i<AIs;i++){
                     input=scan.nextLine().split(",");
-                    for(int j=0;j<input.length-3;j++)
+                    
+                    for(int j=0;j<5;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6]));
+                    a[6]=Integer.parseInt(input[7]);//how is this 8???? it should be 7
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));
                     //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
                 }
                 
@@ -221,7 +223,7 @@ public class Profile {
             }
             return data;
         }catch(Exception e){
-            ErrorLogger.logError(e,"Profile.importTriggerSpotsTopDown");
+            ErrorLogger.logError(e,"Profile.importAIDataTopDown");
         }
         return null;
     }

@@ -109,8 +109,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             else
                 player.continueMove();
         }else if(showingPrompt){//loop components for each redraw
-            
-            showingPromptFlow(g);
+            if(lineNum>promptShowing.size()-1){//it is done and the player has hit the select/attack function to end the prompt
+                if(focusedAI.instantSideView)
+                    done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+            }else
+                showingPromptFlow(g);
         }
         
 //      
@@ -143,10 +146,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }
 //        System.out.println(font.getSize());
         
-        g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+GAME_SPAN.getHeight()/2),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()/2),null);
+        g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+(int)(GAME_SPAN.getHeight()*0.57)),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()*0.4),null);
         g.setColor(Color.white);
         g.setFont(font);
-        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)+GAME_SPAN.x,(int)(0.78*GAME_SPAN.height)+GAME_SPAN.y);
+        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)+GAME_SPAN.x,(int)(0.8*GAME_SPAN.height)+GAME_SPAN.y);
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)

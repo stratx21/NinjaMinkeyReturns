@@ -22,6 +22,8 @@ public class TopDownAI extends AI{
     
     public boolean travelling=false;
     
+    public boolean instantSideView=false;
+    
     private String promptBefore="",promptAfter="";
     
     public int directionFacing=0;
@@ -41,19 +43,20 @@ public class TopDownAI extends AI{
     public boolean defeated=false;
     
     
-    private int IMG_SEQUENCE_MAX=4;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
+    private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
     private int[] playerLocApproaching=new int[2];
     
     
-    public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter){
+    public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter,int instSideView){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         MISSION_GIVEN_ID=mssnGivenID;
         promptBefore=prmptBefore;//System.out.println(prmptBefore+"promptBefore"+promptAfter+"promptAfter");
         promptAfter=prmptAfter;
         visible=vsble==1;
+        instantSideView=instSideView==1;
     }
     
     public String getBeforePrompt(){
@@ -80,21 +83,25 @@ public class TopDownAI extends AI{
                 } else{//has reached player
                     finishedMoving=true;
                     byte directionToFace=0;
-                    if(playerLocApproaching[0]>location[0])//player needs to face right to face the AI
+                    if(playerLocApproaching[0]>location[0]){//player needs to face right to face the AI
                         directionToFace=2;
-                    else if(playerLocApproaching[0]<location[0])//player needs to face left
+                        directionFacing=1;
+                    }else if(playerLocApproaching[0]<location[0]){//player needs to face left
                         directionToFace=1;
-                    if(playerLocApproaching[1]<location[1])//player needs to face down
+                        directionFacing=2;
+                    }if(playerLocApproaching[1]<location[1]){//player needs to face down
                         directionToFace=3;
-                    else if(playerLocApproaching[1]>location[1])//player needs to face up
+                        directionFacing=0;
+                    }else if(playerLocApproaching[1]>location[1]){//player needs to face up
                         directionToFace=0;
-                    
+                        directionFacing=3;
+                    }
                     done.actionPerformed(directionToFace);
                 }
             }
             
             if(travelling){
-            g.drawImage(images.get(directionFacing*5+imageSequence+4),
+            g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
                     GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2+offCenter[0],
                     GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                     SQUARE_SIZE,SQUARE_SIZE,null);

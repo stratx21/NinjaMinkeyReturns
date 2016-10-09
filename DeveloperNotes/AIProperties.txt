@@ -1,9 +1,0 @@
-# of AIs for the region this txt file is for
-locX,locY,AI_ID # (for images), ID # of mission they give, 1 for true for is visible, String beforeprompt, String afterprompt
-
-
-* don't put commas in (for now, ask to change later?)
-
-
-
-* make sure to have an ID number for each 

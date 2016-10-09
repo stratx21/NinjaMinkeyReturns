@@ -72,35 +72,28 @@ public class GraphicsAssets {
     
     public static ArrayList<BufferedImage> importTopDownAIImages(int ai_ID){
         ArrayList<BufferedImage> img=new ArrayList<>();
+        String id=StringTools.numToDigits(ai_ID,3);
         
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//idle up
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//idle down
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//idle left
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//idle right
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+0+".png"));//idle up
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+0+".png"));//idle down
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+0+".png"));//idle left
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+0+".png"));//idle right
         
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel up 1 - 5
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel up 2
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel up 3
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel up 4
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel up 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+i+".png"));//travel up 1 - 5
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+0+".png"));//travel up 5
         
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel down 1 - 10
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel down 2
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel down 3
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel down 4
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel down 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+0+".png"));//travel 
         
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel left 1 - 15
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel left 2
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel left 3
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel left 4
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel left 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+0+".png"));//travel 
         
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel right 1 - 20
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel right 2
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel right 3
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel right 4
-        img.add(importFromString("Graphics/TopDown/AI/AItesting"+ai_ID+".png"));//travel right 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+0+".png"));//travel 
         
         return img;
     }
@@ -112,11 +105,9 @@ public class GraphicsAssets {
         img.add(importFromString("Graphics/TopDown/Player/R0.png"));//idle right
         img.add(importFromString("Graphics/TopDown/Player/D0.png"));//idle down
         
-        img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 1 - 5
-        img.add(importFromString("Graphics/TopDown/Player/U1.png"));//travel up 2
-        img.add(importFromString("Graphics/TopDown/Player/U2.png"));//travel up 3
-        img.add(importFromString("Graphics/TopDown/Player/U3.png"));//travel up 4
-        img.add(importFromString("Graphics/TopDown/Player/U0.png"));//travel up 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/Player/U"+i+".png"));//travel up 4-9
+        img.add(importFromString("Graphics/TopDown/Player/U0.png"));
         
         for(int i=0;i<5;i++)
             img.add(importFromString("Graphics/TopDown/Player/L"+i+".png"));//travel left - 10-14
@@ -124,11 +115,9 @@ public class GraphicsAssets {
         for(int i=0;i<5;i++)
             img.add(importFromString("Graphics/TopDown/Player/R"+i+".png"));//travel left - 15-19
         
-        img.add(importFromString("Graphics/TopDown/Player/D0.png"));//travel down 1 - 20
-        img.add(importFromString("Graphics/TopDown/Player/D1.png"));//travel down 2
-        img.add(importFromString("Graphics/TopDown/Player/D2.png"));//travel down 3
-        img.add(importFromString("Graphics/TopDown/Player/D3.png"));//travel down 4
-        img.add(importFromString("Graphics/TopDown/Player/D0.png"));//travel down 5
+        for(int i=0;i<4;i++)
+            img.add(importFromString("Graphics/TopDown/Player/D"+i+".png"));//
+        img.add(importFromString("Graphics/TopDown/Player/D0.png"));//travel down 
         
         
         

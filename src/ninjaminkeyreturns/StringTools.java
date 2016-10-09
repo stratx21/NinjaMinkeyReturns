@@ -62,7 +62,7 @@ public class StringTools {
 //                        +text.substring(0,tmp=text.indexOf(" ")));
                 if(text.indexOf(" ")==-1){//out of spaces and is done
                     if(getPixelWidth(toAdd+" "+text,font)<maxPixelWidth){//can fit in the current line
-                        toAdd+=text;
+                        toAdd+=" "+text;
                     }else{//cannot fit on the current line; must start on a new one
                         r.add(toAdd);//must call this here so that it is in the proper order
                         r.add(text);
@@ -108,6 +108,19 @@ public class StringTools {
         AffineTransform affinetransform = new AffineTransform();     
         FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
         return (int)(font.getStringBounds(text,frc).getWidth());
+    }
+    
+    /**
+     * 
+     * @param number
+     * @param digits
+     * @return 
+     */
+    public static String numToDigits(int number,int digits){
+        String r=number+"";
+        while(r.length()<digits)
+            r="0"+r;
+        return r;
     }
     
 }
