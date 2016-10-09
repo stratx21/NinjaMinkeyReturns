@@ -28,6 +28,8 @@ public class Profile {
     
     public static boolean[][] completedMissions=new boolean[9][16];//expand on this
     
+    public static int[] playerLocation=new int[2];
+    
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
      * menu for each type of car, an empty space between each set for type
