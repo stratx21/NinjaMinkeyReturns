@@ -24,18 +24,24 @@ public class GamePanel extends CPanel{
     private CListener backToMenu=new CListener();
     
 //    private int c=0;
-    
-    public GamePanel(){///initial startup, only from initial call to start the game
+    /**
+     * GamePanel will always be initialized from the main menu and will thus start on the top down mode.
+     * 
+     * 
+     */
+    public GamePanel(){//initial startup, only from initial call to start the game
 //        timer.start();
         this.repaint();
         runner=new TopDownRunner(new CListener(){
             @Override
-            public void actionPerformed(int sideViewRegionID){//now about to fight an AI or move through a side view mission
-                
+            public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
+                switchToSideView();
             }
         },19,20);
         this.addKeyListener(runner);
         System.out.println("ADDED KEYLISTENER...");
+        
+        
     }
     
     public GamePanel(CListener c){

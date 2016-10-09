@@ -43,7 +43,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     public TopDownRunner(){
         super();
-        setup(0,0);
+        setup(30,30);//this is likely to cause errors
     }
     
     public TopDownRunner(CListener dn,int playerStartX,int playerStartY){
@@ -108,10 +108,16 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 playerKeysFlow();
             else
                 player.continueMove();
+            
         }else if(showingPrompt){//loop components for each redraw
             if(lineNum>promptShowing.size()-1){//it is done and the player has hit the select/attack function to end the prompt
-                if(focusedAI.instantSideView)
+                if(focusedAI.instantSideView){
+                    Profile.playerLocation=new int[]{player.getX(),player.getY()};//set the coordinates so that the player can come back to them
                     done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+                } else{//the AI did not confront the player in a side view manner
+                    player.setDisabled(false);
+                    //other code.... . . .. .. ........................................................<<<<<<<<
+                }
             }else
                 showingPromptFlow(g);
         }
