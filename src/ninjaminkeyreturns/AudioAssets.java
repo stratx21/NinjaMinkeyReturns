@@ -19,12 +19,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class AudioAssets {
     public static Clip music=null;
     
+    /**
+     * This function uses the String input to play a certain requested audio file 
+     * 
+     * @param name the name of the text file that is to be played
+     */
     public static void play(final String name){
         try{
             AudioInputStream audioIn=AudioSystem.getAudioInputStream(AudioAssets.class.getResource("Audio/"+name+".wav"));
             Clip clip=AudioSystem.getClip();
             clip.open(audioIn);
-            if((name.equalsIgnoreCase("music")||name.equals("ylvis_the_fox"))&&Profile.musicOn)
+            if((name.equalsIgnoreCase("music"))&&Profile.musicOn)
                 (music=clip).loop(-1);
             else if(Profile.soundEffectsOn)
                 clip.start();

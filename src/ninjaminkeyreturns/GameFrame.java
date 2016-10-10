@@ -16,7 +16,9 @@ public class GameFrame extends JFrame{
     private CPanel currentPanel;
     public static int[] FRAME_SIZE=new int[2];
     
-    
+    /**
+     * 
+     */
     public GameFrame(){
 //        this.setIconImage(GraphicsAssets.getIcon());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
