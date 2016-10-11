@@ -32,12 +32,7 @@ public class GamePanel extends CPanel{
     public GamePanel(){//initial startup, only from initial call to start the game
 //        timer.start();
         this.repaint();
-        runner=new TopDownRunner(new CListener(){
-            @Override
-            public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
-                switchToSideView();
-            }
-        },19,20);
+        switchToTopDown();
         this.addKeyListener(runner);
         System.out.println("ADDED KEYLISTENER...");
         
@@ -50,7 +45,21 @@ public class GamePanel extends CPanel{
     }
     
     private void switchToSideView(){
-        
+        runner=new SideViewRunner(new CListener(){
+            @Override
+            public void actionPerformed(boolean won){
+                switchToTopDown();
+            }
+        });
+    }
+    
+    private void switchToTopDown(){
+        runner=new TopDownRunner(new CListener(){
+            @Override
+            public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
+                switchToSideView();
+            }
+            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.currentRegion);
     }
     
     int yv=FRAME_SIZE[1]-GAME_SPAN.y-GAME_SPAN.height;

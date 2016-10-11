@@ -12,7 +12,7 @@ import java.awt.Graphics;
  */
 public class SideViewRunner extends GameRunner{
     
-    private SideViewPlayer player=new SideViewPlayer(null);
+    private SideViewPlayer player=new SideViewPlayer(new int[]{60,160});//will this have a different location every time? or just stick with one for every start?
     
     public SideViewRunner(){
         super();

@@ -22,7 +22,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private TopDownPlayer player=null;//new TopDownPlayer(new int[]{19,20});
     
-    private TopDownRegion region=new TopDownRegion(0);
+    private TopDownRegion region=null;
     
     private CListener AIdone=null;
     
@@ -46,9 +46,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         setup(30,30);//this is likely to cause errors
     }
     
-    public TopDownRunner(CListener dn,int playerStartX,int playerStartY){
+    public TopDownRunner(CListener dn,int playerStartX,int playerStartY,int currentRegion){
         super(dn);
         setup(playerStartX,playerStartY);
+        region=new TopDownRegion(currentRegion);
     }
     
     /**

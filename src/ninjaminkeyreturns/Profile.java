@@ -28,7 +28,9 @@ public class Profile {
     
     public static boolean[][] completedMissions=new boolean[9][16];//expand on this
     
-    public static int[] playerLocation=new int[2];
+    public static int[] playerLocation=new int[]{19,20};
+    
+    public static int currentRegion=0;
     
     /**
      * prices for each upgrade; each set includes the prices for the upgrades

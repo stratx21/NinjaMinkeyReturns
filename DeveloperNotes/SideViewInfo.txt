@@ -1,0 +1,3 @@
+20x20 location points per top down square area
+top down was 17x9
+thus 340x180 location points
