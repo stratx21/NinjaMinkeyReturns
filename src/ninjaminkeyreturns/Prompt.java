@@ -7,6 +7,7 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,39 +19,21 @@ public class Prompt{
     
     private java.awt.image.BufferedImage promptImage=null;
     
-    private boolean navigable=false,
-            showStats=false;
+    public boolean showStats=false;
     
     public static int textSpeed=3;
     
-    public Prompt(boolean navigable){
-        this.navigable=navigable;
+    public Prompt(){
         promptImage=GraphicsAssets.getTopDownPromptImage(); 
     }
     
-    public Prompt(boolean navigable,boolean showStats){
-        this(navigable);
+    public Prompt(boolean showStats){ 
+        this();
         this.showStats=showStats;
     }
     
     public void draw(Graphics g){
         
-    }
-    
-    public void loopCalculate(boolean cont){
-        
-    }
-    
-    public void loopCalculate(boolean[] keysPressed){
-        
-    }
-    
-    public boolean getNavigable(){
-        return navigable;
-    }
-    
-    public void setNavigable(boolean a){
-        navigable=a;
     }
     
 }
