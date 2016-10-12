@@ -32,6 +32,10 @@ public class Profile {
     
     public static int currentRegion=0;
     
+    public static double health=50.00;
+    
+    public static double MAX_HEALTH=50.00;
+    
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
      * menu for each type of car, an empty space between each set for type

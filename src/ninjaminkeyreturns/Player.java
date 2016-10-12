@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -14,14 +15,25 @@ import java.util.ArrayList;
  */
 public class Player {
     
-    public double health=0.00;
+    public double health=50.00;
     
     public int[] location=new int[2];
+    
+    public static Rectangle GAME_SPAN=new Rectangle();
+    public static int SQUARE_SIZE=0;
     
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
     public Player(int[] loc){
         location=loc;
+    }
+    
+    public int getX(){
+        return location[0];
+    }
+    
+    public int getY(){
+        return location[1];
     }
     
 }

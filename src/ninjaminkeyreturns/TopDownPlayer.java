@@ -37,11 +37,7 @@ public class TopDownPlayer extends Player{
     private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
-    public Rectangle GAME_SPAN=new Rectangle();
-    
     public int[] offCenter=new int[2];
-    
-    public static int SQUARE_SIZE=0;
     
     public TopDownPlayer(int[] loc) {
         super(loc);
@@ -75,16 +71,6 @@ public class TopDownPlayer extends Player{
     
     public void setTravelling(boolean a){
         travelling=a;
-    }
-    
-    ////////////////////////////////////
-    
-    public int getX(){
-        return location[0];
-    }
-    
-    public int getY(){
-        return location[1];
     }
     
     ////////////////////////////////

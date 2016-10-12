@@ -17,9 +17,6 @@ import java.util.ArrayList;
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
-    
-    public static int SQUARE_SIZE=0;
-    
     private TopDownPlayer player=null;//new TopDownPlayer(new int[]{19,20});
     
     private TopDownRegion region=null;
@@ -57,9 +54,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     private void setup(int playerStartX,int playerStartY){
         player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
-        
-        Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=player.SQUARE_SIZE=SQUARE_SIZE;//
-        Region.GAME_SPAN=AI.GAME_SPAN=player.GAME_SPAN=CPanel.GAME_SPAN;
         promptImage=GraphicsAssets.getTopDownPromptImage(); 
         resetFont();
     }
