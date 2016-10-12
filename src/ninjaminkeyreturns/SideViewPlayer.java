@@ -16,6 +16,10 @@ public class SideViewPlayer extends Player{
     
     public Rectangle span=new Rectangle();
     
+    private final int WALK_VELOCITY=2;//location points per loop
+    
+    private int[] velocity=new int[]{0,0};
+    
     public SideViewPlayer(int[] loc){
         super(loc);
         images=GraphicsAssets.importSideViewPlayerImages();
@@ -32,7 +36,25 @@ public class SideViewPlayer extends Player{
     }
     
     public void draw(Graphics g){
-        g.drawImage(images.get(2),50,50,null);
+        g.drawImage(images.get(1),50,50,null);
+    }
+    
+    public void move(){
+        
+    }
+    
+    ////////////////////
+    
+    public int getWalkVeloctiy(){
+        return WALK_VELOCITY;
+    }
+    
+    public int getXVelocity(){
+        return velocity[0];
+    }
+    
+    public int getYVelocity(){
+        return velocity[1];
     }
     
 }

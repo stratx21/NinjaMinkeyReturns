@@ -30,7 +30,7 @@ public class Profile {
     
     public static int[] playerLocation=new int[]{19,20};
     
-    public static int currentRegion=0;
+    public static int currentRegionTopDown=0;
     
     public static double health=50.00;
     

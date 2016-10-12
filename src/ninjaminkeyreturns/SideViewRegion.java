@@ -22,4 +22,15 @@ public class SideViewRegion extends Region{
     public void draw(Graphics g){
         
     }
+    
+    /**
+     * 
+     * @param x x value of the block-space the function concerns
+     * @param y y value of the block-sppace the function concerns
+     * @return 
+     */
+    public boolean canMoveToSpace(int x,int y){
+        
+        return true;
+    }
 }

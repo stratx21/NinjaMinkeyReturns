@@ -169,11 +169,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }else if(currentKey[3]){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
-        }else if(currentKey[4]){//SETUP   *   future work
+        }//else if(currentKey[4]){//SETUP   *   future work
             
-        }else if(currentKey[5]){//SETUP   *   future work
+        //}else if(currentKey[5]){//SETUP   *   future work
             
-        }
+        //}
         
         //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
         // carry on the above process for keys inside the player class? (depends on future

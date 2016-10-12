@@ -50,16 +50,19 @@ public class GamePanel extends CPanel{
             public void actionPerformed(boolean won){
                 switchToTopDown();
             }
-        });
+        },tempSideID);
     }
+    
+    private int tempSideID=0;
     
     private void switchToTopDown(){
         runner=new TopDownRunner(new CListener(){
             @Override
             public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
                 switchToSideView();
+                tempSideID=sideViewRegionID;
             }
-            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.currentRegion);
+            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.currentRegionTopDown);
     }
     
     int yv=FRAME_SIZE[1]-GAME_SPAN.y-GAME_SPAN.height;
