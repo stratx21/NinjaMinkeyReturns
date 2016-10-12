@@ -36,8 +36,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private TopDownAI focusedAI=null;
     
-    private boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
-    
     public TopDownRunner(){
         super();
         setup(30,30);//this is likely to cause errors
@@ -199,61 +197,22 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     //////////////////
     
-    @Override
-    public void keyTypedFlow(char typed){
-        
-    }
-    
-    /**
-     * PRE::
-     * @param typed 
-     */
-    @Override
-    public void keyPressedFlow(char typed){
-//        System.out.println("key pressed:: "+typed);
-        if(typed==controls[0]){
-            currentKey[0]=true;
-            setOtherKeysFalse(0);//in here to change it only if it is a valid key
-        }else if(typed==controls[1]){
-            currentKey[1]=true;
-            setOtherKeysFalse(1);
-        }else if(typed==controls[2]){
-            currentKey[2]=true;
-            setOtherKeysFalse(2);
-        }else if(typed==controls[3]){
-            currentKey[3]=true;
-            setOtherKeysFalse(3);
-        }else if(typed==controls[4]){
-            currentKey[4]=true;
-            setOtherKeysFalse(4);
-        }else if(typed==controls[5]){
-            currentKey[5]=true;
-            setOtherKeysFalse(5);
-        }
-    }
-    
-    @Override
-    public void keyReleasedFlow(char typed){
-//        System.out.println("key released:: "+typed);
-        if(typed==controls[0]){
-            currentKey[0]=false;
-        }else if(typed==controls[1]){
-            currentKey[1]=false;
-        }else if(typed==controls[2]){
-            currentKey[2]=false;
-        }else if(typed==controls[3]){
-            currentKey[3]=false;
-        }else if(typed==controls[4]){
-            currentKey[4]=false;
-        }else if(typed==controls[5]){
-            currentKey[5]=false;
-        }
-    }
-    
-    private void setOtherKeysFalse(int doNotChange){
-        for(int i=0;i<6;i++)
-            if(i!=doNotChange)
-                currentKey[i]=false;
-    }
+//    @Override
+//    public void keyTypedFlow(char typed){
+//        
+//    }
+//    
+//    /**
+//     * PRE::
+//     * @param typed 
+//     */
+//    @Override
+//    public void keyPressedFlow(char typed){
+////        System.out.println("key pressed:: "+typed);
+//    }
+//    
+//    @Override
+//    public void keyReleasedFlow(char typed){
+//    }
     
 }

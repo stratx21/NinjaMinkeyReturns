@@ -18,6 +18,8 @@ public class GameRunner implements KeyListener{
     
     public static char[] controls=new char[6]; //to change controls change them in Profile then evoke the resetControls function
     
+    public boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
+    
     public static Rectangle GAME_SPAN=new Rectangle();
     public static int SQUARE_SIZE=0;
     
@@ -58,12 +60,54 @@ public class GameRunner implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e){
-        keyPressedFlow(Character.toUpperCase(e.getKeyChar()));
+        //        System.out.println("key released:: "+typed);
+        char typed=Character.toUpperCase(e.getKeyChar());
+        if(typed==controls[0]){
+            currentKey[0]=true;
+            setOtherKeysFalse(0);//in here to change it only if it is a valid key
+        }else if(typed==controls[1]){
+            currentKey[1]=true;
+            setOtherKeysFalse(1);
+        }else if(typed==controls[2]){
+            currentKey[2]=true;
+            setOtherKeysFalse(2);
+        }else if(typed==controls[3]){
+            currentKey[3]=true;
+            setOtherKeysFalse(3);
+        }else if(typed==controls[4]){
+            currentKey[4]=true;
+            setOtherKeysFalse(4);
+        }else if(typed==controls[5]){
+            currentKey[5]=true;
+            setOtherKeysFalse(5);
+        }
+        keyPressedFlow(typed);
     }
 
     @Override
     public void keyReleased(KeyEvent e){
+        char typed=Character.toUpperCase(e.getKeyChar());
+        if(typed==controls[0]){
+            currentKey[0]=false;
+        }else if(typed==controls[1]){
+            currentKey[1]=false;
+        }else if(typed==controls[2]){
+            currentKey[2]=false;
+        }else if(typed==controls[3]){
+            currentKey[3]=false;
+        }else if(typed==controls[4]){
+            currentKey[4]=false;
+        }else if(typed==controls[5]){
+            currentKey[5]=false;
+        }
+        
         keyReleasedFlow(Character.toUpperCase(e.getKeyChar()));
+    }
+    
+    private void setOtherKeysFalse(int doNotChange){
+        for(int i=0;i<6;i++)
+            if(i!=doNotChange)
+                currentKey[i]=false;
     }
     
     //////
