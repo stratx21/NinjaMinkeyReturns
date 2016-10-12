@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Josh
  */
-public class PlainPrompt extends Prompt{
+public class PlainPrompt extends Prompt{//this prompt is used for just showing text on the screen and allowing the player to hit select to continue through it. 
     
     private ArrayList<String> showing=null;
     
