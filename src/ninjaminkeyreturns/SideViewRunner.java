@@ -6,6 +6,8 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import javax.swing.Timer;
 /**
  *
  * @author Josh
@@ -13,6 +15,12 @@ import java.awt.Graphics;
 public class SideViewRunner extends GameRunner{
     
     private SideViewPlayer player=new SideViewPlayer(new int[]{60,160});//will this have a different location every time? or just stick with one for every start?
+    
+    private Rectangle screenSpan=new Rectangle();//in terms of location points
+    
+    public boolean timed=false;
+    
+    public Timer timer=null;
     
     public SideViewRunner(){
         super();

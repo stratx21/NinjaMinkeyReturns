@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
@@ -27,6 +28,10 @@ public class SideViewPlayer extends Player{
     public SideViewPlayer(int[] loc,int spanX,int spanY){
         super(loc);
         span=new Rectangle(location[0],location[1],spanX,spanY);
+    }
+    
+    public void draw(Graphics g){
+        
     }
     
 }

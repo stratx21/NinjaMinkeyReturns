@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
@@ -16,5 +17,9 @@ public class SideViewRegion extends Region{
 
     public SideViewRegion(int regn) {
         super(regn);
+    }
+    
+    public void draw(Graphics g){
+        
     }
 }
