@@ -9,6 +9,6 @@ package ninjaminkeyreturns;
  *
  * @author Josh
  */
-public class Menu extends CPanel{
+public class StartupPrompt extends NavigablePrompt{
     
 }

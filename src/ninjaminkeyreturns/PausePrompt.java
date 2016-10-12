@@ -9,6 +9,6 @@ package ninjaminkeyreturns;
  *
  * @author Josh
  */
-public class MainMenu extends Menu{
+public class PausePrompt extends NavigablePrompt{
     
 }
