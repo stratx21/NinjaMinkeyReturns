@@ -130,4 +130,17 @@ public class GraphicsAssets {
     }
     
     
+    public static ArrayList<BufferedImage> importSideViewPlayerImages(){
+        ArrayList<BufferedImage> img=new ArrayList<>();
+        
+        for(int i=0;i<8;i++)
+            img.add(importFromString("Graphics/SideView/Player/R"+i+".png"));
+        
+        for(int i=0;i<8;i++)
+            img.add(importFromString("Graphics/SideView/Player/L"+i+".png"));
+        
+        return img;
+    }
+    
+    
 }

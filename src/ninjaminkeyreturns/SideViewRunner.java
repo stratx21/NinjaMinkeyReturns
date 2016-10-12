@@ -36,7 +36,7 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void draw(Graphics g){
-        
+        player.draw(g);
     }
     
     /**

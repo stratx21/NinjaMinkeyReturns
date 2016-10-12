@@ -18,6 +18,7 @@ public class SideViewPlayer extends Player{
     
     public SideViewPlayer(int[] loc){
         super(loc);
+        images=GraphicsAssets.importSideViewPlayerImages();
     }
     
     /**
@@ -26,12 +27,12 @@ public class SideViewPlayer extends Player{
      * @param spanY pixels
      */ 
     public SideViewPlayer(int[] loc,int spanX,int spanY){
-        super(loc);
+        this(loc);
         span=new Rectangle(location[0],location[1],spanX,spanY);
     }
     
     public void draw(Graphics g){
-        
+        g.drawImage(images.get(2),50,50,null);
     }
     
 }
