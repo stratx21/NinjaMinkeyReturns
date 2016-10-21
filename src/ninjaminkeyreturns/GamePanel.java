@@ -25,7 +25,7 @@ public class GamePanel extends CPanel{
     
 //    private int c=0;
     /**
-     * GamePanel will always be initialized from the main menu and will thus start on the top down mode.
+     * GamePanel will always be initialized from the main menu and will start on the top down mode.
      * 
      * 
      */
@@ -39,6 +39,11 @@ public class GamePanel extends CPanel{
         
     }
     
+    /**
+     * initializes the class GamePanel with the CListener for when it is done
+     * 
+     * @param c the Clistener instance that will be used to return to the main menu
+     */
     public GamePanel(CListener c){
         this();
         backToMenu=c;
