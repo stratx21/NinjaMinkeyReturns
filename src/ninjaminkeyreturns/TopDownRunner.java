@@ -23,15 +23,12 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private CListener AIdone=null;
     
+    private ArrayList<String> promptShowing=null;
     
-    //prompt components::
-    private ArrayList<String> promptShowing=new ArrayList<>();
+    public boolean showingPrompt=false;
     
-    private boolean showingPrompt=false,waitingForInput=false;
+    PlainPrompt talkingPrompt=null;
     
-    public int textSpeed=3;//inversed; the higher the number the slower it will be
-    
-    private java.awt.image.BufferedImage promptImage=null;
     /////////////////
     
     private TopDownAI focusedAI=null;
@@ -52,7 +49,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     private void setup(int playerStartX,int playerStartY){
         player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
-        promptImage=GraphicsAssets.getTopDownPromptImage(); 
         resetFont();
     }
     
@@ -90,7 +86,19 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             
                         }
                     });
-                    promptShowing=StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getWidth()*0.9));
+                    talkingPrompt=new PlainPrompt(StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getWidth()*0.9)),
+                    new CListener(){
+                        @Override
+                        public void actionPerformed(){
+                            if(focusedAI.instantSideView){
+                                Profile.playerLocation=new int[]{player.getX(),player.getY()};//set the coordinates so that the player can come back to them
+                                done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+                            } else{//the AI did not confront the player in a side view manner
+                                player.setDisabled(false);
+                                //other code.... . . .. .. ........................................................<<<<<<<<
+                            }
+                        }
+                    });
                 }
             }
             player.finishedMoving=false;
@@ -103,52 +111,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 player.continueMove();
             
         }else if(showingPrompt){//loop components for each redraw
-            if(lineNum>promptShowing.size()-1){//it is done and the player has hit the select/attack function to end the prompt
-                if(focusedAI.instantSideView){
-                    Profile.playerLocation=new int[]{player.getX(),player.getY()};//set the coordinates so that the player can come back to them
-                    done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
-                } else{//the AI did not confront the player in a side view manner
-                    player.setDisabled(false);
-                    //other code.... . . .. .. ........................................................<<<<<<<<
-                }
-            }else
-                showingPromptFlow(g);
+            talkingPrompt.loopCalculate(currentKey[4]);
+            talkingPrompt.draw(g);
         }
         
 //      
-    }
-    
-    private int characterNum=0,lineNum=0;
-    private boolean secondLine=false,promptEnded=false;
-    
-    /**
-     * 
-     */
-    private void showingPromptFlow(Graphics g){
-        String currentString=promptShowing.get(lineNum),
-                toDraw;
-        toDraw=currentString;
-        if(!waitingForInput){
-            characterNum++;
-            if(characterNum/textSpeed<currentString.length()){//still drawing the string out
-                toDraw=currentString.substring(0,characterNum/textSpeed+1);
-                characterNum++;
-            }else{//the string has been completely drawn and it is now waiting for user input
-                waitingForInput=true;
-            }
-        }else{//is waiting for player input (done with that line)
-            if(currentKey[4]){
-                lineNum++;
-                characterNum=0;
-                waitingForInput=false;
-            }
-        }
-//        System.out.println(font.getSize());
-        
-        g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+(int)(GAME_SPAN.getHeight()*0.57)),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()*0.4),null);
-        g.setColor(Color.white);
-        g.setFont(font);
-        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)+GAME_SPAN.x,(int)(0.8*GAME_SPAN.height)+GAME_SPAN.y);
     }
     
     //PRE: player.travelling is false (player is not already moving between tiles)
