@@ -52,20 +52,16 @@ public class SideViewRunner extends GameRunner{
     @Override
     public void draw(Graphics g){
         region.draw(g);
-        player.draw(g);
+        player.draw(g,0,0);
         
         playerKeysFlow();
     }
     
     private void playerKeysFlow(){
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
-//            if(player.getX()
-//                    &&region.canMoveToSpace(player.getX()/20,player.getY()/20-1)){
-//                player.moveStart(0);
-//            }
-        }else if(currentKey[1]){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
-//            if(region.canMoveToSpace(player.getX(),player.getY()+1))
-//                player.moveStart(3);
+            player.setJumping(true);
+        }else if(currentKey[1]){
+            
         }else if(currentKey[2]){
 //            if(region.canMoveToSpace(player.getX()-1,player.getY())){
 //                player.moveStart(1);

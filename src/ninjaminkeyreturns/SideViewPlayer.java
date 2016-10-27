@@ -20,6 +20,12 @@ public class SideViewPlayer extends Player{
     
     private int[] velocity=new int[]{0,0};
     
+    public boolean facingRight=true;
+    
+    public boolean jumping=false; 
+    
+    private int imageSequence=0;
+    
     public SideViewPlayer(int[] loc){
         super(loc);
         images=GraphicsAssets.importSideViewPlayerImages();
@@ -35,9 +41,24 @@ public class SideViewPlayer extends Player{
         span=new Rectangle(location[0],location[1],spanX,spanY);
     }
     
-    public void draw(Graphics g){
-        g.drawImage(images.get(1),50,50,null);
-    }
+    /**
+     * 
+     * @param g
+     * @param xIncrement The integer value used for the value of x in which the 
+     *  player should appear to move in relative to the graphical representation
+     *  of all other objects
+     * @param yIncrement The integer value used for the value of in which the 
+     *  player should appear to move in relative to the graphical representation
+     *  of all other objects
+     */
+    public void draw(Graphics g,int xIncrement,int yIncrement){
+        if(travelling){
+            g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
+                GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2+xIncrement,
+                GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE+yIncrement,
+                SQUARE_SIZE,SQUARE_SIZE*2,null);  
+        }else //not travelling
+            g.drawImage(images.get(1),50,50,null);    }
     
     public void move(){
         
@@ -55,6 +76,14 @@ public class SideViewPlayer extends Player{
     
     public int getYVelocity(){
         return velocity[1];
+    }
+    
+    public boolean getJumping(){
+        return jumping;
+    }
+    
+    public void setJumping(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
+        jumping=j;
     }
     
 }

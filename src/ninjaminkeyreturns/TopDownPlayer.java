@@ -30,8 +30,6 @@ public class TopDownPlayer extends Player{
     
     private boolean disabled=false;//for AI purposes, but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
     
-    public boolean travelling=false;
-    
     public boolean finishedMoving=false;
     
     private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0

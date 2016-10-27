@@ -19,6 +19,9 @@ public class Player {
     
     public int[] location=new int[2];
     
+    public boolean travelling=false;
+    
+    
     public static Rectangle GAME_SPAN=new Rectangle();
     public static int SQUARE_SIZE=0;
     
