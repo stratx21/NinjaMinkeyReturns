@@ -6,6 +6,7 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +15,17 @@ import java.util.ArrayList;
  */
 public class SideViewRegion extends Region{
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
+    
+    public Rectangle portal=null;
+    
+    public boolean timed=false;
 
     public SideViewRegion(int regn) {
         super(regn);
+        int[] a=Profile.getSideViewMissionData(regn);
+        timed=a[0]!=0?true:false;
+        if(a[1]!=0)//has a portal
+            portal=new Rectangle(a[2],a[3],a[4],a[5]);
     }
     
     public void draw(Graphics g){

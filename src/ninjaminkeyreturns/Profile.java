@@ -198,7 +198,7 @@ public class Profile {
         return null;
     }
     
-    public int[] getSideViewMissionData(int region){
+    public static int[] getSideViewMissionData(int region){
         try{
             int[] data=null;
             String[] input;
