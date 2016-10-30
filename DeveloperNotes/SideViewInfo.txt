@@ -6,6 +6,7 @@ IDs::
 0-sky
 1-ground tile(surface)
 2-ground tile(not surface)
+3-portal (trigger spot) - finishes round
 
 ______
-int xsize, int ysize, 0-3 ? 0-defeat the enemy : 1-get to the rightmost portal and survive 2-timed to get to the rightmost portal
+int xsize, int ysize

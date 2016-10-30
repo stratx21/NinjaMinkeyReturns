@@ -144,8 +144,6 @@ public class Profile {
                 String[] in=scan.nextLine().split(",");//import size of array
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
                 input=new String[b][a];//[y][x]
-                
-                System.out.println(in[0]+","+in[0]);
 
                 for(int i=0;i<b;i++){
                     input[i]=scan.nextLine().split(":");
@@ -156,6 +154,66 @@ public class Profile {
                     for(int x=0;x<input[y].length;x++){
                         data[x][y]=Integer.parseInt(input[y][x]);
                     }
+                
+                
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importRegionDataTopDown");
+        }
+        return null;
+    }
+    
+    public static int[][] importRegionDataSideView(int region){
+        try{
+            int[][] data=null;
+            String[][] input;// note:: [x][y]
+            int a,b;
+            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
+            Scanner scan=new Scanner(inputSaveFile);
+            if(inputSaveFile!=null){
+                String[] in=scan.nextLine().split(",");//import size of array
+                data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
+                input=new String[b][a];//[y][x]
+                
+
+                for(int i=0;i<b;i++){
+                    input[i]=scan.nextLine().split(":");
+                }
+                
+                //put into the data array but also reverse the [y][x] to be [x][y]
+                for(int y=0;y<input.length;y++)
+                    for(int x=0;x<input[y].length;x++){
+                        data[x][y]=Integer.parseInt(input[y][x]);
+                    }
+                
+                
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importRegionDataTopDown");
+        }
+        return null;
+    }
+    
+    public int[] getSideViewMissionData(int region){
+        try{
+            int[] data=null;
+            String[] input;
+            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
+            Scanner scan=new Scanner(inputSaveFile);
+            if(inputSaveFile!=null){
+                String[] in=scan.nextLine().split(",");//import size of array
+                input=scan.nextLine().split(",");
+                data=new int[input.length];
+
+                for(int i=0;i<data.length;i++){
+                    data[i]=Integer.parseInt(input[i]);
+                }
+                
+                
                 
                 
                 return data;
