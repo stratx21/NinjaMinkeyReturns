@@ -60,16 +60,12 @@ public class SideViewRunner extends GameRunner{
     private void playerKeysFlow(){
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
             player.setJumping(true);
-        }else if(currentKey[1]){
+        }else if(currentKey[1]){//down
             
-        }else if(currentKey[2]){
-//            if(region.canMoveToSpace(player.getX()-1,player.getY())){
-//                player.moveStart(1);
-//                System.out.println("move");
-//            }
-        }else if(currentKey[3]){
-//            if(region.canMoveToSpace(player.getX()+1,player.getY()))
-//                player.moveStart(2);
+        }else if(currentKey[2]){//left
+            //check if can run in this direction!!
+        }else if(currentKey[3]){//right
+            
         }else if(currentKey[4]){//SETUP   *   future work
             
         }else if(currentKey[5]){//SETUP   *   future work

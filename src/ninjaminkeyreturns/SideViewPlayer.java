@@ -22,7 +22,9 @@ public class SideViewPlayer extends Player{
     
     public boolean facingRight=true;
     
-    public boolean jumping=false; 
+    private boolean jumping=false; 
+    
+    private boolean running=false;
     
     private int imageSequence=0;
     
@@ -84,6 +86,14 @@ public class SideViewPlayer extends Player{
     
     public void setJumping(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
         jumping=j;
+    }
+    
+    public boolean getrunning(){
+        return running;
+    }
+    
+    public void setrunning(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
+        running=j;
     }
     
 }
