@@ -66,6 +66,30 @@ public class SideViewPlayer extends Player{
         
     }
     
+    private void walkRight(){
+        
+    }
+    
+    private void walkLeft(){
+        
+    }
+    
+    private void jump(){
+        
+    }
+    
+    private void attackLeft(){
+        
+    }
+    
+    private void attackUp(){
+        
+    }
+    
+    private void attackDown(){
+        
+    }
+    
     ////////////////////
     
     public int getWalkVeloctiy(){
