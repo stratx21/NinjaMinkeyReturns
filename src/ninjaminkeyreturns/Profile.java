@@ -173,14 +173,19 @@ public class Profile {
             inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
+                System.out.println("aaaaaaaaaaaa!gggg");
                 String[] in=scan.nextLine().split(",");//import size of array
+                
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
+                System.out.println("bbbbbbbbbbbb!gggg");
                 input=new String[b][a];//[y][x]
                 
 
                 for(int i=0;i<b;i++){
                     input[i]=scan.nextLine().split(":");
+                    System.out.println(input[i]);
                 }
+                
                 
                 //put into the data array but also reverse the [y][x] to be [x][y]
                 for(int y=0;y<input.length;y++)
@@ -205,8 +210,8 @@ public class Profile {
             inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
-                String[] in=scan.nextLine().split(",");//import size of array
-                input=scan.nextLine().split(",");
+                String[] in=scan.nextLine().split(",");//import size of array 
+                input=scan.nextLine().split(": ");
                 data=new int[input.length];
 
                 for(int i=0;i<data.length;i++){

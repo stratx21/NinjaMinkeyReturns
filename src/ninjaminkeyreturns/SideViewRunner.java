@@ -54,12 +54,23 @@ public class SideViewRunner extends GameRunner{
         region.draw(g);
         player.draw(g,0,0);
         
-        playerKeysFlow();
+        playerCalcFlow();
+    }
+    
+    private void playerCalcFlow(){
+        int movingX=player.getX()+player.getXVelocity(),
+                movingY=player.getY()+player.getYVelocity();
+        if(region.canMoveToSpace(movingX,movingY)){//no collision with the current velocity setting
+            player.moveByVelocities();
+            playerKeysFlow();
+        } else{//there is a collision with the current velocity setting
+            
+        }
     }
     
     private void playerKeysFlow(){
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
-            player.setJumping(true);
+            player.startJump();
         }else if(currentKey[1]){//down
             
         }else if(currentKey[2]){//left
@@ -69,17 +80,6 @@ public class SideViewRunner extends GameRunner{
         }else if(currentKey[4]){//SETUP   *   future work
             
         }else if(currentKey[5]){//SETUP   *   future work
-            
-        }
-    }
-    
-    private void checkPlayerCollisions(){
-        int movingX=player.getX()+player.getXVelocity(),
-                movingY=player.getY()+player.getYVelocity();
-        if(region.canMoveToSpace(movingX,movingY)){//no collision with the current velocity setting
-            player.move();
-            playerKeysFlow();
-        } else{//there is a collision with the current velocity setting
             
         }
     }

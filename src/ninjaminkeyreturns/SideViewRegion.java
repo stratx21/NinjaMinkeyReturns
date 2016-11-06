@@ -16,6 +16,8 @@ import java.util.ArrayList;
 public class SideViewRegion extends Region{
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
     
+    public int[][] regionData=null;
+    
     public Rectangle portal=null;
     
     public boolean timed=false;
@@ -23,6 +25,7 @@ public class SideViewRegion extends Region{
     public SideViewRegion(int regn) {
         super(regn);
         int[] a=Profile.getSideViewMissionData(regn);
+        regionData=Profile.importRegionDataSideView(regn);
         timed=a[0]!=0?true:false;
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);

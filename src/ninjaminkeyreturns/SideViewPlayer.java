@@ -16,15 +16,19 @@ public class SideViewPlayer extends Player{
     
     public Rectangle span=new Rectangle();
     
-    private final int WALK_VELOCITY=2;//location points per loop
+    private final int WALK_VELOCITY=2,JUMP_VELOCITY_START=4;//location points per loop
     
     private int[] velocity=new int[]{0,0};
     
     public boolean facingRight=true;
     
+    private boolean canJump=true;
+    
     private boolean jumping=false; 
     
     private boolean running=false;
+    
+    private boolean attacking=false;
     
     private int imageSequence=0;
     
@@ -62,8 +66,9 @@ public class SideViewPlayer extends Player{
         }else //not travelling
             g.drawImage(images.get(1),50,50,null);    }
     
-    public void move(){
-        
+    public void moveByVelocities(){
+        location[0]+=velocity[0];
+        location[1]+=velocity[1];
     }
     
     private void walkRight(){
@@ -74,8 +79,12 @@ public class SideViewPlayer extends Player{
         
     }
     
-    private void jump(){
-        
+    public void startJump(){
+        if(canJump){//       remove later if not needed?  - -- -- - - -- - - - -- -
+            canJump=false;
+            jumping=true;
+            velocity[1]=JUMP_VELOCITY_START;
+        }
     }
     
     private void attackLeft(){
@@ -110,6 +119,14 @@ public class SideViewPlayer extends Player{
     
     public void setJumping(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
         jumping=j;
+    }
+    
+    public boolean getCanJump(){
+        return canJump;
+    }
+    
+    public void setCanJump(boolean j){
+        canJump=j;
     }
     
     public boolean getrunning(){
