@@ -54,7 +54,7 @@ public class SideViewRunner extends GameRunner{
         region.draw(g);
         player.draw(g,0,0);
         
-        playerCalcFlow();
+        playerCalcFlow();//keep last
     }
     
     private void playerCalcFlow(){

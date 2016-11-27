@@ -1,6 +1,6 @@
 20x20 location points per top down square area (tile)
 top down was 17x9
-thus 340x180 location points per tile
+thus 340x180 location points throughout the whole game display
 
 IDs::
 0-sky

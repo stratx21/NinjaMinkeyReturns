@@ -139,6 +139,22 @@ public class TopDownRegion extends Region{
          return a;
      }
      
+     /**
+      * This function will tell if there is a destroyable object, such as a
+      *     bush that the player can remove in order to access certain areas.
+      * 
+      * NOTE: this does not manage if the player is able to destroy the 
+      *     destroyable object
+      * 
+      * @param x x coordinate on the map information array of the spot to check for a destroyable object
+      * @param y y coordinate on the map information array of the spot to check for a destroyable object
+      * @return 
+      */
+     public boolean hasDestroyableObject(int x,int y){
+         
+         return false;
+     }
+     
     
     
     
