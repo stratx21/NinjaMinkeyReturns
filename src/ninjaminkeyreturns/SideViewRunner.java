@@ -41,7 +41,7 @@ public class SideViewRunner extends GameRunner{
     }
     
     private void setup(){
-        player=new SideViewPlayer(new int[]{60,160}); 
+        player=new SideViewPlayer(new int[]{60,100}); 
         resetFont();
     }
     
@@ -89,6 +89,14 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void calculate(){
+        
+    }
+    
+    private void playerCalculate(){
+        
+    }
+    
+    private void AICalculate(){
         
     }
     
