@@ -16,6 +16,8 @@ import java.util.ArrayList;
  * @author Josh
  */
 public class Prompt{
+    
+    
     public static Font font=null;
     
     public static Rectangle GAME_SPAN=null;
@@ -38,6 +40,10 @@ public class Prompt{
     public Prompt(boolean showStats){ 
         this();
         this.showStats=showStats;
+    }
+    
+    public static void resetFont(){
+        font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getWidth()/21));
     }
     
     public void draw(Graphics g){

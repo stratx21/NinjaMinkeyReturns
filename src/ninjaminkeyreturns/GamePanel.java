@@ -18,14 +18,26 @@ import javax.swing.Timer;
 public class GamePanel extends CPanel{
     
     //public GameRunner runner=null;
-    
+    /**
+     * This is an integer value that tells how many milliseconds each frame 
+     *  should be delayed by on a standard run; the code strives to keep each 
+     *  delay at this number of milliseconds but is prepared for lag.  
+     */
     public final int FRAME_DELAY=20;
     
+    /**
+     * This is the CListener that is used to return to the main menu from the 
+     *  game. 
+     */
     private CListener backToMenu=new CListener();
     
 //    private int c=0;
     /**
-     * GamePanel will always be initialized from the main menu and will start on the top down mode.
+     * This sets up the Game Panel and adds the KeyListener that is used for the
+     *  game's interface.
+     * 
+     * NOTE:: GamePanel will always be initialized from the main menu and will 
+     *  start on the top down mode.
      * 
      * 
      */
@@ -40,7 +52,8 @@ public class GamePanel extends CPanel{
     }
     
     /**
-     * initializes the class GamePanel with the CListener for when it is done
+     * This initializes the class GamePanel with the CListener for when it is 
+     *  done.
      * 
      * @param c the Clistener instance that will be used to return to the main menu
      */
@@ -49,6 +62,11 @@ public class GamePanel extends CPanel{
         backToMenu=c;
     }
     
+    /**
+     * This function manages the change to a side view mode user interface by
+     *  controlling the proper changes required for the switch. 
+     * 
+     */
     private void switchToSideView(){
         runner=new SideViewRunner(new CListener(){
             @Override
@@ -58,8 +76,19 @@ public class GamePanel extends CPanel{
         },tempSideID);
     }
     
+    /**
+     * This integer value is used temporarily throughout the switch between 
+     *  top down view mode and side view mode interfaces in order to instruct
+     *  the new mode as to which region will be managed. 
+     * 
+     */
     private int tempSideID=0;
     
+    /**
+     * This function manages the change to a top down view mode user interface 
+     *  by controlling the proper changes required for the switch. 
+     * 
+     */
     private void switchToTopDown(){
         runner=new TopDownRunner(new CListener(){
             @Override
@@ -69,9 +98,22 @@ public class GamePanel extends CPanel{
             }
             },Profile.playerLocation[0],Profile.playerLocation[1],Profile.currentRegionTopDown);
     }
-    
+    /**
+     * an integer value that is used for the Y value of the black rectangle
+     *  that is used to clear the game span graphical representation. 
+     * 
+     */
     int yv=FRAME_SIZE[1]-GAME_SPAN.y-GAME_SPAN.height;
     
+    /**
+     * The function that is used to create a loop for the game's calculations
+     *  and changes in graphics, while it also manages the Frames Per Second
+     *  and repainting delays. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game.  
+     */
     @Override
     public void paintComponent(Graphics g){
         long firstTime=System.currentTimeMillis();
@@ -106,6 +148,13 @@ public class GamePanel extends CPanel{
 //       }
 //    });
     
+    
+    /**
+     * This function is used as a local reference to the repaint function that 
+     *  is inherited from parent classes and is used to repaint the 
+     *  graphical representation of the game. 
+     * 
+     */
     public void rpnt(){
         this.repaint();
     }

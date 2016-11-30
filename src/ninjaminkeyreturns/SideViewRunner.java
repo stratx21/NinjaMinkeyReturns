@@ -42,7 +42,7 @@ public class SideViewRunner extends GameRunner{
     
     private void setup(){
         player=new SideViewPlayer(new int[]{60,100}); 
-        resetFont();
+        Prompt.resetFont();
     }
     
     /**

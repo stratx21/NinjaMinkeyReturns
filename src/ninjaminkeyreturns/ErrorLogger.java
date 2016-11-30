@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  *
  * @author Josh
  */
-public class ErrorLogger {   //also static stuffs
+public class ErrorLogger {  
     private static String error,o;
     
     //---------Log error of type [Exception]::
@@ -46,6 +46,14 @@ public class ErrorLogger {   //also static stuffs
                 + "text document*");
     }
     
+    /**
+     * This function writes the errors that have been recognized and caught
+     *  by the system and adds the user/developer further information or 
+     *  comments concerning the topic. 
+     * 
+     * @param err the error that evoked this log
+     * @param comnt the user/developer comment or further information
+     */
     private static void writeToFile(String err,String comnt){
         ArrayList<String> prv=new ArrayList<String>();
         int lns=0;
@@ -107,14 +115,25 @@ public class ErrorLogger {   //also static stuffs
         }
     }
     
-    
+    /**
+     * This function displays an error message; this is used in the case that 
+     *  a certain feature is not developed yet or is under progress. 
+     * 
+     * @param s the String to show the user to describe the issue
+     */
     public void tempErrorMessage(String s){
         JOptionPane.showMessageDialog(null, s, "PROMPT", 
                                 JOptionPane.ERROR_MESSAGE);
     }
     
-    //----------Prompt the developer about the error [to make 
-    //              commments or additional information for the documentation]::
+    /**
+     * Prompt the developer or user about the error to make comments or 
+     *  additional information for the documentation. 
+     * 
+     * @param err the error that caused this log
+     * @return the String that was given by the user or developer containing
+     *      comments or further information concerning the issue
+     */
     private static String promptDeveloper(String err){
         String aa=null;
         
@@ -151,6 +170,11 @@ public class ErrorLogger {   //also static stuffs
 
     }
     
+    /**
+     * This function displays an error message; this is used in the case that 
+     *  a certain feature is not developed yet or is under progress. 
+     * 
+     */
     public void unavailable(){
         JOptionPane.showMessageDialog(null, "Route currently unavailable.", "PROMPT", 
                                 JOptionPane.ERROR_MESSAGE);

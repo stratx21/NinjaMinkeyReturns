@@ -49,7 +49,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     private void setup(int playerStartX,int playerStartY){
         player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
-        resetFont();
+        Prompt.resetFont();
     }
     
     /**
@@ -86,7 +86,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             
                         }
                     });
-                    talkingPrompt=new PlainPrompt(StringTools.formatString(focusedAI.getBeforePrompt(),font,(int)(GAME_SPAN.getWidth()*0.9)),
+                    talkingPrompt=new PlainPrompt(StringTools.formatString(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
                     new CListener(){
                         @Override
                         public void actionPerformed(){

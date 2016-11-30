@@ -17,9 +17,24 @@ import javax.swing.JPanel;
 public class CPanel extends JPanel{
 //    public int DELAY=40;
     
+    /**
+     * The current runner object that is being used to calculate what is 
+     *  displayed and controls the overall flow of the game. 
+     */
     public GameRunner runner=null;
 
+    /**
+     * The standard size of the overall frame that is used for the game; this is
+     *  the size whose value is set based on the user's screen resolution 
+     *  for the sake of the game being full-screen. 
+     */
     public static int[] FRAME_SIZE=new int[2];
+    
+    /**
+     * The Rectangle object that represents the area in which the game 
+     *  components are being graphically represented; it is calculated using
+     *  the user's screen resolution. 
+     */
     public static Rectangle GAME_SPAN=new Rectangle();
     
     //public static int[] gameStartPoint=new int[2];
@@ -27,42 +42,32 @@ public class CPanel extends JPanel{
 
 
 
+    /**
+     * sets up the CPanel object. 
+     */
     public CPanel(){
         this.setLayout(null);
     }
     
+    /**
+     * This function overrides the original JPanel function that is called 
+     *  through every repaint sequence that the JPanel manages, and is meant to 
+     *  be overriden by subclasses of CPanel. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     */
     @Override
     public void paintComponent(Graphics g){}
     
     /**
-     * take the original measurements used and translate them to the new sizes
-     * that should be used instead, depending on the frame's size, which
-     * depends on the screen since the game is full screen. 
+     * This function calculates the size of the GAME_SPAN rectangle object and
+     *  the SQUARE_SIZE, the pixel size of each tile, using the user's screen
+     *  resolution.
      * 
-     * @param a the original size divided by 1000 since that is the original x
-     *      size that was used
-     * @return the new x dimension
-     */
-//    public int getNewSizeX(double a){
-//        return (int)(a*FRAME_SIZE[0]);
-//    }
-    
-    /**
-     * take the original measurements used and translate them to the new sizes
-     * that should be used instead, depending on the frame's size, which
-     * depends on the screen since the game is full screen. 
-     * 
-     * @param a the original size divided by 1000 to make it simpler than dividing
-     *      by 700, the original y size; this function formats the number to as
-     *      if it was divided by 1000. 
-     * @return the new y dimension
-     */
-//    public int getNewSizeY(double a){
-//        return (int)(a*1.42857*FRAME_SIZE[1]);
-//    }
-    
-    /**
      * PRE:: FRAME_SIZE is set to the correct size of the full-screen 
+     * 
      */
     public static void calculateTopDownGameSize(){
         int tempX,tempY;

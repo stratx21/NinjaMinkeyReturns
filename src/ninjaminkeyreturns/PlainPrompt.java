@@ -8,8 +8,6 @@ package ninjaminkeyreturns;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import static ninjaminkeyreturns.Prompt.GAME_SPAN;
-import static ninjaminkeyreturns.Prompt.font;
 
 /**
  *

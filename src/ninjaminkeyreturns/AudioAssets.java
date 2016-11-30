@@ -20,9 +20,11 @@ public class AudioAssets {
     public static Clip music=null;
     
     /**
-     * This function uses the String input to play a certain requested audio file 
+     * This function uses the String input to play a certain requested audio 
+     *  file to be found in the given directory src/Audio/ and will use the 
+     *  String input provided to play the given sound. 
      * 
-     * @param name the name of the text file that is to be played
+     * @param name the name of the audio file that is to be played
      */
     public static void play(final String name){
         try{

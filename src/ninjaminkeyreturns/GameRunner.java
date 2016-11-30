@@ -16,39 +16,83 @@ import java.awt.event.KeyListener;
  */
 public class GameRunner implements KeyListener{
     
-    public static char[] controls=new char[6]; //to change controls change them in Profile then evoke the resetControls function
+    /**
+     * An array of characters that are used to control the player object; they 
+     *  are ordered by up, down, left, right, attack, and other attack. 
+     * 
+     * NOTE:: to change controls change them in Profile then evoke the 
+     *  resetControls function
+     */
+    public static char[] controls=new char[6]; 
     
+    /**
+     * A set of booleans that are used to tell what keys are currently being
+     *  pressed. 
+     */
     public boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
     
+    /**
+     * The standard java.awt.Rectangle in which the game is represented 
+     *  graphically and the user interface is shown. 
+     */
     public static Rectangle GAME_SPAN=new Rectangle();
-    public static int SQUARE_SIZE=0;
     
-    public static Font font=null;
+    /**
+     * The standard number of pixels that are on each side of each tile. 
+     */
+    public static int SQUARE_SIZE=0;
     
     /**
      * CListener evoked to exit the game mode or to finish gameplay
      */
     public CListener done=null;
     
+    /**
+     * This sets up the GameRunner. 
+     */
     public GameRunner(){
         resetControls();
     }
     
+    /**
+     * This sets up the GameRunner using a CListener for when the GameRunner 
+     *  instance is finished and needs to return to another flow of code. 
+     * 
+     * @param dn The CListener that will be evoked when the GameRunner is
+     *      finished
+     */
     public GameRunner(CListener dn){
         this();
         done=dn;
     }
     
-    public void resetFont(){
-        Prompt.font=font=new Font(Font.SANS_SERIF,Font.PLAIN,(int)(GAME_SPAN.getWidth()/21));
-    }
-    
+    /**
+     * This function sets the controls that are used for the game directly 
+     *  through the KeyListener that this class implements to what the
+     *  controls are in the Profile class. 
+     * 
+     * NOTE:: to change controls change them in Profile then evoke the 
+     *  resetControls function
+     */
     public void resetControls(){
         controls=Profile.controls;
     }
     
+    /**
+     * This function overrides the original JPanel function that is called 
+     *  through every repaint sequence that the JPanel manages, and is meant to 
+     *  be overriden by subclasses of CPanel. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     */
     public void draw(Graphics g){}
     
+    /**
+     * the flow for calculating aspects of the game; this function is intended
+     *  to be overriden by subclasses. 
+     */
     public void calculate(){}
     
     /////////
