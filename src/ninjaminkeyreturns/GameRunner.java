@@ -96,12 +96,23 @@ public class GameRunner implements KeyListener{
     public void calculate(){}
     
     /////////
-    
+    /**
+     * This function is not used but is required by the interface implemented,
+     *  KeyListener. 
+     * 
+     * @param e the KeyEvent instance used to determine which key was pressed
+     */
     @Override
     public void keyTyped(KeyEvent e){
         keyTypedFlow(Character.toUpperCase(e.getKeyChar()));
     }
 
+    /**
+     * This function is called whenever a key is pressed and will use the 
+     *  information given about which key was pressed to determine what to do.
+     * 
+     * @param e the KeyEvent instance used to determine which key was pressed
+     */
     @Override
     public void keyPressed(KeyEvent e){
         //        System.out.println("key released:: "+typed);
@@ -128,6 +139,12 @@ public class GameRunner implements KeyListener{
         keyPressedFlow(typed);
     }
 
+    /**
+     * This function is called whenever a key is released and will use the 
+     *  information given about which key was pressed to determine what to do.
+     * 
+     * @param e the KeyEvent instance used to determine which key was pressed
+     */
     @Override
     public void keyReleased(KeyEvent e){
         char typed=Character.toUpperCase(e.getKeyChar());
@@ -148,6 +165,13 @@ public class GameRunner implements KeyListener{
         keyReleasedFlow(Character.toUpperCase(e.getKeyChar()));
     }
     
+    /**
+     * This function sets all the boolean values in the currentKey array
+     *  to false except for the one in the index specified. 
+     * 
+     * @param doNotChange the integer value of the index of the one boolean that
+     *      should still be true
+     */
     private void setOtherKeysFalse(int doNotChange){
         for(int i=0;i<6;i++)
             if(i!=doNotChange)
@@ -155,17 +179,30 @@ public class GameRunner implements KeyListener{
     }
     
     //////
-    
+    /**
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
+     * 
+     * @param typed the character of the  key that was typed
+     */
     public void keyTypedFlow(char typed){}
     
+    /**
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
+     * 
+     * @param typed the character of the  key that was pressed
+     */
     public void keyPressedFlow(char typed){}
     
+    /**
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
+     * 
+     * @param typed the character of the  key that was released
+     */
     public void keyReleasedFlow(char typed){}
     
-    
-    public void showPrompt(String prompt){
-        
-    }
     
     ////////
     
