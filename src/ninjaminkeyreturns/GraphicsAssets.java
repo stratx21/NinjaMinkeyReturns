@@ -18,22 +18,13 @@ import javax.imageio.ImageIO;
 public class GraphicsAssets {
     public static ArrayList<BufferedImage> images=new ArrayList<BufferedImage>();//unused later?
     
-    /**
-     * 
-     */
-    public static void importImages(){
-        try{
-            
-        } catch(Exception e){
-            ErrorLogger.logError(e,"GraphicsAssets.importImages");
-        }
-    }
     
     /**
+     * This function imports the image specified by the String location
      * 
-     * @param loc
-     * @return
-     * @throws IOException 
+     * @param loc the file location from src/ of the specified image file
+     * @return the BufferedImage file information to use in the code
+     * @throws IOException if the image could not be found
      */
     private static BufferedImage importFromString(String loc){
         try{
@@ -47,21 +38,28 @@ public class GraphicsAssets {
         return null;
     }
     
-    public static BufferedImage getImage(int index){
-        return images.get(index);
-    }
     
-    public static BufferedImage getIcon(){
-        BufferedImage i=null;
-//        try{
-//            i=importFromString("Graphics/frameIcon.png");
-//        } catch(IOException e){
-//            ErrorLogger.logIOError(e,"getIcon() - GraphicsAssets");
-//        }
-        return i;
-    }
+//////    public static BufferedImage getImage(int index){
+//////        return images.get(index);
+//////    }
     
+//    public static BufferedImage getIcon(){
+//        BufferedImage i=null;
+////        try{
+////            i=importFromString("Graphics/frameIcon.png");
+////        } catch(IOException e){
+////            ErrorLogger.logIOError(e,"getIcon() - GraphicsAssets");
+////        }
+//        return i;
+//    }
     
+    /**
+     * This function imports the images for a specified top down region.
+     * 
+     * @param regionID the ID of the region to tell which one to import
+     * @return an ArrayList of type BufferedImage containing the images for the
+     *      specified region
+     */
     public static ArrayList<BufferedImage> importRegionImagesTopDown(int regionID){
         ArrayList<BufferedImage> img=new ArrayList<>();
         img.add(importFromString("Graphics/TopDown/grass.png"));
@@ -70,6 +68,13 @@ public class GraphicsAssets {
         return img;
     }
     
+    /**
+     * This function imports the images for the AI in a top down mode specified.
+     * 
+     * @param ai_ID the ID of the AI to import 
+     * @return an ArrayList of type BufferedImage containing the images for the
+     *      specified AI
+     */
     public static ArrayList<BufferedImage> importTopDownAIImages(int ai_ID){
         ArrayList<BufferedImage> img=new ArrayList<>();
         String id=StringTools.numToDigits(ai_ID,3);
@@ -98,6 +103,13 @@ public class GraphicsAssets {
         return img;
     }
     
+    /**
+     * This function imports the images for the player in a top down mode specified.
+     * 
+     * @param ai_ID the ID of the AI to import 
+     * @return an ArrayList of type BufferedImage containing the images for the
+     *      specified player
+     */
     public static ArrayList<BufferedImage> importTopDownPlayerImages(){
         ArrayList<BufferedImage> img=new ArrayList<>();
         img.add(importFromString("Graphics/TopDown/Player/U0.png"));//idle up
@@ -125,11 +137,21 @@ public class GraphicsAssets {
         return img;
     }    
     
+    /**
+     * This function gets the outline image that is used for the prompts.
+     * 
+     * @return the outline image in the form of a BufferedImage
+     */
     public static BufferedImage getTopDownPromptImage(){
         return importFromString("Graphics/Prompt.png");
     }
     
-    
+    /**
+     * This function imports the images for the player in side view.
+     * 
+     * @return an ArrayList of type  BufferedImage for the images of the 
+     *      player in side view
+     */
     public static ArrayList<BufferedImage> importSideViewPlayerImages(){
         ArrayList<BufferedImage> img=new ArrayList<>();
         
@@ -140,6 +162,17 @@ public class GraphicsAssets {
             img.add(importFromString("Graphics/SideView/Player/L"+i+".png"));
         
         return img;
+    }
+    
+    /**
+     * This function imports the images for the specified AI in side view.
+     * 
+     * @param AI_ID the ID of the AI for which the images are being imported
+     * @return an ArrayList of type  BufferedImage for the images of the 
+     *      AI in side view
+     */
+    public static ArrayList<BufferedImage> importSideViewAIImages(int AI_ID){
+        return null;
     }
     
     

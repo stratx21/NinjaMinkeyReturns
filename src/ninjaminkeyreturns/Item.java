@@ -11,4 +11,10 @@ package ninjaminkeyreturns;
  */
 public class Item {
     
+    private int speedBoost=0;
+    
+    private double healthBoost=0;
+            
+    public boolean placeable=false;
+    
 }

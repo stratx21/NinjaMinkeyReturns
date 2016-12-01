@@ -16,6 +16,16 @@ import javax.swing.ImageIcon;
  * @author Josh
  */
 public class ImageUtils {
+    
+    /**
+     * This function rotates a BufferedImage by the degrees specified.
+     * 
+     * NOTE:: the image should have invisible space around it for the rotation.
+     * 
+     * @param img the BufferedImage to rotate
+     * @param degrees how many degrees to rotate the image by
+     * @return the new rotated BufferedImage
+     */
     public static BufferedImage rotateImage(BufferedImage img,double degrees){
         ImageIcon icon=new ImageIcon(img);
         BufferedImage blankCanvas=new BufferedImage(icon.getIconWidth(),icon.getIconHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -25,6 +35,12 @@ public class ImageUtils {
         return blankCanvas;
     }
     
+    /**
+     * This function flips a given image vertically.
+     * 
+     * @param image the BufferedImage to flip
+     * @return the flipped image in the form of a BufferedImage
+     */
     public static BufferedImage flipVertical(BufferedImage image){
         AffineTransform tx = AffineTransform.getScaleInstance(1,-1);
         tx.translate(0,-1*image.getHeight(null));
@@ -32,7 +48,12 @@ public class ImageUtils {
         return op.filter(image, null);
     }
 
-
+    /**
+     * This function flips a given image horizontally.
+     * 
+     * @param image the BufferedImage to flip
+     * @return the flipped image in the form of a BufferedImage
+     */
     public static BufferedImage flipHorizontal(BufferedImage image){
         AffineTransform tx = AffineTransform.getScaleInstance(-1,1);
         tx.translate(-1*image.getWidth(null),0);
