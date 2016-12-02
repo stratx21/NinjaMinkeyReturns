@@ -26,8 +26,6 @@ public class TopDownPlayer extends Player{
         return directionFacing;
     }
     
-    public int distanceMoved=0;
-    
     private boolean disabled=false;//for AI purposes, but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
     
     public boolean finishedMoving=false;
@@ -35,6 +33,10 @@ public class TopDownPlayer extends Player{
     private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
     private int imageSequence=0;
     
+    /**
+     * This holds two integers in the form of x and y coordinates to tell how 
+     *  far off of the center tile for the current focus point the player is. 
+     */
     public int[] offCenter=new int[2];
     
     public TopDownPlayer(int[] loc) {
@@ -43,10 +45,24 @@ public class TopDownPlayer extends Player{
     }
     //////////////////////////////
     
+    /**
+     * This returns the x value of how far the player is from the center tile
+     *  for the current focus point.
+     * 
+     * @return the x value of how far the player is from the center tile for the
+     *  current focus point
+     */
     public int getOffCenterX(){
         return offCenter[0];
     }
     
+    /**
+     * This returns the y value of how far the player is from the center tile
+     *  for the current focus point.
+     * 
+     * @return the y value of how far the player is from the center tile for the
+     *  current focus point
+     */
     public int getOffCenterY(){
         return offCenter[1];
     }

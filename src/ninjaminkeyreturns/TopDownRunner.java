@@ -17,35 +17,74 @@ import java.util.ArrayList;
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
+    /**
+     * The player instance that is used for the top down view. 
+     */
     private TopDownPlayer player=null;//new TopDownPlayer(new int[]{19,20});
     
+    /**
+     * The region isntance that is used for the top down view. 
+     */
     private TopDownRegion region=null;
     
+    /**
+     * The CListener that is evoked when the AI is done approaching the player. 
+     */
     private CListener AIdone=null;
     
+    /**
+     * The ArrayList used for the prompt that is being displayed. 
+     */
     private ArrayList<String> promptShowing=null;
     
+    /**
+     * This is for if it is showing a prompt. 
+     */
     public boolean showingPrompt=false;
     
+    /**
+     * The prompt that is used to show strings when the AI talks to the player
+     *  and has no extra options. 
+     */
     PlainPrompt talkingPrompt=null;
     
     /////////////////
     
+    /**
+     * The AI that was triggered and is being talked to or intereacted with. 
+     */
     private TopDownAI focusedAI=null;
     
+    /**
+     * This sets up the TopDownRunner with default settings. 
+     */
     public TopDownRunner(){
         super();
         setup(30,30);//this is likely to cause errors
     }
     
+    /**
+     * This sets up the TopDownRunner. 
+     * 
+     * @param dn the CListener that is evoked when the TopDownRunner is done
+     * @param playerStartX the x starting location for the player
+     * @param playerStartY the y starting location for the player
+     * @param currentRegion the current region ID to be managed
+     */
     public TopDownRunner(CListener dn,int playerStartX,int playerStartY,int currentRegion){
         super(dn);
         setup(playerStartX,playerStartY);
         region=new TopDownRegion(currentRegion);
+        Profile.lastKnownRegionTopDown=currentRegion;
     }
     
     /**
+     * This function sets up the TopDownRunner.
+     * 
      * PRE:: SQUARE_SIZE has been set up in the set up in CPanel
+     * 
+     * @param playerStartX the player's starting x location
+     * @param palyerStartY the player's starting y location
      */
     private void setup(int playerStartX,int playerStartY){
         player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
@@ -53,8 +92,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     }
     
     /**
+     * This function is used to draw the graphical representation of the game. 
      *
-     * @param g
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
      */
     @Override
     public void draw(Graphics g){
@@ -90,7 +132,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                     new CListener(){
                         @Override
                         public void actionPerformed(){
-                            if(focusedAI.instantSideView){
+                            if(focusedAI.instantSideView){ //the top down view ends
                                 Profile.playerLocation=new int[]{player.getX(),player.getY()};//set the coordinates so that the player can come back to them
                                 done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
                             } else{//the AI did not confront the player in a side view manner
@@ -118,10 +160,17 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //      
     }
     
-    //PRE: player.travelling is false (player is not already moving between tiles)
-    //up, down, left, right, attack, other attack
+    /**
+     * This function conducts the flow for the player based on what keys are
+     *  being pressed. 
+     * 
+     * PRE: player.travelling is false (player is not already moving between tiles)
+     * 
+     */
     private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
         //System.out.println("to playerkeysflow");
+        //note:: controls index order - up, down, left, right, attack, other attack
+        
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
             if(region.canMoveToSpace(player.getX(),player.getY()-1))
                 player.moveStart(0);
@@ -147,18 +196,16 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         // changes)
     }
     
-    private void moveToNewRegion(int newRegion){
+    
+    /**
+     * This function gives the TopDownRunner to a new region to run. 
+     * 
+     * @param newRegion the Id for the new region
+     */
+    private void moveToNewRegion(int newRegion){//  - -- - - -- may be against using this
         region.changeRegion(newRegion);
         
         //** code for fading out, then showing the next biome/region pic, then going back....
-    }
-    
-    /**
-     *
-     */
-    @Override
-    public void calculate(){
-        
     }
     
     

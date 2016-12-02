@@ -14,33 +14,70 @@ import java.awt.Rectangle;
  */
 public class SideViewPlayer extends Player{
     
+    /**
+     * The span in which the player is. 
+     */
     public Rectangle span=new Rectangle();
     
+    /**
+     * The maximum velocities for their respective types. 
+     */
     private final int WALK_VELOCITY=2,JUMP_VELOCITY_START=4;//location points per loop
     
+    /**
+     * The velocity, in x,y formatting, of the player that is measured in
+     *  location points. 
+     */
     private int[] velocity=new int[]{0,0};
     
+    /**
+     * This tells if the player is facing towards the right. 
+     */
     public boolean facingRight=true;
     
+    /**
+     * This tells if the player can jump (in case they are falling or disabled).
+     */
     private boolean canJump=true;
     
+    /**
+     * This tells if the player is currently jumping.
+     */
     private boolean jumping=false; 
     
+    /**
+     * This tells if the player is currently running. 
+     */
     private boolean running=false;
     
+    /**
+     * This tells if the player is currently attacking. 
+     */
     private boolean attacking=false;
     
+    /**
+     * This is used for the logic flow of the graphical representation by 
+     *  determining the value of the index that is used to paint the proper
+     *  image out of the sprite sequence. 
+     */
     private int imageSequence=0;
     
+    /**
+     * This sets up the SideViewPlayer with an initial starting location. 
+     * 
+     * @param loc the location at which the player starts (in location points)
+     */
     public SideViewPlayer(int[] loc){
-        super(loc);
-        images=GraphicsAssets.importSideViewPlayerImages();
+        super(loc);//sets the variable location, unless more changes are made
+        images=GraphicsAssets.importSideViewPlayerImages();//import the images
     }
     
     /**
-     * @param loc
-     * @param spanX pixels
-     * @param spanY pixels
+     * This sets up the SideViewPlayer with an initial location and a size.
+     * 
+     * @param loc the starting location of the player (in location points)
+     * @param spanX the width of the player (in location points)
+     * @param spanY the height of the player (in location points)
      */ 
     public SideViewPlayer(int[] loc,int spanX,int spanY){
         this(loc);
@@ -48,6 +85,7 @@ public class SideViewPlayer extends Player{
     }
     
     /**
+     * This draws the SideViewPlayer
      * 
      * @param g
      * @param xIncrement The integer value used for the value of x in which the 
@@ -66,19 +104,32 @@ public class SideViewPlayer extends Player{
         }else //not travelling
             g.drawImage(images.get(1),50,50,null);    }
     
+    /**
+     * This function adds the velocity to the location of the player. 
+     */
     public void moveByVelocities(){
         location[0]+=velocity[0];
         location[1]+=velocity[1];
     }
     
+    /**
+     * This function contains the flow to walk to the right. 
+     */
     private void walkRight(){
         
     }
     
+    
+    /**
+     * This function contains the flow to walk to the left. 
+     */
     private void walkLeft(){
         
     }
     
+    /**
+     * This function contains the flow to start a jump. 
+     */
     public void startJump(){
         if(canJump){//       remove later if not needed?  - -- -- - - -- - - - -- -
             canJump=false;
@@ -87,54 +138,98 @@ public class SideViewPlayer extends Player{
         }
     }
     
+    /**
+     * This function contains the flow to attack to the left.
+     */
     private void attackLeft(){
         
     }
     
+    /**
+     * This function contains the flow to attack up.
+     */
     private void attackUp(){
         
     }
     
+    /**
+     * This function contains the flow to attack down.
+     */
     private void attackDown(){
+        
+    }
+    
+    /**
+     * This function contains the flow to attack to the right.
+     */
+    private void attackRight(){
         
     }
     
     ////////////////////
     
+    /**
+     * This function returns the max walking velocity.
+     * 
+     * @return the max walking velocity
+     */
     public int getWalkVeloctiy(){
         return WALK_VELOCITY;
     }
     
+    /**
+     * This returns the x component of the player's velocity.
+     * 
+     * @return the x component of the player's velocity
+     */
     public int getXVelocity(){
         return velocity[0];
     }
     
+    /**
+     * This returns y component of the player's velocity.
+     * 
+     * @return the y component of the player's velocity
+     */
     public int getYVelocity(){
         return velocity[1];
     }
     
+    /**
+     * This tells if the player is jumping.
+     * 
+     * @return if the player is jumping
+     */
     public boolean getJumping(){
         return jumping;
     }
     
-    public void setJumping(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
-        jumping=j;
-    }
-    
+    /**
+     * This function tells if the player can jump. 
+     * 
+     * @return if the player can jump
+     */
     public boolean getCanJump(){
         return canJump;
     }
     
+    /**
+     * This sets if the player can jump.
+     * 
+     * @param j if the player can jump
+     */
     public void setCanJump(boolean j){
         canJump=j;
     }
     
+    
+    /**
+     * This tells if the player is running. 
+     * 
+     * @return if the player is running
+     */
     public boolean getrunning(){
         return running;
-    }
-    
-    public void setrunning(boolean j){/// ---- probably not used? - -- -- - -- - -- - -
-        running=j;
     }
     
 }

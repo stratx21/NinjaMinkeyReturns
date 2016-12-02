@@ -12,8 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Image;
 /**
- *
- * @author Josh
+ * This class is a Custom-JButton that includes enhancements for icons, a 
+ *  built-in MouseListener, and disabling functions.
+ * 
+ * @author Josh Holland
  */
 public class CButton extends JButton implements MouseListener{
     

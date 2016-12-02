@@ -10,8 +10,20 @@ package ninjaminkeyreturns;
  * @author Josh
  */
 public class SideViewRangedEnemy extends SideViewAI{
+    
+    /**
+     * This integer is used for the delay until the AI can attack again.
+     */
     private int delay=0;
     
+    
+    /**
+     * This function tells if the AI should attack. 
+     * 
+     * @param playerX the player's x location
+     * @param playerY the player's y location
+     * @return if the AI should attack
+     */
     @Override
     public boolean shouldAttack(int playerX,int playerY){ // never uses these two number to calculate...
         if(delay>69){//range of 3 tiles to start shooting
@@ -25,6 +37,13 @@ public class SideViewRangedEnemy extends SideViewAI{
         return false;
     }
     
+    
+    /**
+     * This function contains the flow for the AI's travel.
+     * 
+     * @param playerX the player's x location
+     * @param playerY the player's y location
+     */
     @Override
     public void travel(int playerX,int playerY){
         if(location[0]<playerX-60//AI is to the left of range area
@@ -53,11 +72,17 @@ public class SideViewRangedEnemy extends SideViewAI{
         location[1]+=velocity[1];
     }
     
+    /**
+     * This function makes the AI attack to the left. 
+     */
     @Override
     public void attackLeft(){
         
     }
     
+    /**
+     * This function makes the AI attack to the right. 
+     */
     @Override
     public void attackRight(){
         

@@ -15,19 +15,36 @@ import java.util.ArrayList;
  */
 public class Region {
     
+    /**
+     * The ID of the current region that this class contains data for and runs.
+     */
     public int REGION_ID=0;
     
+    /**
+     * The standard java.awt.Rectangle in which the game is represented 
+     *  graphically and the user interface is shown. 
+     */
     public static Rectangle GAME_SPAN=new Rectangle();
+    
+    /**
+     * The standard number of pixels that are on each side of each tile. 
+     */
     public static int SQUARE_SIZE=0;
     
+    /**
+     * The ArrayList of images that the region uses to draw the graphical 
+     *  representation of the region. 
+     */
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
     
-    //V - array of rectangles for side view, int by int array for top down
-    //public ArrayList<int> type=new ArrayList<>();//type of terrain/etc
-    
-    //public ArrayList<  - - -- - -arraylist for houses ?
-    
+    /**
+     * This sets the ID of the region that this class contains data for and
+     *  runs.
+     * 
+     * @param regn the ID of the region that this class contains data for and
+     *      runs
+     */
     public Region(int regn){
         REGION_ID=regn;
     }

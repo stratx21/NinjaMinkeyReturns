@@ -20,20 +20,54 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Profile {
     
-    public static char[] controls=new char[]{ //up down left right attack other attack
+    /**
+     * This specifies the certain characters that are used for the controls that
+     *  the user can use; they are, by respective index starting at 0: 
+     *      up down left right attack other attack.
+     * 
+     * NOTE:: the default controls are:: 'W','S','A','D','J','K'
+     */
+    public static char[] controls=new char[]{ 
         'W','S','A','D','J','K'//DEFAULT
     };
     
+    /**
+     * These booleans determine if the sound effects or music are on, 
+     *  respectively, and can be changed by the user in the settings.
+     */
     public static boolean soundEffectsOn=true,musicOn=true;
     
+    /**
+     * This array of booleans hold the information about the game progress
+     *  concerning what missions the player has completed. 
+     */
     public static boolean[][] completedMissions=new boolean[9][16];//expand on this
     
+    /**
+     * This array holds the last known location of the user for the sake of
+     *  saving the game so that the player will start off wherever they ended
+     *  the game. 
+     */
     public static int[] playerLocation=new int[]{19,20};
     
-    public static int currentRegionTopDown=0;
+    /**
+     * This integer holds the last known region that the user was in for the
+     *  sake of saving the game so that the player will start off wherever
+     *  they ended the game. 
+     */
+    public static int lastKnownRegionTopDown=0;
     
+    /**
+     * This double holds the last known health value that the user had while 
+     *  still in top down view for the sake of saving the game so that the
+     *  player will keep however much health that they had before they quit or
+     *  before they went into a side view mission. 
+     */
     public static double health=50.00;
     
+    /**
+     * The maximum possible health value.
+     */
     public static double MAX_HEALTH=50.00;
     
     /**
@@ -42,17 +76,22 @@ public class Profile {
      * of car
      */
     
-    //file used to input the data from a save location
+    /**
+     * This is the file used to input the data from a save location.
+     * 
+     */
     public static File inputSaveFile=null;
     
-    //money the user has; the value here, if not influenced by an import of data
-    //by save file, is the default amount of money the user will start with in
-    //a new game. 
-    public static double money=30000.00;
+    /**
+    * Money the user has; the value here, 51.00, if not influenced by an import of data
+    * by save file, is the default amount of money the user will start with in
+    * a new game. 
+    */
+    public static double money=51.00;
     
     /**
-     * save current progress in a save file, using the JFileChooser to let the
-     * user identify a name and where to save it.
+     * This function saves the current progress in a save file, using the 
+     *  JFileChooser to let the user identify a name and where to save it.
      */
     public static void save(){
         JFileChooser sv=new JFileChooser();
@@ -84,8 +123,7 @@ public class Profile {
     }
     
     /**
-     * 
-     * opens the save file specified by the user in the JFileChooser, and
+     * This opens the save file specified by the user in the JFileChooser, and
      * imports the data from it to give the user their progress back. 
      * 
      * @throws Exception Exception thrown if the file is not found for the 
@@ -127,11 +165,12 @@ public class Profile {
     
      /**
      * 
-     * opens 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the top down region specified by the
+     *  integer region.
      * 
-     * @throws Exception Exception thrown if the file is not found for the 
-     * Scanner "in" uses to import the data from the save file specified by
-     * the user through the JFileChooser
+     * @param region the region ID for which the information is being imported
+     * @return a 2-dimensional array of integers containing the imported data
      */
     public static int[][] importRegionDataTopDown(int region){
         try{
@@ -165,6 +204,15 @@ public class Profile {
         return null;
     }
     
+    /**
+     * 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the side view region specified by the
+     *  integer region.
+     * 
+     * @param region the region ID for which the information is being imported
+     * @return a 2-dimensional array of integers containing the imported data
+     */
     public static int[][] importRegionDataSideView(int region){
         try{
             int[][] data=null;
@@ -203,6 +251,15 @@ public class Profile {
         return null;
     }
     
+    /**
+     * 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the side view mission specified by the
+     *  integer region.
+     * 
+     * @param region the mission ID for which the information is being imported
+     * @return a 2-dimensional array of integers containing the imported data
+     */
     public static int[] getSideViewMissionData(int region){
         try{
             int[] data=null;
@@ -230,6 +287,16 @@ public class Profile {
         return null;
     }
     
+    /**
+     * 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the top down trigger spots specified 
+     *  by the integer region.
+     * 
+     * @param newRegion the region ID for which the information is being 
+     *  imported
+     * @return a 2-dimensional array of integers containing the imported data
+     */
     public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
         try{
 //            System.out.println("NEW REGION=="+newRegion);
@@ -267,6 +334,16 @@ public class Profile {
         return null;
     }
     
+    /**
+     * 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the top down AIs specified by the
+     *  integer region.
+     * 
+     * @param newRegion the region ID for which the information is being 
+     *  imported
+     * @return a 2-dimensional array of integers containing the imported data
+     */
     public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
         try{
             ArrayList data=new ArrayList<TopDownAI>();

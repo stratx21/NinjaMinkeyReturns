@@ -11,8 +11,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Josh
+ * This class is a Custom-JPanel that includes enhancement for inheritance for
+ *  the purpose of this program.
+ * 
+ * @author Josh Holland
  */
 public class CPanel extends JPanel{
 //    public int DELAY=40;

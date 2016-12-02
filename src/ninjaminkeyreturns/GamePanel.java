@@ -96,7 +96,7 @@ public class GamePanel extends CPanel{
                 switchToSideView();
                 tempSideID=sideViewRegionID;
             }
-            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.currentRegionTopDown);
+            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown);
     }
     /**
      * an integer value that is used for the Y value of the black rectangle

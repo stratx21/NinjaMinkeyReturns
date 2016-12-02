@@ -10,16 +10,17 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
- *
+ * This prompt is used for just showing text on the screen and allowing the 
+ *  player to hit select to continue through it. 
+ * 
  * @author Josh
  */
-public class PlainPrompt extends Prompt{//this prompt is used for just showing text on the screen and allowing the player to hit select to continue through it. 
+public class PlainPrompt extends Prompt{//
     
-    private ArrayList<String> promptShowing=null;
-    
+    /**
+     * the String that is currently being displayed.
+     */
     public String toDraw="";
-    
-    private CListener done=null;
     
     public PlainPrompt(ArrayList<String> showing,CListener don){
         super();
