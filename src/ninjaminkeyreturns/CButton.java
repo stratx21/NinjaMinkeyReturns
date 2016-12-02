@@ -19,8 +19,16 @@ import java.awt.Image;
  */
 public class CButton extends JButton implements MouseListener{
     
-    public int xIndex,yIndex;//when applicable 
+    public int xIndex,
+
+    /**
+     *
+     */
+    yIndex;//when applicable 
     
+    /**
+     *
+     */
     public int ID;
     
     /**
@@ -33,11 +41,20 @@ public class CButton extends JButton implements MouseListener{
     ImageIcon[] icons=null;
     
     ImageIcon g;
+
+    /**
+     *
+     */
     public boolean pernamantSelect=false;
     
     ImageIcon disabledIcon=null;
     
-    public boolean disabled=false,selected=false;
+    public boolean disabled=false,
+
+    /**
+     *
+     */
+    selected=false;
     
     /**
      * Sets up the CButton object using x and y coordinates, width, height,

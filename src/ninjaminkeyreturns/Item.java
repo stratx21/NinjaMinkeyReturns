@@ -15,6 +15,9 @@ public class Item {
     
     private double healthBoost=0;
             
+    /**
+     *
+     */
     public boolean placeable=false;
     
 }

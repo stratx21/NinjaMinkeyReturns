@@ -18,16 +18,27 @@ public class TopDownPlayer extends Player{
     //                               1   2
     //                                 3
     
+    /**
+     *
+     * @param n
+     */
     public void setDirectionFacing(byte n){
         directionFacing=n;
     }
     
+    /**
+     *
+     * @return
+     */
     public byte getDirectionFacing(){
         return directionFacing;
     }
     
     private boolean disabled=false;//for AI purposes, but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
     
+    /**
+     *
+     */
     public boolean finishedMoving=false;
     
     private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
@@ -39,6 +50,10 @@ public class TopDownPlayer extends Player{
      */
     public int[] offCenter=new int[2];
     
+    /**
+     *
+     * @param loc
+     */
     public TopDownPlayer(int[] loc) {
         super(loc);
         images=GraphicsAssets.importTopDownPlayerImages();
@@ -69,30 +84,56 @@ public class TopDownPlayer extends Player{
     
     ///////////////////////////////
     
+    /**
+     *
+     * @return
+     */
+        
     public boolean getDisabled(){
         return disabled;
     }
     
+    /**
+     *
+     * @param a
+     */
     public void setDisabled(boolean a){
         disabled=a;
     }
     
     ///////////////////////////////
     
+    /**
+     *
+     * @return
+     */
+        
     public boolean getTravelling(){
         return travelling;
     }
     
+    /**
+     *
+     * @param a
+     */
     public void setTravelling(boolean a){
         travelling=a;
     }
     
     ////////////////////////////////
     
+    /**
+     *
+     */
+        
     public void calculate(){
         
     }
     
+    /**
+     *
+     * @param g
+     */
     public void draw(Graphics g){
         if(travelling){
             g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
@@ -104,6 +145,10 @@ public class TopDownPlayer extends Player{
         }
     }
     
+    /**
+     *
+     * @param direction
+     */
     public void moveStart(int direction){
         if(!travelling&&!disabled){
             if(directionFacing!=direction){//is not facing the direction it is about to move in, so face it before moving...
@@ -147,18 +192,31 @@ public class TopDownPlayer extends Player{
     
     /////////////force looks:: (for AI purposes primarily)
     
+    /**
+     *
+     */
+        
     public void forceLookUp(){
         
     }
     
+    /**
+     *
+     */
     public void forceLookDown(){
         
     }
     
+    /**
+     *
+     */
     public void forceLookLeft(){
         
     }
     
+    /**
+     *
+     */
     public void forceLookRight(){
         
     }

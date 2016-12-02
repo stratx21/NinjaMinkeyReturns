@@ -29,7 +29,13 @@ public class ErrorLogger {
     private static String error,o;
     
     //---------Log error of type [Exception]::
-    protected static void logError(Exception e,String f){ //f= function name
+
+    /**
+     *
+     * @param e
+     * @param f
+     */
+        protected static void logError(Exception e,String f){ //f= function name
         System.err.println("/-Error [Exception type used] in function<"+(o=f)
                 +"> -\\ Error :: "+e);
         error=e+"";
@@ -38,7 +44,13 @@ public class ErrorLogger {
     }
     
     //--------Log error fo type [IOException]::
-    protected static void logIOError(IOException e,String f){
+
+    /**
+     *
+     * @param e
+     * @param f
+     */
+        protected static void logIOError(IOException e,String f){
         System.err.println("/-Error [IOException type used] in function<"+(o=f)
                 +"> -\\ IO Error :: "+e);
         error=e+"";

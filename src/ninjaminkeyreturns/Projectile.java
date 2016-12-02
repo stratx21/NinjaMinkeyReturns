@@ -85,6 +85,10 @@ public class Projectile {
         return location[1];
     }
     
+    /**
+     *
+     * @return
+     */
     public int[] getLocation(){
         return location;
     }

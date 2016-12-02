@@ -22,6 +22,11 @@ public class PlainPrompt extends Prompt{//
      */
     public String toDraw="";
     
+    /**
+     *
+     * @param showing
+     * @param don
+     */
     public PlainPrompt(ArrayList<String> showing,CListener don){
         super();
         this.promptShowing=showing;
@@ -31,6 +36,10 @@ public class PlainPrompt extends Prompt{//
     private int characterNum=0,lineNum=0;
     private boolean secondLine=false,promptEnded=false;
     
+    /**
+     *
+     * @param cont
+     */
     public void loopCalculate(boolean cont){
         if(lineNum>promptShowing.size()-1){
             done.actionPerformed();

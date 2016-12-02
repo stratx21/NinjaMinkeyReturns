@@ -14,10 +14,44 @@ import java.awt.image.BufferedImage;
  * @author Josh
  */
 public class CListener {
+
+    /**
+     *
+     */
     public void actionPerformed(){}
+
+    /**
+     *
+     * @param a
+     */
     public void actionPerformed(boolean a){}
+
+    /**
+     *
+     * @param a
+     */
     public void actionPerformed(int a){}
+
+    /**
+     *
+     * @param a
+     */
     public void actionPerformed(byte a){}
+
+    /**
+     *
+     * @param player
+     * @param AI
+     * @param text
+     */
     public void actionPerformed(BufferedImage player,BufferedImage AI,String text){}
+
+    /**
+     *
+     * @param player
+     * @param AI
+     * @param text
+     * @param id
+     */
     public void actionPerformed(BufferedImage player,BufferedImage AI,String text,int id){}
 }

@@ -16,6 +16,10 @@ import javax.imageio.ImageIO;
  * @author Josh
  */
 public class GraphicsAssets {
+
+    /**
+     *
+     */
     public static ArrayList<BufferedImage> images=new ArrayList<BufferedImage>();//unused later?
     
     

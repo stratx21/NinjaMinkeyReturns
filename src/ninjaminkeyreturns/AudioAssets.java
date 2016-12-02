@@ -17,6 +17,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Josh
  */
 public class AudioAssets {
+
+    /**
+     *
+     */
     public static Clip music=null;
     
     /**

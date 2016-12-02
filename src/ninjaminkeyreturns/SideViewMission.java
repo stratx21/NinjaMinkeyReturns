@@ -11,6 +11,10 @@ package ninjaminkeyreturns;
  */
 public class SideViewMission {
     
+    /**
+     *
+     * @param id
+     */
     public SideViewMission(int id){
         ID=id;
     }
