@@ -179,6 +179,7 @@ public class Profile {
             int a,b;
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/R"+region+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
+            System.out.println("importing the data for top down region...");
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
@@ -221,11 +222,11 @@ public class Profile {
             inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
-                System.out.println("aaaaaaaaaaaa!gggg");
+                //System.out.println("aaaaaaaaaaaa!gggg");
                 String[] in=scan.nextLine().split(",");//import size of array
                 
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
-                System.out.println("bbbbbbbbbbbb!gggg");
+                //System.out.println("bbbbbbbbbbbb!gggg");
                 input=new String[b][a];//[y][x]
                 
 
@@ -241,13 +242,15 @@ public class Profile {
                         data[x][y]=Integer.parseInt(input[y][x]);
                     }
                 
-                
+                System.out.println("data :: "+data);
                 return data;
             }
+            System.out.println("data :: "+data);
             return data;
         }catch(Exception e){
-            ErrorLogger.logError(e,"Profile.importRegionDataTopDown");
+            ErrorLogger.logError(e,"Profile.importRegionDataSideView");
         }
+        System.out.println("RETURNING NULL");
         return null;
     }
     
@@ -268,7 +271,7 @@ public class Profile {
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array 
-                input=scan.nextLine().split(": ");
+                input=scan.nextLine().split(":");
                 data=new int[input.length];
 
                 for(int i=0;i<data.length;i++){
@@ -282,7 +285,7 @@ public class Profile {
             }
             return data;
         }catch(Exception e){
-            ErrorLogger.logError(e,"Profile.importRegionDataTopDown");
+            ErrorLogger.logError(e,"Profile.getSideViewMissionData");
         }
         return null;
     }

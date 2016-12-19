@@ -66,9 +66,13 @@ public class GraphicsAssets {
      */
     public static ArrayList<BufferedImage> importRegionImagesTopDown(int regionID){
         ArrayList<BufferedImage> img=new ArrayList<>();
-        img.add(importFromString("Graphics/TopDown/grass.png"));
-        img.add(importFromString("Graphics/TopDown/ForestTree.png"));
-        img.add(importFromString("Graphics/TopDown/redish.png"));
+        String id=StringTools.numToDigits(regionID,3);
+        
+        System.out.println("region ID:: "+id);
+        
+        img.add(importFromString("Graphics/TopDown/Terrain/terrain"+id+".png"));
+        img.add(importFromString("Graphics/TopDown/Terrain/tree"+id+".png"));
+        img.add(importFromString("Graphics/TopDown/Terrain/trigger"+id+".png"));
         return img;
     }
     
@@ -110,7 +114,6 @@ public class GraphicsAssets {
     /**
      * This function imports the images for the player in a top down mode specified.
      * 
-     * @param ai_ID the ID of the AI to import 
      * @return an ArrayList of type BufferedImage containing the images for the
      *      specified player
      */
@@ -165,6 +168,24 @@ public class GraphicsAssets {
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/L"+i+".png"));
         
+        return img;
+    }
+    
+    /**
+     * This function imports the images for a specified side view region.
+     * 
+     * @param regionID the ID of the region to tell which one to import
+     * @return an ArrayList of type BufferedImage containing the images for the
+     *      specified region
+     */
+    public static ArrayList<BufferedImage> importRegionImagesSideView(int regionID){
+        ArrayList<BufferedImage> img=new ArrayList<>();
+        String id=StringTools.numToDigits(regionID,3);
+        
+        System.out.println("region ID:: "+id);
+        
+        img.add(importFromString("Graphics/SideView/Terrain/upperLayer"+id+".png"));
+        img.add(importFromString("Graphics/SideView/Terrain/lowerLayer"+id+".png"));
         return img;
     }
     

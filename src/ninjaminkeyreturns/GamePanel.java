@@ -44,7 +44,10 @@ public class GamePanel extends CPanel{
     public GamePanel(){//initial startup, only from initial call to start the game
 //        timer.start();
         this.repaint();
-        switchToTopDown();
+        
+        //switchToTopDown();
+        switchToSideView();
+        
         this.addKeyListener(runner);
         System.out.println("ADDED KEYLISTENER...");
         

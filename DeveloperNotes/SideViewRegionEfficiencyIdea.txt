@@ -1,0 +1,5 @@
+SideViewRegion.draw : if we never have land up at a certain point we can make the y value in the loop start higher
+
+also: 
+
+if it never goes too down low take out the R_ numbers at the bottom that is just a bunch of layers of dirt.

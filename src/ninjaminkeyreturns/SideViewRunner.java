@@ -31,7 +31,7 @@ public class SideViewRunner extends GameRunner{
      *  user is seeing the game; it will follow the player and move along the 
      *  region. 
      */
-    private Rectangle viewSpan=new Rectangle(0,0,340,180);//in terms of location points
+    private Rectangle camera=new Rectangle(0,0,340,180);//in terms of location points
     
     /**
      * This is the instance of the SideViewRegion that is used to manage the 
@@ -86,7 +86,7 @@ public class SideViewRunner extends GameRunner{
      * This sets up some of the SideViewRunner's aspects.
      */
     private void setup(){
-        player=new SideViewPlayer(new int[]{60,100}); 
+        player=new SideViewPlayer(new int[]{60,20});
         Prompt.resetFont();
     }
     
@@ -99,8 +99,8 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void draw(Graphics g){
-        region.draw(g);
-        player.draw(g,0,0);
+        region.draw(g,(int)camera.getX(),(int)camera.getY());
+        player.draw(g,(int)camera.getX(),(int)camera.getY());
         
         playerCalcFlow();//keep last
     }
@@ -109,13 +109,25 @@ public class SideViewRunner extends GameRunner{
      * The flow for the player calculations.
      */
     private void playerCalcFlow(){
+        //check if the palyer should fall::
+        if(//!player.getJumping()&&
+            region.canMoveToSpace(player.getX(),player.getY()+(int)player.span.getHeight()+player.getJumpVelocity())
+                &&region.canMoveToSpace(player.getX()+(int)player.span.getWidth(),player.getY()+(int)player.span.getHeight()+player.getJumpVelocity()))//then should fall since it can go to the space below
+            if(player.getYVelocity()<player.getJumpVelocity())
+                player.incrementYVelocity(1);
+            else 
+                player.setYVelocity(player.getJumpVelocity());
+        //System.out.println((int)player.span.getHeight());
+        //after all velocities are set::
         int movingX=player.getX()+player.getXVelocity(),
-                movingY=player.getY()+player.getYVelocity();
+                movingY=player.getY()+player.getYVelocity()+(int)player.span.getHeight();
         if(region.canMoveToSpace(movingX,movingY)){//no collision with the current velocity setting
             player.moveByVelocities();
             playerKeysFlow();
         } else{//there is a collision with the current velocity setting
-            
+            player.setXVelocity(0);
+            player.setYVelocity(0);
+            System.out.println("would be a collision with current veloicity");
         }
     }
     

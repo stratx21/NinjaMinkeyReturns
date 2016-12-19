@@ -43,11 +43,14 @@ public class SideViewRegion extends Region{
      */
     public SideViewRegion(int regn) {
         super(regn);
+        System.out.println("initializing SideViewRegion...");
         int[] a=Profile.getSideViewMissionData(regn);
         regionData=Profile.importRegionDataSideView(regn);
+        images=GraphicsAssets.importRegionImagesSideView(regn);
         timed=a[0]!=0?true:false;
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);
+        System.out.println("initialization of SideViewRegion finished");
     }
     
     /**
@@ -57,19 +60,40 @@ public class SideViewRegion extends Region{
      *  graphical representations of the game objects on the frame Container
      *  that holds the game. 
      */
-    public void draw(Graphics g){
+    public void draw(Graphics g,int cameraX,int cameraY){
+        int extraLocationPoints=cameraX%20,
+            extraSpaces=extraLocationPoints==0?0:2;//if some of the tile goes off the screen then 2 extra columns on each side will be drawn
+        //cameraX/=20;//convert to index from location points
+        //cameraY/=20;//convert to index from location points
         
+        for(int y=0;y<9;y++)
+            for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){
+                int temp;
+                if((temp=regionData[x][y])!=0)
+                    g.drawImage(images.get(temp-1),
+                            x*SQUARE_SIZE+(20-extraLocationPoints)/SQUARE_SIZE,
+                            y*SQUARE_SIZE,
+                            SQUARE_SIZE,
+                            SQUARE_SIZE,
+                            null);
+            }
+            //g.drawImage(images.get(0),20+extraLocationPoints,20,SQUARE_SIZE,SQUARE_SIZE,null);
     }
     
     /**
      * This tells if the space provided is clear in terms of the region. 
      * 
-     * @param x x value of the block-space the function concerns
-     * @param y y value of the block-space the function concerns
+     * @param x x value of the block-space the function concerns in location points
+     * @param y y value of the block-space the function concerns in location points
      * @return if the spot is clear
      */
     public boolean canMoveToSpace(int x,int y){
-        
+        x/=20;//translate from location points to index 
+        y/=20;//translate from location points to index 
+        if(regionData!=null){
+            int type=regionData[x][y];
+            return type==0;
+        }
         return true;
     }
 }
