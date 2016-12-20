@@ -19,11 +19,7 @@ public class Player {
      */
     public double health=50.00;
     
-    /**
-     * The location, in pixels for top down view and in location points for side
-     *  view, of the player.
-     */
-    public int[] location=new int[2];
+    
     
     /**
      * This tells if the player is travelling, which could be walking or jumping
@@ -51,34 +47,18 @@ public class Player {
      */
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
-    /**
-     * This sets up the player using a certain location with x and y 
-     *  coordinates.
-     * 
-     * @param loc 
-     */
-    public Player(int[] loc){
-        location=loc;
-    }
+//    /**
+//     * This sets up the player using a certain location with x and y 
+//     *  coordinates.
+//     * 
+//     * @param loc 
+//     */
+//    public Player(int[] loc){
+//        location=loc;
+//    }
     
-    /**
-     * This returns the value of x from the location array to tell where the 
-     *  player is.
-     * 
-     * @return the x coordinate of the player's location
-     */
-    public int getX(){
-        return location[0];
-    }
     
-    /**
-     * This returns the value of y from the location array to tell where the
-     *  player is.
-     * 
-     * @return the y coordinate of the player's location
-     */
-    public int getY(){
-        return location[1];
-    }
+    
+    
     
 }

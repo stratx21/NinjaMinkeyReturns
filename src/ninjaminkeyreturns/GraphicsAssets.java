@@ -168,6 +168,12 @@ public class GraphicsAssets {
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/L"+i+".png"));
         
+        for(int i=0;i<8;i++)
+            img.add(importFromString("Graphics/SideView/Player/JR"+i+".png"));
+        
+        for(int i=0;i<8;i++)
+            img.add(importFromString("Graphics/SideView/Player/JL"+i+".png"));
+        
         return img;
     }
     

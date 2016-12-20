@@ -19,6 +19,12 @@ public class TopDownPlayer extends Player{
     //                                 3
     
     /**
+     * The location, in pixels for top down view and in location points for side
+     *  view, of the player.
+     */
+    public int[] location=new int[2];
+    
+    /**
      *
      * @param n
      */
@@ -55,7 +61,7 @@ public class TopDownPlayer extends Player{
      * @param loc
      */
     public TopDownPlayer(int[] loc) {
-        super(loc);
+        location=loc;
         images=GraphicsAssets.importTopDownPlayerImages();
     }
     //////////////////////////////
@@ -82,6 +88,26 @@ public class TopDownPlayer extends Player{
         return offCenter[1];
     }
     
+    
+    /**
+     * This returns the value of x from the location array to tell where the 
+     *  player is.
+     * 
+     * @return the x coordinate of the player's location
+     */
+    public int getX(){
+        return location[0];
+    }
+    
+    /**
+     * This returns the value of y from the location array to tell where the
+     *  player is.
+     * 
+     * @return the y coordinate of the player's location
+     */
+    public int getY(){
+        return location[1];
+    }
     ///////////////////////////////
     
     /**

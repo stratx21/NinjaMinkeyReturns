@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -22,7 +23,9 @@ public class SideViewPlayer extends Player{
     /**
      * The maximum velocities for their respective types. 
      */
-    private final int WALK_VELOCITY=2,JUMP_VELOCITY_START=4;//location points per loop
+    private final int WALK_VELOCITY=4,JUMP_VELOCITY_START=8;//location points per loop
+    
+    private final int POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20;
     
     /**
      * The velocity, in x,y formatting, of the player that is measured in
@@ -33,17 +36,21 @@ public class SideViewPlayer extends Player{
     /**
      * This tells if the player is facing towards the right. 
      */
-    public boolean facingRight=true;
+    public boolean facingRight=true,
+            wasFacingRight=true;
     
     /**
      * This tells if the player can jump (in case they are falling or disabled).
      */
     private boolean canJump=true;
     
+    private boolean falling=false;
+    
     /**
      * This tells if the player is currently jumping.
      */
-    private boolean jumping=false; 
+    private boolean jumping=false,
+            wasJumping=false; 
     
     /**
      * This tells if the player is currently running. 
@@ -68,9 +75,9 @@ public class SideViewPlayer extends Player{
      * @param loc the location at which the player starts (in location points)
      */
     public SideViewPlayer(int[] loc){
-        super(loc);//sets the variable location, unless more changes are made
+//        super(loc);//sets the variable location, unless more changes are made
         images=GraphicsAssets.importSideViewPlayerImages();//import the images
-        span=new Rectangle(location[0],location[1],20,40);
+        span=new Rectangle(loc[0],loc[1],20,40);
     }
     
     /**
@@ -82,7 +89,7 @@ public class SideViewPlayer extends Player{
      */ 
     public SideViewPlayer(int[] loc,int spanX,int spanY){
         this(loc);
-        span=new Rectangle(location[0],location[1],spanX,spanY);
+        span=new Rectangle((int)span.getX(),(int)span.getY(),spanX,spanY);
         
     }
     
@@ -95,20 +102,36 @@ public class SideViewPlayer extends Player{
      */
     public void draw(Graphics g,int camX,int camY){
         
-        if(travelling){
-            g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
-                (location[0]-camX)*(SQUARE_SIZE/20),
-                (location[1]-camY)*(SQUARE_SIZE/20),
-                SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
-        }else //not travelling
-            g.drawImage(images.get(1),
-                    (location[0]-camX)*(SQUARE_SIZE/20),
-                    (location[1]-camY)*(SQUARE_SIZE/20),
-                    SQUARE_SIZE*2,
-                    SQUARE_SIZE*2,
-                    null);    
+//        g.setColor(Color.blue);
+//        g.fillRect(span.x*POINT_TO_PIXEL_MULTIPLIER,span.y*POINT_TO_PIXEL_MULTIPLIER,span.width*POINT_TO_PIXEL_MULTIPLIER,span.height*POINT_TO_PIXEL_MULTIPLIER);
         
-        System.out.println("x: "+(location[0]-camX)+"  y: "+(location[1]-camY)+"  xV: "+velocity[0]+"  yV: "+velocity[1]);
+        
+        
+        if(velocity[0]==0&&velocity[1]==0){
+            g.drawImage(images.get(facingRight?0:8),
+                    ((int)span.getX()-camX)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
+                    ((int)span.getY()-camY)*(POINT_TO_PIXEL_MULTIPLIER),
+                    SQUARE_SIZE*2,
+                    SQUARE_SIZE*2,
+                    null); 
+            
+        }else{ //travelling
+            g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
+                ((int)span.getX()-camX)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
+                ((int)span.getY()-camY)*(POINT_TO_PIXEL_MULTIPLIER),
+                SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
+            if(imageSequence==39
+                    ||(wasFacingRight!=facingRight)
+                    ||(wasJumping!=jumping))
+                imageSequence=0;
+            else
+                imageSequence++;
+            wasFacingRight=facingRight;
+            wasJumping=jumping;
+        }
+            
+        
+        System.out.println("x: "+(span.getX()-camX)+"  y: "+(span.getY()-camY)+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping);
         
     }
     
@@ -116,8 +139,8 @@ public class SideViewPlayer extends Player{
      * This function adds the velocity to the location of the player. 
      */
     public void moveByVelocities(){
-        location[0]+=velocity[0];
-        location[1]+=velocity[1];
+        span.x+=velocity[0]/2;
+        span.y+=velocity[1]/2;
     }
     
     /**
@@ -142,7 +165,7 @@ public class SideViewPlayer extends Player{
         if(canJump){//       remove later if not needed?  - -- -- - - -- - - - -- -
             canJump=false;
             jumping=true;
-            velocity[1]=-JUMP_VELOCITY_START;
+            velocity[1]=-2*JUMP_VELOCITY_START;
         }
     }
     
@@ -190,6 +213,50 @@ public class SideViewPlayer extends Player{
     }
     
     /**
+     * This returns the value of x from the location array to tell where the 
+     *  player is.
+     * 
+     * @return the x coordinate of the player's location
+     */
+    public int getX(){
+        return (int)span.getX();
+    }
+    
+    /**
+     * This returns the value of y from the location array to tell where the
+     *  player is.
+     * 
+     * @return the y coordinate of the player's location
+     */
+    public int getY(){
+        return (int)span.getY();
+    }
+    
+    public void setX(int a){
+        span.x=a;
+    }
+    
+    public void setY(int a){
+        span.y=a;
+    }
+    
+    public void incrementX(int a){
+        span.x+=a;
+    }
+    
+    public void incrementY(int a){
+        span.y+=a;
+    }
+    
+    public int getWidth(){
+        return (int)span.getWidth();
+    }
+    
+    public int getHeight(){
+        return (int)span.getHeight();
+    }
+    
+    /**
      * This returns the x component of the player's velocity.
      * 
      * @return the x component of the player's velocity
@@ -231,6 +298,20 @@ public class SideViewPlayer extends Player{
      */
     public boolean getJumping(){
         return jumping;
+    }
+    
+    public boolean getFalling(){
+        return falling;
+    }
+    
+    public void setFalling(boolean a){
+        falling=a;
+    }
+    
+    public void endFall(){
+        falling=false;
+        canJump=true;
+        jumping=false;
     }
     
     /**

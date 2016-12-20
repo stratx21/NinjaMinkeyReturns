@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -69,15 +70,23 @@ public class SideViewRegion extends Region{
         for(int y=0;y<9;y++)
             for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){
                 int temp;
-                if((temp=regionData[x][y])!=0)
+                if((temp=regionData[x][y])!=0){
                     g.drawImage(images.get(temp-1),
                             x*SQUARE_SIZE+(20-extraLocationPoints)/SQUARE_SIZE,
                             y*SQUARE_SIZE,
                             SQUARE_SIZE,
                             SQUARE_SIZE,
                             null);
+                    //g.setColor(Color.YELLOW);
+//                    g.fillRect(x*SQUARE_SIZE+(20-extraLocationPoints)/SQUARE_SIZE,
+//                            y*SQUARE_SIZE,
+//                            SQUARE_SIZE,
+//                            SQUARE_SIZE);
+                }
             }
             //g.drawImage(images.get(0),20+extraLocationPoints,20,SQUARE_SIZE,SQUARE_SIZE,null);
+//        g.setColor(java.awt.Color.red);
+//        g.fillRect(temp.x*4,temp.y*4,temp.width*4,temp.height*4);
     }
     
     /**
@@ -90,10 +99,46 @@ public class SideViewRegion extends Region{
     public boolean canMoveToSpace(int x,int y){
         x/=20;//translate from location points to index 
         y/=20;//translate from location points to index 
-        if(regionData!=null){
-            int type=regionData[x][y];
-            return type==0;
-        }
-        return true;
+        if(x<1||x>regionData.length)
+            return false;
+        int type=regionData[x][y];
+        return type==0;
+        
     }
+    
+    /**
+     * 
+     * @param playerSpan the Rectangle object for the player after the current
+     *      velocity values have been added
+     * @return the byte containing what direction the collision is from
+     *                                    0    1
+     *                                    2    3  
+     *                                    4    5
+     * and -1 for no collision
+     */
+    public byte mapCollision(Rectangle playerSpan){
+        int x=(int)playerSpan.getX(),
+                y=(int)playerSpan.getY(),
+                width=(int)playerSpan.getWidth(),
+                height=(int)playerSpan.getHeight();
+        //temp=playerSpan;
+        
+        if(!canMoveToSpace(x,y+height/2))//side ones first
+            return 2;
+        if(!canMoveToSpace(x+width,y+height/2))
+            return 3;
+        if(!canMoveToSpace(x,y))
+            return 0;
+        if(!canMoveToSpace(x+width,y))
+            return 1;
+        if(!canMoveToSpace(x,y+height))
+            return 4;
+        if(!canMoveToSpace(x+width,y+height))
+            return 5;
+        
+        
+        return -1;
+    }
+    
+    //Rectangle temp=new Rectangle();
 }

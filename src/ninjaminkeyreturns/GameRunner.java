@@ -172,7 +172,7 @@ public class GameRunner implements KeyListener{
      * @param doNotChange the integer value of the index of the one boolean that
      *      should still be true
      */
-    private void setOtherKeysFalse(int doNotChange){
+    public void setOtherKeysFalse(int doNotChange){
         for(int i=0;i<6;i++)
             if(i!=doNotChange)
                 currentKey[i]=false;

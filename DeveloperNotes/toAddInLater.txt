@@ -1,0 +1,1 @@
+make the velocities dependent on time and multiply by time to find the movement ?

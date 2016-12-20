@@ -7,7 +7,9 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import javax.swing.Timer;
+import static ninjaminkeyreturns.GameRunner.controls;
 /**
  *
  * @author Josh
@@ -109,27 +111,70 @@ public class SideViewRunner extends GameRunner{
      * The flow for the player calculations.
      */
     private void playerCalcFlow(){
-        //check if the palyer should fall::
-        if(//!player.getJumping()&&
-            region.canMoveToSpace(player.getX(),player.getY()+(int)player.span.getHeight()+player.getJumpVelocity())
-                &&region.canMoveToSpace(player.getX()+(int)player.span.getWidth(),player.getY()+(int)player.span.getHeight()+player.getJumpVelocity()))//then should fall since it can go to the space below
-            if(player.getYVelocity()<player.getJumpVelocity())
-                player.incrementYVelocity(1);
-            else 
-                player.setYVelocity(player.getJumpVelocity());
-        //System.out.println((int)player.span.getHeight());
+        
+        
+        
+        playerFallingCalc();
+        
         //after all velocities are set::
         int movingX=player.getX()+player.getXVelocity(),
-                movingY=player.getY()+player.getYVelocity()+(int)player.span.getHeight();
-        if(region.canMoveToSpace(movingX,movingY)){//no collision with the current velocity setting
+                movingY=player.getY()+player.getYVelocity();
+        byte t;
+        if(-1==(t=region.mapCollision(new Rectangle(movingX,movingY,player.getWidth(),player.getHeight())))){//no collision with the current velocity setting
+            
             player.moveByVelocities();
             playerKeysFlow();
         } else{//there is a collision with the current velocity setting
+//     *                    0   1
+//     *                    2   3  
+//     *                    4   5
+            
+            switch(t){
+                case 0: //if(player.getXVelocity()>0)
+                    break;
+                case 1: 
+                    break;
+                case 2: 
+                    break;
+                case 3: 
+                    break;
+                case 4: if(player.getYVelocity()>0) player.incrementY(19-player.getY()%20);
+                    break;
+                case 5: if(player.getYVelocity()>0) player.incrementY(19-player.getY()%20);
+                    break;
+            }
+//            zeroPlayerVelocity();
+            
             player.setXVelocity(0);
             player.setYVelocity(0);
             System.out.println("would be a collision with current veloicity");
         }
     }
+    
+//    private void zeroPlayerVelocity(){
+//        player.setXVelocity(0);
+//        player.setYVelocity(0);
+//    }
+    
+    
+    
+    private void playerFallingCalc(){
+        //check if the palyer should fall::
+        if(//!player.getJumping()&&
+            region.canMoveToSpace(player.getX(),player.getY()+(int)player.span.getHeight()+2)
+                &&region.canMoveToSpace(player.getX()+(int)player.span.getWidth(),player.getY()+(int)player.span.getHeight()+2)){//then should fall since it can go to the space below
+            if(player.getYVelocity()<player.getJumpVelocity())
+                player.incrementYVelocity(1);
+            else 
+                player.setYVelocity(player.getJumpVelocity());
+            player.setFalling(true);
+        } else{
+            player.endFall();
+        }
+        //System.out.println((int)player.span.getHeight());
+    }
+    
+    private byte sequence=0;
     
     /**
      * The flow for the player for when each key is pressed. 
@@ -140,9 +185,13 @@ public class SideViewRunner extends GameRunner{
         }else if(currentKey[1]){//down
             
         }else if(currentKey[2]){//left
-            //check if can run in this direction!!
+            if(player.getXVelocity()>-1*player.getWalkVeloctiy())
+                player.incrementXVelocity(-1);
+            player.facingRight=false;
         }else if(currentKey[3]){//right
-            
+            if(player.getXVelocity()<player.getWalkVeloctiy())
+                player.incrementXVelocity(1);
+            player.facingRight=true;
         }else if(currentKey[4]){//SETUP   *   future work
             
         }else if(currentKey[5]){//SETUP   *   future work
@@ -157,6 +206,32 @@ public class SideViewRunner extends GameRunner{
     @Override
     public void calculate(){// -------------------------- -  - - is this used?   < ?? ? ? ? ? ? ?   - -- -- -   >?
         
+    }
+    
+    /**
+     * This function is called whenever a key is pressed and will use the 
+     *  information given about which key was pressed to determine what to do.
+     * 
+     * @param e the KeyEvent instance used to determine which key was pressed
+     */
+    @Override
+    public void keyPressed(KeyEvent e){
+        //        System.out.println("key released:: "+typed);
+        char typed=Character.toUpperCase(e.getKeyChar());
+        if(typed==controls[0]){
+            currentKey[0]=true;
+        }else if(typed==controls[1]){
+            currentKey[1]=true;
+        }else if(typed==controls[2]){
+            currentKey[2]=true;
+        }else if(typed==controls[3]){
+            currentKey[3]=true;
+        }else if(typed==controls[4]){
+            currentKey[4]=true;
+        }else if(typed==controls[5]){
+            currentKey[5]=true;
+        }
+        keyPressedFlow(typed);
     }
     
     /**
@@ -205,7 +280,7 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void keyReleasedFlow(char typed){
-        
+        player.setXVelocity(0);
     }
     
 }
