@@ -195,6 +195,13 @@ public class GraphicsAssets {
         return img;
     }
     
+    public static BufferedImage importSideViewBackground(int regionID){
+        
+        String id=StringTools.numToDigits(regionID,3);
+        
+        return importFromString("Graphics/SideView/Background/"+id+".png");
+    }
+    
     /**
      * This function imports the images for the specified AI in side view.
      * 

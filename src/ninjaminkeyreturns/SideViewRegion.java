@@ -8,6 +8,7 @@ package ninjaminkeyreturns;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,8 @@ public class SideViewRegion extends Region{
      * The ArrayList of AIs; this is used to manage the AIs. 
      */
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
+    
+    private BufferedImage background=null;
     
     /**
      * The imported data about the region that is used for collisions and for
@@ -48,6 +51,7 @@ public class SideViewRegion extends Region{
         int[] a=Profile.getSideViewMissionData(regn);
         regionData=Profile.importRegionDataSideView(regn);
         images=GraphicsAssets.importRegionImagesSideView(regn);
+        background=GraphicsAssets.importSideViewBackground(regn);
         timed=a[0]!=0?true:false;
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);
@@ -67,7 +71,11 @@ public class SideViewRegion extends Region{
         //cameraX/=20;//convert to index from location points
         //cameraY/=20;//convert to index from location points
         
-        for(int y=0;y<9;y++)
+        
+        //draw background::
+        g.drawImage(background,(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(), null);
+        
+        for(int y=0;y<10;y++)
             for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){
                 int temp;
                 if((temp=regionData[x][y])!=0){
