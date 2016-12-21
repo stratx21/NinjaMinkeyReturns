@@ -21,7 +21,11 @@ public class SideViewRegion extends Region{
      */
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
     
+    private final int POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20;
+    
     private BufferedImage background=null;
+    
+    private int X_TILES=0;
     
     /**
      * The imported data about the region that is used for collisions and for
@@ -40,6 +44,11 @@ public class SideViewRegion extends Region{
      */
     public boolean timed=false;// duplicate - also in SideViewRunner
 
+    
+    public int getX_TILES(){
+        return X_TILES;
+    }
+    
     /**
      * This sets up the SideViewRegion using the id of the region. 
      * 
@@ -55,7 +64,8 @@ public class SideViewRegion extends Region{
         timed=a[0]!=0?true:false;
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);
-        System.out.println("initialization of SideViewRegion finished");
+        X_TILES=regionData.length;
+        System.out.println("initialization of SideViewRegion finished : xtiles :: "+X_TILES);
     }
     
     /**
@@ -67,7 +77,7 @@ public class SideViewRegion extends Region{
      */
     public void draw(Graphics g,int cameraX,int cameraY){
         int extraLocationPoints=cameraX%20,
-            extraSpaces=extraLocationPoints==0?0:2;//if some of the tile goes off the screen then 2 extra columns on each side will be drawn
+            extraSpaces=extraLocationPoints==0?2:2;//if some of the tile goes off the screen then 2 extra columns on each side will be drawn
         //cameraX/=20;//convert to index from location points
         //cameraY/=20;//convert to index from location points
         
@@ -78,15 +88,15 @@ public class SideViewRegion extends Region{
         for(int y=0;y<10;y++)
             for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){
                 int temp;
-                if((temp=regionData[x][y])!=0){
+                if((x+cameraX/20-1>-1&&x+cameraX/20-1<X_TILES)&&((temp=regionData[x+cameraX/20-1][y])!=0)){
                     g.drawImage(images.get(temp-1),
-                            x*SQUARE_SIZE+(20-extraLocationPoints)/SQUARE_SIZE,
+                            x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
                             y*SQUARE_SIZE,
                             SQUARE_SIZE,
                             SQUARE_SIZE,
                             null);
-                    //g.setColor(Color.YELLOW);
-//                    g.fillRect(x*SQUARE_SIZE+(20-extraLocationPoints)/SQUARE_SIZE,
+//                    g.setColor(Color.YELLOW);
+//                    g.fillRect(x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
 //                            y*SQUARE_SIZE,
 //                            SQUARE_SIZE,
 //                            SQUARE_SIZE);
@@ -107,8 +117,12 @@ public class SideViewRegion extends Region{
     public boolean canMoveToSpace(int x,int y){
         x/=20;//translate from location points to index 
         y/=20;//translate from location points to index 
-        if(x<1||x>regionData.length)
+        
+        if(x<1||x>regionData.length-1)
             return false;
+        if(y<0)
+            return true;
+        
         int type=regionData[x][y];
         return type==0;
         

@@ -10,3 +10,9 @@ IDs::
 
 ______
 int xsize, int ysize
+
+--------------------------------------------- important note:: 
+
+so on the map
+nothing higher than the third row down
+index of 2 but third down in the txt file

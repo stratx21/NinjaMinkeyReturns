@@ -104,7 +104,7 @@ public class SideViewRunner extends GameRunner{
         region.draw(g,(int)camera.getX(),(int)camera.getY());
         player.draw(g,(int)camera.getX(),(int)camera.getY());
         
-        playerCalcFlow();//keep last
+        calculate();
     }
     
     /**
@@ -125,28 +125,68 @@ public class SideViewRunner extends GameRunner{
             player.moveByVelocities();
             playerKeysFlow();
         } else{//there is a collision with the current velocity setting
-//     *                    0   1
-//     *                    2   3  
-//     *                    4   5
+//                         0   1
+//                         2   3  
+//                         4   5
             
             switch(t){
-                case 0: //if(player.getXVelocity()>0)
+                case 0: 
+                    if(!region.canMoveToSpace(player.getX(),player.getY()+player.getYVelocity())){//if there is an obstacle above
+                        if(player.getYVelocity()<0){ 
+                            player.incrementY(-1*((player.getY()-10)%20+1));
+                        }
+                        player.setYVelocity(0);
+                        while(!region.canMoveToSpace(player.getX(),player.getY()-1))
+                            player.incrementY(1);
+                    } else{// is a side collision
+                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                        player.setXVelocity(0);
+                    }
                     break;
                 case 1: 
+                    if(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()+player.getYVelocity())){//if there is an obstacle above
+                        if(player.getYVelocity()<0){
+                            player.incrementY(-1*((player.getY()-10)%20+1));
+                        }
+                        player.setYVelocity(0);
+//                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
+//                            player.incrementY(1);
+                    } else{// is a side collision
+                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                        player.setXVelocity(0);
+                    }
                     break;
-                case 2: 
+                case 2: player.setXVelocity(0);
+                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
-                case 3: 
+                case 3: player.setXVelocity(0);
+                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
-                case 4: if(player.getYVelocity()>0) player.incrementY(19-player.getY()%20);
+                case 4: 
+                    if(!region.canMoveToSpace(player.getX(),player.getY()+player.getHeight()+player.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
+                        if(player.getYVelocity()>0) player.incrementY(19-(player.getY()+10)%20);
+                        player.setYVelocity(0);
+//                        while(!region.canMoveToSpace(player.getX(),player.getY()+1))
+//                            player.incrementY(-1);
+                    } else{
+                        player.setXVelocity(0);
+                    }
                     break;
-                case 5: if(player.getYVelocity()>0) player.incrementY(19-player.getY()%20);
+                case 5: 
+                    if(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()+player.getHeight()+player.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
+                        if(player.getYVelocity()>0) player.incrementY(19-(player.getY()+10)%20);
+                        player.setYVelocity(0);
+                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()+1))
+                            player.incrementY(-1);
+                    } else{
+                        player.setXVelocity(0);
+                    }
                     break;
             }
 //            zeroPlayerVelocity();
             
-            player.setXVelocity(0);
-            player.setYVelocity(0);
+//            player.setXVelocity(0);
+//            player.setYVelocity(0);
             System.out.println("would be a collision with current veloicity");
         }
     }
@@ -162,11 +202,17 @@ public class SideViewRunner extends GameRunner{
         //check if the palyer should fall::
         if(//!player.getJumping()&&
             region.canMoveToSpace(player.getX(),player.getY()+(int)player.span.getHeight()+2)
-                &&region.canMoveToSpace(player.getX()+(int)player.span.getWidth(),player.getY()+(int)player.span.getHeight()+2)){//then should fall since it can go to the space below
+                &&region.canMoveToSpace(player.getX()+(int)player.span.getWidth(),player.getY()+(int)player.span.getHeight()+2)){
+                    //then should fall since it can go to the space below
+            
             if(player.getYVelocity()<player.getJumpVelocity())
                 player.incrementYVelocity(1);
             else 
                 player.setYVelocity(player.getJumpVelocity());
+            
+            if(player.getYVelocity()==0)
+                player.setJumping(false);
+            
             player.setFalling(true);
         } else{
             player.endFall();
@@ -185,12 +231,16 @@ public class SideViewRunner extends GameRunner{
         }else if(currentKey[1]){//down
             
         }else if(currentKey[2]){//left
-            if(player.getXVelocity()>-1*player.getWalkVeloctiy())
+            if(player.getXVelocity()>-1*player.getWalkVeloctiy()){
                 player.incrementXVelocity(-1);
+                //System.out.println("starting to left.................");
+            }
             player.facingRight=false;
         }else if(currentKey[3]){//right
-            if(player.getXVelocity()<player.getWalkVeloctiy())
+            if(player.getXVelocity()<player.getWalkVeloctiy()){
                 player.incrementXVelocity(1);
+                //System.out.println("starting to right.................");
+            }
             player.facingRight=true;
         }else if(currentKey[4]){//SETUP   *   future work
             
@@ -205,7 +255,9 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void calculate(){// -------------------------- -  - - is this used?   < ?? ? ? ? ? ? ?   - -- -- -   >?
+        playerCalcFlow();
         
+        cameraPlacementCalculations();
     }
     
     /**
@@ -218,6 +270,7 @@ public class SideViewRunner extends GameRunner{
     public void keyPressed(KeyEvent e){
         //        System.out.println("key released:: "+typed);
         char typed=Character.toUpperCase(e.getKeyChar());
+        System.out.println(typed);
         if(typed==controls[0]){
             currentKey[0]=true;
         }else if(typed==controls[1]){
@@ -244,9 +297,28 @@ public class SideViewRunner extends GameRunner{
     /**
      * This calculates any changes in the visual span, the camera, so that it
      *  follows the player. 
+     * 
+     * PRE:: this is called after the player calculations for collisions and 
+     *  other interactions are made
      */
-    private void calculateViewSpan(){
+    private void cameraPlacementCalculations(){
+        //assuming that the perspective concerning the y-axis does not change
+        //thus this only works with the x component 
+        int t;
+        if((t=(player.getX()-(int)camera.getX()))<80&&player.getXVelocity()<0
+                ||t>240&&player.getXVelocity()>0){//then there should be a change
+            
         
+            if(camera.x+player.getXVelocity()<0)
+                camera.x=0;
+            else if(camera.x+camera.getWidth()+player.getXVelocity()>region.getX_TILES()*20){//number of tiles in the x direction times location points per tile
+                camera.x=region.getX_TILES()*20-(int)camera.getWidth();
+            } else{//the camera movement will work
+                camera.x+=player.getXVelocity()/2;
+            }
+        }
+        
+        //System.out.println("CAMERA:: x: "+camera.x+"  y: "+camera.y+"  PLAYER VELOCITY:: "+player.getXVelocity());
     }
     
     /**
@@ -267,6 +339,7 @@ public class SideViewRunner extends GameRunner{
      * 
      * @param typed the character of the key pressed
      */
+    
     @Override
     public void keyPressedFlow(char typed){
         
@@ -280,7 +353,8 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void keyReleasedFlow(char typed){
-        player.setXVelocity(0);
+        if(typed==controls[2]||typed==controls[3])
+            player.setXVelocity(0);
     }
     
 }

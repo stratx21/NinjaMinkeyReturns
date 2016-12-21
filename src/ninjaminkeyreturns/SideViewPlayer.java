@@ -23,7 +23,7 @@ public class SideViewPlayer extends Player{
     /**
      * The maximum velocities for their respective types. 
      */
-    private final int WALK_VELOCITY=4,JUMP_VELOCITY_START=8;//location points per loop
+    private final int WALK_VELOCITY=4,JUMP_VELOCITY_START=7;//location points per loop
     
     private final int POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20;
     
@@ -77,7 +77,7 @@ public class SideViewPlayer extends Player{
     public SideViewPlayer(int[] loc){
 //        super(loc);//sets the variable location, unless more changes are made
         images=GraphicsAssets.importSideViewPlayerImages();//import the images
-        span=new Rectangle(loc[0],loc[1],20,40);
+        span=new Rectangle(loc[0],loc[1],10,30);//NOTE :: 0.75* 2 tiles for height
     }
     
     /**
@@ -87,11 +87,11 @@ public class SideViewPlayer extends Player{
      * @param spanX the width of the player (in location points)
      * @param spanY the height of the player (in location points)
      */ 
-    public SideViewPlayer(int[] loc,int spanX,int spanY){
-        this(loc);
-        span=new Rectangle((int)span.getX(),(int)span.getY(),spanX,spanY);
-        
-    }
+//    public SideViewPlayer(int[] loc,int spanX,int spanY){
+//        this(loc);
+//        span=new Rectangle((int)span.getX(),(int)span.getY(),spanX,spanY);
+//        
+//    }
     
     /**
      * This draws the SideViewPlayer.
@@ -102,23 +102,25 @@ public class SideViewPlayer extends Player{
      */
     public void draw(Graphics g,int camX,int camY){
         
-//        g.setColor(Color.blue);
-//        g.fillRect(span.x*POINT_TO_PIXEL_MULTIPLIER,span.y*POINT_TO_PIXEL_MULTIPLIER,span.width*POINT_TO_PIXEL_MULTIPLIER,span.height*POINT_TO_PIXEL_MULTIPLIER);
+        g.setColor(Color.blue);
+        g.fillRect(((int)span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
+                ((int)span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER),
+                span.width*POINT_TO_PIXEL_MULTIPLIER,span.height*POINT_TO_PIXEL_MULTIPLIER);
         
         
         
         if(velocity[0]==0&&velocity[1]==0){
             g.drawImage(images.get(facingRight?0:8),
-                    ((int)span.getX()-camX)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                    ((int)span.getY()-camY)*(POINT_TO_PIXEL_MULTIPLIER),
+                    ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
+                    ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
                     SQUARE_SIZE*2,
                     SQUARE_SIZE*2,
                     null); 
             
         }else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
-                ((int)span.getX()-camX)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                ((int)span.getY()-camY)*(POINT_TO_PIXEL_MULTIPLIER),
+                ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
+                ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
                 SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
             if(imageSequence==39
                     ||(wasFacingRight!=facingRight)
@@ -131,7 +133,7 @@ public class SideViewPlayer extends Player{
         }
             
         
-        System.out.println("x: "+(span.getX()-camX)+"  y: "+(span.getY()-camY)+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping);
+        System.out.println("PLAYER:: x: "+(span.getX())+"  y: "+(span.getY())+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping+" PLAYEER VELOCITY:: "+velocity[0]);
         
     }
     
@@ -163,7 +165,7 @@ public class SideViewPlayer extends Player{
      */
     public void startJump(){
         if(canJump){//       remove later if not needed?  - -- -- - - -- - - - -- -
-            canJump=false;
+            setCanJump(false);
             jumping=true;
             velocity[1]=-2*JUMP_VELOCITY_START;
         }
@@ -300,6 +302,10 @@ public class SideViewPlayer extends Player{
         return jumping;
     }
     
+    public void setJumping(boolean a){
+        jumping=a;
+    }
+    
     public boolean getFalling(){
         return falling;
     }
@@ -309,9 +315,9 @@ public class SideViewPlayer extends Player{
     }
     
     public void endFall(){
-        falling=false;
-        canJump=true;
-        jumping=false;
+        setFalling(false);
+        setCanJump(true);
+        setJumping(false);
     }
     
     /**
@@ -329,7 +335,7 @@ public class SideViewPlayer extends Player{
      * @param j if the player can jump
      */
     public void setCanJump(boolean j){
-        canJump=j;
+        canJump=true;
     }
     
     
