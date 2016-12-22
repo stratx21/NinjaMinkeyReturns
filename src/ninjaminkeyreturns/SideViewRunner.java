@@ -8,6 +8,7 @@ package ninjaminkeyreturns;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.Timer;
 import static ninjaminkeyreturns.GameRunner.controls;
 /**
@@ -21,6 +22,13 @@ public class SideViewRunner extends GameRunner{
      *  the side view. 
      */
     private SideViewMission mission=null;
+    
+    private ArrayList<HitBox> playerAttacks=new ArrayList<>();
+    
+    private ArrayList<HitBox> AIAttacks=new ArrayList<>();
+            
+    
+    
     
     /**
      * The instance of SideViewPlayer that is used for the player that is in
@@ -105,6 +113,10 @@ public class SideViewRunner extends GameRunner{
         player.draw(g,(int)camera.getX(),(int)camera.getY());
         
         calculate();
+    }
+    
+    private void calculateAI(){
+        
     }
     
     /**
@@ -255,6 +267,8 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void calculate(){// -------------------------- -  - - is this used?   < ?? ? ? ? ? ? ?   - -- -- -   >?
+        calculateAI();
+        
         playerCalcFlow();
         
         cameraPlacementCalculations();
