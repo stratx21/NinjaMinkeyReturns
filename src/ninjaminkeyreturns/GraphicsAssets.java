@@ -68,7 +68,7 @@ public class GraphicsAssets {
         ArrayList<BufferedImage> img=new ArrayList<>();
         String id=StringTools.numToDigits(regionID,3);
         
-        System.out.println("region ID:: "+id);
+        //System.out.println("region ID:: "+id);
         
         img.add(importFromString("Graphics/TopDown/Terrain/terrain"+id+".png"));
         img.add(importFromString("Graphics/TopDown/Terrain/tree"+id+".png"));
