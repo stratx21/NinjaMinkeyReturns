@@ -91,7 +91,7 @@ public class SideViewRegion extends Region{
                 if((x+cameraX/20-1>-1&&x+cameraX/20-1<X_TILES)&&((temp=regionData[x+cameraX/20-1][y])!=0)){
                     g.drawImage(images.get(temp-1),
                             x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
-                            y*SQUARE_SIZE,
+                            y*SQUARE_SIZE+(int)GAME_SPAN.getY(),
                             SQUARE_SIZE,
                             SQUARE_SIZE,
                             null);
