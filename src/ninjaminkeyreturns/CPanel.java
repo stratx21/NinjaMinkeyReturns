@@ -84,6 +84,8 @@ public class CPanel extends JPanel{
         Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=Player.SQUARE_SIZE=Prompt.SQUARE_SIZE=
             GameRunner.SQUARE_SIZE=xLesY?xPixelMax:yPixelMax;
         
+        System.out.println(GAME_SPAN.getWidth()+","+GAME_SPAN.getHeight());
+        
     }
     
 }

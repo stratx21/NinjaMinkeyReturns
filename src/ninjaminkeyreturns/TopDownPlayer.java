@@ -163,11 +163,11 @@ public class TopDownPlayer extends Player{
     public void draw(Graphics g){
         if(travelling){
             g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
-                    GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,
-                    GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,
+                    GAME_SPAN.width/2-SQUARE_SIZE/2,
+                    GAME_SPAN.height/2-SQUARE_SIZE/2,
                     SQUARE_SIZE,SQUARE_SIZE,null);
         }else{
-            g.drawImage(images.get(directionFacing),GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
+            g.drawImage(images.get(directionFacing),GAME_SPAN.width/2-SQUARE_SIZE/2,GAME_SPAN.height/2-SQUARE_SIZE/2,SQUARE_SIZE,SQUARE_SIZE,null);
         }
     }
     

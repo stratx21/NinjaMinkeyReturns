@@ -104,7 +104,7 @@ public class SideViewPlayer extends Player{
         
         g.setColor(Color.blue);
         g.fillRect(((int)span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                ((int)span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)+(int)GAME_SPAN.getY(),
+                ((int)span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER),
                 span.width*POINT_TO_PIXEL_MULTIPLIER,span.height*POINT_TO_PIXEL_MULTIPLIER);
         
         
@@ -112,7 +112,7 @@ public class SideViewPlayer extends Player{
         if(velocity[0]==0&&velocity[1]==0){
             g.drawImage(images.get(facingRight?0:8),
                     ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                    ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)+(int)GAME_SPAN.getY(),
+                    ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
                     SQUARE_SIZE*2,
                     SQUARE_SIZE*2,
                     null); 
@@ -120,7 +120,7 @@ public class SideViewPlayer extends Player{
         }else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
                 ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)+(int)GAME_SPAN.getY(),
+                ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
                 SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
             if(imageSequence==39
                     ||(wasFacingRight!=facingRight)
@@ -133,7 +133,7 @@ public class SideViewPlayer extends Player{
         }
             
         
-        System.out.println("PLAYER:: x: "+(span.getX())+"  y: "+(span.getY())+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping+" PLAYEER VELOCITY:: "+velocity[0]);
+        //System.out.println("PLAYER:: x: "+(span.getX())+"  y: "+(span.getY())+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping+" PLAYEER VELOCITY:: "+velocity[0]);
         
     }
     

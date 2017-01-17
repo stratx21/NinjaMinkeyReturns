@@ -83,7 +83,7 @@ public class SideViewRegion extends Region{
         
         
         //draw background::
-        g.drawImage(background,(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(), null);
+        g.drawImage(background,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(), null);
         
         for(int y=0;y<10;y++)
             for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){
@@ -91,7 +91,7 @@ public class SideViewRegion extends Region{
                 if((x+cameraX/20-1>-1&&x+cameraX/20-1<X_TILES)&&((temp=regionData[x+cameraX/20-1][y])!=0)){
                     g.drawImage(images.get(temp-1),
                             x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
-                            y*SQUARE_SIZE+(int)GAME_SPAN.getY(),
+                            y*SQUARE_SIZE,
                             SQUARE_SIZE,
                             SQUARE_SIZE,
                             null);

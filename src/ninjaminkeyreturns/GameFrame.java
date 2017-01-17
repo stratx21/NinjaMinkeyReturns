@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -38,7 +40,15 @@ public class GameFrame extends JFrame{
         this.setResizable(false);
 //        this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
         this.setVisible(true);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        //get the screen resolution::
+        Dimension s=Toolkit.getDefaultToolkit().getScreenSize();
+        CPanel.FRAME_SIZE=FRAME_SIZE=new int[]{(int)s.getWidth(),(int)s.getHeight()};
+        
+        CPanel.calculateTopDownGameSize();
+        
         setSIZE();
         
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -60,7 +70,7 @@ public class GameFrame extends JFrame{
         
         //only here because of testing/developing purposes::
         
-        CPanel.calculateTopDownGameSize();
+        
         
         currentPanel=new GamePanel(new CListener(){
             @Override
@@ -83,8 +93,12 @@ public class GameFrame extends JFrame{
      */
     
     private void setSIZE(){
-        CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=this.getWidth();
-        CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=this.getHeight();
+        
+        CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
+        CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=(int)CPanel.GAME_SPAN.getHeight();
+        
+        //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=this.getWidth();
+        //CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=this.getHeight();
         CPanel.FRAME_SIZE=FRAME_SIZE;
         this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
     }
