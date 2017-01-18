@@ -95,11 +95,11 @@ public class SideViewRegion extends Region{
                             SQUARE_SIZE,
                             SQUARE_SIZE,
                             null);
-//                    g.setColor(Color.YELLOW);
-//                    g.fillRect(x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
-//                            y*SQUARE_SIZE,
-//                            SQUARE_SIZE,
-//                            SQUARE_SIZE);
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(x*SQUARE_SIZE+(20-extraLocationPoints)*POINT_TO_PIXEL_MULTIPLIER-SQUARE_SIZE*2,
+                            y*SQUARE_SIZE,
+                            SQUARE_SIZE,
+                            SQUARE_SIZE);
                 }
             }
             //g.drawImage(images.get(0),20+extraLocationPoints,20,SQUARE_SIZE,SQUARE_SIZE,null);
