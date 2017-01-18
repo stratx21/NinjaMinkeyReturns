@@ -83,7 +83,7 @@ public class SideViewRegion extends Region{
         
         
         //draw background::
-        g.drawImage(background,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(), null);
+        g.drawImage(background,0,-200,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(), null);
         
         for(int y=0;y<10;y++)
             for(int x=0-extraSpaces/2;x<17+extraSpaces;x++){

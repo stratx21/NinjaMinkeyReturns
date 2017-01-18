@@ -132,9 +132,9 @@ public class GamePanel extends CPanel{
         
         runner.draw(g);
         
-        g.setColor(Color.black);
-        g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
-        g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
+        //g.setColor(Color.black);
+        //g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
+        //g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
         
 //        System.out.println("end draw");
         try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
