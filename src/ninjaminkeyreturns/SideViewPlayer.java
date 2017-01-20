@@ -102,6 +102,8 @@ public class SideViewPlayer extends Player{
      */
     public void draw(Graphics g,int camX,int camY){
         
+        System.out.println(GAME_SPAN.width+","+GAME_SPAN.height+"  square size:: "+SQUARE_SIZE+"  MULTIPLIER:: "+POINT_TO_PIXEL_MULTIPLIER);
+        
         g.setColor(Color.blue);
         g.fillRect(((int)span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
                 ((int)span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER),

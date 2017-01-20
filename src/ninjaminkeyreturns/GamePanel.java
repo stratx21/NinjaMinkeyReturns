@@ -106,7 +106,7 @@ public class GamePanel extends CPanel{
      *  that is used to clear the game span graphical representation. 
      * 
      */
-    int yv=FRAME_SIZE[1]-GAME_SPAN.y-GAME_SPAN.height;
+    int yv=(int)GAME_SPAN.getHeight()-GAME_SPAN.y-GAME_SPAN.height;
     
     /**
      * The function that is used to create a loop for the game's calculations
@@ -125,7 +125,7 @@ public class GamePanel extends CPanel{
 //        c++;
         
         g.setColor(Color.black);
-        g.fillRect(-1,-1,FRAME_SIZE[0]+2,FRAME_SIZE[1]+2);
+        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
         
 //        g.setColor(Color.red);   //for testing purposes
 //        g.fillRect(50,50,600+c,120);

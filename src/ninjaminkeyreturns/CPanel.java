@@ -24,13 +24,6 @@ public class CPanel extends JPanel{
      *  displayed and controls the overall flow of the game. 
      */
     public GameRunner runner=null;
-
-    /**
-     * The standard size of the overall frame that is used for the game; this is
-     *  the size whose value is set based on the user's screen resolution 
-     *  for the sake of the game being full-screen. 
-     */
-    public static int[] FRAME_SIZE=new int[2];
     
     /**
      * The Rectangle object that represents the area in which the game 
@@ -71,15 +64,15 @@ public class CPanel extends JPanel{
      * PRE:: FRAME_SIZE is set to the correct size of the full-screen 
      * 
      */
-    public static void calculateTopDownGameSize(){
+    public static void calculateTopDownGameSize(int frameWidth,int frameHeight){
         int tempX,tempY;
         boolean xLesY;
-        int xPixelMax=(FRAME_SIZE[0]-5)/17,
-            yPixelMax=(FRAME_SIZE[1]-5)/9;// each is the max pixels that could be used going in that direction
+        int xPixelMax=(frameWidth-5)/17,
+            yPixelMax=(frameHeight-5)/9;// each is the max pixels that could be used going in that direction
         
-        Region.GAME_SPAN=AI.GAME_SPAN=Player.GAME_SPAN=Prompt.GAME_SPAN=
-            GameRunner.GAME_SPAN=GAME_SPAN=(xLesY=xPixelMax<yPixelMax)?new Rectangle(FRAME_SIZE[0]/2-(tempX=xPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=xPixelMax*9)/2,tempX,tempY)
-                :new Rectangle(FRAME_SIZE[0]/2-(tempX=yPixelMax*17)/2,FRAME_SIZE[1]/2-(tempY=yPixelMax*9)/2,tempX,tempY);
+        GameFrame.GAME_SPAN=Region.GAME_SPAN=AI.GAME_SPAN=Player.GAME_SPAN=Prompt.GAME_SPAN=
+            GameRunner.GAME_SPAN=GAME_SPAN=(xLesY=xPixelMax<yPixelMax)?new Rectangle(frameWidth/2-(tempX=xPixelMax*17)/2,frameHeight/2-(tempY=xPixelMax*9)/2,tempX,tempY)
+                :new Rectangle(frameWidth/2-(tempX=yPixelMax*17)/2,frameHeight/2-(tempY=yPixelMax*9)/2,tempX,tempY);
         
         Region.SQUARE_SIZE=AI.SQUARE_SIZE=GameRunner.SQUARE_SIZE=Player.SQUARE_SIZE=Prompt.SQUARE_SIZE=
             GameRunner.SQUARE_SIZE=xLesY?xPixelMax:yPixelMax;

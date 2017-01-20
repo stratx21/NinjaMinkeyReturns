@@ -6,6 +6,7 @@
 package ninjaminkeyreturns;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -22,11 +23,11 @@ public class GameFrame extends JFrame{
     private CPanel currentPanel;
     
     /**
-     * The standard size of the overall frame that is used for the game; this is
-     *  the size whose value is set based on the user's screen resolution 
-     *  for the sake of the game being full-screen. 
+     * The Rectangle object that represents the area in which the game 
+     *  components are being graphically represented; it is calculated using
+     *  the user's screen resolution. 
      */
-    public static int[] FRAME_SIZE=new int[2];
+    public static Rectangle GAME_SPAN=new Rectangle();
     
     /**
      * Set up the game's frame in order to give the user a graphical 
@@ -45,9 +46,10 @@ public class GameFrame extends JFrame{
         
         //get the screen resolution::
         Dimension s=Toolkit.getDefaultToolkit().getScreenSize();
-        CPanel.FRAME_SIZE=FRAME_SIZE=new int[]{(int)s.getWidth(),(int)s.getHeight()};
+        //CPanel.GAME_SPAN.width=GAME_SPAN.width=(int)s.getWidth();
+        //CPanel.GAME_SPAN.height=GAME_SPAN.height=(int)s.getHeight();
         
-        CPanel.calculateTopDownGameSize();
+        CPanel.calculateTopDownGameSize((int)s.getWidth(),(int)s.getHeight());
         
         setSIZE();
         
@@ -94,13 +96,13 @@ public class GameFrame extends JFrame{
     
     private void setSIZE(){
         
-        CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
-        CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=(int)CPanel.GAME_SPAN.getHeight();
+        //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
+        //CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=(int)CPanel.GAME_SPAN.getHeight();
         
         //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=this.getWidth();
         //CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=this.getHeight();
-        CPanel.FRAME_SIZE=FRAME_SIZE;
-        this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
+        //CPanel.FRAME_SIZE=FRAME_SIZE;
+        this.setSize(GAME_SPAN.width,GAME_SPAN.height);
     }
     
     /**
