@@ -25,7 +25,7 @@ public class SideViewPlayer extends Player{
      */
     private final int WALK_VELOCITY=4,JUMP_VELOCITY_START=7;//location points per loop
     
-    private final int POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20;
+    private final double POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20.0;
     
     /**
      * The velocity, in x,y formatting, of the player that is measured in
@@ -105,24 +105,25 @@ public class SideViewPlayer extends Player{
         System.out.println(GAME_SPAN.width+","+GAME_SPAN.height+"  square size:: "+SQUARE_SIZE+"  MULTIPLIER:: "+POINT_TO_PIXEL_MULTIPLIER);
         
         g.setColor(Color.blue);
-        g.fillRect(((int)span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                ((int)span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER),
-                span.width*POINT_TO_PIXEL_MULTIPLIER,span.height*POINT_TO_PIXEL_MULTIPLIER);
+        g.fillRect((int)((span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
+                (int)((span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)),
+                (int)(span.width*POINT_TO_PIXEL_MULTIPLIER),
+                (int)(span.height*POINT_TO_PIXEL_MULTIPLIER));
         
         
         
         if(velocity[0]==0&&velocity[1]==0){
             g.drawImage(images.get(facingRight?0:8),
-                    ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                    ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
+                    (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
+                    (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                     SQUARE_SIZE*2,
                     SQUARE_SIZE*2,
                     null); 
             
         }else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
-                ((int)span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2,
-                ((int)span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER),
+                (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
+                (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                 SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
             if(imageSequence==39
                     ||(wasFacingRight!=facingRight)
