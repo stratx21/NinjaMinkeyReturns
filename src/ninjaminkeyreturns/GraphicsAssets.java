@@ -162,17 +162,26 @@ public class GraphicsAssets {
     public static ArrayList<BufferedImage> importSideViewPlayerImages(){
         ArrayList<BufferedImage> img=new ArrayList<>();
         
+        //Walking::
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/R"+i+".png"));
         
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/L"+i+".png"));
         
+        //Jumping::
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/JR"+i+".png"));
         
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/JL"+i+".png"));
+        
+        //Attacking::
+        for(int i=0;i<15;i++)
+            img.add(importFromString("Graphics/SideView/Player/AR"+i+".png"));
+        
+        for(int i=0;i<15;i++)
+            img.add(importFromString("Graphics/SideView/Player/AL"+i+".png"));
         
         return img;
     }

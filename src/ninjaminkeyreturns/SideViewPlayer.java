@@ -120,6 +120,10 @@ public class SideViewPlayer extends Player{
                     SQUARE_SIZE*2,
                     null); 
             
+        }else if(attacking){
+        
+        
+        
         }else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
                 (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),

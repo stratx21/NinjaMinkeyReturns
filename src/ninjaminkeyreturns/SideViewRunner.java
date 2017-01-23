@@ -163,6 +163,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>20){
                             player.incrementX(10);
                             player.incrementY(10);
+                            stuck=0;
                             //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
@@ -187,6 +188,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>20){
                             player.incrementX(-10);
                             player.incrementY(10);
+                            stuck=0;
                             //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
