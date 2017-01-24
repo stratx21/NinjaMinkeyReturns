@@ -176,7 +176,7 @@ public class GraphicsAssets {
         for(int i=0;i<8;i++)
             img.add(importFromString("Graphics/SideView/Player/JL"+i+".png"));
         
-        //Attacking::
+        //Attacking:: (melee with swords)
         for(int i=0;i<15;i++)
             img.add(importFromString("Graphics/SideView/Player/AR"+i+".png"));
         
@@ -212,15 +212,41 @@ public class GraphicsAssets {
     }
     
     /**
-     * This function imports the images for the specified AI in side view.
+     * This function imports the images for the specified Melee Enemy in side 
+     *  view.
      * 
      * @param AI_ID the ID of the AI for which the images are being imported
      * @return an ArrayList of type  BufferedImage for the images of the 
      *      AI in side view
      */
-    public static ArrayList<BufferedImage> importSideViewAIImages(int AI_ID){
+    public static ArrayList<BufferedImage> importSideViewMeleeEnemyImages(int AI_ID){
         return null;
     }
+    
+    /**
+     * This function imports the images for the specified Ranged Enemy in side 
+     *  view.
+     * 
+     * @param AI_ID the ID of the AI for which the images are being imported
+     * @return an ArrayList of type  BufferedImage for the images of the 
+     *      AI in side view
+     */
+    public static ArrayList<BufferedImage> importSideViewRangedEnemyImages(int AI_ID){
+        return null;
+    }
+    
+    /**
+     * This function imports the images for the specified Air Enemy in side 
+     *  view.
+     * 
+     * @param AI_ID the ID of the AI for which the images are being imported
+     * @return an ArrayList of type  BufferedImage for the images of the 
+     *      AI in side view
+     */
+    public static ArrayList<BufferedImage> importSideViewAirEnemyImages(int AI_ID){
+        return null;
+    }
+    
     
     
 }

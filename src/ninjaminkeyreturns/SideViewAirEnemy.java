@@ -17,6 +17,12 @@ public class SideViewAirEnemy extends SideViewAI{
     private int delay=0;
 //    private boolean delayReady=false;
     
+    public SideViewAirEnemy(int startX,int startY,int ai_id){
+        AI_ID=ai_id;
+        images=GraphicsAssets.importSideViewAirEnemyImages(AI_ID);
+        location=new int[]{startX,startY};
+    }
+    
     /**
      * This function tells if the AI should attack. 
      * 
