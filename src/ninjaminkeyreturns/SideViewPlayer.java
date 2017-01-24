@@ -60,7 +60,8 @@ public class SideViewPlayer extends Player{
     /**
      * This tells if the player is currently attacking. 
      */
-    private boolean attacking=false;
+    private boolean attacking=false,
+            canAttack=true;
     
     /**
      * This is used for the logic flow of the graphical representation by 
@@ -178,24 +179,25 @@ public class SideViewPlayer extends Player{
         }
     }
     
+    public void startAttack(){
+        if(canAttack){
+            attacking=true;
+            canAttack=false;
+        }
+        if(facingRight){
+            
+        }
+    }
+    
+    public void endAttack(){
+        canAttack=true;
+        attacking=false;
+    }
+    
     /**
      * This function contains the flow to attack to the left.
      */
     private void attackLeft(){
-        
-    }
-    
-    /**
-     * This function contains the flow to attack up.
-     */
-    private void attackUp(){
-        
-    }
-    
-    /**
-     * This function contains the flow to attack down.
-     */
-    private void attackDown(){
         
     }
     
@@ -229,6 +231,22 @@ public class SideViewPlayer extends Player{
      */
     public int getX(){
         return (int)span.getX();
+    }
+    
+    public boolean getAttacking(){
+        return attacking;
+    }
+    
+    public void setAttacking(boolean a){
+        attacking=a;
+    }
+    
+    public boolean getCanAttack(){
+        return canAttack;
+    }
+    
+    public void setCanAttack(boolean a){
+        canAttack=a;
     }
     
     /**
