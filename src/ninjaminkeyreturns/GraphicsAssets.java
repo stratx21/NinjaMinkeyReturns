@@ -183,6 +183,14 @@ public class GraphicsAssets {
         for(int i=0;i<15;i++)
             img.add(importFromString("Graphics/SideView/Player/AL"+i+".png"));
         
+        //Attacking:: (ranged with the banana)
+        
+        for(int i=0;i<15;i++)
+            img.add(importFromString("Graphics/SideView/Player/BR"+i+".png"));
+        
+        for(int i=0;i<15;i++)
+            img.add(importFromString("Graphics/SideView/Player/BL"+i+".png"));
+        
         return img;
     }
     
