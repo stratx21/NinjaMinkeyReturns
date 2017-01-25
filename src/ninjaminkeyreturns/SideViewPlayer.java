@@ -58,10 +58,13 @@ public class SideViewPlayer extends Player{
     private boolean running=false;
     
     /**
-     * This tells if the player is currently attacking. 
+     * These give information about the attacking state.
      */
     private boolean attacking=false,
-            canAttack=true;
+            shooting=false,
+            canAttack=true,
+            wasAttacking=false,
+            attackingRight=true;
     
     /**
      * This is used for the logic flow of the graphical representation by 
@@ -121,16 +124,16 @@ public class SideViewPlayer extends Player{
                     SQUARE_SIZE*2,
                     null); 
             
-        }else if(attacking){
-        
-        
-        
+        }else if(attacking||shooting){
+            
+            //g.drawImage(images.get(CONSTANT+(facingRight?0:8)+(shooting?0:15+imageSequence/3)) < - use only if there is the same # of images for melee and ranged attacks
+            
         }else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
                 (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
                 (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                 SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
-            if(imageSequence==39
+            if(imageSequence==39//just before 40; just before 8th 
                     ||(wasFacingRight!=facingRight)
                     ||(wasJumping!=jumping))
                 imageSequence=0;
@@ -179,19 +182,23 @@ public class SideViewPlayer extends Player{
         }
     }
     
-    public void startAttack(){
+    public void startAttack(boolean isMelee){
         if(canAttack){
-            attacking=true;
+            if(isMelee)
+                attacking=true;
+            else
+                shooting=true;
             canAttack=false;
         }
-        if(facingRight){
-            
-        }
+        attackingRight=facingRight;
     }
     
     public void endAttack(){
         canAttack=true;
+        shooting=false;
         attacking=false;
+        wasAttacking=false;
+        //attackingRight does not affect the start or end flow; it is just used, thus it is not changed here. 
     }
     
     /**
@@ -239,6 +246,14 @@ public class SideViewPlayer extends Player{
     
     public void setAttacking(boolean a){
         attacking=a;
+    }
+    
+    public boolean getshooting(){
+        return shooting;
+    }
+    
+    public void setshooting(boolean a){
+        shooting=a;
     }
     
     public boolean getCanAttack(){
