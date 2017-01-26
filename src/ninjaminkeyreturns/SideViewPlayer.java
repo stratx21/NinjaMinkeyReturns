@@ -113,18 +113,40 @@ public class SideViewPlayer extends Player{
      * @param camY the y location of the camera
      */
     public void draw(Graphics g,int camX,int camY){
-        
+        //System.out.println("at player drawWWWWwwWWWWwWWwwW!");
         //System.out.println(GAME_SPAN.width+","+GAME_SPAN.height+"  square size:: "+SQUARE_SIZE+"  MULTIPLIER:: "+POINT_TO_PIXEL_MULTIPLIER);
         
-        g.setColor(Color.blue);
-        g.fillRect((int)((span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
-                (int)((span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)),
-                (int)(span.width*POINT_TO_PIXEL_MULTIPLIER),
-                (int)(span.height*POINT_TO_PIXEL_MULTIPLIER));
+//        g.setColor(Color.blue);
+//        g.fillRect((int)((span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
+//                (int)((span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)),
+//                (int)(span.width*POINT_TO_PIXEL_MULTIPLIER),
+//                (int)(span.height*POINT_TO_PIXEL_MULTIPLIER));
         
         
-        
-        if(velocity[0]==0&&velocity[1]==0){
+        if(attacking||shooting){
+            if(attackingRight)//becuase on the images the player is farther to the left on the facing right images but farther to the right on the facing left images
+                g.drawImage(images.get((32+((shooting?30:0)+imageSequence/5))),//40 cuz it compensates for the facing right already being incorperated
+                        (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
+                        (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
+                        (int)(SQUARE_SIZE*2.5),SQUARE_SIZE*2,null); 
+            else
+                g.drawImage(images.get(47+((shooting?30:0)+imageSequence/5)),//30 cuz two sets of left AND right images for the melee attacks
+                        (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE),
+                        (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
+                        (int)(SQUARE_SIZE*2.5),SQUARE_SIZE*2,null);
+            
+//            System.out.println(t+" "+imageSequence);
+            
+            if(imageSequence==74){
+                imageSequence=0;
+                endAttack();
+            }else
+                imageSequence++;
+            
+            //System.out.println(imageSequence);
+                
+            
+        }else if(velocity[0]==0&&velocity[1]==0){
             g.drawImage(images.get(facingRight?0:8),
                     (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
                     (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
@@ -132,20 +154,7 @@ public class SideViewPlayer extends Player{
                     SQUARE_SIZE*2,
                     null); 
             
-        }else if(attacking||shooting){
-            if(facingRight)//becuase on the images the player is farther to the left on the facing right images but farther to the right on the facing left images
-                g.drawImage(images.get(40+(shooting?0:30+imageSequence/3)),//40 cuz it compensates for the facing right already being incorperated
-                        (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
-                        (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
-                        SQUARE_SIZE*2,SQUARE_SIZE*4,null); 
-            else
-                g.drawImage(images.get(32+(shooting?0:30+imageSequence/3)),//30 cuz two sets of left AND right images for the melee attacks
-                        (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
-                        (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
-                        SQUARE_SIZE*2,SQUARE_SIZE*4,null); 
-                
-            
-        }else{ //travelling
+        } else{ //travelling
             g.drawImage(images.get((facingRight?0:8)+(jumping?16:0)+imageSequence/5),
                 (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
                 (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
@@ -181,6 +190,8 @@ public class SideViewPlayer extends Player{
             setCanJump(false);
             jumping=true;
             velocity[1]=-2*JUMP_VELOCITY_START;
+            if(!attacking&&!shooting)
+                imageSequence=0;
         }
     }
     
@@ -206,6 +217,9 @@ public class SideViewPlayer extends Player{
         //for both melee and ranged:: 
         canAttack=false;
         attackingRight=facingRight;
+        imageSequence=0;
+        
+        System.out.println(facingRight+" = facingRight");
         
     }
     

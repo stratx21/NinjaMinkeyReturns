@@ -112,6 +112,8 @@ public class SideViewRunner extends GameRunner{
         region.draw(g,(int)camera.getX(),(int)camera.getY());
         player.draw(g,(int)camera.getX(),(int)camera.getY());
         
+        //System.out.println("draaawwwwiiiinnnggggggggg!!!! "+g);
+        
         calculate();
     }
     
@@ -300,7 +302,9 @@ public class SideViewRunner extends GameRunner{
                     );
             }
         }else if(currentKey[5]){//attack (ranged with banana)
-            player.startAttack(false);
+            if(player.getCanAttack()){
+                player.startAttack(false);
+            }
         }
     }
     

@@ -191,6 +191,8 @@ public class GraphicsAssets {
         for(int i=0;i<15;i++)
             img.add(importFromString("Graphics/SideView/Player/BL"+i+".png"));
         
+        img.add(importFromString("Graphics/SideView/Player/Projectile.png"));//index # 92
+        
         return img;
     }
     
