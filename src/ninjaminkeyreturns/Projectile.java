@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
  * @author Josh
  */
 public class Projectile extends HitBox{
+    
+    public final double POINT_TO_PIXEL_MULTIPLIER=Region.SQUARE_SIZE/20.0;
 
     /**
      * This constructor sets up the HitBox using the x and y coordinates
@@ -35,12 +37,12 @@ public class Projectile extends HitBox{
      * 
      * @param x the starting x coordinate of the hitbox (in location points)
      * @param y the starting y coordinate of the hitbox (in location points)
-     * @param width how wide the hitbox is (in location points)
+     * @param width how wide the hitbox is (in locationPoints)
      * @param height how high the hitbox is (in location points)
      * @param dmg how much damage the hitbox deals
      */
     public Projectile(int x, int y, int width, int height, double dmg,int[] vel,BufferedImage img) {
-        super(x, y, width, height, dmg);
+        super(x, y, width,height, dmg);
         velocity=vel;
         image=img;
     }
@@ -76,7 +78,7 @@ public class Projectile extends HitBox{
     private BufferedImage image=null;
     
     public void draw(Graphics g){
-        g.drawImage(image, x, y, width, height,null);
+        g.drawImage(image,x,y,(int)(width*POINT_TO_PIXEL_MULTIPLIER),(int)(height*POINT_TO_PIXEL_MULTIPLIER),null);
     }
     
     public void incrementByVelocity(){

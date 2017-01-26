@@ -304,6 +304,15 @@ public class SideViewRunner extends GameRunner{
         }else if(currentKey[5]){//attack (ranged with banana)
             if(player.getCanAttack()){
                 player.startAttack(false);
+                playerAttacks.add(new Projectile(
+                        player.getX()+player.getWidth(),     //locaiton points
+                        player.getY()+player.getHeight()*3/4,//locaiton points
+                        5,
+                        5,
+                        player.getRangedDamage(),
+                        new int[]{5,player.getYVelocity()},
+                        player.getProjectileImage()
+                ));
             }
         }
     }

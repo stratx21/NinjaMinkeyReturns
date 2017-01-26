@@ -8,6 +8,7 @@ package ninjaminkeyreturns;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -46,6 +47,11 @@ public class SideViewPlayer extends Player{
      * This is used to tell how much damage is dealt per each melee attack. 
      */
     private double meleeDamage=10;
+    
+    /**
+     * This is used to tell how much damage is dealt per each ranged attack. 
+     */
+    private double rangedDamage=10;
     
     /**
      * This tells if the player can jump (in case they are falling or disabled).
@@ -408,6 +414,24 @@ public class SideViewPlayer extends Player{
     public void setMeleeDamage(double a){
         meleeDamage=a;
     }
+            
+    /**
+     * This function returns how much damage the player deals in a melee attack. 
+     * 
+     * @return how much damage the player deals in a melee attack
+     */
+    public double getRangedDamage(){
+        return rangedDamage;
+    }
+    
+    /**
+     * This function sets how much damage the player deals in a melee attack. 
+     * 
+     * @param a how much damage the player should deal per melee attack 
+     */
+    public void setRangedDamage(double a){
+        rangedDamage=a;
+    }
     
     /**
      * This function returns the boolean value concerning if the player is 
@@ -562,6 +586,15 @@ public class SideViewPlayer extends Player{
      */
     public boolean getrunning(){
         return running;
+    }
+    
+    /**
+     * This function returns the image used for the banana's projectile. 
+     * 
+     * @return the image for the banana's projectile
+     */
+    public BufferedImage getProjectileImage(){
+        return images.get(92);
     }
     
 }
