@@ -5,6 +5,7 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
@@ -51,5 +52,7 @@ public class HitBox extends Rectangle{
     public double getDamage(){
         return damage;
     }
+    
+    public void draw(Graphics g){}
     
 }

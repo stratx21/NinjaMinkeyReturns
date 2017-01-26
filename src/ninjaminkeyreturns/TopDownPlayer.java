@@ -158,7 +158,9 @@ public class TopDownPlayer extends Player{
     
     /**
      *
-     * @param g
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
      */
     public void draw(Graphics g){
         if(travelling){

@@ -26,6 +26,8 @@ public class SideViewRunner extends GameRunner{
     private ArrayList<HitBox> playerAttacks=new ArrayList<>();
     
     private ArrayList<HitBox> AIAttacks=new ArrayList<>();
+    
+    private ArrayList<SideViewAI> enemies=new ArrayList<>();
             
     
     
@@ -111,6 +113,11 @@ public class SideViewRunner extends GameRunner{
     public void draw(Graphics g){
         region.draw(g,(int)camera.getX(),(int)camera.getY());
         player.draw(g,(int)camera.getX(),(int)camera.getY());
+        
+        //draw projectiles (player) ::
+        for(HitBox a:playerAttacks)
+            if(a instanceof Projectile)
+                a.draw(g);
         
         //System.out.println("draaawwwwiiiinnnggggggggg!!!! "+g);
         
@@ -328,6 +335,9 @@ public class SideViewRunner extends GameRunner{
         playerCalcFlow();
         
         cameraPlacementCalculations();
+        
+        
+        
     }
     
     /**
@@ -361,7 +371,9 @@ public class SideViewRunner extends GameRunner{
      * This is used to calculate the flow of the AIs. 
      */
     private void AICalculate(){
-        
+        for(SideViewAI a:enemies){//add in also hitbox collisions
+            
+        }
     }
     
     /**

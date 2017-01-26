@@ -114,7 +114,9 @@ public class SideViewPlayer extends Player{
     /**
      * This draws the SideViewPlayer.
      * 
-     * @param g
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
      * @param camX the x location of the camera
      * @param camY the y location of the camera
      */

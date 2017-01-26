@@ -42,7 +42,7 @@ public class Projectile extends HitBox{
      * @param dmg how much damage the hitbox deals
      */
     public Projectile(int x, int y, int width, int height, double dmg,int[] vel,BufferedImage img) {
-        super(x, y, width,height, dmg);
+        super(x,y,width,height,dmg);
         velocity=vel;
         image=img;
     }
@@ -62,11 +62,6 @@ public class Projectile extends HitBox{
     private int[] velocity=new int[2];
     
     /**
-     * The length of one side of the Projectile. 
-     */
-    private int width=0;
-    
-    /**
      * This is how much damage the Projectile influences on what it hits.
      */
     private double damage=0;
@@ -77,8 +72,15 @@ public class Projectile extends HitBox{
      */
     private BufferedImage image=null;
     
+    @Override
     public void draw(Graphics g){
-        g.drawImage(image,x,y,(int)(width*POINT_TO_PIXEL_MULTIPLIER),(int)(height*POINT_TO_PIXEL_MULTIPLIER),null);
+        g.drawImage(image,
+                (int)(x*POINT_TO_PIXEL_MULTIPLIER),
+                (int)(y*POINT_TO_PIXEL_MULTIPLIER),
+                (int)(width*POINT_TO_PIXEL_MULTIPLIER),
+                (int)(height*POINT_TO_PIXEL_MULTIPLIER),
+                null);
+        //System.out.println("drawing the projectileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+x+"   "+y+"   "+(int)(width*POINT_TO_PIXEL_MULTIPLIER)+"    "+(int)(height*POINT_TO_PIXEL_MULTIPLIER));
     }
     
     public void incrementByVelocity(){
@@ -91,24 +93,18 @@ public class Projectile extends HitBox{
      * 
      * @return how much damage the Projectile influences on its target
      */
-    public double getDamage(){
-        return damage;        
-    }
+    //public double getDamage(){
+    //    return damage;        
+    //}
     
     /**
      * Set how much damage the Projectile influences on its target.
      * 
      * @param a how much damage the Projectile influences on its target
      */
-    public void setDamage(double a){
-        damage=a;
-    }
-    
-    /**
-     * The current location, in location points and in the x,y format, of the
-     *  Projectile. 
-     */
-    private int[] location=new int[2];
+   // public void setDamage(double a){
+    //    damage=a;
+    //}
     
     /**
      * Get the x location of the Projectile.
