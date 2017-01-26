@@ -288,10 +288,19 @@ public class SideViewRunner extends GameRunner{
                 //System.out.println("starting to right.................");
             }
             player.facingRight=true;
-        }else if(currentKey[4]){//SETUP   *   future work
-            
-        }else if(currentKey[5]){//SETUP   *   future work
-            
+        }else if(currentKey[4]){//attack (melee with swords)                        playerAttacks
+            if(player.getCanAttack()){
+                player.startAttack(true);
+                playerAttacks.add(new HitBox(//all in location points
+                        player.getX()+(player.getFacingRight()?player.getWidth():0),
+                        player.getY()+player.getHeight(),
+                        15,
+                        40,
+                        player.getMeleeDamage())
+                    );
+            }
+        }else if(currentKey[5]){//attack (ranged with banana)
+            player.startAttack(false);
         }
     }
     

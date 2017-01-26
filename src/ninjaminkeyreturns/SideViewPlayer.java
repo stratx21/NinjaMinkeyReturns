@@ -25,6 +25,9 @@ public class SideViewPlayer extends Player{
      */
     private final int WALK_VELOCITY=4,JUMP_VELOCITY_START=7;//location points per loop
     
+    /**
+     * This multiplier is used to translate location points to pixels. 
+     */
     private final double POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20.0;
     
     /**
@@ -38,6 +41,11 @@ public class SideViewPlayer extends Player{
      */
     public boolean facingRight=true,
             wasFacingRight=true;
+    
+    /**
+     * This is used to tell how much damage is dealt per each melee attack. 
+     */
+    private double meleeDamage=10;
     
     /**
      * This tells if the player can jump (in case they are falling or disabled).
@@ -166,21 +174,6 @@ public class SideViewPlayer extends Player{
     }
     
     /**
-     * This function contains the flow to walk to the right. 
-     */
-    private void walkRight(){
-        
-    }
-    
-    
-    /**
-     * This function contains the flow to walk to the left. 
-     */
-    private void walkLeft(){
-        
-    }
-    
-    /**
      * This function contains the flow to start a jump. 
      */
     public void startJump(){
@@ -191,37 +184,41 @@ public class SideViewPlayer extends Player{
         }
     }
     
+    /**
+     * This function will set the according variables for the start of an
+     *  attack, either melee or ranged. 
+     * 
+     * DEV NOTE:: the hitbox information could be moved to the SideViewPlayer 
+     *  class, then it could be returned from a function or accessed from an 
+     *  external call.
+     * 
+     * PRE:: canAttack is checked to be true
+     * 
+     * @param isMelee if the attack is a melee type (with the swords); if it is
+     *      false then it is a ranged attack (with the banana)
+     */
     public void startAttack(boolean isMelee){
-        if(canAttack){
-            if(isMelee)
-                attacking=true;
-            else
-                shooting=true;
-            canAttack=false;
-        }
+        if(isMelee)
+            attacking=true;
+        else
+            shooting=true;
+
+        //for both melee and ranged:: 
+        canAttack=false;
         attackingRight=facingRight;
+        
     }
     
+    /**
+     * This function will set the according variables for the end of an
+     *  attack, either melee or ranged. 
+     */
     public void endAttack(){
         canAttack=true;
         shooting=false;
         attacking=false;
         wasAttacking=false;
         //attackingRight does not affect the start or end flow; it is just used, thus it is not changed here. 
-    }
-    
-    /**
-     * This function contains the flow to attack to the left.
-     */
-    private void attackLeft(){
-        
-    }
-    
-    /**
-     * This function contains the flow to attack to the right.
-     */
-    private void attackRight(){
-        
     }
     
     ////////////////////
@@ -235,6 +232,11 @@ public class SideViewPlayer extends Player{
         return WALK_VELOCITY;
     }
     
+    /**
+     * This function returns the starting jumping velocity.
+     * 
+     * @return the starting jump velocity
+     */
     public int getJumpVelocity(){
         return JUMP_VELOCITY_START;
     }
@@ -249,26 +251,60 @@ public class SideViewPlayer extends Player{
         return (int)span.getX();
     }
     
+    /**
+     * This function returns the boolean concerning if the player is attacking. 
+     * 
+     * @return the boolean concerning if the player is attacking
+     */
     public boolean getAttacking(){
         return attacking;
     }
     
+    /**
+     * This function sets the boolean value for if the player is attacking using
+     *  the melee attack. 
+     * 
+     * @param a if the player is attacking
+     */
     public void setAttacking(boolean a){
         attacking=a;
     }
     
+    /**
+     * This function will return the boolean value concerning if the player
+     *  is shooting. 
+     * 
+     * @return if the player is shooting
+     */
     public boolean getshooting(){
         return shooting;
     }
     
+    /**
+     * This function sets the boolean concerning if the player is shooting. 
+     * 
+     * @param a if the variable should be set to true
+     */
     public void setshooting(boolean a){
         shooting=a;
     }
     
+    /**
+     * This function returns the boolean value concerning if the player can
+     *  attack. 
+     * 
+     * @return if the player can attack
+     */
     public boolean getCanAttack(){
         return canAttack;
     }
     
+    /**
+     * This function sets the boolean value concerning if the player can
+     *  attack. 
+     * 
+     * @param a if the player can attack
+     */
     public void setCanAttack(boolean a){
         canAttack=a;
     }
@@ -283,28 +319,100 @@ public class SideViewPlayer extends Player{
         return (int)span.getY();
     }
     
+    /**
+     * This function sets the x location of the player. 
+     * 
+     * @param a the new x location of the player
+     */
     public void setX(int a){
         span.x=a;
     }
     
+    /**
+     * This function sets the y location of the player. 
+     * 
+     * @param a the new y location of the player
+     */
     public void setY(int a){
         span.y=a;
     }
     
+    /**
+     * This function increments the x value of the player's location by the
+     *  amount specified; if it is negative then the number will decrease the
+     *  player's x location. 
+     * 
+     * @param a how much to increment the player's x location by
+     */
     public void incrementX(int a){
         span.x+=a;
     }
     
+    /**
+     * This function increments the y value of the player's location by the 
+     *  amount specified; if it is negative then the number will decrease the 
+     *  player's y location.
+     * 
+     * @param a 
+     */
     public void incrementY(int a){
         span.y+=a;
     }
     
+    /**
+     * This function returns the width of the player in location points. 
+     * 
+     * @return the width of the player in location points
+     */
     public int getWidth(){
         return (int)span.getWidth();
     }
     
+    /**
+     * This function returns the height of the player in location points. 
+     * 
+     * @return the height of the player in location points
+     */
     public int getHeight(){
         return (int)span.getHeight();
+    }
+    
+    /**
+     * This function returns how much damage the player deals in a melee attack. 
+     * 
+     * @return how much damage the player deals in a melee attack
+     */
+    public double getMeleeDamage(){
+        return meleeDamage;
+    }
+    
+    /**
+     * This function sets how much damage the player deals in a melee attack. 
+     * 
+     * @param a how much damage the player should deal per melee attack 
+     */
+    public void setMeleeDamage(double a){
+        meleeDamage=a;
+    }
+    
+    /**
+     * This function returns the boolean value concerning if the player is 
+     *  facing to the right. 
+     * 
+     * @return if the player is facing towards the right 
+     */
+    public boolean getFacingRight(){
+        return facingRight;
+    }
+    
+    /**
+     * This function sets the boolean value concerning if the player is facing
+     *  towards the right. 
+     * 
+     * @param a if the player should face towards the right
+     */
+    public void setFacingRight(boolean a){
+        facingRight=a;
     }
     
     /**
@@ -325,18 +433,40 @@ public class SideViewPlayer extends Player{
         return velocity[1];
     }
     
+    /**
+     * This function sets the player's velocity in the x direction. 
+     * 
+     * @param a what to set the velocity in the x direction to
+     */
     public void setXVelocity(int a){
         velocity[0]=a;
     }
     
+    /**
+     * This function sets the player's velocity in the y direction.
+     * 
+     * @param a what to set the velocity in the y direciton to
+     */
     public void setYVelocity(int a){
         velocity[1]=a;
     }
     
+    /**
+     * This function increments the x component of the player's velocity. 
+     * 
+     * @param a how much to increment the x component of the player's velocity
+     *      by 
+     */
     public void incrementXVelocity(int a){
         velocity[0]+=a;
     }
     
+    /**
+     * This function increments the y component of the player's velocity. 
+     * 
+     * @param a how much to increment the y component of the player's velocity
+     *      by 
+     */
     public void incrementYVelocity(int a){
         velocity[1]+=a;
     }
@@ -351,18 +481,41 @@ public class SideViewPlayer extends Player{
         return jumping;
     }
     
+    /**
+     * This function sets the boolean value concerning if the player is jumping;
+     *  this function is not for the purpose of making the player jump.
+     * 
+     * @param a if the player is jumping
+     */
     public void setJumping(boolean a){
         jumping=a;
     }
     
+    /**
+     * This function returns the boolean value concerning if the player is 
+     *  falling. 
+     * 
+     * @return if the player is falling. 
+     */
     public boolean getFalling(){
         return falling;
     }
     
+    /**
+     * This function sets the value for the boolean concerning if the player is
+     *  falling; this function is not for the purpose of making the player jump.
+     * 
+     * @param a if the player should be falling. 
+     */
     public void setFalling(boolean a){
         falling=a;
     }
     
+    /**
+     * This function is used to set the variables for after the player is done
+     *  falling. 
+     * 
+     */
     public void endFall(){
         setFalling(false);
         setCanJump(true);
