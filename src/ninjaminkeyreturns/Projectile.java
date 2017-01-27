@@ -15,6 +15,8 @@ import java.awt.image.BufferedImage;
 public class Projectile extends HitBox{
     
     public final double POINT_TO_PIXEL_MULTIPLIER=Region.SQUARE_SIZE/20.0;
+    
+    
 
     /**
      * This constructor sets up the HitBox using the x and y coordinates
@@ -43,7 +45,7 @@ public class Projectile extends HitBox{
      */
     public Projectile(int x, int y, int width, int height, double dmg,int[] vel,BufferedImage img) {
         super(x,y,width,height,dmg);
-        velocity=vel;
+        velocity=new double[]{vel[0],vel[1]};
         image=img;
     }
     
@@ -59,7 +61,7 @@ public class Projectile extends HitBox{
      * The velocity, in location points and in the x,y format, of the
      *  Projectile. 
      */
-    private int[] velocity=new int[2];
+    private double[] velocity=new double[2];//is a double for the sake of gravity affecting it less
     
     /**
      * This is how much damage the Projectile influences on what it hits.
@@ -73,14 +75,18 @@ public class Projectile extends HitBox{
     private BufferedImage image=null;
     
     @Override
-    public void draw(Graphics g){
+    public void draw(Graphics g,int camX,int camY){
         g.drawImage(image,
-                (int)(x*POINT_TO_PIXEL_MULTIPLIER),
-                (int)(y*POINT_TO_PIXEL_MULTIPLIER),
+                (int)((x-camX)*POINT_TO_PIXEL_MULTIPLIER),
+                (int)((y-camY)*POINT_TO_PIXEL_MULTIPLIER),
                 (int)(width*POINT_TO_PIXEL_MULTIPLIER),
                 (int)(height*POINT_TO_PIXEL_MULTIPLIER),
                 null);
+        
         //System.out.println("drawing the projectileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+x+"   "+y+"   "+(int)(width*POINT_TO_PIXEL_MULTIPLIER)+"    "+(int)(height*POINT_TO_PIXEL_MULTIPLIER));
+        if(velocity[1]<5)
+            velocity[1]+=0.5;
+        incrementByVelocity();
     }
     
     public void incrementByVelocity(){
@@ -138,7 +144,7 @@ public class Projectile extends HitBox{
      * @return the x velocity of the Projectile
      */
     public int getXVelocity(){
-        return velocity[0];
+        return (int)velocity[0];
     }
     
     /**
@@ -147,7 +153,7 @@ public class Projectile extends HitBox{
      * @return the y velocity of the Projectile
      */
     public int getYVelocity(){
-        return velocity[1];
+        return (int)velocity[1];
     }
     
     /**
@@ -156,7 +162,7 @@ public class Projectile extends HitBox{
      * @return the velocity of the Projectile
      */
     public int[] getVelocity(){
-        return velocity;
+        return new int[]{(int)velocity[0],(int)velocity[1]};
     }
     
 }

@@ -53,6 +53,6 @@ public class HitBox extends Rectangle{
         return damage;
     }
     
-    public void draw(Graphics g){}
+    public void draw(Graphics g, int camX,int camY){}
     
 }

@@ -116,8 +116,9 @@ public class SideViewRunner extends GameRunner{
         
         //draw projectiles (player) ::
         for(HitBox a:playerAttacks)
-            if(a instanceof Projectile)
-                a.draw(g);
+            if(a instanceof Projectile){
+                a.draw(g,(int)camera.getX(),(int)camera.getY());
+            }
         
         //System.out.println("draaawwwwiiiinnnggggggggg!!!! "+g);
         
@@ -317,7 +318,7 @@ public class SideViewRunner extends GameRunner{
                         5,
                         5,
                         player.getRangedDamage(),
-                        new int[]{5,player.getYVelocity()},
+                        new int[]{player.getFacingRight()?5:-5,-5},
                         player.getProjectileImage()
                 ));
             }

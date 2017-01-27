@@ -133,19 +133,19 @@ public class SideViewPlayer extends Player{
         
         if(attacking||shooting){
             if(attackingRight)//becuase on the images the player is farther to the left on the facing right images but farther to the right on the facing left images
-                g.drawImage(images.get((32+((shooting?30:0)+imageSequence/5))),//40 cuz it compensates for the facing right already being incorperated
+                g.drawImage(images.get((32+((shooting?30:0)+imageSequence/3))),//40 cuz it compensates for the facing right already being incorperated
                         (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
                         (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                         (int)(SQUARE_SIZE*2.5),SQUARE_SIZE*2,null); 
             else
-                g.drawImage(images.get(47+((shooting?30:0)+imageSequence/5)),//30 cuz two sets of left AND right images for the melee attacks
+                g.drawImage(images.get(47+((shooting?30:0)+imageSequence/3)),//30 cuz two sets of left AND right images for the melee attacks
                         (int)((span.getX()-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE),
                         (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                         (int)(SQUARE_SIZE*2.5),SQUARE_SIZE*2,null);
             
 //            System.out.println(t+" "+imageSequence);
             
-            if(imageSequence==74){
+            if(imageSequence==44){
                 imageSequence=0;
                 endAttack();
             }else
