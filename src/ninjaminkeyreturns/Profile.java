@@ -351,7 +351,7 @@ public class Profile {
         try{
             ArrayList data=new ArrayList<TopDownAI>();
             int[] a=new int[7];
-            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/AI"+newRegion+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
                 Scanner scan=new Scanner(inputSaveFile);
@@ -364,10 +364,61 @@ public class Profile {
                     
                     for(int j=0;j<5;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    a[6]=Integer.parseInt(input[7]);//how is this 8???? it should be 7
+                    a[6]=Integer.parseInt(input[7]);
                     data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));
                     //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
                 }
+                
+                
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            ErrorLogger.logError(e,"Profile.importAIDataTopDown");
+        }
+        return null;
+    }
+    
+    /**
+     * 
+     * This function imports the data needed for the definition of the 
+     *  information that is needed about the top down AIs specified by the
+     *  integer region.
+     * 
+     * @param newRegion the region ID for which the information is being 
+     *  imported
+     * @return a 2-dimensional array of integers containing the imported data
+     */
+    public static SideViewAI importAISideView(int newRegion){
+        try{
+            SideViewAI data=new SideViewAI();
+            int[] a=new int[7];
+            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
+            
+            if(inputSaveFile!=null){
+                Scanner scan=new Scanner(inputSaveFile);
+                
+                String[] input=new String[0];
+                input=scan.nextLine().split(",");
+                    
+                for(int j=0;j<input.length+1;j++)
+                    a[j]=Integer.parseInt(input[j]);
+                
+                
+                switch(a[0]){
+                    case 1: //melee
+                        data=new SideViewMeleeEnemy(0,0,0);
+                        break;
+                    case 2:
+                        data=new SideViewRangedEnemy(0,0,0);
+                        break;
+                    case 3:
+                        data=new SideViewAirEnemy(0,0,0);
+                        break;
+                }
+                //data=new SideViewAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));
+                //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
+                
                 
                 
                 return data;
