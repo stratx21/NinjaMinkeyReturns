@@ -229,9 +229,9 @@ public class SideViewPlayer extends Player{
         attackingRight=facingRight;
         imageSequence=0;
         
-        makeHitBox.actionPerformed(new HitBox(getX()+(attackingRight?0:-40),
+        makeHitBox.actionPerformed(new HitBox(getX()+(attackingRight?-5:-20),
                 getY(),
-                15,
+                25,
                 40,
                 meleeDamage));
         
@@ -279,6 +279,10 @@ public class SideViewPlayer extends Player{
      */
     public int getX(){
         return (int)span.getX();
+    }
+    
+    public void hit(double damage){
+        health-=damage;
     }
     
     /**

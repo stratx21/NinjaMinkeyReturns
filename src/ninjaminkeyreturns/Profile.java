@@ -392,7 +392,7 @@ public class Profile {
     public static ArrayList<SideViewAI> importAISideView(int AI_ID){
         try{
             ArrayList<SideViewAI> data=new ArrayList<>();
-            int[] a=new int[7];
+            
             inputSaveFile=new File(Profile.class.getResource("AIData/SideView/"+StringTools.numToDigits(AI_ID,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
@@ -400,12 +400,12 @@ public class Profile {
                 
                 String[] input=new String[0];
                 input=scan.nextLine().split(",");
-                    
+                
+                int[] a=new int[input.length];  
+                
                 for(int j=0;j<input.length;j++)
                     a[j]=Integer.parseInt(input[j]);
-                
-                
-                System.out.println("llllleeeeeeeeeeeennnnnnnnnnnngggggggggggggtttttttttttthhhhhhhhhhhhhhhhhh=  = = == = =="+a.length);
+                //System.out.println("llllleeeeeeeeeeeennnnnnnnnnnngggggggggggggtttttttttttthhhhhhhhhhhhhhhhhh=  = = == = =="+a.length);
                 
                 switch(a[0]){
                     case 1: //melee
@@ -430,7 +430,7 @@ public class Profile {
             }
             return data;
         }catch(Exception e){
-            ErrorLogger.logError(e,"Profile.importAIDataTopDown");
+            ErrorLogger.logError(e,"Profile.importAIDataSideView");
         }
         return null;
     }

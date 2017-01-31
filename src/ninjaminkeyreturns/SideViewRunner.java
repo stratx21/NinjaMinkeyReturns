@@ -25,7 +25,7 @@ public class SideViewRunner extends GameRunner{
     
     private ArrayList<HitBox> playerAttacks=new ArrayList<>();
     
-    private ArrayList<HitBox> AIAttacks=new ArrayList<>();
+    private ArrayList<Projectile> AIProjectiles=new ArrayList<>();
     
     private ArrayList<SideViewAI> enemies=new ArrayList<>();
             
@@ -105,6 +105,14 @@ public class SideViewRunner extends GameRunner{
                 playerAttacks.add(a);
             }
         };
+        
+        SideViewAI.spawnProjectile=new CListener(){
+            @Override
+            public void actionPerformed(Projectile b){
+                AIProjectiles.add(b);
+            }
+        };
+        
         Prompt.resetFont();
     }
     
@@ -132,8 +140,14 @@ public class SideViewRunner extends GameRunner{
                     playerAttacks.remove(a);//remove player projectile if not on the screen anymore
                     i--;
                 }
-            }else if(!player.getAttacking())//is a hitbox also; if the player is not attacking then the hitbox should be destroyed
-                playerAttacks.remove(a);
+            }else{//is a hitbox also; but not a projectile
+                if(!player.getAttacking()) //if player is not attacking then no hitbox
+                    playerAttacks.remove(a);
+                else{ // player is attacking
+                    a.x+=player.getXVelocity();
+                    a.y+=player.getYVelocity();
+                }
+            }
         }
         
         calculateAI(g);
@@ -142,6 +156,7 @@ public class SideViewRunner extends GameRunner{
     }
     
     private void calculateAI(Graphics g){
+        if(region.AIs!=null)
         for(int i=0;i<region.AIs.size();i++){
             SideViewAI a=region.AIs.get(i);
             if(a!=null){
@@ -161,6 +176,13 @@ public class SideViewRunner extends GameRunner{
                             region.AIs.remove(a);
                     }
                     
+                    if(a.meleeAttack!=null)
+                        if(player.span.intersects(a.meleeAttack)){
+                            player.hit(a.damage);
+                            player.incrementYVelocity(-1);
+                            player.incrementXVelocity((a.facingRight?1:-1));
+                        }
+                    
                     a.moveByVelocities();
                 } else{
                     if(player.getX()>a.startX)
@@ -179,7 +201,8 @@ public class SideViewRunner extends GameRunner{
      */
     private void playerCalcFlow(){
         
-        
+        if(player.getXVelocity()!=0&&!currentKey[2]&&!currentKey[3]&&!player.getFalling())
+            player.incrementXVelocity((player.getXVelocity()>0?-1:1));
         
         playerFallingCalc();
         

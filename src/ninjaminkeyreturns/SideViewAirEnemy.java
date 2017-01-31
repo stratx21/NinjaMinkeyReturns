@@ -16,7 +16,7 @@ public class SideViewAirEnemy extends SideViewAI{
     /**
      * This integer is used for the delay until the AI can attack again.
      */
-    private int delay=0;
+    private int attackDelay=0;
 //    private boolean delayReady=false;
     
     /**
@@ -46,12 +46,7 @@ public class SideViewAirEnemy extends SideViewAI{
      */
     @Override
     public boolean shouldAttack(int playerX,int playerY){
-        if(delay>69){
-            delay=0;
             return true;
-        }
-        delay++;
-        return false;
     }
     
     /**
@@ -68,19 +63,25 @@ public class SideViewAirEnemy extends SideViewAI{
     }
     
     /**
-     * This function makes the AI attack to the left. 
+     * This function makes the AI start its attack. 
      */
     @Override
-    public void attackLeft(){
-        
+    public void startAttack(){
+        if(canAttack){
+            attacking=true;
+            canAttack=false;
+            attackDelay=0;
+        }
     }
     
     /**
-     * This function makes the AI attack to the right. 
+     * This function is for the flow of the end of the AI's attacking. 
      */
     @Override
-    public void attackRight(){
-        
+    public void endAttack(){
+        wasAttacking=false;
+        attacking=false;
+        meleeAttack=null;
     }
     
     @Override

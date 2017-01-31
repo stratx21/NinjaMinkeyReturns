@@ -36,7 +36,7 @@ public class SideViewAI extends AI{
     
     public Rectangle span=new Rectangle();
     
-    public boolean attacking=false,wasAttacking=false; 
+    public boolean attacking=false,wasAttacking=false,canAttack=true; 
     
     public boolean jumping=false,wasJumping=false;
     
@@ -45,6 +45,10 @@ public class SideViewAI extends AI{
     public double damage=2;
     
     public boolean defeated=false;
+    
+    public static CListener spawnProjectile=null;
+    
+    public HitBox meleeAttack=null;
     
     /**
      * This represents the health of the AI. 
@@ -69,10 +73,8 @@ public class SideViewAI extends AI{
     public void calculate(int playerX,int playerY){
         travel(playerX,playerY);
         if(shouldAttack(playerX,playerY)){
-            if(span.x<playerX)
-                attackRight();
-            else
-                attackLeft();
+            //System.out.println("should attackkkk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            startAttack();
         }
         if(health<0)
             defeated=true;
@@ -143,18 +145,27 @@ public class SideViewAI extends AI{
         //use the damage in this class to determine the projectile damage!
     }
     
-    /**
-     * This function spawns a hit box of a certain type, location, and size,
-     *  primarily for the Melee-attack AI. 
-     * 
-     * @param x the x coordinate of the hitbox
-     * @param y the y coordinate of the hitbox
-     * @param span.width the span.width of the hitbox
-     * @param span.height the span.height of the hitbox
-     */
+//    /**
+//     * This function spawns a hit box of a certain type, location, and size,
+//     *  primarily for the Melee-attack AI. 
+//     * 
+//     * @param x the x coordinate of the hitbox
+//     * @param y the y coordinate of the hitbox
+//     * @param span.width the span.width of the hitbox
+//     * @param span.height the span.height of the hitbox
+//     */
 //    public void spawnHitBox(int x,int y,int span.width,int span.height){
 //        
 //    }
+    
+    public void startAttack(){
+        
+    }
+    
+    public void endAttack(){
+        wasAttacking=false;
+        attacking=false;
+    }
     
     /**
      * This function tells if the AI is facing towards the right. 

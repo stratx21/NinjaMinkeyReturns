@@ -18,7 +18,10 @@ public class SideViewMeleeEnemy extends SideViewAI{
     /**
      * This integer is used for the delay until the AI can attack again.
      */
-    private int delay=0;
+    private int attackDelay=0;
+    
+    
+    
     /**
      * This sets up the enemy for use in the code. 
      * 
@@ -41,16 +44,28 @@ public class SideViewMeleeEnemy extends SideViewAI{
     
     @Override
     public void draw(Graphics g,int camX,int camY){
+        
+        if(!canAttack){
+            if(attackDelay==75){
+                attackDelay=0;
+                canAttack=true;
+            } else
+                attackDelay++;       
+        }
+        
         if(attacking){
             if(wasAttacking){
-                if(sequence==20)//7 images, 21 for max
+                if(sequence==20){//7 images, 21 for max
                     sequence=0;
-                else
+                    endAttack();
+                }else
                     sequence++;
-            }else
+            }else{
                 sequence=0;
+                wasAttacking=true;
+            }
             
-            g.drawImage(images.get(6+(facingRight?0:3)+sequence/3),
+            g.drawImage(images.get(6+(facingRight?0:7)+sequence/3),
                 (int)((span.x-camX-5)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
                 (int)((span.y-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                 SQUARE_SIZE*2,SQUARE_SIZE*2,null);  
@@ -88,15 +103,10 @@ public class SideViewMeleeEnemy extends SideViewAI{
      */
     @Override
     public boolean shouldAttack(int playerX,int playerY){ 
-        if(delay>69){//range of 1 tile to start shooting
-            if(span.x>playerX-20&&span.x<playerX+20){
-                delay=0;
+            if(span.x>playerX-25&&span.x<playerX+25){//extra range of 10 which it detects but cannot reach on each side
                 return true;
             } else
                 return false;
-        }
-        delay++;
-        return false;
     }
     
     /**
@@ -108,7 +118,7 @@ public class SideViewMeleeEnemy extends SideViewAI{
     @Override
     public void travel(int playerX,int playerY){
         //System.out.println(health);
-        
+//        System.out.println(attacking);
         
         
         if(span.x<playerX+10//AI is to the left of range area
@@ -139,21 +149,40 @@ public class SideViewMeleeEnemy extends SideViewAI{
     }
     
     
+//    /**
+//     * This function makes the AI attack to the left. 
+//     */
+//    @Override
+//    public void attackLeft(){
+//        
+//    }
+    
+    
     /**
-     * This function makes the AI attack to the left. 
+     * This function makes the AI start its attack. 
      */
     @Override
-    public void attackLeft(){
-        
+    public void startAttack(){
+        if(canAttack){
+            attacking=true;
+            canAttack=false;
+            meleeAttack=new HitBox(getX()+(facingRight?-5:-15),
+                    getY(),
+                    20,
+                    40,
+                    damage);
+            attackDelay=0;
+        }
     }
     
-    
     /**
-     * This function makes the AI attack to the right. 
+     * This function is for the flow of the end of the AI's attacking. 
      */
     @Override
-    public void attackRight(){
-        
+    public void endAttack(){
+        wasAttacking=false;
+        attacking=false;
+        meleeAttack=null;
     }
     
 }

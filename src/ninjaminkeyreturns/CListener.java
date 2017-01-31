@@ -57,4 +57,6 @@ public class CListener {
     
     public void actionPerformed(HitBox a){}
     
+    public void actionPerformed(Projectile a){}
+    
 }
