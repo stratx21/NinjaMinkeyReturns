@@ -370,10 +370,10 @@ public class SideViewRunner extends GameRunner{
                 AI.hit(a.getDamage());
                 if(a instanceof Projectile){
                     AI.setYVelocity(-2);
-                    AI.setXVelocity(((Projectile)a).getXVelocity());
+                    AI.incrementXVelocity(((Projectile)a).getXVelocity()/2);
                 } else{//is a plain hitbox; not a Projectile
                     AI.setYVelocity(-2);
-                    AI.setXVelocity(3*(player.getAttackingRight()?1:-1));
+                    AI.setXVelocity(6*(player.getAttackingRight()?1:-1));
                 }
             }
         }
@@ -398,7 +398,7 @@ public class SideViewRunner extends GameRunner{
 //                         4   5
             //System.out.println("t == "+t+" stuck == "+stuck);
             
-            //System.out.println(" t = "+t);
+            System.out.println(" t = "+t);
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
@@ -457,9 +457,33 @@ public class SideViewRunner extends GameRunner{
                     }
                     break;
                 case 2: AI.setXVelocity(1);
+                
+                if(last!=2)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>15){
+                            AI.incrementX(4);
+                            AI.incrementY(-4);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
                 //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 3: AI.setXVelocity(-1);
+                
+                if(last!=3)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>15){
+                            AI.incrementX(-4);
+                            AI.incrementY(-4);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
                 //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 

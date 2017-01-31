@@ -140,8 +140,8 @@ public class SideViewMeleeEnemy extends SideViewAI{
             else if(velocity[0]<0)
                 velocity[0]++;
         }
-        if(velocity[0]!=0)
-            velocity[0]=MAX_VELOCITY*(velocity[0]>0?1:-1);
+//        if(velocity[0]!=0)
+//            velocity[0]=MAX_VELOCITY*(velocity[0]>0?1:-1);
         
         span.x+=velocity[0];
         span.y+=velocity[1];
