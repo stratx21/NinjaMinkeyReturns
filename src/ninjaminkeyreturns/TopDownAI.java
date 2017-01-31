@@ -21,6 +21,11 @@ public class TopDownAI extends AI{
     public int MISSION_GIVEN_ID=0;
     
     /**
+     *  Location of the AI object; either in pixels or in Location Points.
+     */
+    public int[] location=new int[2];
+    
+    /**
      * This tells if the AI is travelling. 
      */
     public boolean travelling=false;
@@ -292,6 +297,24 @@ public class TopDownAI extends AI{
                 imageSequence=0;
         }
         directionFacing=2;
+    }
+    
+    /**
+     * retrieves the X value of the current position of the AI object
+     * 
+     * @return the x location value of the AI object
+     */
+    public int getX(){
+        return location[0];
+    }
+    
+    /**
+     * retrieves the Y value of the current position of the AI object
+     * 
+     * @return the y location value of the AI object
+     */
+    public int getY(){
+        return location[1];
     }
     
     

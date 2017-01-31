@@ -382,18 +382,18 @@ public class Profile {
     /**
      * 
      * This function imports the data needed for the definition of the 
-     *  information that is needed about the top down AIs specified by the
-     *  integer region.
+     *  information that is needed about the side view AI specified by the
+     *  integer AI_ID.
      * 
-     * @param newRegion the region ID for which the information is being 
+     * @param AI_ID the AI ID for which the information is being 
      *  imported
      * @return a 2-dimensional array of integers containing the imported data
      */
-    public static SideViewAI importAISideView(int newRegion){
+    public static ArrayList<SideViewAI> importAISideView(int AI_ID){
         try{
-            SideViewAI data=new SideViewAI();
+            ArrayList<SideViewAI> data=new ArrayList<>();
             int[] a=new int[7];
-            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("AIData/SideView/"+StringTools.numToDigits(AI_ID,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
                 Scanner scan=new Scanner(inputSaveFile);
@@ -401,19 +401,24 @@ public class Profile {
                 String[] input=new String[0];
                 input=scan.nextLine().split(",");
                     
-                for(int j=0;j<input.length+1;j++)
+                for(int j=0;j<input.length;j++)
                     a[j]=Integer.parseInt(input[j]);
                 
                 
+                System.out.println("llllleeeeeeeeeeeennnnnnnnnnnngggggggggggggtttttttttttthhhhhhhhhhhhhhhhhh=  = = == = =="+a.length);
+                
                 switch(a[0]){
                     case 1: //melee
-                        data=new SideViewMeleeEnemy(0,0,0);
+                        for(int i=3;i<input.length;i++)
+                            data.add(new SideViewMeleeEnemy(a[1],a[2],AI_ID,a[i]));
                         break;
                     case 2:
-                        data=new SideViewRangedEnemy(0,0,0);
+                        for(int i=3;i<input.length;i++)
+                            data.add(new SideViewRangedEnemy(a[1],a[2],AI_ID,a[i]));
                         break;
                     case 3:
-                        data=new SideViewAirEnemy(0,0,0);
+                        for(int i=3;i<input.length;i++)
+                            data.add(new SideViewAirEnemy(a[1],a[2],AI_ID,a[i]));
                         break;
                 }
                 //data=new SideViewAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));

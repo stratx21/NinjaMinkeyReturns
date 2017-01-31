@@ -54,4 +54,7 @@ public class CListener {
      * @param id
      */
     public void actionPerformed(BufferedImage player,BufferedImage AI,String text,int id){}
+    
+    public void actionPerformed(HitBox a){}
+    
 }

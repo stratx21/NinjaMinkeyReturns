@@ -49,7 +49,7 @@ public class SideViewRunner extends GameRunner{
      * This is the instance of the SideViewRegion that is used to manage the 
      *  region for side view. 
      */
-    private SideViewRegion region=null;
+    private SideViewRegion region=new SideViewRegion(0);
     
     /**
      * This tells if the side view is timed. 
@@ -88,7 +88,7 @@ public class SideViewRunner extends GameRunner{
      * @param dn the CListener instance for when SideViewRunner is done
      * @param currentRegion the ID for the SideViewRegion that is being run
      */
-    public SideViewRunner(CListener dn,int currentRegion){
+    public SideViewRunner(CListener dn,int currentRegion){//////////////////////
         super(dn);
         region=new SideViewRegion(currentRegion);
         setup();
@@ -99,6 +99,12 @@ public class SideViewRunner extends GameRunner{
      */
     private void setup(){
         player=new SideViewPlayer(new int[]{60,20});
+        player.makeHitBox=new CListener(){
+            @Override
+            public void actionPerformed(HitBox a){
+                playerAttacks.add(a);
+            }
+        };
         Prompt.resetFont();
     }
     
@@ -115,18 +121,53 @@ public class SideViewRunner extends GameRunner{
         player.draw(g,(int)camera.getX(),(int)camera.getY());
         
         //draw projectiles (player) ::
-        for(HitBox a:playerAttacks)
+        for(int i=0;i<playerAttacks.size();i++){
+            HitBox a=playerAttacks.get(i);
             if(a instanceof Projectile){
                 a.draw(g,(int)camera.getX(),(int)camera.getY());
-            }
+                if(a.getX()<0
+                 ||a.getX()>region.getMapLength()
+                 ||a.getY()>200
+                 ||a.getY()<-10){
+                    playerAttacks.remove(a);//remove player projectile if not on the screen anymore
+                    i--;
+                }
+            }else if(!player.getAttacking())//is a hitbox also; if the player is not attacking then the hitbox should be destroyed
+                playerAttacks.remove(a);
+        }
         
-        //System.out.println("draaawwwwiiiinnnggggggggg!!!! "+g);
+        calculateAI(g);
         
         calculate();
     }
     
-    private void calculateAI(){
-        
+    private void calculateAI(Graphics g){
+        for(int i=0;i<region.AIs.size();i++){
+            SideViewAI a=region.AIs.get(i);
+            if(a!=null){
+                //System.out.println(a.active+a.startX);
+                if(a.active){
+                    a.draw(g,(int)camera.getX(),(int)camera.getY());
+                    a.calculate(player.getX(),player.getY());
+                    AIDamagedCalc(a);
+                    AICalcFlow(a);
+                    
+                    if(a.getHealth()<0){
+                        if(a.getY()>-30){
+                            a.setYVelocity(-7);
+                            a.setXVelocity(a.facingRight?-6:6);
+                        }
+                        else
+                            region.AIs.remove(a);
+                    }
+                    
+                    a.moveByVelocities();
+                } else{
+                    if(player.getX()>a.startX)
+                        a.active=true;
+                }
+            }
+        }
     }
     
     private int stuck=0;
@@ -211,10 +252,38 @@ public class SideViewRunner extends GameRunner{
                         player.setXVelocity(-2);
                     }
                     break;
-                case 2: player.setXVelocity(0);
+                case 2://left
+                    player.setXVelocity(0);
+                    if(region.canMoveToSpace(player.getX()+10,player.getY()+5+player.getYVelocity()))
+                        player.incrementYVelocity(2);
+                    
+                    if(last!=2)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>15){
+                            player.incrementX(4);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
                 //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
-                case 3: player.setXVelocity(0);
+                case 3: //right
+                    player.setXVelocity(0);
+                    if(region.canMoveToSpace(player.getX()-10,player.getY()+5+player.getYVelocity()))
+                        player.incrementYVelocity(2);
+                    
+                    if(last!=3)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>15){
+                            player.incrementX(-4);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
                 //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 
@@ -243,14 +312,9 @@ public class SideViewRunner extends GameRunner{
             
 //            player.setXVelocity(0);
 //            player.setYVelocity(0);
-            System.out.println("would be a collision with current veloicity");
+            //System.out.println("would be a collision with current veloicity");
         }
     }
-    
-//    private void zeroPlayerVelocity(){
-//        player.setXVelocity(0);
-//        player.setYVelocity(0);
-//    }
     
     
     
@@ -272,6 +336,184 @@ public class SideViewRunner extends GameRunner{
             player.setFalling(true);
         } else{
             player.endFall();
+        }
+        //System.out.println((int)player.span.getHeight());
+    }
+    
+    
+    private void AIDamagedCalc(SideViewAI AI){
+        for(HitBox a:playerAttacks){
+            if(AI.span.intersects(a)){//AI was hit by this hitbox
+                AI.hit(a.getDamage());
+                if(a instanceof Projectile){
+                    AI.setYVelocity(-2);
+                    AI.setXVelocity(((Projectile)a).getXVelocity());
+                } else{//is a plain hitbox; not a Projectile
+                    AI.setYVelocity(-2);
+                    AI.setXVelocity(3*(player.getAttackingRight()?1:-1));
+                }
+            }
+        }
+    }
+    
+    private void AICalcFlow(SideViewAI AI){
+        
+        
+        AIFallingCalc(AI);
+        
+        //after all velocities are set::
+        int movingX=AI.getX()+AI.getXVelocity(),
+                movingY=AI.getY()+AI.getYVelocity();
+        byte t;
+        if(-1==(t=region.mapCollision(new Rectangle(movingX,movingY,AI.getWidth(),AI.getHeight())))){//no collision with the current velocity setting
+            
+            //AI.moveByVelocities();
+            playerKeysFlow();
+        } else{//there is a collision with the current velocity setting
+//                         0   1
+//                         2   3
+//                         4   5
+            //System.out.println("t == "+t+" stuck == "+stuck);
+            
+            //System.out.println(" t = "+t);
+            switch(t){
+                case 0: 
+                    if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
+                        if(AI.getYVelocity()<0){ 
+                            AI.incrementY(-1*((AI.getY()-10)%20+1));
+                        }
+                        AI.setYVelocity(0);
+                        while(!region.canMoveToSpace(AI.getX(),AI.getY()-1))
+                            AI.incrementY(1);
+                        
+                        if(last!=0)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>20){
+                            AI.incrementX(10);
+                            AI.incrementY(10);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
+                        
+                    } else{// is a side collision
+                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                        System.out.println("set to 0 from 0");
+                        AI.setXVelocity(1);
+                    }
+                    break;
+                case 1: 
+                    if(!region.canMoveToSpace(AI.getX()+AI.getWidth(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
+                        //System.out.println("is a vertical collision");
+                        if(AI.getYVelocity()<0){
+                            AI.incrementY(-1*((AI.getY()-10)%20+1));
+                        }
+                        AI.setYVelocity(0);
+                        
+                        if(last!=1)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>20){
+                            AI.incrementX(-10);
+                            AI.incrementY(10);
+                            stuck=0;
+                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        }
+                        
+                        
+//                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
+//                            player.incrementY(1);
+                    } else{// is a side collision
+                        //System.out.println("is a side collision");
+                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                        AI.setXVelocity(-1);
+                    }
+                    break;
+                case 2: AI.setXVelocity(1);
+                //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                    break;
+                case 3: AI.setXVelocity(-1);
+                //System.out.println("setting velocity[0] of player to 0 from a side collision");
+                    break;
+                case 4: 
+                    if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getHeight()+AI.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
+                        if(AI.getYVelocity()>0) AI.incrementY(19-(AI.getY()+10)%20);
+                        AI.setYVelocity(0);
+//                        while(!region.canMoveToSpace(player.getX(),player.getY()+1))
+//                            player.incrementY(-1);
+                    } else{
+                        AI.setXVelocity(0);
+                    }
+                    
+                     if(last!=4)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>20){
+                            AI.incrementX(10);
+                            AI.incrementY(-10);
+                            stuck=0;
+                        }
+                    
+                    break;
+                case 5: 
+                    if(!region.canMoveToSpace(AI.getX()+AI.getWidth(),AI.getY()+AI.getHeight()+AI.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
+                        if(AI.getYVelocity()>0) AI.incrementY(19-(AI.getY()+10)%20);
+                        AI.setYVelocity(0);
+                        while(!region.canMoveToSpace(AI.getX()+AI.getWidth(),AI.getY()+1))
+                            AI.incrementY(-1);
+                    } else{
+                        AI.setXVelocity(0);
+                    }
+                    
+                    
+                    if(last!=5)
+                            stuck=0;
+                        
+                        stuck++;
+                        
+                        if(stuck>20){
+                            AI.incrementX(-10);
+                            AI.incrementY(-10);
+                            stuck=0;
+                        }
+                        
+                        
+                    break;
+            }
+            
+            last=t;
+//            zeroPlayerVelocity();
+            
+//            player.setXVelocity(0);
+//            player.setYVelocity(0);
+            //System.out.println("would be a collision with current veloicity");
+        }
+    }
+    
+    private void AIFallingCalc(SideViewAI AI){
+        //check if the palyer should fall::
+        if(//!player.getJumping()&&
+            region.canMoveToSpace(AI.getX(),AI.getY()+(int)AI.getHeight()+2)
+                &&region.canMoveToSpace(AI.getX()+(int)AI.getWidth(),AI.getY()+(int)AI.getHeight()+2)){
+                    //then should fall since it can go to the space below
+            
+            if(AI.getYVelocity()<AI.getJumpVelocity())
+                AI.incrementYVelocity(1);
+            else 
+                AI.setYVelocity(AI.getJumpVelocity());
+            
+//            if(AI.getYVelocity()==0)
+//                AI.setJumping(false);
+            
+            //AI.setFalling(true);
+        } else{
+            //AI.endFall();
         }
         //System.out.println((int)player.span.getHeight());
     }
@@ -331,7 +573,7 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void calculate(){// -------------------------- -  - - is this used?   < ?? ? ? ? ? ? ?   - -- -- -   >?
-        calculateAI();
+//        calculateAI();
         
         playerCalcFlow();
         
@@ -351,7 +593,7 @@ public class SideViewRunner extends GameRunner{
     public void keyPressed(KeyEvent e){
         //        System.out.println("key released:: "+typed);
         char typed=Character.toUpperCase(e.getKeyChar());
-        System.out.println(typed);
+        //System.out.println(typed);
         if(typed==controls[0]){
             currentKey[0]=true;
         }else if(typed==controls[1]){

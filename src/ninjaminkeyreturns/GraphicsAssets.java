@@ -230,7 +230,26 @@ public class GraphicsAssets {
      *      AI in side view
      */
     public static ArrayList<BufferedImage> importSideViewMeleeEnemyImages(int AI_ID){
-        return null;
+        ArrayList<BufferedImage> img=new ArrayList<>();
+        
+        String id=StringTools.numToDigits(AI_ID,3);
+        
+        //Walking::
+        for(int i=0;i<3;i++)
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/R"+i+".png"));
+        
+        for(int i=0;i<3;i++)
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/L"+i+".png"));
+        
+        //attacking::
+        for(int i=0;i<7;i++)
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/AR"+i+".png"));
+        
+        for(int i=0;i<7;i++)
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/AL"+i+".png"));
+        
+        
+        return img;
     }
     
     /**

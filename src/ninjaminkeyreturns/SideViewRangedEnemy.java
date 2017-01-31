@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Josh
@@ -16,10 +18,22 @@ public class SideViewRangedEnemy extends SideViewAI{
      */
     private int delay=0;
     
-    public SideViewRangedEnemy(int startX,int startY,int ai_id){
+    /**
+     * This sets up the enemy for use in the code. 
+     * 
+     * 
+     * @param startHealth 
+     * @param damageDealt how much damage the AI deals per attack
+     * @param ai_id the ID of the AI that this class represents
+     * @param startingX the x location, in location points, where the player 
+     *      will reach in order for this AI to spawn
+     */
+    public SideViewRangedEnemy(int startHealth,int damageDealt,int ai_id,int startingX){
         AI_ID=ai_id;
+        health=startHealth;
+        damage=damageDealt;
+        span=new Rectangle(startingX,20,10,30);//in location points
         images=GraphicsAssets.importSideViewRangedEnemyImages(AI_ID);
-        location=new int[]{startX,startY};
     }
     
     /**
@@ -30,9 +44,9 @@ public class SideViewRangedEnemy extends SideViewAI{
      * @return if the AI should attack
      */
     @Override
-    public boolean shouldAttack(int playerX,int playerY){ // never uses these two number to calculate...
+    public boolean shouldAttack(int playerX,int playerY){ 
         if(delay>69){//range of 3 tiles to start shooting
-            if(location[0]>playerX-60&&location[0]<playerX+60){
+            if(span.x>playerX-60&&span.x<playerX+60){
                 delay=0;
                 return true;
             } else
@@ -51,14 +65,14 @@ public class SideViewRangedEnemy extends SideViewAI{
      */
     @Override
     public void travel(int playerX,int playerY){
-        if(location[0]<playerX-60//AI is to the left of range area
+        if(span.x<playerX-60//AI is to the left of range area
                 ){
             if(velocity[0]<MAX_VELOCITY){//velocity is less than the max allowed velocity
                 velocity[0]++;
             }
             facingRight=true;
             
-        } else if(location[0]>playerX+60//AI is to the right of the range area
+        } else if(span.x>playerX+60//AI is to the right of the range area
                 ){
             if(velocity[0]>-1*MAX_VELOCITY){//velocity is greater than the least allowed velocity
                 velocity[0]--;
@@ -73,8 +87,8 @@ public class SideViewRangedEnemy extends SideViewAI{
         
         velocity[0]=MAX_VELOCITY*(velocity[0]>0?1:-1);
         
-        location[0]+=velocity[0];
-        location[1]+=velocity[1];
+        span.x+=velocity[0];
+        span.y+=velocity[1];
     }
     
     /**

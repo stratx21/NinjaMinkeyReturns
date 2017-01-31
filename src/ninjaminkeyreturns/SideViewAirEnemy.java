@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Josh
@@ -17,10 +19,22 @@ public class SideViewAirEnemy extends SideViewAI{
     private int delay=0;
 //    private boolean delayReady=false;
     
-    public SideViewAirEnemy(int startX,int startY,int ai_id){
+    /**
+     * This sets up the enemy for use in the code. 
+     * 
+     * 
+     * @param startHealth 
+     * @param damageDealt how much damage the AI deals per attack
+     * @param ai_id the ID of the AI that this class represents
+     * @param startingX the x location, in location points, where the player 
+     *      will reach in order for this AI to spawn
+     */
+    public SideViewAirEnemy(int startHealth,int damageDealt,int ai_id,int startingX){
         AI_ID=ai_id;
+        health=startHealth;
+        damage=damageDealt;
+        span=new Rectangle(startingX,20,10,30);//in location points   < - span.width and height may need to be changed since these may be different sizes
         images=GraphicsAssets.importSideViewAirEnemyImages(AI_ID);
-        location=new int[]{startX,startY};
     }
     
     /**
@@ -31,7 +45,7 @@ public class SideViewAirEnemy extends SideViewAI{
      * @return if the AI should attack
      */
     @Override
-    public boolean shouldAttack(int playerX,int playerY){ // never uses these two numbers to calculate... [inheritance complication]
+    public boolean shouldAttack(int playerX,int playerY){
         if(delay>69){
             delay=0;
             return true;
@@ -49,8 +63,8 @@ public class SideViewAirEnemy extends SideViewAI{
      */
     @Override
     public void travel(int playerX,int playerY){
-        location[0]+=velocity[0];
-        location[1]+=velocity[1]; // if the AIs cannot be hit (air ones) then this may not be needed?
+        span.x+=velocity[0];
+        span.y+=velocity[1]; // if the AIs cannot be hit (air ones) then this may not be needed?
     }
     
     /**
@@ -67,6 +81,11 @@ public class SideViewAirEnemy extends SideViewAI{
     @Override
     public void attackRight(){
         
+    }
+    
+    @Override
+    public int getJumpVelocity(){//so that the enemy does not fall from gravity
+        return 0;
     }
     
 }

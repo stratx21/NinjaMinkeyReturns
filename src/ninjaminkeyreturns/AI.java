@@ -42,27 +42,8 @@ public class AI {
      */
     public ArrayList<BufferedImage> images=new ArrayList<>();
     
-    /**
-     *  Location of the AI object; either in pixels or in Location Points.
-     */
-    public int[] location=new int[2];
     
-    /**
-     * retrieves the X value of the current position of the AI object
-     * 
-     * @return the x location value of the AI object
-     */
-    public int getX(){
-        return location[0];
-    }
     
-    /**
-     * retrieves the Y value of the current position of the AI object
-     * 
-     * @return the y location value of the AI object
-     */
-    public int getY(){
-        return location[1];
-    }
+    
     
 }

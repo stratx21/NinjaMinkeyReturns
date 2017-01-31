@@ -49,6 +49,10 @@ public class SideViewRegion extends Region{
         return X_TILES;
     }
     
+    public int getMapLength(){//in location points
+        return X_TILES*20;
+    }
+    
     /**
      * This sets up the SideViewRegion using the id of the region. 
      * 
@@ -57,15 +61,25 @@ public class SideViewRegion extends Region{
     public SideViewRegion(int regn) {
         super(regn);
         System.out.println("initializing SideViewRegion...");
+        
         int[] a=Profile.getSideViewMissionData(regn);
         regionData=Profile.importRegionDataSideView(regn);
+        
         images=GraphicsAssets.importRegionImagesSideView(regn);
         background=GraphicsAssets.importSideViewBackground(regn);
         timed=a[0]!=0?true:false;
+        
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);
+        
         X_TILES=regionData.length;
-        System.out.println("initialization of SideViewRegion finished : xtiles :: "+X_TILES);
+        
+        AIs=Profile.importAISideView(regn);
+        
+        
+        System.out.println("AIs:: "+AIs);
+        
+        //System.out.println("initialization of SideViewRegion finished : xtiles :: "+X_TILES);
     }
     
     /**

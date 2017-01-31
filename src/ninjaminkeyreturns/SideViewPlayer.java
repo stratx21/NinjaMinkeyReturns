@@ -60,6 +60,8 @@ public class SideViewPlayer extends Player{
     
     private boolean falling=false;
     
+    public CListener makeHitBox=null;
+    
     /**
      * This tells if the player is currently jumping.
      */
@@ -121,6 +123,7 @@ public class SideViewPlayer extends Player{
      * @param camY the y location of the camera
      */
     public void draw(Graphics g,int camX,int camY){
+        //moveByVelocities();
         //System.out.println("at player drawWWWWwwWWWWwWWwwW!");
         //System.out.println(GAME_SPAN.width+","+GAME_SPAN.height+"  square size:: "+SQUARE_SIZE+"  MULTIPLIER:: "+POINT_TO_PIXEL_MULTIPLIER);
         
@@ -129,7 +132,7 @@ public class SideViewPlayer extends Player{
 //                (int)((span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)),
 //                (int)(span.width*POINT_TO_PIXEL_MULTIPLIER),
 //                (int)(span.height*POINT_TO_PIXEL_MULTIPLIER));
-        
+//        System.out.println("[player] x:: "+span.x);
         
         if(attacking||shooting){
             if(attackingRight)//becuase on the images the player is farther to the left on the facing right images but farther to the right on the facing left images
@@ -203,13 +206,12 @@ public class SideViewPlayer extends Player{
         }
     }
     
+    
+    
     /**
      * This function will set the according variables for the start of an
      *  attack, either melee or ranged. 
      * 
-     * DEV NOTE:: the hitbox information could be moved to the SideViewPlayer 
-     *  class, then it could be returned from a function or accessed from an 
-     *  external call.
      * 
      * PRE:: canAttack is checked to be true
      * 
@@ -227,7 +229,13 @@ public class SideViewPlayer extends Player{
         attackingRight=facingRight;
         imageSequence=0;
         
-        System.out.println(facingRight+" = facingRight");
+        makeHitBox.actionPerformed(new HitBox(getX()+(attackingRight?0:-40),
+                getY(),
+                15,
+                40,
+                meleeDamage));
+        
+        //System.out.println(facingRight+" = facingRight");
         
     }
     
@@ -300,6 +308,10 @@ public class SideViewPlayer extends Player{
      */
     public boolean getshooting(){
         return shooting;
+    }
+    
+    public boolean getAttackingRight(){
+        return attackingRight;
     }
     
     /**
@@ -485,7 +497,7 @@ public class SideViewPlayer extends Player{
     /**
      * This function sets the player's velocity in the y direction.
      * 
-     * @param a what to set the velocity in the y direciton to
+     * @param a what to set the velocity in the y direction to
      */
     public void setYVelocity(int a){
         velocity[1]=a;

@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Josh
@@ -14,12 +16,35 @@ public class SideViewAI extends AI{
     /**
      * The maximum velocity that the AI can reach. 
      */
-    public int MAX_VELOCITY=4;
+    public int MAX_VELOCITY=1;
+    
+    public int startX=2000;
+    
+    public boolean active=false;
+    
+    //public CListener dead=null;
+    
+    /**
+     * This multiplier is used to translate location points to pixels. 
+     */
+    public final double POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20.0;
     
     /**
      * This tells if the AI is facing to the right. 
      */
     public boolean facingRight=false;
+    
+    public Rectangle span=new Rectangle();
+    
+    public boolean attacking=false,wasAttacking=false; 
+    
+    public boolean jumping=false,wasJumping=false;
+    
+    public int sequence=0;
+    
+    public double damage=2;
+    
+    public boolean defeated=false;
     
     /**
      * This represents the health of the AI. 
@@ -32,6 +57,8 @@ public class SideViewAI extends AI{
      */
     public int[] velocity=new int[]{0,0};
     
+    public void draw(java.awt.Graphics g,int camX,int camY){}
+    
     /**
      * This goes through the calculations for the AI in order to run it in the
      *  way that it is supposed to run. 
@@ -42,15 +69,17 @@ public class SideViewAI extends AI{
     public void calculate(int playerX,int playerY){
         travel(playerX,playerY);
         if(shouldAttack(playerX,playerY)){
-            if(location[0]<playerX)
+            if(span.x<playerX)
                 attackRight();
             else
                 attackLeft();
         }
+        if(health<0)
+            defeated=true;
     }
     
 //    public void calculateLeftOrRight(int playerX){
-//        facingRight=location[0]<playerX;   
+//        facingRight=span.x<playerX;   
 //    }
     
     /**
@@ -120,12 +149,12 @@ public class SideViewAI extends AI{
      * 
      * @param x the x coordinate of the hitbox
      * @param y the y coordinate of the hitbox
-     * @param width the width of the hitbox
-     * @param height the height of the hitbox
+     * @param span.width the span.width of the hitbox
+     * @param span.height the span.height of the hitbox
      */
-    public void spawnHitBox(int x,int y,int width,int height){
-        
-    }
+//    public void spawnHitBox(int x,int y,int span.width,int span.height){
+//        
+//    }
     
     /**
      * This function tells if the AI is facing towards the right. 
@@ -171,5 +200,122 @@ public class SideViewAI extends AI{
     public void hit(double dmg){
         health-=dmg;
     }
+    
+    /**
+     * This returns the x component of the AI's velocity.
+     * 
+     * @return the x component of the AI's velocity
+     */
+    public int getXVelocity(){
+        return velocity[0];
+    }
+    
+    /**
+     * This returns y component of the AI's velocity.
+     * 
+     * @return the y component of the AI's velocity
+     */
+    public int getYVelocity(){
+        return velocity[1];
+    }
+    
+    /**
+     * This function sets the AI's velocity in the x direction. 
+     * 
+     * @param a what to set the velocity in the x direction to
+     */
+    public void setXVelocity(int a){
+        velocity[0]=a;
+    }
+    
+    /**
+     * This function sets the AI's velocity in the y direction.
+     * 
+     * @param a what to set the velocity in the y direction to
+     */
+    public void setYVelocity(int a){
+        velocity[1]=a;
+    }
+    
+    /**
+     * This function increments the x component of the AI's velocity. 
+     * 
+     * @param a how much to increment the x component of the AI's velocity
+     *      by 
+     */
+    public void incrementXVelocity(int a){
+        velocity[0]+=a;
+    }
+    
+    /**
+     * This function increments the y component of the AI's velocity. 
+     * 
+     * @param a how much to increment the y component of the AI's velocity
+     *      by 
+     */
+    public void incrementYVelocity(int a){
+        velocity[1]+=a;
+    }
+    
+    public int getHeight(){
+        return span.height;
+    }
+    
+    public int getWidth(){
+        return span.width;
+    }
+    
+    public int getJumpVelocity(){
+        return 3;
+    }
+    
+    /**
+     * This function adds the velocity to the location of the player. 
+     */
+    public void moveByVelocities(){
+        span.x+=velocity[0]/2;
+        span.y+=velocity[1]/2;
+    }
+    
+        /**
+     * This function increments the x value of the AI's location by the
+     *  amount specified; if it is negative then the number will decrease the
+     *  player's x location. 
+     * 
+     * @param a how much to increment the AI's x location by
+     */
+    public void incrementX(int a){
+        span.x+=a;
+    }
+    
+    /**
+     * This function increments the y value of the AI's location by the 
+     *  amount specified; if it is negative then the number will decrease the 
+     *  AI's y location.
+     * 
+     * @param a how much to increment the AI's y location by
+     */
+    public void incrementY(int a){
+        span.y+=a;
+    }
+    
+    /**
+     * retrieves the X value of the current position of the AI object
+     * 
+     * @return the x location value of the AI object
+     */
+    public int getX(){
+        return span.x;
+    }
+    
+    /**
+     * retrieves the Y value of the current position of the AI object
+     * 
+     * @return the y location value of the AI object
+     */
+    public int getY(){
+        return span.y;
+    }
+    
     
 }
