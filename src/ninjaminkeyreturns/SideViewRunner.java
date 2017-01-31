@@ -185,7 +185,7 @@ public class SideViewRunner extends GameRunner{
                     
                     a.moveByVelocities();
                 } else{
-                    if(player.getX()>a.startX)
+                    if(player.getX()>a.startX-100)
                         a.active=true;
                 }
             }
@@ -391,14 +391,13 @@ public class SideViewRunner extends GameRunner{
         if(-1==(t=region.mapCollision(new Rectangle(movingX,movingY,AI.getWidth(),AI.getHeight())))){//no collision with the current velocity setting
             
             //AI.moveByVelocities();
-            playerKeysFlow();
         } else{//there is a collision with the current velocity setting
 //                         0   1
 //                         2   3
 //                         4   5
             //System.out.println("t == "+t+" stuck == "+stuck);
             
-            System.out.println(" t = "+t);
+            System.out.println(" t = "+t+" stuck = "+stuck+" AI:: "+AI+" v:: "+AI.getXVelocity()+","+AI.getYVelocity());
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
@@ -458,7 +457,7 @@ public class SideViewRunner extends GameRunner{
                     break;
                 case 2: AI.setXVelocity(1);
                 
-                if(last!=2)
+                if(last!=2&&last!=3)
                             stuck=0;
                         
                         stuck++;
@@ -473,7 +472,7 @@ public class SideViewRunner extends GameRunner{
                     break;
                 case 3: AI.setXVelocity(-1);
                 
-                if(last!=3)
+                if(last!=2&&last!=3)
                             stuck=0;
                         
                         stuck++;
@@ -496,7 +495,7 @@ public class SideViewRunner extends GameRunner{
                         AI.setXVelocity(0);
                     }
                     
-                     if(last!=4)
+                     if(last!=4&&last!=5)
                             stuck=0;
                         
                         stuck++;
@@ -505,6 +504,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(10);
                             AI.incrementY(-10);
                             stuck=0;
+                            System.out.println("12458072365#@$#^%#@$%#@^$#@^% fixed stuck!!!!! -4 ");
                         }
                     
                     break;
@@ -519,7 +519,7 @@ public class SideViewRunner extends GameRunner{
                     }
                     
                     
-                    if(last!=5)
+                    if(last!=4&&last!=5)
                             stuck=0;
                         
                         stuck++;
@@ -528,6 +528,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-10);
                             AI.incrementY(-10);
                             stuck=0;
+                            System.out.println("12458072365#@$#^%#@$%#@^$#@^% fixed stuck!!!!! -5 ");
                         }
                         
                         
