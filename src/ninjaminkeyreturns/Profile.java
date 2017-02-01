@@ -301,26 +301,32 @@ public class Profile {
      * @return a 2-dimensional array of integers containing the imported data
      */
     public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
+        System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         try{
 //            System.out.println("NEW REGION=="+newRegion);
-            
+            System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
             ArrayList data=new ArrayList<TriggerSpot>();
-            int[] a=new int[7];
+            int[] opp=new int[7];
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
-                
+                System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
                 String[] input=new String[0];
-                
+                System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 //                System.out.println("past input creation");
                 
-                for(int i=0;i<triggers;i++){
+                for(int i=0;i<triggers;i++){System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"+triggers);
                     input=scan.nextLine().split(",");
-                    for(int j=0;j<input.length;j++)
-                        a[j]=Integer.parseInt(input[j]);
-                    data.add(new TriggerSpot(a[1],a[2],a[3],a[4],a[0],a[5]==1,a[6]));
                     
+                    System.out.println("data::"+input[0]+" "+input[1]+" "+input[2]+" "+opp[5]);
+                    for(int j=0;j<input.length;j++){
+                        System.out.println("j == "+j);
+                        opp[j]=Integer.parseInt(input[j]);
+                    }
+                    data.add(new TriggerSpot(opp[1],opp[2],opp[3],opp[4],opp[0],opp[5]==1,opp[6]));
+                    System.out.println("Trigger spot data:: "+opp[1]+"  "+opp[2]+"  "+opp[3]+"  "+opp[4]+"  "+opp[0]+"  "+opp[5]==1+"  "+opp[6]);
+                    System.out.println("asjdrejngjrngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 }
                 
 //                System.out.println("past create triggers");
@@ -333,6 +339,7 @@ public class Profile {
             return data;
         }catch(Exception e){
             ErrorLogger.logError(e,"Profile.importTriggerSpotsTopDown");
+            System.out.println(e);
         }
         return null;
     }

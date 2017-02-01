@@ -57,7 +57,9 @@ public class TriggerSpot {
      * @param aiTriggrd 
      */
     public TriggerSpot(int x,int y,int lngth,int hght,int rgnToGoTo,boolean vsble,int aiTriggrd){
+        System.out.println("From TriggerSpot:: "+x+" "+y+" "+lngth+" "+hght+" "+rgnToGoTo+" "+vsble+" "+aiTriggrd);
         location=new int[]{x,y};
+        
         width=lngth-x;
         height=hght-y;
         if(toRegion=(rgnToGoTo>-1)){
