@@ -77,10 +77,13 @@ public class GamePanel extends CPanel implements KeyListener{
             @Override
             public void actionPerformed(boolean won){
                 switchToTopDown();
+                if(!won)
+                    Player.health=Profile.MAX_HEALTH;
             }
             
             
         },tempSideID);
+        Player.health=Profile.health;
     }
     
     /**
@@ -104,6 +107,7 @@ public class GamePanel extends CPanel implements KeyListener{
                 tempSideID=sideViewRegionID;
             }
             },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown);
+        Profile.health=Player.health;
     }
     /**
      * an integer value that is used for the Y value of the black rectangle

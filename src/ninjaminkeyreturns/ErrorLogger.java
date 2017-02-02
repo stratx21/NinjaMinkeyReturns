@@ -36,8 +36,8 @@ public class ErrorLogger {
      * @param f
      */
         protected static void logError(Exception e,String f){ //f= function name
-        System.err.println("/-Error [Exception type used] in function<"+(o=f)
-                +"> -\\ Error :: "+e);
+        System.err.println("├┬┴┬┴ Error [Exception type used] in function<"+(o=f)
+                +"> ┬┴┬┴┤ Error :: "+e);
         error=e+"";
         promptDeveloper(""+e+"\n*Emailing information can be found in the "
                 + "text document*");
@@ -51,8 +51,8 @@ public class ErrorLogger {
      * @param f
      */
         protected static void logIOError(IOException e,String f){
-        System.err.println("/-Error [IOException type used] in function<"+(o=f)
-                +"> -\\ IO Error :: "+e);
+        System.err.println("├┬┴┬┴ Error [IOException type used] in function<"+(o=f)
+                +"> ┬┴┬┴┤ IO Error :: "+e);
         error=e+"";
         promptDeveloper(""+e+"\n*Emailing information can be found in the "
                 + "text document*");
@@ -114,8 +114,8 @@ public class ErrorLogger {
                 f.write("\"");
                 
                 f.newLine();
-                f.write("\n**Note:: You can copy this crash report and "
-                + "email it to the developers at etdickey@gmail.com**");
+                f.write("\n├┬┴┬┴ Note:: You can copy this crash report and "
+                + "email it to the developers at etdickey@gmail.com ┬┴┬┴┤");
                 f.newLine();
                 f.write("------------------------------------------------"
                         +"--------------------------------------------------");

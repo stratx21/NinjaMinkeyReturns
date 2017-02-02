@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -41,7 +42,7 @@ public class Profile {
      * This array of booleans hold the information about the game progress
      *  concerning what missions the player has completed. 
      */
-    public static boolean[][] completedMissions=new boolean[9][16];//expand on this
+    public static ArrayList<Boolean> completedMissions=new ArrayList<>();
     
     /**
      * This array holds the last known location of the user for the sake of
@@ -63,12 +64,12 @@ public class Profile {
      *  player will keep however much health that they had before they quit or
      *  before they went into a side view mission. 
      */
-    public static double health=50.00;
+    public static double health=200.0;
     
     /**
      * The maximum possible health value.
      */
-    public static double MAX_HEALTH=50.00;
+    public static double MAX_HEALTH=200.0;
     
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
@@ -89,6 +90,18 @@ public class Profile {
     */
     public static double money=51.00;
     
+    public static void setAllMissionsToFalse(){
+        Collections.fill(completedMissions,Boolean.FALSE);
+    }
+    
+    public static boolean getCompletedMission(int index){
+        if(index>=completedMissions.size()){
+            System.err.println("|----ERROR:: the mission index provided, "+index+", was invalid... The size is "+completedMissions.size()+"  ---|");
+            return true;
+        }
+        return completedMissions.get(index);
+    }
+    
     /**
      * This function saves the current progress in a save file, using the 
      *  JFileChooser to let the user identify a name and where to save it.
@@ -100,6 +113,18 @@ public class Profile {
             try (FileWriter save = new FileWriter(sv.getSelectedFile()+".txt")) {
                 System.out.println(sv.getSelectedFile());//returns file name and the directory location
                 //save.write......
+                
+                save.write(money+",");
+                
+                save.write(health+","+MAX_HEALTH+",");
+                
+                save.write(lastKnownRegionTopDown+","+playerLocation[0]+","+playerLocation[1]+",");
+                
+                
+                //keep last :: 
+                for(Boolean b:completedMissions){
+                    save.write(b.toString());
+                }
                 
 //                save.write(money+":");
 //                for(int k=0;k<5;k++)
@@ -139,8 +164,8 @@ public class Profile {
         if(inputSaveFile!=null){
             String[] in=new Scanner(inputSaveFile).nextLine().split(":");
 
-            for(int i=0;i<in.length;i++)
-                System.out.println(in[i]);
+//            for(int i=0;i<in.length;i++)
+//                System.out.println(in[i]);
 
             money=Double.parseDouble(in[0]);
 
@@ -195,7 +220,7 @@ public class Profile {
                         data[x][y]=Integer.parseInt(input[y][x]);
                     }
                 
-                
+                System.out.println("finished import of top down region successfully.");
                 return data;
             }
             return data;
@@ -222,17 +247,15 @@ public class Profile {
             inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
-                //System.out.println("aaaaaaaaaaaa!gggg");
                 String[] in=scan.nextLine().split(",");//import size of array
                 
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
-                //System.out.println("bbbbbbbbbbbb!gggg");
                 input=new String[b][a];//[y][x]
                 
 
                 for(int i=0;i<b;i++){
                     input[i]=scan.nextLine().split(":");
-                    System.out.println(input[i]);
+                    //System.out.println(input[i]);
                 }
                 
                 
@@ -242,15 +265,15 @@ public class Profile {
                         data[x][y]=Integer.parseInt(input[y][x]);
                     }
                 
-                System.out.println("data :: "+data);
+                //System.out.println("data :: "+data);
                 return data;
             }
-            System.out.println("data :: "+data);
+            //System.out.println("data :: "+data);
             return data;
         }catch(Exception e){
             ErrorLogger.logError(e,"Profile.importRegionDataSideView");
         }
-        System.out.println("RETURNING NULL");
+        System.out.println("RETURNING NULL in Profile.importRegionDataSideView");
         return null;
     }
     
@@ -301,35 +324,24 @@ public class Profile {
      * @return a 2-dimensional array of integers containing the imported data
      */
     public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
-        //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         try{
-//            System.out.println("NEW REGION=="+newRegion);
-            //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
             ArrayList<TriggerSpot> data=new ArrayList<>();
             int[] opp=new int[10];
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
-                //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-                String[] input=new String[0];
-                //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-//                System.out.println("past input creation");
                 
-                for(int i=0;i<triggers;i++){//System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"+triggers);
+                String[] input=new String[0];
+                
+                for(int i=0;i<triggers;i++){
                     input=scan.nextLine().split(",");
-                    
-                    //System.out.println("data::"+input[0]+" "+input[1]+" "+input[2]+" "+opp[5]);
                     for(int j=0;j<input.length;j++){
-                        System.out.println("j == "+j);
                         opp[j]=Integer.parseInt(input[j]);
                     }
                     data.add(new TriggerSpot(opp[1],opp[2],opp[3],opp[4],opp[0],opp[5]==1,opp[6],opp[7],opp[8],opp[9]));
-                    //System.out.println("Trigger spot data:: "+opp[1]+"  "+opp[2]+"  "+opp[3]+"  "+opp[4]+"  "+opp[0]+"  "+opp[5]==1+"  "+opp[6]);
-                    //System.out.println("asjdrejngjrngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 }
                 
-//                System.out.println("past create triggers");
                 
                 
                 
@@ -371,8 +383,7 @@ public class Profile {
                     
                     for(int j=0;j<7;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[7],input[8],a[6],a[4],a[5]));
-                    //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[8],input[9],a[6],a[4],a[5],a[7]));
                 }
                 
                 
@@ -411,7 +422,6 @@ public class Profile {
                 
                 for(int j=0;j<input.length;j++)
                     a[j]=Integer.parseInt(input[j]);
-                //System.out.println("llllleeeeeeeeeeeennnnnnnnnnnngggggggggggggtttttttttttthhhhhhhhhhhhhhhhhh=  = = == = =="+a.length);
                 
                 switch(a[0]){
                     case 1: //melee
@@ -426,10 +436,7 @@ public class Profile {
                         for(int i=3;i<input.length;i++)
                             data.add(new SideViewAirEnemy(a[1],a[2],AI_ID,a[i]));
                         break;
-                }
-                //data=new SideViewAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));
-                //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
-                
+                }                
                 
                 
                 return data;

@@ -46,12 +46,12 @@ public class SideViewPlayer extends Player{
     /**
      * This is used to tell how much damage is dealt per each melee attack. 
      */
-    private double meleeDamage=2;
+    private double meleeDamage=4;
     
     /**
      * This is used to tell how much damage is dealt per each ranged attack. 
      */
-    private double rangedDamage=1;
+    private double rangedDamage=2;
     
     /**
      * This tells if the player can jump (in case they are falling or disabled).
