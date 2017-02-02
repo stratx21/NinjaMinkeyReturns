@@ -14,7 +14,7 @@ import java.awt.event.KeyListener;
  *
  * @author Josh
  */
-public class GameRunner implements KeyListener{
+public class GameRunner{
     
     /**
      * An array of characters that are used to control the player object; they 
@@ -97,26 +97,22 @@ public class GameRunner implements KeyListener{
     
     /////////
     /**
-     * This function is not used but is required by the interface implemented,
-     *  KeyListener. 
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
      * 
-     * @param e the KeyEvent instance used to determine which key was pressed
+     * @param typed the character of the  key that was typed
      */
-    @Override
-    public void keyTyped(KeyEvent e){
-        keyTypedFlow(Character.toUpperCase(e.getKeyChar()));
+    public void keyTypedFlow(char typed){
+        
     }
 
     /**
-     * This function is called whenever a key is pressed and will use the 
-     *  information given about which key was pressed to determine what to do.
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
      * 
-     * @param e the KeyEvent instance used to determine which key was pressed
+     * @param typed the character of the  key that was pressed
      */
-    @Override
-    public void keyPressed(KeyEvent e){
-        //        System.out.println("key released:: "+typed);
-        char typed=Character.toUpperCase(e.getKeyChar());
+    public void keyPressedFlow(char typed){
         if(typed==controls[0]){
             currentKey[0]=true;
             setOtherKeysFalse(0);//in here to change it only if it is a valid key
@@ -136,18 +132,15 @@ public class GameRunner implements KeyListener{
             currentKey[5]=true;
             setOtherKeysFalse(5);
         }
-        keyPressedFlow(typed);
     }
 
     /**
-     * This function is called whenever a key is released and will use the 
-     *  information given about which key was pressed to determine what to do.
+     * This function is meant to be overriden for inheritance purposes for 
+     *  subclasses to control the flow of the game more easily. 
      * 
-     * @param e the KeyEvent instance used to determine which key was pressed
+     * @param typed the character of the  key that was released
      */
-    @Override
-    public void keyReleased(KeyEvent e){
-        char typed=Character.toUpperCase(e.getKeyChar());
+    public void keyReleasedFlow(char typed){
         if(typed==controls[0]){
             currentKey[0]=false;
         }else if(typed==controls[1]){
@@ -161,8 +154,6 @@ public class GameRunner implements KeyListener{
         }else if(typed==controls[5]){
             currentKey[5]=false;
         }
-        
-        keyReleasedFlow(Character.toUpperCase(e.getKeyChar()));
     }
     
     /**
@@ -177,32 +168,6 @@ public class GameRunner implements KeyListener{
             if(i!=doNotChange)
                 currentKey[i]=false;
     }
-    
-    //////
-    /**
-     * This function is meant to be overriden for inheritance purposes for 
-     *  subclasses to control the flow of the game more easily. 
-     * 
-     * @param typed the character of the  key that was typed
-     */
-    public void keyTypedFlow(char typed){}
-    
-    /**
-     * This function is meant to be overriden for inheritance purposes for 
-     *  subclasses to control the flow of the game more easily. 
-     * 
-     * @param typed the character of the  key that was pressed
-     */
-    public void keyPressedFlow(char typed){}
-    
-    /**
-     * This function is meant to be overriden for inheritance purposes for 
-     *  subclasses to control the flow of the game more easily. 
-     * 
-     * @param typed the character of the  key that was released
-     */
-    public void keyReleasedFlow(char typed){}
-    
     
     ////////
     

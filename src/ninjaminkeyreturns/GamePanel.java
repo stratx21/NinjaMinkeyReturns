@@ -9,13 +9,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.Timer;
 
 /**
  *
  * @author Josh
  */
-public class GamePanel extends CPanel{
+public class GamePanel extends CPanel implements KeyListener{
     
     //public GameRunner runner=null;
     /**
@@ -45,8 +47,8 @@ public class GamePanel extends CPanel{
 //        timer.start();
         this.repaint();
         
-        //switchToTopDown();
-        switchToSideView();
+        switchToTopDown();
+        //switchToSideView();
         
         //this.addKeyListener(runner);
         System.out.println("ADDED KEYLISTENER...");
@@ -76,6 +78,8 @@ public class GamePanel extends CPanel{
             public void actionPerformed(boolean won){
                 switchToTopDown();
             }
+            
+            
         },tempSideID);
     }
     
@@ -160,6 +164,21 @@ public class GamePanel extends CPanel{
      */
     public void rpnt(){
         this.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        runner.keyTypedFlow(Character.toUpperCase(e.getKeyChar()));
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        runner.keyPressedFlow(Character.toUpperCase(e.getKeyChar()));
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        runner.keyReleasedFlow(Character.toUpperCase(e.getKeyChar()));
     }
     
 }

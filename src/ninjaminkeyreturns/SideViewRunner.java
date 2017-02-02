@@ -633,33 +633,6 @@ public class SideViewRunner extends GameRunner{
     }
     
     /**
-     * This function is called whenever a key is pressed and will use the 
-     *  information given about which key was pressed to determine what to do.
-     * 
-     * @param e the KeyEvent instance used to determine which key was pressed
-     */
-    @Override
-    public void keyPressed(KeyEvent e){
-        //        System.out.println("key released:: "+typed);
-        char typed=Character.toUpperCase(e.getKeyChar());
-        //System.out.println(typed);
-        if(typed==controls[0]){
-            currentKey[0]=true;
-        }else if(typed==controls[1]){
-            currentKey[1]=true;
-        }else if(typed==controls[2]){
-            currentKey[2]=true;
-        }else if(typed==controls[3]){
-            currentKey[3]=true;
-        }else if(typed==controls[4]){
-            currentKey[4]=true;
-        }else if(typed==controls[5]){
-            currentKey[5]=true;
-        }
-        keyPressedFlow(typed);
-    }
-    
-    /**
      * This is used to calculate the flow of the AIs. 
      */
     private void AICalculate(){
@@ -716,7 +689,19 @@ public class SideViewRunner extends GameRunner{
     
     @Override
     public void keyPressedFlow(char typed){
-        
+        if(typed==controls[0]){
+            currentKey[0]=true;
+        }else if(typed==controls[1]){
+            currentKey[1]=true;
+        }else if(typed==controls[2]){
+            currentKey[2]=true;
+        }else if(typed==controls[3]){
+            currentKey[3]=true;
+        }else if(typed==controls[4]){
+            currentKey[4]=true;
+        }else if(typed==controls[5]){
+            currentKey[5]=true;
+        }
     }
     
     /**
@@ -727,6 +712,7 @@ public class SideViewRunner extends GameRunner{
      */
     @Override
     public void keyReleasedFlow(char typed){
+        super.keyReleasedFlow(typed);
         if(typed==controls[2]||typed==controls[3])
             player.setXVelocity(0);
     }

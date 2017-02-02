@@ -20,7 +20,7 @@ public class GameFrame extends JFrame{
      * The current instance of CPanel that is added on to this container that
      *  is used to display the graphical representation of the game. 
      */
-    private CPanel currentPanel;
+    private GamePanel currentPanel;
     
     /**
      * The Rectangle object that represents the area in which the game 
@@ -82,7 +82,7 @@ public class GameFrame extends JFrame{
         });
         
         this.add(currentPanel);
-        this.addKeyListener(currentPanel.runner);
+        this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
     }
@@ -112,11 +112,11 @@ public class GameFrame extends JFrame{
      * @param cp the instance of CPanel that is used to replace the current 
      *      instance of CPanel that is added on to this Container
      */
-    private void setNewPanelType(CPanel cp){    
-//        this.setVisible(false);
-        this.remove(currentPanel);
-        currentPanel=cp;
-        this.add(currentPanel);
-        this.setVisible(true);
-    }
+//    private void setNewPanelType(CPanel cp){    
+////        this.setVisible(false);
+//        this.remove(currentPanel);
+//        currentPanel=cp;
+//        this.add(currentPanel);
+//        this.setVisible(true);
+//    }
 }
