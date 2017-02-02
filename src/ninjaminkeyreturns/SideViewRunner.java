@@ -28,8 +28,6 @@ public class SideViewRunner extends GameRunner{
     private ArrayList<Projectile> AIProjectiles=new ArrayList<>();
     
     private ArrayList<SideViewAI> enemies=new ArrayList<>();
-            
-    
     
     
     /**
@@ -172,10 +170,12 @@ public class SideViewRunner extends GameRunner{
                             a.setYVelocity(-7);
                             a.setXVelocity(a.facingRight?-6:6);
                         }
-                        else
+                        else{
                             region.AIs.remove(a);
-                    } else if(a.getY()>200)
+                        }
+                    } else if(a.getY()>200){
                         region.AIs.remove(a);
+                    }
                     
                     if(a.meleeAttack!=null)
                         if(player.span.intersects(a.meleeAttack)){
@@ -193,6 +193,12 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    private void removeAI(SideViewAI a){
+        region.AIs.remove(a);
+        if(region.AIs.size()==0)
+            done.actionPerformed(true);
+    }
+    
     private int stuck=0;
     
     private byte last=0;
@@ -201,6 +207,9 @@ public class SideViewRunner extends GameRunner{
      * The flow for the player calculations.
      */
     private void playerCalcFlow(){
+        
+        if(player.getHealth()<=0)
+            done.actionPerformed(false);
         
         if(player.getXVelocity()!=0&&!currentKey[2]&&!currentKey[3]&&!player.getFalling())
             player.incrementXVelocity((player.getXVelocity()>0?-1:1));

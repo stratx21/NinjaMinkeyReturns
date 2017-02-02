@@ -528,6 +528,10 @@ public class SideViewPlayer extends Player{
     }
     
     
+    public double getHealth(){
+        return health;
+    }
+    
     /**
      * This tells if the player is jumping.
      * 
