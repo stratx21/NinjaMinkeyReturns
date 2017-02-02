@@ -69,6 +69,6 @@ public class PlainPrompt extends Prompt{//
         super.drawBackImage(g);
         g.setColor(Color.white);
         g.setFont(font);
-        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)+GAME_SPAN.x,(int)(0.8*GAME_SPAN.height)+GAME_SPAN.y);
+        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width),(int)(0.8*GAME_SPAN.height));
     }
 }
