@@ -16,6 +16,10 @@ public class TriggerSpot {
      */
     private int[] location=new int[2];
     
+    private int[] coordsToGoTo=new int[2];
+    
+    public int saveCheckIndex=-1;
+    
     //public int TYPE_ID=0;
     
     /**
@@ -56,10 +60,11 @@ public class TriggerSpot {
      * @param vsble
      * @param aiTriggrd 
      */
-    public TriggerSpot(int x,int y,int lngth,int hght,int rgnToGoTo,boolean vsble,int aiTriggrd){
-        System.out.println("From TriggerSpot:: "+x+" "+y+" "+lngth+" "+hght+" "+rgnToGoTo+" "+vsble+" "+aiTriggrd);
+    public TriggerSpot(int x,int y,int lngth,int hght,int rgnToGoTo,boolean vsble,int aiTriggrd,int xToGoTo,int yToGoTo,int saveCheckINDX){
+        //System.out.println("From TriggerSpot:: "+x+" "+y+" "+lngth+" "+hght+" "+rgnToGoTo+" "+vsble+" "+aiTriggrd);
         location=new int[]{x,y};
-        
+        saveCheckIndex=saveCheckINDX;
+        coordsToGoTo=new int[]{xToGoTo,yToGoTo};
         width=lngth-x;
         height=hght-y;
         if(toRegion=(rgnToGoTo>-1)){

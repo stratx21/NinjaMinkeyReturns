@@ -1,1 +1,1 @@
-timed? 0-not timed 1-timed,1 for has portal 0 for not portal, portal x, portal y, portal width, portal length
+timed? 0-not timed 1-timed

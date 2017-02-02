@@ -104,6 +104,10 @@ public class TopDownAI extends AI{
      */
     private int[] playerLocApproaching=new int[2];
     
+    public int saveIndexForWin=-1;
+    
+    public int itemIDNeeded=-1;
+    
     /**
      * This sets up the TopDownAI to prepare it for what it may need in order
      *  to enhance the flow of the game. 
@@ -119,7 +123,7 @@ public class TopDownAI extends AI{
      * @param prmptAfter the prompt for after the mission (if applicable)
      * @param instSideView if the AI forces the user into a side view mission
      */
-    public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter,int instSideView){
+    public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         MISSION_GIVEN_ID=mssnGivenID;
@@ -127,6 +131,8 @@ public class TopDownAI extends AI{
         promptAfter=prmptAfter;
         visible=vsble==1;
         instantSideView=instSideView==1;
+        saveIndexForWin=saveIndex;
+        itemIDNeeded=itemNeeded;
     }
     
     /**

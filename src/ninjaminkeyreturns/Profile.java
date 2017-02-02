@@ -177,7 +177,7 @@ public class Profile {
             int[][] data=null;
             String[][] input;// note:: [x][y]
             int a,b;
-            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/R"+region+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/R"+StringTools.numToDigits(region,3)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             System.out.println("importing the data for top down region...");
             if(inputSaveFile!=null){
@@ -301,32 +301,32 @@ public class Profile {
      * @return a 2-dimensional array of integers containing the imported data
      */
     public static ArrayList<TriggerSpot> importTriggerSpotsTopDown(int newRegion){
-        System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+        //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         try{
 //            System.out.println("NEW REGION=="+newRegion);
-            System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-            ArrayList data=new ArrayList<TriggerSpot>();
-            int[] opp=new int[7];
+            //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+            ArrayList<TriggerSpot> data=new ArrayList<>();
+            int[] opp=new int[10];
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
-                System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+                //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
                 String[] input=new String[0];
-                System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+                //System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 //                System.out.println("past input creation");
                 
-                for(int i=0;i<triggers;i++){System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"+triggers);
+                for(int i=0;i<triggers;i++){//System.out.println("wasregbaregsjrenyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"+triggers);
                     input=scan.nextLine().split(",");
                     
-                    System.out.println("data::"+input[0]+" "+input[1]+" "+input[2]+" "+opp[5]);
+                    //System.out.println("data::"+input[0]+" "+input[1]+" "+input[2]+" "+opp[5]);
                     for(int j=0;j<input.length;j++){
                         System.out.println("j == "+j);
                         opp[j]=Integer.parseInt(input[j]);
                     }
-                    data.add(new TriggerSpot(opp[1],opp[2],opp[3],opp[4],opp[0],opp[5]==1,opp[6]));
-                    System.out.println("Trigger spot data:: "+opp[1]+"  "+opp[2]+"  "+opp[3]+"  "+opp[4]+"  "+opp[0]+"  "+opp[5]==1+"  "+opp[6]);
-                    System.out.println("asjdrejngjrngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    data.add(new TriggerSpot(opp[1],opp[2],opp[3],opp[4],opp[0],opp[5]==1,opp[6],opp[7],opp[8],opp[9]));
+                    //System.out.println("Trigger spot data:: "+opp[1]+"  "+opp[2]+"  "+opp[3]+"  "+opp[4]+"  "+opp[0]+"  "+opp[5]==1+"  "+opp[6]);
+                    //System.out.println("asjdrejngjrngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 }
                 
 //                System.out.println("past create triggers");
@@ -357,7 +357,7 @@ public class Profile {
     public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
         try{
             ArrayList data=new ArrayList<TopDownAI>();
-            int[] a=new int[7];
+            int[] a=new int[9];
             inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
@@ -369,10 +369,9 @@ public class Profile {
                 for(int i=0;i<AIs;i++){
                     input=scan.nextLine().split(",");
                     
-                    for(int j=0;j<5;j++)
+                    for(int j=0;j<8;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    a[6]=Integer.parseInt(input[7]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[5],input[6],a[6]));
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],a[4],input[8],input[9],a[7],a[5],a[6]));
                     //for(int y=0;y<input.length;y++)System.out.println("s:"+input[y]);
                 }
                 

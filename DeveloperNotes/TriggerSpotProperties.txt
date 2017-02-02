@@ -7,4 +7,7 @@ One number for how many trigger spots are stored
 4th: int: x location value 2
 5th: int: y location value 2
 6th: int: 1 if true if is visible
-8th: int: which AI appears (-1 if not applicable)
+7th: int: which AI appears (-1 if not applicable)
+8th: int: x tile coordinate to spawn at when going to the next region (-1 if irrelivant)
+9th: int: y tile coordinate to spawn at when going to the next region (-1 if irrelivant)
+10th:int: the index of the save file to check to see if the trigger spot is triggered
