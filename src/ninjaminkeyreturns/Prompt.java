@@ -117,7 +117,7 @@ public class Prompt{
      *  that holds the game. 
      */
     public void drawBackImage(Graphics g){
-        g.drawImage(promptImage,(int)GAME_SPAN.getX(),(int)(GAME_SPAN.getY()+(int)(GAME_SPAN.getHeight()*0.57)),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()*0.4),null);
+        g.drawImage(promptImage,0,(int)((int)(GAME_SPAN.getHeight()*0.57)),(int)(GAME_SPAN.getWidth()),(int)(GAME_SPAN.getHeight()*0.4),null);
     }
     
 }
