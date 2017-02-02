@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 
 /**
- *
+ *This class manages many of the Top-Down region and AI functions. 
+ * 
  * @author Josh
  */
 public class TopDownRegion extends Region{
@@ -169,6 +170,28 @@ public class TopDownRegion extends Region{
              h=ai.getX()==x&&ai.getY()==y;
          }
          return h;
+     }
+     
+     public TopDownAI getAI(int index){
+         return AIs.get(index);
+     }
+     
+     public TopDownAI getAIAtSpotClass(int x,int y){
+         for(int i=0;i<AIs.size();i++){
+             TopDownAI ai=AIs.get(i);
+             if(ai.getX()==x&&ai.getY()==y)
+                 return ai;
+         }
+         return null;
+     }
+     
+     public int getAIAtSpotInteger(int x,int y){
+         for(int i=0;i<AIs.size();i++){
+             TopDownAI ai=AIs.get(i);
+             if(ai.getX()==x&&ai.getY()==y)
+                 return i;
+         }
+         return -1;
      }
      
      /**

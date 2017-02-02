@@ -30,7 +30,7 @@ public class StringTools {
      * @return an ArrayList of type String that contains each line that should
      *      be displayed based on how long each line is in pixels
      */
-    public static ArrayList<String> formatString(String text,Font font,int maxPixelWidth){
+    public static ArrayList<String> formatStringForPrompt(String text,Font font,int maxPixelWidth){
         ArrayList<String> r=new ArrayList<String>();
         int b=0;
         if(getPixelWidth(text,font)<=maxPixelWidth){ //defualt case just works

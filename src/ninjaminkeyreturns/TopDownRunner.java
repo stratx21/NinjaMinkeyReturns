@@ -109,8 +109,26 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //        player.calculate();
         
         if(player.finishedMoving){//finished moving to the square
-            int a=region.getTriggerSpotHit(player.getX(),player.getY());
-            if(a!=-1){
+            triggeringFlow(region.getTriggerSpotHit(player.getX(),player.getY()));
+            player.finishedMoving=false;
+        }
+        
+        if(!player.getDisabled()){
+            if(!player.travelling)
+                playerKeysFlow();
+            else
+                player.continueMove();
+            
+        }else if(showingPrompt){//loop components for each redraw
+            talkingPrompt.loopCalculate(currentKey[4]);
+            talkingPrompt.draw(g);
+        }
+        
+//      
+    }
+    
+    private void triggeringFlow(int a){
+        if(a!=-1){
                 player.setDisabled(true);
                 TriggerSpot hit=region.getTriggerSpot(a);
                 if(hit.toRegion){//is going to a different region
@@ -128,7 +146,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             
                         }
                     });
-                    talkingPrompt=new PlainPrompt(StringTools.formatString(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
+                    talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
                     new CListener(){
                         @Override
                         public void actionPerformed(){
@@ -143,21 +161,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                     });
                 }
             }
-            player.finishedMoving=false;
-        }
-        
-        if(!player.getDisabled()){
-            if(!player.travelling)
-                playerKeysFlow();
-            else
-                player.continueMove();
-            
-        }else if(showingPrompt){//loop components for each redraw
-            talkingPrompt.loopCalculate(currentKey[4]);
-            talkingPrompt.draw(g);
-        }
-        
-//      
     }
     
     /**
@@ -185,15 +188,56 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }else if(currentKey[3]){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
-        }//else if(currentKey[4]){//SETUP   *   future work
+        }else if(currentKey[4]){//SETUP   *   future work
+            switch(player.getDirectionFacing()){
+                case 0: triggerAIFromKey(player.getX(),player.getY()-1);
+                    break;
+                case 1: triggerAIFromKey(player.getX()-1,player.getY());
+                    break;
+                case 2: triggerAIFromKey(player.getX()+1,player.getY());
+                    break;
+                case 3: triggerAIFromKey(player.getX(),player.getY()+1);
+                    break;
+            }
+        }else if(currentKey[5]){//SETUP   *   future work
             
-        //}else if(currentKey[5]){//SETUP   *   future work
-            
-        //}
+        }
         
         //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
         // carry on the above process for keys inside the player class? (depends on future
         // changes)
+    }
+    
+    private void triggerAIFromKey(int detectX,int detectY){
+        int triggeredAI=region.getAIAtSpotInteger(detectX,detectY);
+        TopDownAI ai=region.getAI(triggeredAI);
+        if(triggeredAI!=-1&&triggeredAI<region.AIs.size()
+                &&((!Profile.getCompletedMission(ai.saveIndexToNotTalk))
+                   ||(ai.saveIndexToNotTalk==-1))){
+        //call on the triggered AI
+                    System.out.println("triggering AI from runner (selected with SELECT function) .... ");
+                    focusedAI=region.triggerAI(triggeredAI,player.getX(),player.getY(),AIdone=new CListener(){
+                        @Override
+                        public void actionPerformed(byte facing){//after the AI has approached the player::
+                            player.setDirectionFacing(facing);
+                            showingPrompt=true;
+                            
+                        }
+                    });
+                    talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
+                    new CListener(){
+                        @Override
+                        public void actionPerformed(){
+                            if(focusedAI.instantSideView){ //the top down view ends
+                                Profile.playerLocation=new int[]{player.getX(),player.getY()+2};//set the coordinates so that the player can come back to them
+                                done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+                            } else{//the AI did not confront the player in a side view manner
+                                player.setDisabled(false);
+                                //other code.... . . .. .. ........................................................<<<<<<<<
+                            }
+                        }
+                    });
+        }
     }
     
     
