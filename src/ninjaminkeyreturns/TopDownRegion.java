@@ -179,14 +179,12 @@ public class TopDownRegion extends Region{
       * @return if the player hit a trigger spot
       */
      public int getTriggerSpotHit(int x,int y){
-         System.out.println("triggereedddddd!! 111111");
          int r=-1;
          boolean done=false;
          for(int i=0;i<triggerSpotsData.size()&&!done;i++){
              TriggerSpot t=triggerSpotsData.get(i);
              if(t.getX()<=x&&t.getX()+t.getWidth()>=x
                      &&t.getY()<=y&&t.getY()+t.getHeight()>=y){
-                 System.out.println("triggereedddddd!! 2");
                  r=i;
                  done=true;
              }

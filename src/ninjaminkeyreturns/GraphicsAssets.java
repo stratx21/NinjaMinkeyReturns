@@ -87,26 +87,26 @@ public class GraphicsAssets {
         ArrayList<BufferedImage> img=new ArrayList<>();
         String id=StringTools.numToDigits(ai_ID,3);
         
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+0+".png"));//idle up
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+0+".png"));//idle down
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+0+".png"));//idle left
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+0+".png"));//idle right
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/U"+0+".png"));//idle up
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/D"+0+".png"));//idle down
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/L"+0+".png"));//idle left
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/R"+0+".png"));//idle right
         
         for(int i=0;i<4;i++)
-            img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+i+".png"));//travel up 1 - 5
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"U"+0+".png"));//travel up 5
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"/U"+i+".png"));//travel up 1 - 5
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/U"+0+".png"));//travel up 5
         
         for(int i=0;i<4;i++)
-            img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+i+".png"));//travel 
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"L"+0+".png"));//travel 
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"/L"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/L"+0+".png"));//travel 
         
         for(int i=0;i<4;i++)
-            img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+i+".png"));//travel 
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"R"+0+".png"));//travel 
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"/R"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/R"+0+".png"));//travel 
         
         for(int i=0;i<4;i++)
-            img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+i+".png"));//travel 
-        img.add(importFromString("Graphics/TopDown/AI/"+id+"D"+0+".png"));//travel 
+            img.add(importFromString("Graphics/TopDown/AI/"+id+"/D"+i+".png"));//travel 
+        img.add(importFromString("Graphics/TopDown/AI/"+id+"/D"+0+".png"));//travel 
         
         return img;
     }

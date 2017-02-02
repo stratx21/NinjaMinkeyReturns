@@ -9,7 +9,7 @@ IDs::
 3-portal (trigger spot) - finishes round
 
 ______
-int xsize, int ysize
+int xsize, int ysize, int 1=timed 0=not timed
 
 --------------------------------------------- important note:: 
 

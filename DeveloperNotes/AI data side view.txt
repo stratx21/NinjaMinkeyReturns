@@ -1,4 +1,4 @@
-attack type (1 - melee, 2 - ranged, 3 drop),
-health,
-damage per attack, 
-->from here it is 1 integer value for each location points location that the player reaches for this AI to spawn
+0-attack type (1 - melee, 2 - ranged, 3 drop),
+1-health,
+2-damage per attack, 
+3-->from here it is 1 integer value for each location points location that the player reaches for this AI to spawn

@@ -123,10 +123,10 @@ public class TopDownAI extends AI{
      * @param prmptAfter the prompt for after the mission (if applicable)
      * @param instSideView if the AI forces the user into a side view mission
      */
-    public TopDownAI(int x,int y,int ID,int mssnGivenID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded){
+    public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
-        MISSION_GIVEN_ID=mssnGivenID;
+        //MISSION_GIVEN_ID=mssnGivenID;
         promptBefore=prmptBefore;//System.out.println(prmptBefore+"promptBefore"+promptAfter+"promptAfter");
         promptAfter=prmptAfter;
         visible=vsble==1;
@@ -194,19 +194,16 @@ public class TopDownAI extends AI{
             }
             
             if(travelling){
-            g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
-                    GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2+offCenter[0],
-                    GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
-                    SQUARE_SIZE,SQUARE_SIZE,null);
-//            System.out.println("travelling");
+                g.drawImage(images.get(directionFacing*5+imageSequence/5+4),
+                        GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2+offCenter[0],
+                        GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
+                        SQUARE_SIZE,SQUARE_SIZE,null);
             }else{
                 g.drawImage(images.get(directionFacing),
-                        GAME_SPAN.x+GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2,
-                        GAME_SPAN.y+GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2
+                        GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2,
+                        +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2
                         ,SQUARE_SIZE,SQUARE_SIZE,null);
-//                System.out.println("NOT    travelling");
             }
-//            System.out.println(location[0]+","+location[1]+"togo:: "+toGo[0]+","+toGo[1]);
         }
     }
     
