@@ -174,7 +174,8 @@ public class SideViewRunner extends GameRunner{
                         }
                         else
                             region.AIs.remove(a);
-                    }
+                    } else if(a.getY()>200)
+                        region.AIs.remove(a);
                     
                     if(a.meleeAttack!=null)
                         if(player.span.intersects(a.meleeAttack)){
