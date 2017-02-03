@@ -104,7 +104,7 @@ public class TopDownAI extends AI{
      */
     private int[] playerLocApproaching=new int[2];
     
-    public int saveIndexForWin=-1,saveIndexToNotTalk=-1;
+    public int saveIndexForWin=-1,saveIndexToNotTalk=-1,saveIndexToTalk=-1;
     
     public int itemIDNeeded=-1;
     
@@ -123,7 +123,7 @@ public class TopDownAI extends AI{
      * @param prmptAfter the prompt for after the mission (if applicable)
      * @param instSideView if the AI forces the user into a side view mission
      */
-    public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded,int saveIndexNotTalk){
+    public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded,int saveIndexNotTalk,int saveIndex2Talk){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         promptBefore=prmptBefore;
@@ -133,6 +133,7 @@ public class TopDownAI extends AI{
         saveIndexForWin=saveIndex;
         itemIDNeeded=itemNeeded;
         saveIndexToNotTalk=saveIndexNotTalk;
+        saveIndexToTalk=saveIndex2Talk;
     }
     
     /**
@@ -178,16 +179,16 @@ public class TopDownAI extends AI{
                     byte directionToFace=0;
                     if(playerLocApproaching[0]>location[0]){//player needs to face right to face the AI
                         directionToFace=2;
-                        directionFacing=1;
+                        directionFacing=3; //< - always 3 to compensate for graphics
                     }else if(playerLocApproaching[0]<location[0]){//player needs to face left
                         directionToFace=1;
-                        directionFacing=2;
+                        directionFacing=3;//< - always 3 to compensate for graphics
                     }if(playerLocApproaching[1]<location[1]){//player needs to face down
                         directionToFace=3;
-                        directionFacing=0;
+                        directionFacing=3;//< - always 3 to compensate for graphics
                     }else if(playerLocApproaching[1]>location[1]){//player needs to face up
                         directionToFace=0;
-                        directionFacing=3;
+                        directionFacing=3;//< - always 3 to compensate for graphics
                     }
                     done.actionPerformed(directionToFace);
                 }

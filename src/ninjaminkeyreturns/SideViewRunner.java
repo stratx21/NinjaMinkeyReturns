@@ -171,10 +171,10 @@ public class SideViewRunner extends GameRunner{
                             a.setXVelocity(a.facingRight?-6:6);
                         }
                         else{
-                            region.AIs.remove(a);
+                            removeAI(a);
                         }
                     } else if(a.getY()>200){
-                        region.AIs.remove(a);
+                        removeAI(a);
                     }
                     
                     if(a.meleeAttack!=null)

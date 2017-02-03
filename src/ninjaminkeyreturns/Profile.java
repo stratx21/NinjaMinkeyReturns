@@ -383,7 +383,7 @@ public class Profile {
                     
                     for(int j=0;j<7;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[8],input[9],a[6],a[4],a[5],a[7]));
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[9],input[10],a[6],a[4],a[5],a[7],a[8]));
                 }
                 
                 

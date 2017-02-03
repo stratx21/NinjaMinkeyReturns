@@ -1,6 +1,6 @@
 # of AIs for the region this txt file is for
-locX,locY,AI_ID # (for images), 1 for true for is visible,index of save file array if mission completed,ID of item needed (-1 if none),1 for true for goes into side view,int value for the save boolean needed to NOT talk/get a mission(-1 if none), String beforeprompt, String afterprompt
-0     1             2                     3                            4                                            5                               6                                  7                                                                      8                   9                    
+locX,locY,AI_ID # (for images), 1 for true for is visible,index of save file array if mission completed,ID of item needed (-1 if none),1 for true for goes into side view,int value for the save boolean needed to NOT talk/get a mission(-1 if none),int value for the save boolean needed TO Talk/get mission (previous used for after mission done they can’t again) (-1 if none), String beforeprompt, String afterprompt
+0     1             2                     3                            4                                            5                               6                                  7                                                                                                                8                                                                                     9                    10      
 
 * don't put commas in (for now, ask to change later?)--- change to colons or something? 
 
