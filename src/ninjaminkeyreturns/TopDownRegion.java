@@ -212,6 +212,9 @@ public class TopDownRegion extends Region{
                  done=true;
              }
          }
+         if(Math.random()*7==0&&canMoveToSpace(x,y+3))
+             r=0;
+         
          return r;
      }
      

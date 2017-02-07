@@ -135,7 +135,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //                    System.out.println("to region????");
                     //move to another region....
                     
-                } else if(hit.AI_Triggered>-1){
+                } else if(hit.AI_Triggered>-1&&!Profile.getCompletedMission(region.getAI(hit.AI_Triggered).saveIndexToNotTalk)&&Profile.getCompletedMission(region.getAI(hit.AI_Triggered).saveIndexToTalk)){
                     //call on the triggered AI
                     System.out.println("triggering AI from runner.... ");
                     focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
@@ -161,6 +161,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                     });
                 }
             }
+        
+        
     }
     
     /**
