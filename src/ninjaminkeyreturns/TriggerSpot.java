@@ -113,4 +113,8 @@ public class TriggerSpot {
         return location[1];
     }
     
+    public void setLocation(int x,int y){
+        location=new int[]{x,y};
+    }
+    
 }

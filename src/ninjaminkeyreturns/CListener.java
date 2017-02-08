@@ -15,6 +15,8 @@ import java.awt.image.BufferedImage;
  */
 public class CListener {
 
+    
+    public void actionPerformed(int a,int c){}
     /**
      *
      */

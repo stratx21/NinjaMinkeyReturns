@@ -97,7 +97,6 @@ public class GamePanel extends CPanel implements KeyListener{
     /**
      * This function manages the change to a top down view mode user interface 
      *  by controlling the proper changes required for the switch. 
-     * 
      */
     private void switchToTopDown(){
         runner=new TopDownRunner(new CListener(){
@@ -105,6 +104,12 @@ public class GamePanel extends CPanel implements KeyListener{
             public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
                 switchToSideView();
                 tempSideID=sideViewRegionID;
+            }
+            
+            @Override
+            public void actionPerformed(int newPlayerX,int newPlayerY){//now about to go to a side view mission
+                switchToSideView();
+                
             }
             },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown);
         Profile.health=Player.health;
