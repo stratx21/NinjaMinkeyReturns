@@ -18,7 +18,7 @@ public class Region {
     /**
      * The ID of the current region that this class contains data for and runs.
      */
-    public int REGION_ID=0;
+    protected int REGION_ID=0;
     
     /**
      * The standard java.awt.Rectangle in which the game is represented 
@@ -47,6 +47,10 @@ public class Region {
      */
     public Region(int regn){
         REGION_ID=regn;
+    }
+    
+    public int getRegionID(){
+        return REGION_ID;
     }
     
 }

@@ -157,7 +157,7 @@ public class TopDownRegion extends Region{
      }
      
      /**
-      * This tells if the spot has an AI in it. 
+      * This tells if the spot has an AI in it.
       * 
       * @param x the x location of the tile
       * @param y the y location of the tile
