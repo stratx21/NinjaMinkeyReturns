@@ -18,7 +18,7 @@ public class TopDownAI extends AI{
     /**
      * The ID of the mission that this AI gives. 
      */
-    public int MISSION_GIVEN_ID=0;
+    public int SIDEVIEW_REGION_TO_GO_TO_ID=0;
     
     /**
      *  Location of the AI object; either in pixels or in Location Points.
@@ -123,7 +123,7 @@ public class TopDownAI extends AI{
      * @param prmptAfter the prompt for after the mission (if applicable)
      * @param instSideView if the AI forces the user into a side view mission
      */
-    public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded,int saveIndexNotTalk,int saveIndex2Talk){
+    public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded,int saveIndexNotTalk,int saveIndex2Talk,int sideViewGoTo){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         promptBefore=prmptBefore;
@@ -134,6 +134,7 @@ public class TopDownAI extends AI{
         itemIDNeeded=itemNeeded;
         saveIndexToNotTalk=saveIndexNotTalk;
         saveIndexToTalk=saveIndex2Talk;
+        SIDEVIEW_REGION_TO_GO_TO_ID=sideViewGoTo;
     }
     
     /**
@@ -319,6 +320,10 @@ public class TopDownAI extends AI{
      */
     public int getY(){
         return location[1];
+    }
+    
+    public void setLocation(int x,int y){
+        location=new int[]{x,y};
     }
     
     

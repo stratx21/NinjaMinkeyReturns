@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -96,7 +97,7 @@ public class Profile {
     
     public static boolean getCompletedMission(int index){
         if(index>=completedMissions.size()){
-            System.err.println("|----ERROR:: the mission index provided, "+index+", was invalid... The size is "+completedMissions.size()+"  ---|");
+            System.err.println("|----ERROR:: the save file index provided, "+index+", was invalid... The size is "+completedMissions.size()+"  ---|");
             return true;
         }
         return completedMissions.get(index);
@@ -244,7 +245,7 @@ public class Profile {
             int[][] data=null;
             String[][] input;// note:: [x][y]
             int a,b;
-            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+StringTools.numToDigits(region,2)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array
@@ -327,7 +328,7 @@ public class Profile {
         try{
             ArrayList<TriggerSpot> data=new ArrayList<>();
             int[] opp=new int[10];
-            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+newRegion+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/T"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 int triggers=Integer.parseInt(scan.nextLine());//number of trigger spots in this list
@@ -339,6 +340,7 @@ public class Profile {
                     for(int j=0;j<input.length;j++){
                         opp[j]=Integer.parseInt(input[j]);
                     }
+                    System.out.println("For current top down region "+StringTools.numToDigits(newRegion,3)+" trigger spot #"+i+" :: "+opp[0]+" 1d "+opp[1]+" 2d "+opp[2]+" 3d "+opp[3]+" 4d "+opp[4]+" 5d "+opp[5]+" 6d "+opp[6]+" 7d "+opp[7]+" 8d "+opp[8]+" 9d "+opp[9]+" 10d ");
                     data.add(new TriggerSpot(opp[1],opp[2],opp[3],opp[4],opp[0],opp[5]==1,opp[6],opp[7],opp[8],opp[9]));
                 }
                 
@@ -369,7 +371,7 @@ public class Profile {
     public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
         try{
             ArrayList data=new ArrayList<TopDownAI>();
-            int[] a=new int[9];
+            int[] a=new int[12];
             inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
@@ -381,9 +383,10 @@ public class Profile {
                 for(int i=0;i<AIs;i++){
                     input=scan.nextLine().split(",");
                     
-                    for(int j=0;j<7;j++)
+                    for(int j=0;j<9;j++)
                         a[j]=Integer.parseInt(input[j]);
-                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[9],input[10],a[6],a[4],a[5],a[7],a[8]));
+                    a[7]=Integer.parseInt(input[11]);
+                    data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[9],input[10],a[6],a[4],a[5],a[7],a[8],a[7]));
                 }
                 
                 
@@ -402,15 +405,15 @@ public class Profile {
      *  information that is needed about the side view AI specified by the
      *  integer AI_ID.
      * 
-     * @param AI_ID the AI ID for which the information is being 
+     * @param regionID the AI ID for which the information is being 
      *  imported
      * @return a 2-dimensional array of integers containing the imported data
      */
-    public static ArrayList<SideViewAI> importAISideView(int AI_ID){
+    public static ArrayList<SideViewAI> importAISideView(int regionID){
         try{
             ArrayList<SideViewAI> data=new ArrayList<>();
             
-            inputSaveFile=new File(Profile.class.getResource("AIData/SideView/"+StringTools.numToDigits(AI_ID,3)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("AIData/SideView/"+StringTools.numToDigits(regionID,2)+".txt").toURI());
             
             if(inputSaveFile!=null){
                 Scanner scan=new Scanner(inputSaveFile);
@@ -426,15 +429,15 @@ public class Profile {
                 switch(a[0]){
                     case 1: //melee
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewMeleeEnemy(a[1],a[2],AI_ID,a[i]));
+                            data.add(new SideViewMeleeEnemy(a[1],a[2],regionID,a[i]));
                         break;
                     case 2:
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewRangedEnemy(a[1],a[2],AI_ID,a[i]));
+                            data.add(new SideViewRangedEnemy(a[1],a[2],regionID,a[i]));
                         break;
                     case 3:
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewAirEnemy(a[1],a[2],AI_ID,a[i]));
+                            data.add(new SideViewAirEnemy(a[1],a[2],regionID,a[i]));
                         break;
                 }                
                 

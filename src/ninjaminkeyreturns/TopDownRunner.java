@@ -135,7 +135,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //                    System.out.println("to region????");
                     //move to another region....
                     
-                } else if(hit.AI_Triggered>-1&&!Profile.getCompletedMission(region.getAI(hit.AI_Triggered).saveIndexToNotTalk)&&Profile.getCompletedMission(region.getAI(hit.AI_Triggered).saveIndexToTalk)){
+                } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
                     System.out.println("triggering AI from runner.... ");
                     focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
@@ -152,7 +152,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         public void actionPerformed(){
                             if(focusedAI.instantSideView){ //the top down view ends
                                 Profile.playerLocation=new int[]{player.getX(),player.getY()};//set the coordinates so that the player can come back to them
-                                done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+                                done.actionPerformed(focusedAI.SIDEVIEW_REGION_TO_GO_TO_ID);
                             } else{//the AI did not confront the player in a side view manner
                                 player.setDisabled(false);
                                 //other code.... . . .. .. ........................................................<<<<<<<<
@@ -232,7 +232,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         public void actionPerformed(){
                             if(focusedAI.instantSideView){ //the top down view ends
                                 Profile.playerLocation=new int[]{player.getX(),player.getY()+2};//set the coordinates so that the player can come back to them
-                                done.actionPerformed(focusedAI.MISSION_GIVEN_ID);
+                                done.actionPerformed(focusedAI.SIDEVIEW_REGION_TO_GO_TO_ID);
                             } else{//the AI did not confront the player in a side view manner
                                 player.setDisabled(false);
                                 //other code.... . . .. .. ........................................................<<<<<<<<
