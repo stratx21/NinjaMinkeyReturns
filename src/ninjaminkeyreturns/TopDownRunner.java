@@ -212,21 +212,20 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     private void triggerAIFromKey(int detectX,int detectY){
         int triggeredAI=region.getAIAtSpotInteger(detectX,detectY);
-        TopDownAI ai=region.getAI(triggeredAI);
-        if(triggeredAI!=-1&&triggeredAI<region.AIs.size()
-                &&((!Profile.getCompletedMission(ai.saveIndexToNotTalk))
-                   ||(ai.saveIndexToNotTalk==-1))){
-        //call on the triggered AI
-                    System.out.println("triggering AI from runner (selected with SELECT function) .... ");
-                    focusedAI=region.triggerAI(triggeredAI,player.getX(),player.getY(),AIdone=new CListener(){
-                        @Override
-                        public void actionPerformed(byte facing){//after the AI has approached the player::
-                            player.setDirectionFacing(facing);
-                            showingPrompt=true;
-                            
-                        }
-                    });
-                    talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
+        
+        if(triggeredAI!=-1&&triggeredAI<region.AIs.size()){
+            TopDownAI ai=region.getAI(triggeredAI);
+            //call on the triggered AI
+            System.out.println("triggering AI from runner (selected with SELECT function) .... ");
+            focusedAI=region.triggerAI(triggeredAI,player.getX(),player.getY(),AIdone=new CListener(){
+                @Override
+                public void actionPerformed(byte facing){//after the AI has approached the player::
+                    player.setDirectionFacing(facing);
+                    showingPrompt=true;
+                    
+                }
+            });
+            talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(focusedAI.getBeforePrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
                     new CListener(){
                         @Override
                         public void actionPerformed(){
@@ -239,6 +238,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             }
                         }
                     });
+        } else {
         }
     }
     

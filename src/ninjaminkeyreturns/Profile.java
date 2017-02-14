@@ -429,15 +429,15 @@ public class Profile {
                 switch(a[0]){
                     case 1: //melee
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewMeleeEnemy(a[1],a[2],regionID,a[i]));
+                            data.add(new SideViewMeleeEnemy(a[1],a[2],regionID,a[i]*20));
                         break;
                     case 2:
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewRangedEnemy(a[1],a[2],regionID,a[i]));
+                            data.add(new SideViewRangedEnemy(a[1],a[2],regionID,a[i]*20));
                         break;
                     case 3:
                         for(int i=3;i<input.length;i++)
-                            data.add(new SideViewAirEnemy(a[1],a[2],regionID,a[i]));
+                            data.add(new SideViewAirEnemy(a[1],a[2],regionID,a[i]*20));
                         break;
                 }                
                 
