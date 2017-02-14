@@ -173,10 +173,7 @@ public class TopDownRegion extends Region{
      }
      
      public TopDownAI getAI(int index){
-         if(index==-1)
-             return null;
-         
-        return AIs.get(index);
+         return AIs.get(index);
      }
      
      public TopDownAI getAIAtSpotClass(int x,int y){
