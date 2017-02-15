@@ -17,6 +17,8 @@ import java.util.ArrayList;
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
+    static int lastTriggeredAI=-1;
+    
     /**
      * The player instance that is used for the top down view. 
      */
@@ -135,8 +137,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
 //                    System.out.println("to region????");
                     //move to another region....
                     
+                    done.actionPerformed(hit.regionToGoTo,true);
+                    
                 } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
+                    lastTriggeredAI=hit.AI_Triggered;
                     System.out.println("triggering AI from runner.... ");
                     focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
                         @Override

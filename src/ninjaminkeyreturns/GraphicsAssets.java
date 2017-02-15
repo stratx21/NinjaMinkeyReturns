@@ -85,7 +85,7 @@ public class GraphicsAssets {
      */
     public static ArrayList<BufferedImage> importTopDownAIImages(int ai_ID){
         ArrayList<BufferedImage> img=new ArrayList<>();
-        String id=StringTools.numToDigits(ai_ID,3);
+        String id=StringTools.numToDigits(ai_ID,4);
         
         img.add(importFromString("Graphics/TopDown/AI/"+id+"/U"+0+".png"));//idle up
         img.add(importFromString("Graphics/TopDown/AI/"+id+"/D"+0+".png"));//idle down

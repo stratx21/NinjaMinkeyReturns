@@ -369,10 +369,11 @@ public class Profile {
      * @return a 2-dimensional array of integers containing the imported data
      */
     public static ArrayList<TopDownAI> importAIDataTopDown(int newRegion){
+        ArrayList<TopDownAI> data=new ArrayList<>();
         try{
-            ArrayList data=new ArrayList<TopDownAI>();
+            
             int[] a=new int[12];
-            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,4)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
             
             if(inputSaveFile!=null){
                 Scanner scan=new Scanner(inputSaveFile);
@@ -396,7 +397,7 @@ public class Profile {
         }catch(Exception e){
             ErrorLogger.logError(e,"Profile.importAIDataTopDown");
         }
-        return null;
+        return data;
     }
     
     /**
@@ -428,16 +429,16 @@ public class Profile {
                 
                 switch(a[0]){
                     case 1: //melee
-                        for(int i=3;i<input.length;i++)
-                            data.add(new SideViewMeleeEnemy(a[1],a[2],regionID,a[i]*20));
+                        for(int i=4;i<input.length;i++)
+                            data.add(new SideViewMeleeEnemy(a[1],a[2],a[3],a[i]*20));
                         break;
                     case 2:
-                        for(int i=3;i<input.length;i++)
-                            data.add(new SideViewRangedEnemy(a[1],a[2],regionID,a[i]*20));
+                        for(int i=4;i<input.length;i++)
+                            data.add(new SideViewRangedEnemy(a[1],a[2],a[3],a[i]*20));
                         break;
                     case 3:
-                        for(int i=3;i<input.length;i++)
-                            data.add(new SideViewAirEnemy(a[1],a[2],regionID,a[i]*20));
+                        for(int i=4;i<input.length;i++)
+                            data.add(new SideViewAirEnemy(a[1],a[2],a[3],a[i]*20));
                         break;
                 }                
                 

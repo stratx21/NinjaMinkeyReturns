@@ -34,7 +34,16 @@ public class CListener {
      */
     public void actionPerformed(int a){}
 
+    
     /**
+     *
+     * @param a
+     */
+    public void actionPerformed(int a,boolean b){}
+    
+    
+    /**
+     * 
      *
      * @param a
      */

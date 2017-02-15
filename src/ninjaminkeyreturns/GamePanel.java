@@ -77,8 +77,8 @@ public class GamePanel extends CPanel implements KeyListener{
             @Override
             public void actionPerformed(boolean won){
                 switchToTopDown();
-                if(!won)
-                    Player.health=Profile.MAX_HEALTH;
+                //if(!won)
+                Player.health=Profile.MAX_HEALTH;
             }
             
             
@@ -111,6 +111,15 @@ public class GamePanel extends CPanel implements KeyListener{
                 switchToSideView();
                 
             }
+            
+            @Override
+            public void actionPerformed(int topDownRegionToGoTo,boolean b){
+                runner=null;
+                Profile.lastKnownRegionTopDown=topDownRegionToGoTo;
+                switchToTopDown();
+            }
+                
+            
             },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown);
         Profile.health=Player.health;
     }
