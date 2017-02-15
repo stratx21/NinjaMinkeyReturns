@@ -372,7 +372,7 @@ public class Profile {
         try{
             ArrayList data=new ArrayList<TopDownAI>();
             int[] a=new int[12];
-            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,3)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("AIData/TopDown/"+StringTools.numToDigits(newRegion,4)+".txt").toURI());
             
             if(inputSaveFile!=null){
                 Scanner scan=new Scanner(inputSaveFile);
