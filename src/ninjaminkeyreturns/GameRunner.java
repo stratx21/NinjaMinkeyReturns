@@ -115,22 +115,22 @@ public class GameRunner{
     public void keyPressedFlow(char typed){
         if(typed==controls[0]){
             currentKey[0]=true;
-            setOtherKeysFalse(0);//in here to change it only if it is a valid key
+            //setOtherKeysFalse(0);//in here to change it only if it is a valid key
         }else if(typed==controls[1]){
             currentKey[1]=true;
-            setOtherKeysFalse(1);
+            //setOtherKeysFalse(1);
         }else if(typed==controls[2]){
             currentKey[2]=true;
-            setOtherKeysFalse(2);
+            //setOtherKeysFalse(2);
         }else if(typed==controls[3]){
             currentKey[3]=true;
-            setOtherKeysFalse(3);
+            //setOtherKeysFalse(3);
         }else if(typed==controls[4]){
             currentKey[4]=true;
-            setOtherKeysFalse(4);
+            //setOtherKeysFalse(4);
         }else if(typed==controls[5]){
             currentKey[5]=true;
-            setOtherKeysFalse(5);
+            //setOtherKeysFalse(5);
         }
     }
 

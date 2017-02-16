@@ -33,6 +33,8 @@ public class GamePanel extends CPanel implements KeyListener{
      */
     private CListener backToMenu=new CListener();
     
+    private boolean wonAndAfterPrompt=false;
+    
 //    private int c=0;
     /**
      * This sets up the Game Panel and adds the KeyListener that is used for the
@@ -76,9 +78,12 @@ public class GamePanel extends CPanel implements KeyListener{
         runner=new SideViewRunner(new CListener(){
             @Override
             public void actionPerformed(boolean won){
-                switchToTopDown();
+                
                 //if(!won)
                 Player.health=Profile.MAX_HEALTH;
+                wonAndAfterPrompt=won;//so that it is originally false but if won here
+                //System.out.println("WONNNNN :: "+won+wonAndAfterPrompt);
+                switchToTopDown();
             }
             
             
@@ -99,6 +104,12 @@ public class GamePanel extends CPanel implements KeyListener{
      *  by controlling the proper changes required for the switch. 
      */
     private void switchToTopDown(){
+        
+        switch(Profile.lastKnownRegionTopDown){
+            
+        }
+        
+
         runner=new TopDownRunner(new CListener(){
             @Override
             public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
@@ -120,7 +131,9 @@ public class GamePanel extends CPanel implements KeyListener{
             }
                 
             
-            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown);
+            },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown,wonAndAfterPrompt);
+        
+        
         Profile.health=Player.health;
     }
     /**

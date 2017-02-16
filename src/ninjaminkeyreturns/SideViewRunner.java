@@ -584,21 +584,21 @@ public class SideViewRunner extends GameRunner{
     private void playerKeysFlow(){
         if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
             player.startJump();
-        }else if(currentKey[1]){//down
+        }if(currentKey[1]){//down
             
-        }else if(currentKey[2]){//left
+        }if(currentKey[2]){//left
             if(player.getXVelocity()>-1*player.getWalkVeloctiy()){
                 player.incrementXVelocity(-1);
                 //System.out.println("starting to left.................");
             }
             player.facingRight=false;
-        }else if(currentKey[3]){//right
+        }if(currentKey[3]){//right
             if(player.getXVelocity()<player.getWalkVeloctiy()){
                 player.incrementXVelocity(1);
                 //System.out.println("starting to right.................");
             }
             player.facingRight=true;
-        }else if(currentKey[4]){//attack (melee with swords)                        playerAttacks
+        }if(currentKey[4]){//attack (melee with swords)                        playerAttacks
             if(player.getCanAttack()){
                 player.startAttack(true);
                 playerAttacks.add(new HitBox(//all in location points
@@ -609,7 +609,7 @@ public class SideViewRunner extends GameRunner{
                         player.getMeleeDamage())
                     );
             }
-        }else if(currentKey[5]){//attack (ranged with banana)
+        }if(currentKey[5]){//attack (ranged with banana)
             if(player.getCanAttack()){
                 player.startAttack(false);
                 playerAttacks.add(new Projectile(

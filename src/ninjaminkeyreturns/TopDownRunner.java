@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
-    static int lastTriggeredAI=-1;
+    public static int lastTriggeredAI=-1;
     
     /**
      * The player instance that is used for the top down view. 
@@ -73,11 +73,15 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      * @param playerStartY the y starting location for the player
      * @param currentRegion the current region ID to be managed
      */
-    public TopDownRunner(CListener dn,int playerStartX,int playerStartY,int currentRegion){
+    public TopDownRunner(CListener dn,int playerStartX,int playerStartY,int currentRegion,boolean showAfterPrompt){
         super(dn);
         setup(playerStartX,playerStartY);
         region=new TopDownRegion(currentRegion);
         Profile.lastKnownRegionTopDown=currentRegion;
+        //System.out.println("showAfterPrompt:: "+showAfterPrompt);
+        if(showAfterPrompt&&lastTriggeredAI>-1)
+            comingBackStartPrompt();
+        
     }
     
     /**
@@ -91,6 +95,20 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     private void setup(int playerStartX,int playerStartY){
         player=new TopDownPlayer(new int[]{playerStartX,playerStartY});
         Prompt.resetFont();
+    }
+    
+    private void comingBackStartPrompt(){
+        //System.out.println("REACHED COMING BACK THINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+        player.setDisabled(true);
+        showingPrompt=true;
+        talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(region.getAI(lastTriggeredAI).getAfterPrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
+                    new CListener(){
+                        @Override
+                        public void actionPerformed(){
+                            player.setDisabled(false);
+                            showingPrompt=false;
+                        }
+                    });
     }
     
     /**
@@ -128,6 +146,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
 //      
     }
+    
+    
     
     private void triggeringFlow(int a){
         if(a!=-1){

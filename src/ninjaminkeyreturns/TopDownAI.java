@@ -127,7 +127,7 @@ public class TopDownAI extends AI{
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
         location=new int[]{x,y};
         promptBefore=prmptBefore;
-        promptAfter=prmptAfter;
+        promptAfter="*"+prmptAfter+"*";
         visible=vsble==1;
         instantSideView=instSideView==1;
         saveIndexForWin=saveIndex;
