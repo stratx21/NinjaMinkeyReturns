@@ -5,6 +5,8 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -57,7 +59,12 @@ public class Player {
 //        location=loc;
 //    }
     
-    
+    public static void drawHealthBar(Graphics g){
+        g.setColor(Color.GRAY);
+        g.fillRect(SQUARE_SIZE/4, SQUARE_SIZE/4, SQUARE_SIZE*2, SQUARE_SIZE/2);
+        g.setColor(Color.red);
+        g.fillRect(SQUARE_SIZE/4, SQUARE_SIZE/4, (int)((SQUARE_SIZE*2)*(health/Profile.MAX_HEALTH)), SQUARE_SIZE/2);
+    }
     
     
     

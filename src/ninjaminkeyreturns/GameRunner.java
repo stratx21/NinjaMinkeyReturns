@@ -20,13 +20,13 @@ public class GameRunner{
      * NOTE:: to change controls change them in Profile then evoke the 
      *  resetControls function
      */
-    public static char[] controls=new char[6]; 
+    public static char[] controls=new char[7]; 
     
     /**
      * A set of booleans that are used to tell what keys are currently being
      *  pressed. 
      */
-    public boolean[] currentKey=new boolean[6];//up, down, left, right, attack, other attack
+    public boolean[] currentKey=new boolean[7];//up, down, left, right, attack, other attack
     
     /**
      * The standard java.awt.Rectangle in which the game is represented 
@@ -128,6 +128,8 @@ public class GameRunner{
         }else if(typed==controls[5]){
             currentKey[5]=true;
             //setOtherKeysFalse(5);
+        }else if(typed==controls[6]){
+            currentKey[6]=true;
         }
     }
 
@@ -138,6 +140,7 @@ public class GameRunner{
      * @param typed the character of the  key that was released
      */
     public void keyReleasedFlow(char typed){
+        //replace with a loop? ::
         if(typed==controls[0]){
             currentKey[0]=false;
         }else if(typed==controls[1]){
@@ -150,6 +153,8 @@ public class GameRunner{
             currentKey[4]=false;
         }else if(typed==controls[5]){
             currentKey[5]=false;
+        }else if(typed==controls[6]){
+            currentKey[6]=false;
         }
     }
     

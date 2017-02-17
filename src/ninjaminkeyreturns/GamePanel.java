@@ -129,12 +129,18 @@ public class GamePanel extends CPanel implements KeyListener{
                 Profile.lastKnownRegionTopDown=topDownRegionToGoTo;
                 switchToTopDown();
             }
+            
+            @Override
+            public void actionPerformed(){//quit the game, go to the main menu
+                backToMenu.actionPerformed();
+            }
                 
             
             },Profile.playerLocation[0],Profile.playerLocation[1],Profile.lastKnownRegionTopDown,wonAndAfterPrompt);
         
         
         Profile.health=Player.health;
+        wonAndAfterPrompt=false;
     }
     /**
      * an integer value that is used for the Y value of the black rectangle

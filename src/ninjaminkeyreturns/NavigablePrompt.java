@@ -5,13 +5,21 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import static ninjaminkeyreturns.Prompt.GAME_SPAN;
+import static ninjaminkeyreturns.Prompt.font;
 
 /**
  *
  * @author Josh
  */
 public class NavigablePrompt extends Prompt{//this prompt is used for menus and such. It will have different options that the user can choose. It does not have a KeyListener so it requires functions to be called as the keys are pressed in this situation
+    
+    
+    public CListener done=null;
+    
+    //private int indent=0;
     
     /**
      * The choice that the user is currently on (the "cursor" is on).
@@ -21,7 +29,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
     /**
      * The different choices that the user can choose from.
      */
-    private String[] choices=new String[4];
+    public Option[] choices=new Option[4];
     
     /**
      * This sets up the NavigablePrompt while bringing in a CListener for when
@@ -33,7 +41,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      * @param don the CListener evoked when the Prompt is finished
      */
     public NavigablePrompt(boolean showStats,CListener don){
-        
+        done=don;
     }
     
     /**
@@ -45,7 +53,39 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      */
     public void loopCalculate(boolean[] keysPressed){
         
+        if(keysPressed[4]){//selected one
+            choices[cursorLocation].activate.actionPerformed();
+            System.out.println("SELECTED ONE!");
+        }
+        
+        
+        if(moveAgainSequence==0){
+            if(keysPressed[2]){//left
+                cursorLocation-=1;
+                moveAgainSequence=10;
+            } else if(keysPressed[3]){//right
+                cursorLocation+=1;
+                moveAgainSequence=10;
+            }
+            
+        }
+        
+        if(moveAgainSequence>0)
+            moveAgainSequence--;
+        
+        if(cursorLocation>choices.length-1){
+            cursorLocation-=choices.length;//if 4 and length 4, 4-4=0
+        }else if(cursorLocation<0){
+            cursorLocation+=choices.length;//if -1 and length 4, -1+4=3
+        }
+        
+        choices[cursorLocation].setSelected(true);
+        for(int i=0;i<choices.length;i++)
+            if(i!=cursorLocation)
+                choices[i].setSelected(false);
     }
+    
+    private int moveAgainSequence=0;
     
     /**
      * This function draws the graphical representation of the NavigablePrompt
@@ -58,7 +98,33 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      */
     @Override
     public void draw(Graphics g){
+        String toDraw="";
+        for(int i=0;i<choices.length;i++){
+            if(choices[i].getSelected())
+                toDraw+=">";
+            else
+                toDraw+="  ";
+            toDraw+=" "+choices[i].getText();
+        }
         
+        super.drawBackImage(g);
+        g.setColor(Color.white);
+        g.setFont(font);
+        g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)/**+indent*/,(int)(0.8*GAME_SPAN.height));
     }
+    
+//    public void calculateIndent(){
+//        String typicalDraw="";
+//        for(int i=0;i<choices.length;i++)
+//            typicalDraw+=choices[i].getText();
+//        for(int i=0;i<choices.length-1;i++)
+//            typicalDraw+="  ";
+//        typicalDraw+=">";
+//            
+//        indent=(int)((GAME_SPAN.width)-(2*0.05*GAME_SPAN.width)-StringTools.getPixelWidth(typicalDraw, font))/2;
+//        
+//        
+//        System.out.println("indent (prompt):: "+indent);
+//    }
     
 }

@@ -42,13 +42,16 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     /**
      * This is for if it is showing a prompt. 
      */
-    public boolean showingPrompt=false;
+    public boolean showingPromptTalking=false,
+            showingPromptPause=false;
     
     /**
      * The prompt that is used to show strings when the AI talks to the player
      *  and has no extra options. 
      */
     PlainPrompt talkingPrompt=null;
+    
+    PausePrompt pausePrompt=null;
     
     /////////////////
     
@@ -100,13 +103,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     private void comingBackStartPrompt(){
         //System.out.println("REACHED COMING BACK THINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         player.setDisabled(true);
-        showingPrompt=true;
+        showingPromptTalking=true;
         talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(region.getAI(lastTriggeredAI).getAfterPrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
                     new CListener(){
                         @Override
                         public void actionPerformed(){
                             player.setDisabled(false);
-                            showingPrompt=false;
+                            showingPromptTalking=false;
                         }
                     });
     }
@@ -139,9 +142,15 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             else
                 player.continueMove();
             
-        }else if(showingPrompt){//loop components for each redraw
+        }else if(showingPromptTalking){//loop components for each redraw
             talkingPrompt.loopCalculate(currentKey[4]);
             talkingPrompt.draw(g);
+        } else if(showingPromptPause&&pausePrompt!=null){
+                pausePrompt.loopCalculate(currentKey);
+            if(pausePrompt!=null)
+                pausePrompt.draw(g);
+            if(sequencePauseAgain>0)
+                sequencePauseAgain--;
         }
         
 //      
@@ -167,7 +176,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
                             player.setDirectionFacing(facing);
-                            showingPrompt=true;
+                            showingPromptTalking=true;
                             
                         }
                     });
@@ -189,6 +198,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         
     }
+    
+    private int sequencePauseAgain=0;
     
     /**
      * This function conducts the flow for the player based on what keys are
@@ -215,7 +226,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }else if(currentKey[3]){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
-        }else if(currentKey[4]){//SETUP   *   future work
+        }else if(currentKey[4]){
             switch(player.getDirectionFacing()){
                 case 0: triggerAIFromKey(player.getX(),player.getY()-1);
                     break;
@@ -228,6 +239,43 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             }
         }else if(currentKey[5]){//SETUP   *   future work
             
+        } else if(currentKey[6]&&sequencePauseAgain==0){//pause
+            //System.out.println("pausing... . .. . ."+showingPromptPause);
+            if(!showingPromptPause){
+                System.out.println("-paused-");
+                sequencePauseAgain=10;
+                currentKey[6]=false;
+                showingPromptPause=true;
+                player.setDisabled(true);
+                pausePrompt=new PausePrompt(true,new CListener(){
+                    @Override
+                    public void actionPerformed(int choice){//when done
+                        showingPromptPause=false;
+                        player.setDisabled(false);
+                        pausePrompt=null;
+                        sequencePauseAgain=0;
+                        switch(choice){
+                            case 0://resume
+                                showingPromptPause=false;
+                                pausePrompt=null;
+                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
+                                break;
+                            case 1://quit
+                                done.actionPerformed();
+                                break;
+                            case 2://save
+                                Profile.save();
+                                break;
+                        }
+                    }
+                });
+            } else{// is showing the prompt already
+                System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
+                showingPromptPause=false;
+                player.setDisabled(false);
+                pausePrompt=null;
+                sequencePauseAgain=0;
+            }
         }
         
         //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
@@ -246,7 +294,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 @Override
                 public void actionPerformed(byte facing){//after the AI has approached the player::
                     player.setDirectionFacing(facing);
-                    showingPrompt=true;
+                    showingPromptTalking=true;
                     
                 }
             });

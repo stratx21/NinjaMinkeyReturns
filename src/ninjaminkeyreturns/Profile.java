@@ -30,7 +30,7 @@ public class Profile {
      * NOTE:: the default controls are:: 'W','S','A','D','J','K'
      */
     public static char[] controls=new char[]{ 
-        'W','S','A','D','J','K'//DEFAULT
+        'W','S','A','D','J','K','P'//DEFAULT
     };
     
     /**

@@ -151,6 +151,9 @@ public class SideViewRunner extends GameRunner{
         calculateAI(g);
         
         calculate();
+        
+        
+        Player.drawHealthBar(g);
     }
     
     private void calculateAI(Graphics g){

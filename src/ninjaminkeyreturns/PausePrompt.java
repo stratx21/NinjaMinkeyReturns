@@ -25,22 +25,32 @@ public class PausePrompt extends NavigablePrompt{
      */
     public PausePrompt(boolean showStats, CListener don) {
         super(showStats, don);
-    }
-    
-    
-    
-    /**
-     * This function draws the graphical representation of the Prompt
-     *  interface and will also display the user's statistical data if the
-     *  boolean showStats is set to true.
-     * 
-     * @param g the java.awt.Graphics object that is used to form the 
-     *  graphical representations of the game objects on the frame Container
-     *  that holds the game. 
-     */
-    @Override
-    public void draw(Graphics g){
+        choices=new Option[]{
+            new Option("Resume",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(0);
+                }
+            }),
+            new Option("Quit",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(1);
+                }
+            }),
+            new Option("Save",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(2);
+                }
+            })
         
+        };
+        //calculateIndent();
     }
+    
+    
+    
+
     
 }

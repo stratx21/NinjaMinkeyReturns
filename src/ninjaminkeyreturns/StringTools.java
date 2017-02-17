@@ -32,7 +32,6 @@ public class StringTools {
      */
     public static ArrayList<String> formatStringForPrompt(String text,Font font,int maxPixelWidth){
         ArrayList<String> r=new ArrayList<String>();
-        int b=0;
         if(getPixelWidth(text,font)<=maxPixelWidth){ //defualt case just works
             r.add(text);
             return r;
@@ -104,7 +103,7 @@ public class StringTools {
      * @param font the font that is being used to draw the String text
      * @return the integer value of how long in pixels the String will be
      */
-    private static int getPixelWidth(String text,Font font){
+    public static int getPixelWidth(String text,Font font){
         AffineTransform affinetransform = new AffineTransform();     
         FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
         return (int)(font.getStringBounds(text,frc).getWidth());
