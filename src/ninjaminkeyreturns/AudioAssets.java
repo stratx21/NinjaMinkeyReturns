@@ -32,7 +32,7 @@ public class AudioAssets {
      */
     public static void play(final String name){
         try{
-            AudioInputStream audioIn=AudioSystem.getAudioInputStream(AudioAssets.class.getResource("Audio/"+name+".mp3"));
+            AudioInputStream audioIn=AudioSystem.getAudioInputStream(AudioAssets.class.getResource("Audio/"+name+".wav"));
             Clip clip=AudioSystem.getClip();
             clip.open(audioIn);
             if((name.equalsIgnoreCase("music"))&&Profile.musicOn)
