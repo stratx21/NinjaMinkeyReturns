@@ -387,6 +387,7 @@ public class Profile {
                     for(int j=0;j<9;j++)
                         a[j]=Integer.parseInt(input[j]);
                     a[7]=Integer.parseInt(input[11]);
+                    System.out.println("aaa 333 ====="+a[3]);
                     data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[9],input[10],a[6],a[4],a[5],a[7],a[8],a[7]));
                 }
                 

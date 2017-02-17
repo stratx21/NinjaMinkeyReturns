@@ -124,8 +124,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     @Override
     public void draw(Graphics g){
 //        System.out.println("reached top down draw");
-        region.draw(g,player.getX(),player.getY(),player.getOffCenterX(),player.getOffCenterY());
-        player.draw(g);
+        
         
         //calculate:: (may be moved into another recursion/timer later)::
         
@@ -134,24 +133,29 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         if(player.finishedMoving){//finished moving to the square
             triggeringFlow(region.getTriggerSpotHit(player.getX(),player.getY()));
             player.finishedMoving=false;
+            for(TopDownAI ai:region.AIs){//put in player info for all AIs
+                ai.calcToGo(player.getX(),player.getY());
+            }
         }
         
-        if(!player.getDisabled()){
-            if(!player.travelling)
-                playerKeysFlow();
-            else
-                player.continueMove();
+        region.draw(g,player.getX(),player.getY(),player.getOffCenterX(),player.getOffCenterY());
+        player.draw(g);
+        
+        if(!player.travelling)
+            playerKeysFlow();
+        else
+            player.continueMove();
             
-        }else if(showingPromptTalking){//loop components for each redraw
+        if(showingPromptTalking){//loop components for each redraw
             talkingPrompt.loopCalculate(currentKey[4]);
             talkingPrompt.draw(g);
         } else if(showingPromptPause&&pausePrompt!=null){
-                pausePrompt.loopCalculate(currentKey);
+            pausePrompt.loopCalculate(currentKey);
             if(pausePrompt!=null)
                 pausePrompt.draw(g);
-            if(sequencePauseAgain>0)
-                sequencePauseAgain--;
         }
+        if(sequencePauseAgain>0)
+            sequencePauseAgain--;
         
 //      
     }
@@ -212,35 +216,49 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         //System.out.println("to playerkeysflow");
         //note:: controls index order - up, down, left, right, attack, other attack
         
-        if(currentKey[0]){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
+        if(currentKey[0]&&!player.getDisabled()){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
             if(region.canMoveToSpace(player.getX(),player.getY()-1))
                 player.moveStart(0);
-        }else if(currentKey[1]){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
+        }else if(currentKey[1]&&!player.getDisabled()){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
             if(region.canMoveToSpace(player.getX(),player.getY()+1))
                 player.moveStart(3);
-        }else if(currentKey[2]){
+        }else if(currentKey[2]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()-1,player.getY())){
                 player.moveStart(1);
 //                System.out.println("move");
             }
-        }else if(currentKey[3]){
+        }else if(currentKey[3]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
-        }else if(currentKey[4]){
+        }else if(currentKey[4]&&!player.getDisabled()){
+            boolean a=false,b=false;
             switch(player.getDirectionFacing()){
-                case 0: triggerAIFromKey(player.getX(),player.getY()-1);
+                case 0: b=triggerAIFromKey(player.getX(),player.getY()-1);
+                if(b)
+                    a=true;
                     break;
-                case 1: triggerAIFromKey(player.getX()-1,player.getY());
+                case 1: b=triggerAIFromKey(player.getX()-1,player.getY());
+                if(b)
+                    a=true;
                     break;
-                case 2: triggerAIFromKey(player.getX()+1,player.getY());
+                case 2: b=triggerAIFromKey(player.getX()+1,player.getY());
+                if(b)
+                    a=true;
                     break;
-                case 3: triggerAIFromKey(player.getX(),player.getY()+1);
+                case 3: b=triggerAIFromKey(player.getX(),player.getY()+1);
+                if(b)
+                    a=true;
                     break;
+            }
+            
+            if(!a){
+                AudioAssets.play("Error");
+                System.out.println("PLAYED ERROR SOUND");
             }
         }else if(currentKey[5]){//SETUP   *   future work
             
         } else if(currentKey[6]&&sequencePauseAgain==0){//pause
-            //System.out.println("pausing... . .. . ."+showingPromptPause);
+            System.out.println("pausing... . .. . ."+showingPromptPause);
             if(!showingPromptPause){
                 System.out.println("-paused-");
                 sequencePauseAgain=10;
@@ -260,10 +278,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                                 pausePrompt=null;
                                 System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
                                 break;
-                            case 1://quit
+                            case 1://options
+                                
+                                break;
+                            case 2://quit
                                 done.actionPerformed();
                                 break;
-                            case 2://save
+                            case 3://save
                                 Profile.save();
                                 break;
                         }
@@ -274,16 +295,18 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 showingPromptPause=false;
                 player.setDisabled(false);
                 pausePrompt=null;
-                sequencePauseAgain=0;
+                sequencePauseAgain=10;
             }
         }
+        
+        //System.out.println("currentKey[6]&&sequencePauseAgain==0 "+currentKey[6]+"  "+sequencePauseAgain);
         
         //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
         // carry on the above process for keys inside the player class? (depends on future
         // changes)
     }
     
-    private void triggerAIFromKey(int detectX,int detectY){
+    private boolean triggerAIFromKey(int detectX,int detectY){
         int triggeredAI=region.getAIAtSpotInteger(detectX,detectY);
         
         if(triggeredAI!=-1&&triggeredAI<region.AIs.size()){
@@ -311,8 +334,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                             }
                         }
                     });
-        } else {
-        }
+            return true;
+        } //no ai was triggered
+        return false;
     }
     
     

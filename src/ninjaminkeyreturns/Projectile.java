@@ -84,6 +84,10 @@ public class Projectile extends HitBox{
                 null);
         
         //System.out.println("drawing the projectileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+x+"   "+y+"   "+(int)(width*POINT_TO_PIXEL_MULTIPLIER)+"    "+(int)(height*POINT_TO_PIXEL_MULTIPLIER));
+        
+    }
+    
+    public void calculate(){
         if(velocity[1]<5)
             velocity[1]+=0.5;
         incrementByVelocity();

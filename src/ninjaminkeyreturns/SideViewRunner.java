@@ -31,6 +31,20 @@ public class SideViewRunner extends GameRunner{
     
     
     /**
+     * This is for if it is showing a prompt. 
+     */
+    public boolean showingPromptPause=false;
+    
+    /**
+     * The prompt that is used for the pause menu.
+     */
+    
+    PausePrompt pausePrompt=null;
+    
+    private int sequencePauseAgain=0;
+    
+    
+    /**
      * The instance of SideViewPlayer that is used for the player that is in
      *  side view. 
      */
@@ -131,6 +145,9 @@ public class SideViewRunner extends GameRunner{
             HitBox a=playerAttacks.get(i);
             if(a instanceof Projectile){
                 a.draw(g,(int)camera.getX(),(int)camera.getY());
+                if(!showingPromptPause)
+                    ((Projectile) a).calculate();
+                
                 if(a.getX()<0
                  ||a.getX()>region.getMapLength()
                  ||a.getY()>200
@@ -148,9 +165,20 @@ public class SideViewRunner extends GameRunner{
             }
         }
         
-        calculateAI(g);
+        if(showingPromptPause&&pausePrompt!=null){
+            System.out.println("PAUSE LOOOPPPPP");
+            pausePrompt.loopCalculate(currentKey);
+            if(pausePrompt!=null)
+                pausePrompt.draw(g);
+            if(sequencePauseAgain>0)
+                sequencePauseAgain--;
+        }else{
+            calculateAI(g);
         
-        calculate();
+            calculate();
+        }
+        
+        
         
         
         Player.drawHealthBar(g);
@@ -161,7 +189,6 @@ public class SideViewRunner extends GameRunner{
         for(int i=0;i<region.AIs.size();i++){
             SideViewAI a=region.AIs.get(i);
             if(a!=null){
-                //System.out.println(a.active+a.startX);
                 if(a.active){
                     a.draw(g,(int)camera.getX(),(int)camera.getY());
                     a.calculate(player.getX(),player.getY());
@@ -410,7 +437,7 @@ public class SideViewRunner extends GameRunner{
 //                         4   5
             //System.out.println("t == "+t+" stuck == "+stuck);
             
-            System.out.println(" t = "+t+" stuck = "+stuck+" AI:: "+AI+" v:: "+AI.getXVelocity()+","+AI.getYVelocity());
+            //System.out.println(" t = "+t+" stuck = "+stuck+" AI:: "+AI+" v:: "+AI.getXVelocity()+","+AI.getYVelocity());
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
@@ -435,7 +462,7 @@ public class SideViewRunner extends GameRunner{
                         
                     } else{// is a side collision
                         //System.out.println("setting velocity[0] of player to 0 from a side collision");
-                        System.out.println("set to 0 from 0");
+                        //System.out.println("set to 0 from 0");
                         AI.setXVelocity(1);
                     }
                     break;
@@ -517,7 +544,6 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(10);
                             AI.incrementY(-10);
                             stuck=0;
-                            System.out.println("12458072365#@$#^%#@$%#@^$#@^% fixed stuck!!!!! -4 ");
                         }
                     
                     break;
@@ -541,7 +567,6 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-10);
                             AI.incrementY(-10);
                             stuck=0;
-                            System.out.println("12458072365#@$#^%#@$%#@^$#@^% fixed stuck!!!!! -5 ");
                         }
                         
                         
@@ -624,6 +649,43 @@ public class SideViewRunner extends GameRunner{
                         new int[]{player.getFacingRight()?5:-5,-5},
                         player.getProjectileImage()
                 ));
+            }
+        } if(currentKey[6]&&sequencePauseAgain==0){//pause
+            System.out.println("pausing... . .. . ."+showingPromptPause);
+            if(!showingPromptPause){
+                System.out.println("-paused-");
+                sequencePauseAgain=10;
+                currentKey[6]=false;
+                showingPromptPause=true;
+                pausePrompt=new PausePrompt(true,new CListener(){
+                    @Override
+                    public void actionPerformed(int choice){//when done
+                        showingPromptPause=false;
+                        pausePrompt=null;
+                        sequencePauseAgain=0;
+                        switch(choice){
+                            case 0://resume
+                                showingPromptPause=false;
+                                pausePrompt=null;
+                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
+                                break;
+                            case 1://options
+                                
+                                break;
+                            case 2://quit
+                                done.actionPerformed();
+                                break;
+                            case 3://save
+                                Profile.save();
+                                break;
+                        }
+                    }
+                });
+            } else{// is showing the prompt already
+                System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
+                showingPromptPause=false;
+                pausePrompt=null;
+                sequencePauseAgain=0;
             }
         }
     }

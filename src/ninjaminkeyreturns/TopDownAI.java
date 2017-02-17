@@ -128,7 +128,8 @@ public class TopDownAI extends AI{
         location=new int[]{x,y};
         promptBefore=prmptBefore;
         promptAfter="*"+prmptAfter+"*";
-        visible=vsble==1;
+        visible=(vsble==1);
+        System.out.println(visible);
         instantSideView=instSideView==1;
         saveIndexForWin=saveIndex;
         itemIDNeeded=itemNeeded;
@@ -162,7 +163,7 @@ public class TopDownAI extends AI{
      *  graphical representations of the game objects on the frame Container
      *  that holds the game. 
      */
-    public void draw(Graphics g){
+    public void draw(Graphics g,int offX,int offY){
         if(visible){
             if(walkingToPlayer){//flow
                 if(toGo[1]<-1){
@@ -201,9 +202,10 @@ public class TopDownAI extends AI{
                         GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                         SQUARE_SIZE,SQUARE_SIZE,null);
             }else{
-                g.drawImage(images.get(directionFacing),
-                        GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2,
-                        +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2
+                //System.out.println("drawingIdle.............................................");
+                g.drawImage(images.get(directionFacing*5),
+                        GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2-offX,
+                        +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2-offY
                         ,SQUARE_SIZE,SQUARE_SIZE,null);
             }
         }

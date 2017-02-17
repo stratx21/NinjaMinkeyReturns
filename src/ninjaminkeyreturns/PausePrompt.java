@@ -32,16 +32,22 @@ public class PausePrompt extends NavigablePrompt{
                     done.actionPerformed(0);
                 }
             }),
-            new Option("Quit",new CListener(){
+            new Option("Options",new CListener(){
                 @Override
                 public void actionPerformed(){
                     done.actionPerformed(1);
                 }
             }),
-            new Option("Save",new CListener(){
+            new Option("Quit",new CListener(){
                 @Override
                 public void actionPerformed(){
                     done.actionPerformed(2);
+                }
+            }),
+            new Option("Save",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(3);
                 }
             })
         
