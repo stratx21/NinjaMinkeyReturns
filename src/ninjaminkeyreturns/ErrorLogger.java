@@ -39,8 +39,8 @@ public class ErrorLogger {
         System.err.println("├┬┴┬┴ Error [Exception type used] in function<"+(o=f)
                 +"> ┬┴┬┴┤ Error :: "+e);
         error=e+"";
-        promptDeveloper(""+e+"\n*Emailing information can be found in the "
-                + "text document*");
+        promptDeveloper(""+e+"\n*You can email the crash report to Ethan Dickey "
+                + "at etdickey@gmail.com*");
     }
     
     /**
