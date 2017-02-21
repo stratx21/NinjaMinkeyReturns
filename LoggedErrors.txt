@@ -8,3 +8,13 @@ Error:: java.lang.NumberFormatException: For input string: "What...? You're stil
 **Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com**
 --------------------------------------------------------------------------------------------------
 
+
+--------------------------------------------------------------------------------------------------
+GraphicsAssets.importFromString(String)
+Error Occured at [YYYY/MM/DD HH:MM:SS]:: Tue Feb 21 16:01:05 CST 2017
+Error:: java.lang.NullPointerException
+**Developer Comments:: ""
+
+├┬┴┬┴ Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com ┬┴┬┴┤
+--------------------------------------------------------------------------------------------------
+

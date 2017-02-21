@@ -73,13 +73,16 @@ public class GameFrame extends JFrame{
         //only here because of testing/developing purposes::
         
         
-        switchToMainMenuPanel(true);
+//        switchToMainMenuPanel(true);
+        switchToGamePanel();
         
         
         
     }
     
     private void switchToGamePanel(){
+        System.out.println("switch to game panel!krmfkngkdddddddddddddddddddddddddddddddddddd");
+        currentPanel=null;
         currentPanel=new GamePanel(new CListener(){
             @Override
             public void actionPerformed(){
@@ -90,9 +93,13 @@ public class GameFrame extends JFrame{
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        Prompt.resetFont();
+        ErrorLogger.logEvent("Finished setting up game CPanel");
     }
     
     private void switchToMainMenuPanel(boolean startup){
+        System.out.println("switching to main menu panelllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        currentPanel=null;
         currentPanel=new StartPanel(startup,new CListener(){
             @Override
             public void actionPerformed(){
@@ -103,6 +110,8 @@ public class GameFrame extends JFrame{
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        Prompt.resetFont();
+        ErrorLogger.logEvent("Finished setting up main menu CPanel");
     }
     
     /**

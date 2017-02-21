@@ -5,9 +5,11 @@
  */
 package ninjaminkeyreturns;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import static ninjaminkeyreturns.CPanel.GAME_SPAN;
 
 /**
  *
@@ -15,6 +17,8 @@ import java.awt.image.BufferedImage;
  */
 public class StartPanel extends CPanel{
     boolean[] keysPressed=new boolean[7];
+    
+    boolean dones=false;
     
     NavigablePrompt menu=null;
     
@@ -30,6 +34,7 @@ public class StartPanel extends CPanel{
     
     public StartPanel(boolean startup,CListener d){
         initialImages=startup;
+        startImages=GraphicsAssets.importStartupImages();
         
         done=d;
         
@@ -40,21 +45,26 @@ public class StartPanel extends CPanel{
     
     @Override
     public void paintComponent(Graphics g){
-        
+        g.setColor(Color.black);
+        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
+        //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
+        //System.out.println(startImages[0]+"  "+startImages[1]+" "+startImages[2]);
         if(initialImages){
-            System.out.println(" time oneee :: "+time);
-            g.drawImage(startImages[instructionsRun?time/75:time/50],(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            if((!instructionsRun&&time>98)
-                ||(instructionsRun&&time>148)){
-                System.out.println("THIS CODE IS AUTISTIC");
+            //System.out.println(" time oneee :: "+time+" "+GAME_SPAN.getX()+" "+GAME_SPAN.getY()+" "+GAME_SPAN.getWidth()+" "+GAME_SPAN.getHeight());
+            g.drawImage(startImages[instructionsRun?time/150:time/75],0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+            if((!instructionsRun&&time>148)
+                ||(instructionsRun&&time>298)){
+                //System.out.println("THIS CODE IS AUTISTIC");
                 initialImages=false;
                 if(!instructionsRun)
                     setupMenu();
             }else
                 time++;
                 
-        } else if(instructionsRun){
+        } else if(instructionsRun&&!dones){
+            dones=true;
             done.actionPerformed();
+            
             
         }else{
             
@@ -71,7 +81,8 @@ public class StartPanel extends CPanel{
         }catch(Exception e){
             
         }
-        this.repaint();
+        if(!dones)
+            this.repaint();
     }
     
     private void setupMenu(){
@@ -80,21 +91,23 @@ public class StartPanel extends CPanel{
                     public void actionPerformed(int choice){
                         switch(choice){
                             case 0://start new
-                                Profile.startNewGame();
-                                
-                                startImages=GraphicsAssets.importInstructionImages();
-                                initialImages=true;
-                                time=0;
-                                instructionsRun=true;
+                                startNewGame();
                                 //done.actionPerformed();
                                 break;
                             case 1://load an old save
+                                boolean a=false;
                                 try{
-                                    Profile.open();
+                                    a=Profile.open();
                                 }catch(Exception e){
                                     System.out.println("Error with getting load file:: "+e);
                                 }
+                                if(!a)
+                                    startNewGame();
+                                
+                                menu=null;
+                                dones=true;
                                 done.actionPerformed();
+                                
                                 break;
                             case 2://options
                                 menu=new OptionsPrompt(false,new CListener(){
@@ -113,6 +126,15 @@ public class StartPanel extends CPanel{
                     }
                     
                 });
+    }
+    
+    private void startNewGame(){
+        Profile.startNewGame();         
+        startImages=GraphicsAssets.importInstructionImages();
+        initialImages=true;
+        time=0;
+        instructionsRun=true;
+        menu=null;
     }
     
     private void keysFlow(){

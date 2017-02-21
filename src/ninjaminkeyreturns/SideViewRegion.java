@@ -60,7 +60,7 @@ public class SideViewRegion extends Region{
      */
     public SideViewRegion(int regn) {
         super(regn);
-        System.out.println("initializing SideViewRegion...");
+        ErrorLogger.logEvent("initializing SideViewRegion "+regn+"...");
         
         int[] a=Profile.getSideViewMissionData(regn);
         regionData=Profile.importRegionDataSideView(regn);

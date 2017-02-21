@@ -15,6 +15,8 @@ public class Building {//all buildings are 3x3 tiles
     
     public BufferedImage image=null;
     
+    public int width=3,height=3;//tiles
+    
     public int[] location=new int[2];
     
     public Building(BufferedImage img,int startX,int startY){
@@ -28,6 +30,14 @@ public class Building {//all buildings are 3x3 tiles
     
     public int getY(){
         return location[1];
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public int getHeight(){
+        return height;
     }
         
     
