@@ -25,20 +25,44 @@ public class OptionsPrompt extends NavigablePrompt{
      */
     public OptionsPrompt(boolean showStats, CListener don) {
         super(showStats, don);
+        choices=new Option[]{
+            new Option("Back",new CListener(){
+               @Override
+               public void actionPerformed(){
+                   chooseAgain=10;
+                   done.actionPerformed(0);
+               }
+            }),
+            new Option("SoundOn",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    Profile.setSound(false);
+                    Profile.setSound(true);
+                }
+            }),
+            new Option("SoundOff",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    Profile.setSound(false);
+                }
+            })//,
+//            new Option("Quit",new CListener(){
+//                @Override
+//                public void actionPerformed(){
+//                    done.actionPerformed(2);
+//                }
+//            }),
+//            new Option("Save",new CListener(){
+//                @Override
+//                public void actionPerformed(){
+//                    done.actionPerformed(3);
+//                }
+//            })
+        
+        };
+        //calculateIndent();
     }
     
-    /**
-     * This function draws the graphical representation of the Prompt
-     *  interface and will also display the user's statistical data if the
-     *  boolean showStats is set to true.
-     * 
-     * @param g the java.awt.Graphics object that is used to form the 
-     *  graphical representations of the game objects on the frame Container
-     *  that holds the game. 
-     */
-    @Override
-    public void draw(Graphics g){
-        
-    }
+
     
 }

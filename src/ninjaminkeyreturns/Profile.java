@@ -33,11 +33,6 @@ public class Profile {
         'W','S','A','D','J','K','P'//DEFAULT
     };
     
-    /**
-     * These booleans determine if the sound effects or music are on, 
-     *  respectively, and can be changed by the user in the settings.
-     */
-    public static boolean soundEffectsOn=true,musicOn=true;
     
     /**
      * This array of booleans hold the information about the game progress
@@ -59,6 +54,8 @@ public class Profile {
      */
     public static int lastKnownRegionTopDown=0;
     
+    public static boolean soundOn=true;
+    
     /**
      * This double holds the last known health value that the user had while 
      *  still in top down view for the sake of saving the game so that the
@@ -70,7 +67,7 @@ public class Profile {
     /**
      * The maximum possible health value.
      */
-    public static double MAX_HEALTH=200.0;
+    public final static double MAX_HEALTH=200.0;
     
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
@@ -90,6 +87,19 @@ public class Profile {
     * a new game. 
     */
     public static double money=51.00;
+    
+    public static void startNewGame(){
+        health=MAX_HEALTH;
+        playerLocation=new int[]{19,20};
+    }
+    
+    public static void setSound(boolean a){
+        soundOn=a;
+        if(!a&&AudioAssets.music!=null)
+            AudioAssets.music.stop();
+        else if(a)
+            AudioAssets.play("MainSong");
+    }
     
     public static void setAllMissionsToFalse(){
         Collections.fill(completedMissions,Boolean.FALSE);
@@ -115,17 +125,12 @@ public class Profile {
                 System.out.println(sv.getSelectedFile());//returns file name and the directory location
                 //save.write......
                 
-                save.write(money+",");
-                
-                save.write(health+","+MAX_HEALTH+",");
-                
-                save.write(lastKnownRegionTopDown+","+playerLocation[0]+","+playerLocation[1]+",");
                 
                 
-                //keep last :: 
-                for(Boolean b:completedMissions){
-                    save.write(b.toString());
-                }
+                save.write(health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
+                
+                
+                
                 
 //                save.write(money+":");
 //                for(int k=0;k<5;k++)

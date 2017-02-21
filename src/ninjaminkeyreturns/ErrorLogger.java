@@ -35,12 +35,61 @@ public class ErrorLogger {
      * @param e
      * @param f
      */
-        protected static void logError(Exception e,String f){ //f= function name
+    protected static void logError(Exception e,String f){ //f= function name
         System.err.println("├┬┴┬┴ Error [Exception type used] in function<"+(o=f)
                 +"> ┬┴┬┴┤ Error :: "+e);
         error=e+"";
         promptDeveloper(""+e+"\n*Emailing information can be found in the "
                 + "text document*");
+    }
+    
+    /**
+     *
+     * @param e
+     * @param f
+     */
+    protected static void logEvent(String f){ //f= function name
+        System.out.println("=-Event-= ::  "+f);
+        
+        ArrayList<String> prv=new ArrayList<String>();
+        int lns=0;
+        try{
+            Scanner in = new Scanner(new FileInputStream("Events.txt"));
+            while(in.hasNextLine()){
+                lns++;
+                prv.add(in.nextLine());
+            }
+            
+            in.close();
+        }catch(IOException ioex){
+            System.err.println("error using Scanner in ErrorLogger");
+        }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Events."
+                    +"txt"))) {
+                Date date = new Date();
+                
+                for(int a=0;a<lns;a++){
+                    writer.write(prv.get(a));
+                    writer.newLine();
+                }
+                writer.newLine();
+                
+                writer.write("--------------------------------------------------------"
+                        +"------------------------------------------");
+                writer.newLine();
+                writer.write("Event Occured at [YYYY/MM/DD HH:MM:SS]:: "+date);
+                writer.newLine();
+                writer.write("=-Event-= :: "+f);
+                
+                writer.newLine();
+                writer.write("------------------------------------------------"
+                        +"--------------------------------------------------");
+                writer.newLine();
+                writer.newLine();
+            }catch(IOException ioex){
+            System.err.println("Error in writing to LoggerErrors.txt file:: "
+                    +ioex);
+        }
     }
     
     //--------Log error fo type [IOException]::
@@ -92,8 +141,10 @@ public class ErrorLogger {
                 
                 f.write("--------------------------------------------------------"
                         +"------------------------------------------");
-                f.newLine();
-                f.write(o);
+                if(o!=null){
+                    f.newLine();
+                    f.write(o);
+                }
                 f.newLine();
                 f.write("Error Occured at [YYYY/MM/DD HH:MM:SS]:: "+date);
                 f.newLine();

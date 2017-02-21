@@ -31,17 +31,19 @@ public class AudioAssets {
      * @param name the name of the audio file that is to be played
      */
     public static void play(final String name){
+        if(Profile.soundOn){
         try{
             AudioInputStream audioIn=AudioSystem.getAudioInputStream(AudioAssets.class.getResource("Audio/"+name+".wav"));
             Clip clip=AudioSystem.getClip();
             clip.open(audioIn);
-            if((name.equalsIgnoreCase("music"))&&Profile.musicOn)
+            if((name.equalsIgnoreCase("MainSong")))
                 (music=clip).loop(-1);
-            else if(Profile.soundEffectsOn)
+            else 
                 clip.start();
         } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e){
             System.err.println("Error getting audio/playing:: "+e);
             ErrorLogger.logError(e,"AudioAssets.play(String)");
+        }
         }
     }
 }

@@ -25,20 +25,35 @@ public class StartupPrompt extends NavigablePrompt{
      */
     public StartupPrompt(boolean showStats, CListener don) {
         super(showStats, don);
-    }
-    
-    /**
-     * This function draws the graphical representation of the Prompt
-     *  interface and will also display the user's statistical data if the
-     *  boolean showStats is set to true.
-     * 
-     * @param g the java.awt.Graphics object that is used to form the 
-     *  graphical representations of the game objects on the frame Container
-     *  that holds the game. 
-     */
-    @Override
-    public void draw(Graphics g){
         
+        choices=new Option[]{
+            new Option("Start",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(0);
+                }
+            }),
+            new Option("Load",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    chooseAgain=10;
+                    done.actionPerformed(1);
+                }
+            }),
+            new Option("Options",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(2);
+                }
+            }),
+            new Option("Quit",new CListener(){
+                @Override
+                public void actionPerformed(){
+                    done.actionPerformed(3);
+                }
+            })
+        
+        };
     }
     
 }

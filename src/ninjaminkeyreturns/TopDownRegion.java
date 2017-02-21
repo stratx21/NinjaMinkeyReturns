@@ -213,7 +213,7 @@ public class TopDownRegion extends Region{
              }
          }
          
-         if((int)(Math.random()*7)==-1&&canMoveToSpace(x,y+3)){
+         if((int)(Math.random()*7)==1&&canMoveToSpace(x,y+3)){
              r=0;
              AIs.get(0).setLocation(x,y-5);
          }

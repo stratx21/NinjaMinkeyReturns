@@ -20,7 +20,7 @@ public class GameFrame extends JFrame{
      * The current instance of CPanel that is added on to this container that
      *  is used to display the graphical representation of the game. 
      */
-    private GamePanel currentPanel;
+    private CPanel currentPanel;
     
     /**
      * The Rectangle object that represents the area in which the game 
@@ -73,14 +73,32 @@ public class GameFrame extends JFrame{
         //only here because of testing/developing purposes::
         
         
+        switchToMainMenuPanel(true);
         
+        
+        
+    }
+    
+    private void switchToGamePanel(){
         currentPanel=new GamePanel(new CListener(){
             @Override
             public void actionPerformed(){
-                //back to main menu...  (if keeping this exact code...)
+                switchToMainMenuPanel(false);
             }
         });
-        
+        this.add(currentPanel);
+        this.addKeyListener(currentPanel);
+        super.setVisible(true);
+        this.repaint();
+    }
+    
+    private void switchToMainMenuPanel(boolean startup){
+        currentPanel=new StartPanel(startup,new CListener(){
+            @Override
+            public void actionPerformed(){
+                switchToGamePanel();
+            }
+        });
         this.add(currentPanel);
         this.addKeyListener(currentPanel);
         super.setVisible(true);

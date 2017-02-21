@@ -7,6 +7,7 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
  * 
  * @author Josh Holland
  */
-public class CPanel extends JPanel{
+public class CPanel extends JPanel implements KeyListener{
 //    public int DELAY=40;
     
     /**
@@ -78,6 +79,21 @@ public class CPanel extends JPanel{
             GameRunner.SQUARE_SIZE=xLesY?xPixelMax:yPixelMax;
         
         System.out.println(GAME_SPAN.getWidth()+","+GAME_SPAN.getHeight());
+        
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
         
     }
     

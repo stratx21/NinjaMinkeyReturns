@@ -39,7 +39,7 @@ public class SideViewRunner extends GameRunner{
      * The prompt that is used for the pause menu.
      */
     
-    PausePrompt pausePrompt=null;
+    NavigablePrompt pausePrompt=null;
     
     private int sequencePauseAgain=0;
     
@@ -657,30 +657,7 @@ public class SideViewRunner extends GameRunner{
                 sequencePauseAgain=10;
                 currentKey[6]=false;
                 showingPromptPause=true;
-                pausePrompt=new PausePrompt(true,new CListener(){
-                    @Override
-                    public void actionPerformed(int choice){//when done
-                        showingPromptPause=false;
-                        pausePrompt=null;
-                        sequencePauseAgain=0;
-                        switch(choice){
-                            case 0://resume
-                                showingPromptPause=false;
-                                pausePrompt=null;
-                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
-                                break;
-                            case 1://options
-                                
-                                break;
-                            case 2://quit
-                                done.actionPerformed();
-                                break;
-                            case 3://save
-                                Profile.save();
-                                break;
-                        }
-                    }
-                });
+                setupPausePrompt();
             } else{// is showing the prompt already
                 System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
                 showingPromptPause=false;
@@ -688,6 +665,42 @@ public class SideViewRunner extends GameRunner{
                 sequencePauseAgain=0;
             }
         }
+    }
+    
+    private void setupPausePrompt(){
+        pausePrompt=new PausePrompt(true,new CListener(){
+                    @Override
+                    public void actionPerformed(int choice){//when done
+                        switch(choice){
+                            case 0://resume
+                                showingPromptPause=false;
+                                pausePrompt=null;
+                                sequencePauseAgain=0;
+                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
+                                break;
+                            case 1://options
+                                pausePrompt=new OptionsPrompt(false,new CListener(){
+                                    @Override
+                                    public void actionPerformed(int c){
+                                        if(c==0){
+                                            setupPausePrompt();
+                                            sequencePauseAgain=0;
+                                        }
+                                    }
+                                });
+                                break;
+                            case 2://quit
+                                done.actionPerformed();
+                                break;
+                            case 3://save
+                                showingPromptPause=false;
+                                pausePrompt=null;
+                                sequencePauseAgain=0;
+                                Profile.save();
+                                break;
+                        }
+                    }
+                });
     }
     
     /**

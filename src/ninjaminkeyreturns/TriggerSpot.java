@@ -117,4 +117,8 @@ public class TriggerSpot {
         location=new int[]{x,y};
     }
     
+    public int[] getCoordsToGoTo(){
+        return coordsToGoTo;
+    }
+    
 }

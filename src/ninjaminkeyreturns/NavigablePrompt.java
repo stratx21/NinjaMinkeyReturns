@@ -19,6 +19,8 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
     
     public CListener done=null;
     
+    public static int chooseAgain=10;
+    
     //private int indent=0;
     
     /**
@@ -52,11 +54,16 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      *      pressed
      */
     public void loopCalculate(boolean[] keysPressed){
+        System.out.println(cursorLocation);
         
-        if(keysPressed[4]){//selected one
+        if(keysPressed[4]&&chooseAgain==0){//selected one
             choices[cursorLocation].activate.actionPerformed();
-            System.out.println("SELECTED ONE!");
+            System.out.println("SELECTED ONE!"+cursorLocation);
         }
+        
+        if(chooseAgain>0)
+            chooseAgain--;
+        
         
         
         if(moveAgainSequence==0){

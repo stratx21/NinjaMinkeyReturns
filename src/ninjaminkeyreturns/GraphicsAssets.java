@@ -23,6 +23,22 @@ public class GraphicsAssets {
     public static ArrayList<BufferedImage> images=new ArrayList<BufferedImage>();//unused later?
     
     
+    public static BufferedImage[] importStartupImages(){
+        return new BufferedImage[]{
+            importFromString("Graphics/Startup/1.png"),
+            importFromString("Graphics/Startup/2.png"),
+            importFromString("Graphics/Startup/3.png")
+        };
+    }
+    
+    public static BufferedImage[] importInstructionImages(){
+        return new BufferedImage[]{
+            importFromString("Graphics/Startup/4.png"),
+            importFromString("Graphics/Startup/5.png"),
+            importFromString("Graphics/Startup/3.png")
+        };
+    }
+    
     /**
      * This function imports the image specified by the String location
      * 

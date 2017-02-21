@@ -35,6 +35,7 @@ public class PausePrompt extends NavigablePrompt{
             new Option("Options",new CListener(){
                 @Override
                 public void actionPerformed(){
+                    chooseAgain=10;
                     done.actionPerformed(1);
                 }
             }),
