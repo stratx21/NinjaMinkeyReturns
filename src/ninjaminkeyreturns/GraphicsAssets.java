@@ -6,7 +6,6 @@
 package ninjaminkeyreturns;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,11 +50,20 @@ public class GraphicsAssets {
         InputStream in=GraphicsAssets.class.getResource(loc).openStream();
         if(in!=null)
             return ImageIO.read(in);
-        else
+        else{
+            System.err.println("did not find the image at "+loc);
             return null;
-        } catch(Exception e ){System.out.println("Graphics image failed to be read by the ImageIO::    "+loc);}
+        }
+        } catch(Exception e ){
+            ErrorLogger.logEvent("GraphicsAssets.importFromString(String) failed to import::  "+loc);
+            e.printStackTrace();
+        }
         //(BufferedImage)(ImageIO.read(GraphicsAssets.class.getResourceAsStream(loc)));
         return null;
+    }
+    
+    public static BufferedImage importBuildingImage(String name){
+        return importFromString("Graphics/Buildings/"+name+".png");
     }
     
     
@@ -248,14 +256,14 @@ public class GraphicsAssets {
     public static ArrayList<BufferedImage> importSideViewMeleeEnemyImages(int AI_ID){
         ArrayList<BufferedImage> img=new ArrayList<>();
         
-        String id=StringTools.numToDigits(AI_ID,3);
+        String id=StringTools.numToDigits(AI_ID,4);
         
         //Walking::
         for(int i=0;i<3;i++)
-            img.add(importFromString("Graphics/SideView/AI/"+id+"/R"+i+".png"));
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/WR"+i+".png"));
         
         for(int i=0;i<3;i++)
-            img.add(importFromString("Graphics/SideView/AI/"+id+"/L"+i+".png"));
+            img.add(importFromString("Graphics/SideView/AI/"+id+"/WL"+i+".png"));
         
         //attacking::
         for(int i=0;i<7;i++)

@@ -7,6 +7,7 @@ package ninjaminkeyreturns;
 
 import java.util.ArrayList;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  *This class manages many of the Top-Down region and AI functions. 
@@ -101,32 +102,33 @@ public class TopDownRegion extends Region{
      *      y direction
      */
      private void drawBackRegion(Graphics g,int xs,int ys,int offX,int offY){
+         int t=0;
          if(offX==0&&offY==0){//player is still
             for(int x=0;x<17;x++){
                 for(int y=0;y<9;y++){
-                    g.drawImage(images.get(types[x+xs-8][y+ys-4]),x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[x+xs-8][y+ys-4])>2)?null:images.get(t)),x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
                 }
             }
          } else{ //player is not still
             for(int x=0;x<17;x++){//draw images for original rectangle, but modified with the off-setting::
                 for(int y=0;y<9;y++){
-                    g.drawImage(images.get(types[x+xs-8][y+ys-4]),x*SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[x+xs-8][y+ys-4])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
                 }
             }
             
             //drawing parts coming into the visibility range::
             if(offX>0){//player is going left
                 for(int y=0;y<9;y++)//          (V)-1 more because of the x left 1 more,(V)similar here for SQUARE_SIZE
-                    g.drawImage(images.get(types[xs-9][y+ys-4]),-SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[xs-9][y+ys-4])>2)?null:images.get(t)),-SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             } else if(offX<0){//player is going right
                 for(int y=0;y<9;y++)//remember to put in height***********
-                    g.drawImage(images.get(types[xs+9][y+ys-4]),GAME_SPAN.width+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[xs+9][y+ys-4])>2)?null:images.get(t)),GAME_SPAN.width+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             } else if(offY>0){//player is going up
                 for(int x=0;x<17;x++)
-                    g.drawImage(images.get(types[x+xs-8][ys-5]),x*SQUARE_SIZE+offX,-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[x+xs-8][ys-5])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             } else if(offY<0){//player is going down
                 for(int x=0;x<17;x++)
-                    g.drawImage(images.get(types[x+xs-8][ys+5]),x*SQUARE_SIZE+offX,GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    g.drawImage((((t=types[x+xs-8][ys+5])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
             }
          }
              
@@ -153,7 +155,8 @@ public class TopDownRegion extends Region{
       */
      public boolean canMoveToSpace(int x,int y){
          int t;
-         return !hasAI(x,y)&&((t=getType(x,y))==00||t==02);
+         //return !hasAI(x,y)&&((t=getType(x,y))==00||t==02);
+         return true;
      }
      
      /**
@@ -213,7 +216,7 @@ public class TopDownRegion extends Region{
              }
          }
          
-         if((int)(Math.random()*7)==1&&canMoveToSpace(x,y+3)){
+         if((int)(Math.random()*7)==-1&&canMoveToSpace(x,y+3)){
              r=0;
              AIs.get(0).setLocation(x,y-5);
          }
@@ -249,8 +252,8 @@ public class TopDownRegion extends Region{
          a.calcToGo(playerX,playerY);
          AIApproachDone=a.done=new CListener(){
              @Override
-             public void actionPerformed(byte a){
-                 c.actionPerformed(a);
+             public void actionPerformed(byte i){
+                 c.actionPerformed(i);
              }
          };
          return a;

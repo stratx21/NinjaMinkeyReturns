@@ -157,11 +157,12 @@ public class Profile {
      * This opens the save file specified by the user in the JFileChooser, and
      * imports the data from it to give the user their progress back. 
      * 
+     * @return a boolean value concerning if the file import worked properly
      * @throws Exception Exception thrown if the file is not found for the 
      * Scanner "in" uses to import the data from the save file specified by
      * the user through the JFileChooser
      */
-    public static void open() throws Exception{
+    public static boolean open() throws Exception{
         JFileChooser fc=new JFileChooser();
         fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
         if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
@@ -191,7 +192,8 @@ public class Profile {
 //                completedMissions[i]=Boolean.parseBoolean(in[c]);
 //                c++;
 //            }
-        }
+        return true;
+        } else return false;
     }
     
      /**
@@ -210,7 +212,7 @@ public class Profile {
             int a,b;
             inputSaveFile=new File(Profile.class.getResource("RegionData/TopDown/R"+StringTools.numToDigits(region,3)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
-            System.out.println("importing the data for top down region...");
+            ErrorLogger.logEvent("importing the data for top down region...");
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array
                 data=new int[a=Integer.parseInt(in[0])][b=Integer.parseInt(in[1])];//[x][y]
@@ -226,7 +228,7 @@ public class Profile {
                         data[x][y]=Integer.parseInt(input[y][x]);
                     }
                 
-                System.out.println("finished import of top down region successfully.");
+                ErrorLogger.logEvent("finished import of top down region successfully.");
                 return data;
             }
             return data;
@@ -235,6 +237,34 @@ public class Profile {
         }
         return null;
     }
+    
+    public static ArrayList<Building> importTopDownBuildings(int region){
+        try{
+            ArrayList<Building> data=new ArrayList<>();
+            String[][] input;// note:: [x][y]
+            int a,b;
+            inputSaveFile=new File(Profile.class.getResource("RegionData/Buildings/R"+StringTools.numToDigits(region,3)+".txt").toURI());
+            Scanner scan=new Scanner(inputSaveFile);
+            ErrorLogger.logEvent("importing the data for top down buildings...");
+            if(inputSaveFile!=null){
+                
+                while(scan.hasNextLine()){
+                    String[] in=scan.nextLine().split(",");
+                    data.add(new Building(GraphicsAssets.importBuildingImage(in[0]),Integer.parseInt(in[1]),Integer.parseInt(in[2])));
+                }
+                
+                System.out.println("finished import of top down region successfully.");
+                return data;
+            }
+            return data;
+        }catch(Exception e){
+            e.printStackTrace();
+            ErrorLogger.logEvent("Buildings failed to import for region "+region);
+        }
+        return null;
+    }
+    
+    
     
     /**
      * 
@@ -392,7 +422,7 @@ public class Profile {
                     for(int j=0;j<9;j++)
                         a[j]=Integer.parseInt(input[j]);
                     a[7]=Integer.parseInt(input[11]);
-                    System.out.println("aaa 333 ====="+a[3]);
+                    System.out.println("aaa 7 ====="+a[7]);
                     data.add(new TopDownAI(a[0],a[1],a[2],a[3],input[9],input[10],a[6],a[4],a[5],a[7],a[8],a[7]));
                 }
                 

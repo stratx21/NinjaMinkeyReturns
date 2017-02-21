@@ -1,0 +1,7 @@
+6
+15,14,1011,1,-1,-1,1,-1,-1,"WOW This is inspired.","I am sad now. I NEED A KIDNEY TRANSPLANT.",00
+15,40,1011,1,-1,-1,1,-1,-1,"The world used to have potential.","Well I guess having you around has changed things.",01
+15,27,1010,1,-1,-1,1,-1,-1,"Oh look we meet again mabey.","So here our first meeting or age old conflict ends here.",03
+15,14,1011,1,-1,-1,1,-1,-1,"Look I have dialogue.","I NEED A KIDNEY TRANSPLANT.",01
+15,41,1010,1,-1,-1,1,-1,-1,"The game could just end after this fight.","well I guess that the game goes on. I think we wanted to have a falling action section.",00
+15,83,1010,1,-1,-1,1,-1,-1,"Help help i can't find the plot.","No I was wrong the developer has lost the plot.",04

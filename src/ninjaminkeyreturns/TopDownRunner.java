@@ -84,7 +84,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         //System.out.println("showAfterPrompt:: "+showAfterPrompt);
         if(showAfterPrompt&&lastTriggeredAI>-1)
             comingBackStartPrompt();
-        
+        for(TopDownAI ai:region.AIs){//put in player info for all AIs
+                ai.calcToGo(player.getX(),player.getY());
+            }
     }
     
     /**
@@ -123,7 +125,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     @Override
     public void draw(Graphics g){
-//        System.out.println("reached top down draw");
         
         
         //calculate:: (may be moved into another recursion/timer later)::
@@ -230,26 +231,35 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }else if(currentKey[3]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
-        }else if(currentKey[4]&&!player.getDisabled()){
+        }else if(currentKey[4]&&!player.getDisabled()){//select
             boolean a=false,b=false;
             switch(player.getDirectionFacing()){
                 case 0: b=triggerAIFromKey(player.getX(),player.getY()-1);
-                if(b)
+                if(b){
+                    player.setDisabled(true);
                     a=true;
+                }
                     break;
                 case 1: b=triggerAIFromKey(player.getX()-1,player.getY());
-                if(b)
+                if(b){
+                    player.setDisabled(true);
                     a=true;
+                }
                     break;
                 case 2: b=triggerAIFromKey(player.getX()+1,player.getY());
-                if(b)
+                if(b){
+                    player.setDisabled(true);
                     a=true;
+                }
                     break;
                 case 3: b=triggerAIFromKey(player.getX(),player.getY()+1);
-                if(b)
+                if(b){
+                    player.setDisabled(true);
                     a=true;
+                }
                     break;
             }
+            
             
             if(!a){
                 AudioAssets.play("Error");
@@ -286,7 +296,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         pausePrompt=new PausePrompt(true,new CListener(){
                     @Override
                     public void actionPerformed(int choice){//when done
-                        System.out.println("CHOICE=="+choice);
+                        //System.out.println("CHOICE=="+choice);
                         switch(choice){
                             case 0://resume
                                 showingPromptPause=false;
@@ -340,7 +350,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         public void actionPerformed(){
                             if(focusedAI.instantSideView){ //the top down view ends
                                 Profile.playerLocation=new int[]{player.getX(),player.getY()+2};//set the coordinates so that the player can come back to them
-                                done.actionPerformed(focusedAI.SIDEVIEW_REGION_TO_GO_TO_ID);
+                                done.actionPerformed((int)focusedAI.SIDEVIEW_REGION_TO_GO_TO_ID);
                             } else{//the AI did not confront the player in a side view manner
                                 player.setDisabled(false);
                                 //other code.... . . .. .. ........................................................<<<<<<<<

@@ -7,8 +7,6 @@ package ninjaminkeyreturns;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import static ninjaminkeyreturns.Prompt.GAME_SPAN;
-import static ninjaminkeyreturns.Prompt.font;
 
 /**
  *
@@ -20,6 +18,8 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
     public CListener done=null;
     
     public static int chooseAgain=10;
+    
+    private boolean drawStats=false;
     
     //private int indent=0;
     
@@ -43,6 +43,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      * @param don the CListener evoked when the Prompt is finished
      */
     public NavigablePrompt(boolean showStats,CListener don){
+        drawStats=showStats;
         done=don;
     }
     
@@ -118,6 +119,9 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
         g.setColor(Color.white);
         g.setFont(font);
         g.drawString(toDraw,(int)(0.05*GAME_SPAN.width)/**+indent*/,(int)(0.8*GAME_SPAN.height));
+        
+        if(drawStats)
+            Player.drawHealthBar(g);
     }
     
 //    public void calculateIndent(){

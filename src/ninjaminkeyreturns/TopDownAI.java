@@ -129,13 +129,13 @@ public class TopDownAI extends AI{
         promptBefore=prmptBefore;
         promptAfter="*"+prmptAfter+"*";
         visible=(vsble==1);
-        System.out.println(visible);
         instantSideView=instSideView==1;
         saveIndexForWin=saveIndex;
         itemIDNeeded=itemNeeded;
         saveIndexToNotTalk=saveIndexNotTalk;
         saveIndexToTalk=saveIndex2Talk;
         SIDEVIEW_REGION_TO_GO_TO_ID=sideViewGoTo;
+        System.out.println("side view region to goo toooooo :: "+sideViewGoTo);
     }
     
     /**
@@ -164,7 +164,7 @@ public class TopDownAI extends AI{
      *  that holds the game. 
      */
     public void draw(Graphics g,int offX,int offY){
-        if(visible){
+        //if(visible){
             if(walkingToPlayer){//flow
                 if(toGo[1]<-1){
                     walkDown();
@@ -180,10 +180,10 @@ public class TopDownAI extends AI{
                     finishedMoving=true;
                     byte directionToFace=0;
                     if(playerLocApproaching[0]>location[0]){//player needs to face right to face the AI
-                        directionToFace=2;
+                        directionToFace=1;
                         directionFacing=3; //< - always 3 to compensate for graphics
                     }else if(playerLocApproaching[0]<location[0]){//player needs to face left
-                        directionToFace=1;
+                        directionToFace=2;
                         directionFacing=3;//< - always 3 to compensate for graphics
                     }if(playerLocApproaching[1]<location[1]){//player needs to face down
                         directionToFace=3;
@@ -208,7 +208,7 @@ public class TopDownAI extends AI{
                         +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2-offY
                         ,SQUARE_SIZE,SQUARE_SIZE,null);
             }
-        }
+        //}
     }
     
     /**
