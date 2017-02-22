@@ -38,3 +38,33 @@ Error:: java.lang.NullPointerException
 ├┬┴┬┴ Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com ┬┴┬┴┤
 --------------------------------------------------------------------------------------------------
 
+
+--------------------------------------------------------------------------------------------------
+Profile.importAIDataTopDown
+Error Occured at [YYYY/MM/DD HH:MM:SS]:: Wed Feb 22 14:08:30 CST 2017
+Error:: java.lang.NumberFormatException: For input string: ""Well it could.""
+**Developer Comments:: "IDK what is happening"
+
+├┬┴┬┴ Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com ┬┴┬┴┤
+--------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------
+Profile.importAIDataTopDown
+Error Occured at [YYYY/MM/DD HH:MM:SS]:: Wed Feb 22 14:08:39 CST 2017
+Error:: java.lang.NumberFormatException: For input string: ""Well it could.""
+**Developer Comments:: "3rd error -_-"
+
+├┬┴┬┴ Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com ┬┴┬┴┤
+--------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------
+Region change - failed to import data
+Error Occured at [YYYY/MM/DD HH:MM:SS]:: Wed Feb 22 14:22:40 CST 2017
+Error:: null
+**Developer Comments:: "Why you do dis to me??"
+
+├┬┴┬┴ Note:: You can copy this crash report and email it to the developers at etdickey@gmail.com ┬┴┬┴┤
+--------------------------------------------------------------------------------------------------
+

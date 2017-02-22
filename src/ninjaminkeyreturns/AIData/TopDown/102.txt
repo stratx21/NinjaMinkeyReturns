@@ -1,7 +1,7 @@
 6
 12,13,1014,1,-1,-1,1,-1,-1,"Would you belive that I'm not a native english speaker.","Ya that was a lie.",02
 15,12,1014,1,-1,-1,1,-1,-1,"Hold on I'm the final boss of the game!!!","I mean you could just say the game ends here.",01
-19,12,1020,1,-1,-1,1,-1,-1,"Danger, Danger the game causes headeaches.","Well it could.",03
+19,12,1020,1,-1,-1,1,-1,-1,"Danger Danger the game causes headeaches.","Well it could.",03
 21,14,1014,1,-1,-1,1,-1,-1,"Ice cream","Ice cream. because you punched me.",03
 24,13,1020,1,-1,-1,1,-1,-1,"You know you did't have to attack anyone.","STOP GOING AROUND AND ATTACKING PEOPLE. You are a bad person.",01
 27,12,1020,1,-1,-1,1,-1,-1,"I think that a plane would have been more useful.","I NEED A KIDNEY TRANSPLANT.",00
