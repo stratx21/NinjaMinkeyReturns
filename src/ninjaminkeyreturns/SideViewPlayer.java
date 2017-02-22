@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewPlayer extends Player{
     

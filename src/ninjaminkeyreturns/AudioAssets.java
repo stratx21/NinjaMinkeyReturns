@@ -14,7 +14,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class AudioAssets {
 

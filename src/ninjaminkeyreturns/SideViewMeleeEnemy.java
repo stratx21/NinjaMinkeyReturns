@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewMeleeEnemy extends SideViewAI{
     

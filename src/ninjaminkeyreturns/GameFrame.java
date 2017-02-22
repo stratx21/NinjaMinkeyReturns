@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class GameFrame extends JFrame{
     /**

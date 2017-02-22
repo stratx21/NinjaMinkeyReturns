@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class ErrorLogger {  
     private static String error,o;

@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class Building {//all buildings are 3x3 tiles
     

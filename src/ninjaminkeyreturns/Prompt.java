@@ -5,7 +5,6 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class Prompt{
     

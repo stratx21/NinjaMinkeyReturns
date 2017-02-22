@@ -7,7 +7,7 @@ package ninjaminkeyreturns;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class Option {
     

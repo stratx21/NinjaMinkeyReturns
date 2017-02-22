@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * This class is designed to have functions overriden in order to control the
  *  flow of code.
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class CListener {
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class GraphicsAssets {
 

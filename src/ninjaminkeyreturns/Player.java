@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class Player {
     /**

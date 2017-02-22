@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class HitBox extends Rectangle{
     /**

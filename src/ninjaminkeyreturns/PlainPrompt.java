@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * This prompt is used for just showing text on the screen and allowing the 
  *  player to hit select to continue through it. 
  * 
- * @author Josh
+ * @author Josh Holland
  */
 public class PlainPrompt extends Prompt{//
     
