@@ -98,6 +98,7 @@ public class GamePanel extends CPanel implements KeyListener{
             
         },tempSideID);
         Player.health=Profile.health;
+        this.repaint();
     }
     
     /**
@@ -149,6 +150,7 @@ public class GamePanel extends CPanel implements KeyListener{
         
         Profile.health=Player.health;
         wonAndAfterPrompt=false;
+        this.repaint();
     }
     
     /**
