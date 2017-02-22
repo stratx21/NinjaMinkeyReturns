@@ -90,7 +90,7 @@ public class GamePanel extends CPanel implements KeyListener{
             public void actionPerformed(boolean won){
                 
                 //if(!won)
-                Player.health=Profile.MAX_HEALTH;
+                //Player.health=Profile.MAX_HEALTH;
                 wonAndAfterPrompt=won;//so that it is originally false but if won here
                 switchToTopDown();
             }

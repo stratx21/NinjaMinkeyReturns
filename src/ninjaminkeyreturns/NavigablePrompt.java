@@ -43,7 +43,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
     /**
      * The choice that the user is currently on (the "cursor" is on).
      */
-    private byte cursorLocation=0;
+    protected byte cursorLocation=0;
     
     /**
      * The different choices that the user can choose from.

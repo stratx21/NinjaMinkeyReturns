@@ -86,10 +86,10 @@ public class TopDownRegion extends Region{
     public void draw(Graphics g,int x,int y,int offX,int offY){
         drawBackRegion(g,x,y,offX*-1,offY*-1);//invert offX and offY
         
-        System.out.println("X : "+x+"  Y : "+y);
+        //System.out.println("X : "+x+"  Y : "+y);
         
         for(Building b:buildings){
-            System.out.println("building x : "+b.getX()+" y : "+b.getY());
+            //System.out.println("building x : "+b.getX()+" y : "+b.getY());
             if(new Rectangle(x-9,y-5,19,11).intersects(new Rectangle(b.getX(),b.getY(),b.getWidth(),b.getHeight())))
                 g.drawImage(b.getImage(),(b.getX()-x+7)*SQUARE_SIZE-offX,(b.getY()-y+3)*SQUARE_SIZE-offY,b.getWidth()*SQUARE_SIZE,b.getHeight()*SQUARE_SIZE,null);
         }

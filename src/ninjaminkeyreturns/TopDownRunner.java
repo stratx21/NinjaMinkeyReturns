@@ -81,6 +81,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         setup(playerStartX,playerStartY);
         region=new TopDownRegion(currentRegion);
         Profile.lastKnownRegionTopDown=currentRegion;
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+showAfterPrompt+"  "+lastTriggeredAI);
         if(showAfterPrompt&&lastTriggeredAI>-1)
             comingBackStartPrompt();
         for(TopDownAI ai:region.AIs){//put in player info for all AIs
@@ -130,7 +131,8 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         
         //calculate:: (may be moved into another recursion/timer later)::
-        
+        //if(saveAgainSequence>0)
+        //    saveAgainSequence--;
 //        player.calculate();
         
         if(player.finishedMoving){//finished moving to the square
@@ -291,6 +293,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     }
     
     /**
+     * The integer value used for the sequence to save again. 
+     */
+    //private int saveAgainSequence=0;
+    
+    public static boolean doneSaving=true;
+    
+    /**
      * This function sets up the pause prompt. 
      */
     private void setupPausePrompt(){
@@ -303,6 +312,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                                 pausePrompt=null;
                                 sequencePauseAgain=0;
                                 player.setDisabled(false);
+                                ErrorLogger.logEvent("Menu was quit");
                                 break;
                             case 1://options
                                 pausePrompt=new OptionsPrompt(false,new CListener(){
@@ -318,10 +328,13 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                                 done.actionPerformed();
                                 break;
                             case 3://save
-                                showingPromptPause=false;
-                                pausePrompt=null;
-                                sequencePauseAgain=0;
-                                Profile.save();
+                                //showingPromptPause=false;
+                                //pausePrompt=null;
+                                //sequencePauseAgain=0;
+                                if(doneSaving){
+                                    doneSaving=false;
+                                    Profile.save();
+                                }
                                 break;
                         }
                     }
@@ -341,6 +354,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         if(triggeredAI!=-1&&triggeredAI<region.AIs.size()){
             TopDownAI ai=region.getAI(triggeredAI);
+            lastTriggeredAI=triggeredAI;
             //call on the triggered AI
             ErrorLogger.logEvent("triggering AI from runner (selected with SELECT function) .... ");
             focusedAI=region.triggerAI(triggeredAI,player.getX(),player.getY(),AIdone=new CListener(){

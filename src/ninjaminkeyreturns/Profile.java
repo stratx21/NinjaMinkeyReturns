@@ -66,12 +66,12 @@ public class Profile {
      *  player will keep however much health that they had before they quit or
      *  before they went into a side view mission. 
      */
-    public static double health=200.0;
+    public static double health=750.0;
     
     /**
      * The maximum possible health value.
      */
-    public final static double MAX_HEALTH=200.0;
+    public final static double MAX_HEALTH=750.0;
     
     /**
      * prices for each upgrade; each set includes the prices for the upgrades
@@ -144,6 +144,7 @@ public class Profile {
      *  JFileChooser to let the user identify a name and where to save it.
      */
     public static void save(){
+        TopDownRunner.doneSaving=false;
         JFileChooser sv=new JFileChooser();
         if(sv.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
         try{
@@ -155,11 +156,13 @@ public class Profile {
                 
                 save.write((int)health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
                 
+                
             } //returns file name and the directory location
             //save.write......
         } catch(Exception ex){
             ex.printStackTrace();
         }
+        TopDownRunner.doneSaving=true;
     }
     }
     

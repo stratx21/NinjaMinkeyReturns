@@ -34,7 +34,7 @@ public class StartPanel extends CPanel{
      * The integer values of the max ping of time that the timePing variable 
      *  should get to in order to move on. 
      */
-    private int maxIntro=150,maxInstructions=300;
+    private int maxIntro=150,maxInstructions=500;
     
     /**
      * The instance of the Prompt that is used for the main menu and the options

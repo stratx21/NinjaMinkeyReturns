@@ -46,6 +46,7 @@ public class PausePrompt extends NavigablePrompt{
             new Option("Save",new CListener(){
                 @Override
                 public void actionPerformed(){
+                    cursorLocation=0;
                     done.actionPerformed(3);
                 }
             })
