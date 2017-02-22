@@ -93,8 +93,11 @@ public class GameFrame extends JFrame{
         super.setVisible(true);
         this.repaint();
         currentPanel.repaint();
-        this.setSIZE();
+//        this.setSIZE();
         //this.requestFocus();
+        this.setLocation(0,0);
+        this.setLocation(30,30);
+        this.setLocation(5,5);
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up game CPanel");
     }
@@ -121,7 +124,7 @@ public class GameFrame extends JFrame{
         super.setVisible(true);
         this.repaint();
         currentPanel.repaint();
-        this.setSIZE();
+//        this.setSIZE();
         //this.requestFocus();
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up main menu CPanel");

@@ -107,7 +107,6 @@ public class StartPanel extends CPanel{
     public void paintComponent(Graphics g){
         
         if(!dones){
-            System.out.println("painnnntttiiiinnnnggggg");
             g.setColor(Color.black);
             g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
             //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
