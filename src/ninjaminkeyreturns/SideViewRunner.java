@@ -7,26 +7,28 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import static ninjaminkeyreturns.GameRunner.controls;
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewRunner extends GameRunner{
     
     /**
-     * The instance of the mission that is used for information for the flow of
-     *  the side view. 
+     * The player's HitBox objects that are used to damage the AI enemies. 
      */
-    private SideViewMission mission=null;
-    
     private ArrayList<HitBox> playerAttacks=new ArrayList<>();
     
+    /**
+     * The AI projectile objects that are used to damage the player. 
+     */
     private ArrayList<Projectile> AIProjectiles=new ArrayList<>();
     
+    /**
+     * The enemies in side view mode. 
+     */
     private ArrayList<SideViewAI> enemies=new ArrayList<>();
     
     
@@ -41,6 +43,9 @@ public class SideViewRunner extends GameRunner{
     
     NavigablePrompt pausePrompt=null;
     
+    /**
+     * The sequence number used to bring up the pause menu again. 
+     */
     private int sequencePauseAgain=0;
     
     
@@ -183,6 +188,14 @@ public class SideViewRunner extends GameRunner{
         Player.drawHealthBar(g);
     }
     
+    /**
+     * This function is used in the loop that calculates aspects of the game in
+     *  order to calculate aspects of the region and AIs. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game.  
+     */
     private void calculateAI(Graphics g){
         if(region.AIs!=null)
         for(int i=0;i<region.AIs.size();i++){
@@ -222,14 +235,26 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function removes a certain AI based on the SideViewAI provided. 
+     * 
+     * @param a the instance of the SideViewAI to remove from the ArrayList
+     */
     private void removeAI(SideViewAI a){
         region.AIs.remove(a);
         if(region.AIs.size()==0)
             done.actionPerformed(true);
     }
     
+    /**
+     * This integer is used to keep the objects of the game not stuck. 
+     */
     private int stuck=0;
     
+    /**
+     * This is used as a temporary variable to tell which collision happened 
+     *  last to help the objects of the game not get stuck. 
+     */
     private byte last=0;
     
     /**
@@ -363,7 +388,11 @@ public class SideViewRunner extends GameRunner{
     }
     
     
-    
+    /**
+     * This function contains the calculations used to keep the player running
+     *  as it should be, controlled by the user and by the physics of the
+     *  game. 
+     */
     private void playerFallingCalc(){
         //check if the palyer should fall::
         if(//!player.getJumping()&&
@@ -386,6 +415,11 @@ public class SideViewRunner extends GameRunner{
     }
     
     
+    /**
+     * This function calculates the damage done to a certain AI instance.
+     * 
+     * @param AI the AI to be damaged if it is hit
+     */
     private void AIDamagedCalc(SideViewAI AI){
         for(HitBox a:playerAttacks){
             if(AI.span.intersects(a)){//AI was hit by this hitbox
@@ -401,6 +435,11 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function manages the calculations for the AIs specified. 
+     * 
+     * @param AI The AI to have calculations done concerning it 
+     */
     private void AICalcFlow(SideViewAI AI){
         
         
@@ -547,6 +586,11 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * Calculations for when an AI is falling (a gravity manager for AIs).
+     * 
+     * @param AI the AI that is possibly falling.
+     */
     private void AIFallingCalc(SideViewAI AI){
         //check if the palyer should fall::
         if(//!player.getJumping()&&
@@ -563,6 +607,9 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * An integer value used for calculations and drawing. 
+     */
     private byte sequence=0;
     
     /**
@@ -622,6 +669,9 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function sets up the pause prompt. 
+     */
     private void setupPausePrompt(){
         pausePrompt=new PausePrompt(true,new CListener(){
                     @Override

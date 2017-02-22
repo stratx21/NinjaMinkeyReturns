@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class StringTools {
     
@@ -110,10 +110,13 @@ public class StringTools {
     }
     
     /**
+     * This function translates an integer value to a String with equal value
+     *  in terms of being an integer but in the format of the specified number
+     *  of characters. 
      * 
-     * @param number
-     * @param digits
-     * @return 
+     * @param number the number to be formatted
+     * @param digits the number of digits to format this number to
+     * @return the formatted number in the form of a String
      */
     public static String numToDigits(int number,int digits){
         String r=number+"";

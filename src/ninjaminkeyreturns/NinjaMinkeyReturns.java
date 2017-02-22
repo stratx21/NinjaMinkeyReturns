@@ -17,6 +17,8 @@ public class NinjaMinkeyReturns{
      * @param args the command line arguments
      */
     public static void main(String[] args){
+        ErrorLogger.logEvent("<<<< - (!) - NEW INSTANCE OF THE GAME IS NOW "
+                +"RUNNING - (!) - >>>>");
         AudioAssets.play("MainSong");
         new GameFrame();
     }

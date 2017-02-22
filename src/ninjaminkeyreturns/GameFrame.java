@@ -76,6 +76,10 @@ public class GameFrame extends JFrame{
         
     }
     
+    /**
+     * This function switches the panel type to be the GamePanel in order for 
+     *  the player to play the game. 
+     */
     private void switchToGamePanel(){
         currentPanel=null;
         currentPanel=new GamePanel(new CListener(){
@@ -93,6 +97,13 @@ public class GameFrame extends JFrame{
         ErrorLogger.logEvent("Finished setting up game CPanel");
     }
     
+    /**
+     * This function sets up the main menu and removes the panel and flow of 
+     *  the game.
+     * 
+     * @param startup the boolean value concerning if the program is just 
+     *      starting
+     */
     private void switchToMainMenuPanel(boolean startup){
         currentPanel=null;
         currentPanel=new StartPanel(startup,new CListener(){
@@ -118,7 +129,6 @@ public class GameFrame extends JFrame{
      *  accuracy of the code. 
      * 
      */
-    
     private void setSIZE(){
         
         //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
@@ -129,19 +139,4 @@ public class GameFrame extends JFrame{
         //CPanel.FRAME_SIZE=FRAME_SIZE;
         this.setSize(GAME_SPAN.width,GAME_SPAN.height);
     }
-    
-    /**
-     * This removes the old CPanel instance from this Container and adds a new
-     *  one that is specified by the parameter instance of CPanel. 
-     * 
-     * @param cp the instance of CPanel that is used to replace the current 
-     *      instance of CPanel that is added on to this Container
-     */
-//    private void setNewPanelType(CPanel cp){    
-////        this.setVisible(false);
-//        this.remove(currentPanel);
-//        currentPanel=cp;
-//        this.add(currentPanel);
-//        this.setVisible(true);
-//    }
 }

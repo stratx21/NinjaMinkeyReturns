@@ -26,7 +26,7 @@ public class GameRunner{
      * A set of booleans that are used to tell what keys are currently being
      *  pressed. 
      */
-    public boolean[] currentKey=new boolean[7];//up, down, left, right, attack, other attack
+    protected boolean[] currentKey=new boolean[7];//up, down, left, right, attack, other attack
     
     /**
      * The standard java.awt.Rectangle in which the game is represented 
@@ -42,7 +42,7 @@ public class GameRunner{
     /**
      * CListener evoked to exit the game mode or to finish gameplay
      */
-    public CListener done=null;
+    protected CListener done=null;
     
     /**
      * This sets up the GameRunner. 

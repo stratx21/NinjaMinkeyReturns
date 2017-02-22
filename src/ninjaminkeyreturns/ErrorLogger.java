@@ -31,22 +31,24 @@ public class ErrorLogger {
     //---------Log error of type [Exception]::
 
     /**
+     * This function is used to log an error. 
      *
-     * @param e
-     * @param f
+     * @param e the error that occurred
+     * @param f the name of the function, the location, from where the error
+     *      originated.
      */
     protected static void logError(Exception e,String f){ //f= function name
         System.err.println("├┬┴┬┴ Error [Exception type used] in function<"+(o=f)
                 +"> ┬┴┬┴┤ Error :: "+e);
         error=e+"";
-        promptDeveloper(""+e+"\n*You can email the crash report to Ethan Dickey "
-                + "at etdickey@gmail.com*");
+        promptDeveloper(""+e+"\n*You can email the crash report to Ethan Dickey"
+                + " at etdickey@gmail.com*");
     }
     
     /**
-     *
-     * @param e
-     * @param f
+     *This function logs an event given by the String provided. 
+     * 
+     * @param f the explanation of the event to log 
      */
     protected static void logEvent(String f){ //f= function name
         System.out.println("=-Event-= ::  "+f);
@@ -95,9 +97,10 @@ public class ErrorLogger {
     //--------Log error fo type [IOException]::
 
     /**
-     *
-     * @param e
-     * @param f
+     * This function logs an I/O Error.
+     * 
+     * @param e the IOException that was caused
+     * @param f the location at which this error originated
      */
         protected static void logIOError(IOException e,String f){
         System.err.println("├┬┴┬┴ Error [IOException type used] in function<"+(o=f)

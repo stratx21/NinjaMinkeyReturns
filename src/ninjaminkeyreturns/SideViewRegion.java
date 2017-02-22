@@ -5,7 +5,6 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewRegion extends Region{
     /**
@@ -21,10 +20,20 @@ public class SideViewRegion extends Region{
      */
     public ArrayList<SideViewAI> AIs=new ArrayList<>();
     
+    /**
+     * The integer value used to translate location points to pixels. 
+     */
     private final int POINT_TO_PIXEL_MULTIPLIER=SQUARE_SIZE/20;
     
+    /**
+     * The image used for the background of this region. 
+     */
     private BufferedImage background=null;
     
+    /**
+     * This is an integer value concerning how many tiles are in the x 
+     *  direction.
+     */
     private int X_TILES=0;
     
     /**
@@ -44,11 +53,21 @@ public class SideViewRegion extends Region{
      */
     public boolean timed=false;// duplicate - also in SideViewRunner
 
-    
+    /**
+     * This function returns the variable X_TILES's value, which is the tiles in
+     *  the map in the x direction. 
+     * 
+     * @return the value of X_TILES
+     */
     public int getX_TILES(){
         return X_TILES;
     }
     
+    /**
+     * This function returns the length of the map in location points. 
+     * 
+     * @return the length of the map in location points
+     */
     public int getMapLength(){//in location points
         return X_TILES*20;
     }

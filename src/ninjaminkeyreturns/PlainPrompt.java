@@ -23,7 +23,9 @@ public class PlainPrompt extends Prompt{//
     public String toDraw="";
     
     /**
-     *
+     * This sets up the PlainPrompt object using the String values by line
+     *  that it should show and the CListener instance for when it is finished. 
+     * 
      * @param showing
      * @param don
      */
@@ -33,12 +35,24 @@ public class PlainPrompt extends Prompt{//
         done=don;
     }
     
+    /**
+     * These values are used to calculate what characters should be displayed
+     *  by the PlainPrompt. 
+     */
     private int characterNum=0,lineNum=0;
+    
+    /**
+     * These values are used to calculate what characters should be displayed
+     *  by the PlainPrompt. 
+     */
     private boolean secondLine=false,promptEnded=false;
     
     /**
-     *
-     * @param cont
+     * This function is used for the loop that is used to calculate aspects of
+     *  the game. 
+     * 
+     * @param cont the boolean value concerning if the user is ordering the 
+     *      prompt to move on
      */
     public void loopCalculate(boolean cont){
         if(lineNum>promptShowing.size()-1){
@@ -64,6 +78,13 @@ public class PlainPrompt extends Prompt{//
         }
     }
     
+    /**
+     * This function draws the visual representation of the PlainPrompt object. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     */
     @Override
     public void draw(Graphics g){
         super.drawBackImage(g);

@@ -5,8 +5,6 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Graphics;
-
 /**
  *
  * @author Josh
@@ -53,7 +51,6 @@ public class PausePrompt extends NavigablePrompt{
             })
         
         };
-        //calculateIndent();
     }
     
     

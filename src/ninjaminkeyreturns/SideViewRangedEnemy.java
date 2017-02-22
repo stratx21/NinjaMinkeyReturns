@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewRangedEnemy extends SideViewAI{
     

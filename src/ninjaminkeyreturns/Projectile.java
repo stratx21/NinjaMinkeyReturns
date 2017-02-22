@@ -64,16 +64,20 @@ public class Projectile extends HitBox{
     private double[] velocity=new double[2];//is a double for the sake of gravity affecting it less
     
     /**
-     * This is how much damage the Projectile influences on what it hits.
-     */
-    private double damage=0;
-    
-    /**
      * The image that is used to represent the projectile graphically to the
      *  user. 
      */
     private BufferedImage image=null;
     
+    /**
+     * This function draws the visual representation of this object. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     * @param camX the x location of the camera (location points)
+     * @param camY the y location of the camera (location points)
+     */
     @Override
     public void draw(Graphics g,int camX,int camY){
         g.drawImage(image,
@@ -87,60 +91,24 @@ public class Projectile extends HitBox{
         
     }
     
+    /**
+     * This function is used as a loop to calculate the location of the 
+     *  Projectile. 
+     */
     public void calculate(){
         if(velocity[1]<5)
             velocity[1]+=0.5;
         incrementByVelocity();
     }
     
+    /**
+     * This function increments the location of the projectile by the velocity 
+     *  that it has. 
+     */
     public void incrementByVelocity(){
         x+=velocity[0];
         y+=velocity[1];
     }
-    
-    /**
-     * This returns how much damage the Projectile influences on its target.
-     * 
-     * @return how much damage the Projectile influences on its target
-     */
-    //public double getDamage(){
-    //    return damage;        
-    //}
-    
-    /**
-     * Set how much damage the Projectile influences on its target.
-     * 
-     * @param a how much damage the Projectile influences on its target
-     */
-   // public void setDamage(double a){
-    //    damage=a;
-    //}
-    
-    /**
-     * Get the x location of the Projectile.
-     * 
-     * @return the x location of the Projectile
-     */
-//    public int getX(){
-//        return location[0];
-//    }
-    
-    /**
-     * Get the y location of the Projectile
-     * 
-     * @return the y location of the Projectile
-     */
-//    public int getY(){
-//        return location[1];
-//    }
-    
-    /**
-     *
-     * @return
-     */
-//    public int[] getLocation(){
-//        return location;
-//    }
     
     /**
      * Get the x velocity of the Projectile

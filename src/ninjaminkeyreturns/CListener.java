@@ -15,59 +15,66 @@ import java.awt.image.BufferedImage;
  */
 public class CListener {
 
-    
-    public void actionPerformed(int a,int c){}
     /**
-     *
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
+     */
+    public void actionPerformed(int a,int c){}
+    
+    /**
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(){}
 
     /**
-     *
-     * @param a
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(boolean a){}
 
     /**
-     *
-     * @param a
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(int a){}
 
     
     /**
-     *
-     * @param a
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(int a,boolean b){}
     
     
     /**
-     * 
-     *
-     * @param a
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(byte a){}
 
     /**
-     *
-     * @param player
-     * @param AI
-     * @param text
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(BufferedImage player,BufferedImage AI,String text){}
 
     /**
-     *
-     * @param player
-     * @param AI
-     * @param text
-     * @param id
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
      */
     public void actionPerformed(BufferedImage player,BufferedImage AI,String text,int id){}
     
+    /**
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
+     */
     public void actionPerformed(HitBox a){}
     
+    /**
+     *One of the functions that is intended to be overriden by an instance of
+     *  CListener. 
+     */
     public void actionPerformed(Projectile a){}
     
 }

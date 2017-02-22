@@ -19,15 +19,10 @@ import java.awt.Image;
  */
 public class CButton extends JButton implements MouseListener{
     
-    public int xIndex,
-
-    /**
-     *
-     */
-    yIndex;//when applicable 
+    public int xIndex,yIndex;//when applicable 
     
     /**
-     *
+     *The integer value used to identify an instance of this class. 
      */
     public int ID;
     

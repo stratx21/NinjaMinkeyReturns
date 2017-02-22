@@ -54,6 +54,10 @@ public class Profile {
      */
     public static int lastKnownRegionTopDown=0;
     
+    /**
+     * 
+     * This is a boolean value concerning if sounds should be played by the game. 
+     */
     public static boolean soundOn=true;
     
     /**
@@ -88,26 +92,47 @@ public class Profile {
     */
     public static double money=51.00;
     
+    /**
+     * This function sets up the stats for a new game. 
+     * 
+     */
     public static void startNewGame(){
         health=MAX_HEALTH;
         lastKnownRegionTopDown=0;
         playerLocation=new int[]{19,20};
     }
     
+    /**
+     * This function is used to turn the sound of the game on or off. 
+     * 
+     * @param a the boolean concerning if the sound should be on or off; true is
+     *      on and false is off 
+     */
     public static void setSound(boolean a){
         soundOn=a;
-        if(!a&&AudioAssets.music!=null)
-            AudioAssets.music.stop();
+        if(!a&&AudioAssets.getMusic()!=null)
+            AudioAssets.stopMusic();
         else if(a)
             AudioAssets.play("MainSong");
     }
     
+    /**
+     * This function sets all the missions to incomplete by setting the values
+     *  of each mission to false.
+     */
     public static void setAllMissionsToFalse(){
         Collections.fill(completedMissions,Boolean.FALSE);
     }
     
+    /**
+     * This function returns a boolean value concerning if the player has
+     *  completed a certain mission. 
+     * 
+     * @param index the index of which mission to check
+     * @return true if the index is invalid or the actual value if it is valid
+     */
     public static boolean getCompletedMission(int index){
-        if(index>=completedMissions.size()){
+        if(index>=completedMissions.size()||index<0){
             System.err.println("|----ERROR:: the save file index provided, "+index+", was invalid... The size is "+completedMissions.size()+"  ---|");
             return true;
         }
@@ -211,6 +236,14 @@ public class Profile {
         return null;
     }
     
+    /**
+     * This function imports the data needed to set up the buildings in top down
+     *  game play mode. 
+     * 
+     * @param region the region ID for which the buildings are being imported
+     * @return an ArrayList of Building objects that is used to display the 
+     *      Building objects and make calculations
+     */
     public static ArrayList<Building> importTopDownBuildings(int region){
         try{
             ArrayList<Building> data=new ArrayList<>();

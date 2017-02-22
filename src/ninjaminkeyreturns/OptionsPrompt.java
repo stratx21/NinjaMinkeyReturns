@@ -43,22 +43,9 @@ public class OptionsPrompt extends NavigablePrompt{
                 public void actionPerformed(){
                     Profile.setSound(false);
                 }
-            })//,
-//            new Option("Quit",new CListener(){
-//                @Override
-//                public void actionPerformed(){
-//                    done.actionPerformed(2);
-//                }
-//            }),
-//            new Option("Save",new CListener(){
-//                @Override
-//                public void actionPerformed(){
-//                    done.actionPerformed(3);
-//                }
-//            })
+            })
         
         };
-        //calculateIndent();
     }
     
 

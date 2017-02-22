@@ -40,7 +40,7 @@ public class AI {
      * The images that are used to represent the AI object; these will be 
      *  imported in the setup through the system of constructors. 
      */
-    public ArrayList<BufferedImage> images=new ArrayList<>();
+    protected ArrayList<BufferedImage> images=new ArrayList<>();
     
     
     

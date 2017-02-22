@@ -5,15 +5,12 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
@@ -51,6 +48,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     PlainPrompt talkingPrompt=null;
     
+    /**
+     * The prompt used for the pause menu. 
+     */
     NavigablePrompt pausePrompt=null;
     
     /////////////////
@@ -101,6 +101,10 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         Prompt.resetFont();
     }
     
+    /**
+     * This function starts up the prompt for the AI to speak to the user when
+     *  coming back from a side view mission. 
+     */
     private void comingBackStartPrompt(){
         player.setDisabled(true);
         showingPromptTalking=true;
@@ -161,6 +165,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     
     
+    /**
+     * This function includes the flow for triggering a given AI. 
+     * 
+     * @param a the index of the AI to trigger 
+     */
     private void triggeringFlow(int a){
         if(a!=-1){
                 player.setDisabled(true);
@@ -201,6 +210,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
     }
     
+    /**
+     * This is used for when the user can pause again. 
+     */
     private int sequencePauseAgain=0;
     
     /**
@@ -278,6 +290,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }
     }
     
+    /**
+     * This function sets up the pause prompt. 
+     */
     private void setupPausePrompt(){
         pausePrompt=new PausePrompt(true,new CListener(){
                     @Override
@@ -313,6 +328,14 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 });
     }
     
+    /**
+     * This function triggers an AI based on the player hitting Select on a 
+     *  certain spot. 
+     * 
+     * @param detectX the x position to detect at
+     * @param detectY the y position to detect at
+     * @return if an AI was triggered
+     */
     private boolean triggerAIFromKey(int detectX,int detectY){
         int triggeredAI=region.getAIAtSpotInteger(detectX,detectY);
         
