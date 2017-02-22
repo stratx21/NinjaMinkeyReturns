@@ -87,8 +87,10 @@ public class StartPanel extends CPanel{
         
         done=d;
         
-        if(!startup)
-            timePing=maxIntro-2;
+        if(!startup){
+            //timePing=maxIntro-2;
+            setupMenu();
+        }
         
         this.repaint();
     }
@@ -103,7 +105,9 @@ public class StartPanel extends CPanel{
      */
     @Override
     public void paintComponent(Graphics g){
+        
         if(!dones){
+            System.out.println("painnnntttiiiinnnnggggg");
             g.setColor(Color.black);
             g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
             //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
@@ -115,6 +119,7 @@ public class StartPanel extends CPanel{
                     ||(instructionsRun&&timePing>maxInstructions-2)){
                     //System.out.println("THIS CODE IS AUTISTIC");
                     initialImages=false;
+                    timePing=0;
                     if(!instructionsRun)
                         setupMenu();
                 }else

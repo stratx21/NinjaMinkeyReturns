@@ -81,7 +81,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         setup(playerStartX,playerStartY);
         region=new TopDownRegion(currentRegion);
         Profile.lastKnownRegionTopDown=currentRegion;
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+showAfterPrompt+"  "+lastTriggeredAI);
         if(showAfterPrompt&&lastTriggeredAI>-1)
             comingBackStartPrompt();
         for(TopDownAI ai:region.AIs){//put in player info for all AIs
