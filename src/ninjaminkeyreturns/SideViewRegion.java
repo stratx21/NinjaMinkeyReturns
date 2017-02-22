@@ -86,7 +86,7 @@ public class SideViewRegion extends Region{
         
         images=GraphicsAssets.importRegionImagesSideView(regn);
         background=GraphicsAssets.importSideViewBackground(regn);
-        timed=a[0]!=0?true:false;
+    //    timed=a[0]!=0?true:false;
         
         if(a[1]!=0)//has a portal
             portal=new Rectangle(a[2],a[3],a[4],a[5]);

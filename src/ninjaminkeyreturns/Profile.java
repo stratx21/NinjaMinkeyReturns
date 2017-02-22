@@ -332,7 +332,7 @@ public class Profile {
         try{
             int[] data=null;
             String[] input;
-            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R"+region+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/SideView/R0"+region+".txt").toURI());//int was taking off the 0 required in front of the file name.
             Scanner scan=new Scanner(inputSaveFile);
             if(inputSaveFile!=null){
                 String[] in=scan.nextLine().split(",");//import size of array 
