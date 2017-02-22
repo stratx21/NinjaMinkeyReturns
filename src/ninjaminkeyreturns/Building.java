@@ -39,6 +39,10 @@ public class Building {//all buildings are 3x3 tiles
     public int getHeight(){
         return height;
     }
+    
+    public BufferedImage getImage(){
+        return image;
+    }
         
     
 }

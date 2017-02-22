@@ -27,6 +27,8 @@ public class GamePanel extends CPanel implements KeyListener{
      */
     public final int FRAME_DELAY=20;
     
+    private boolean dones=false;
+    
     /**
      * This is the CListener that is used to return to the main menu from the 
      *  game. 
@@ -131,6 +133,7 @@ public class GamePanel extends CPanel implements KeyListener{
             
             @Override
             public void actionPerformed(){//quit the game, go to the main menu
+                dones=true;
                 backToMenu.actionPerformed();
             }
                 
@@ -159,23 +162,24 @@ public class GamePanel extends CPanel implements KeyListener{
      */
     @Override
     public void paintComponent(Graphics g){
-        long firstTime=System.currentTimeMillis();
-        
-        g.setColor(Color.black);
-        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
-        
-//        g.setColor(Color.red);   //for testing purposes
-//        g.fillRect(50,50,600+c,120);
-        if(runner!=null)
-            runner.draw(g);
-        
-        //g.setColor(Color.black);
-        //g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
-        //g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
-        
-        try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
-        this.repaint();
-        
+        if(!dones){
+            long firstTime=System.currentTimeMillis();
+
+            g.setColor(Color.black);
+            g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
+
+    //        g.setColor(Color.red);   //for testing purposes
+    //        g.fillRect(50,50,600+c,120);
+            if(runner!=null)
+                runner.draw(g);
+
+            //g.setColor(Color.black);
+            //g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
+            //g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
+
+            try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
+            this.repaint();
+        }
     }
     
     

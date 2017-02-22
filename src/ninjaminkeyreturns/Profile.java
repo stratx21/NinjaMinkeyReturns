@@ -90,6 +90,7 @@ public class Profile {
     
     public static void startNewGame(){
         health=MAX_HEALTH;
+        lastKnownRegionTopDown=0;
         playerLocation=new int[]{19,20};
     }
     
@@ -127,24 +128,8 @@ public class Profile {
                 
                 
                 
-                save.write(health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
+                save.write((int)health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
                 
-                
-                
-                
-//                save.write(money+":");
-//                for(int k=0;k<5;k++)
-//                    for(int i=0;i<3;i++){
-//                        for(int j=0;j<6;j++){
-//                            save.write(upgrades[k][i][j]+":");
-//                        }
-//                    }
-//                
-//                for(int i=0;i<5;i++)
-//                    save.write(boughtCars[i]+":");
-//                
-//                for(int i=0;i<completedMissions.length;i++)
-//                    save.write(completedMissions[i]+":");
             } //returns file name and the directory location
             //save.write......
         } catch(Exception ex){
@@ -165,33 +150,21 @@ public class Profile {
     public static boolean open() throws Exception{
         JFileChooser fc=new JFileChooser();
         fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
-        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
                 inputSaveFile=fc.getSelectedFile();
             }
         if(inputSaveFile!=null){
             String[] in=new Scanner(inputSaveFile).nextLine().split(":");
-
+            health=Integer.parseInt(in[0]);
+            lastKnownRegionTopDown=Integer.parseInt(in[1]);
+            playerLocation=new int[]{Integer.parseInt(in[2]),Integer.parseInt(in[3])};
 //            for(int i=0;i<in.length;i++)
 //                System.out.println(in[i]);
+            for(int i=0;i<in.length;i++)
+                System.out.print("input["+i+"] == "+in[i]);
+            
+            System.out.println();
 
-            money=Double.parseDouble(in[0]);
-
-//            int c=1;
-//            for(int k=0;k<5;k++)
-//                for(int i=0;i<3;i++)
-//                    for(int j=0;j<6;j++){
-//                        upgrades[k][i][j]=Boolean.parseBoolean(in[c]);
-//                        c++;
-//                    }
-//            for(int i=0;i<5;i++){
-//                boughtCars[i]=Boolean.parseBoolean(in[c]);
-//                c++;
-//            }
-//
-//            for(int i=0;i<completedMissions.length;i++){
-//                completedMissions[i]=Boolean.parseBoolean(in[c]);
-//                c++;
-//            }
         return true;
         } else return false;
     }
@@ -243,7 +216,7 @@ public class Profile {
             ArrayList<Building> data=new ArrayList<>();
             String[][] input;// note:: [x][y]
             int a,b;
-            inputSaveFile=new File(Profile.class.getResource("RegionData/Buildings/R"+StringTools.numToDigits(region,3)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/Buildings/"+StringTools.numToDigits(region,3)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             ErrorLogger.logEvent("importing the data for top down buildings...");
             if(inputSaveFile!=null){

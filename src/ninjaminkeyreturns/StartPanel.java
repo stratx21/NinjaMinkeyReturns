@@ -20,6 +20,8 @@ public class StartPanel extends CPanel{
     
     boolean dones=false;
     
+    private int maxIntro=150,maxInstructions=300;
+    
     NavigablePrompt menu=null;
     
     private int time=0;
@@ -38,51 +40,54 @@ public class StartPanel extends CPanel{
         
         done=d;
         
-        ErrorLogger.logEvent("Started StartPanel");
+        if(!startup)
+            time=maxIntro-2;
         
         this.repaint();
     }
     
     @Override
     public void paintComponent(Graphics g){
-        g.setColor(Color.black);
-        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
-        //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
-        //System.out.println(startImages[0]+"  "+startImages[1]+" "+startImages[2]);
-        if(initialImages){
-            //System.out.println(" time oneee :: "+time+" "+GAME_SPAN.getX()+" "+GAME_SPAN.getY()+" "+GAME_SPAN.getWidth()+" "+GAME_SPAN.getHeight());
-            g.drawImage(startImages[instructionsRun?time/150:time/75],0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            if((!instructionsRun&&time>148)
-                ||(instructionsRun&&time>298)){
-                //System.out.println("THIS CODE IS AUTISTIC");
-                initialImages=false;
-                if(!instructionsRun)
-                    setupMenu();
-            }else
-                time++;
-                
-        } else if(instructionsRun&&!dones){
-            dones=true;
-            done.actionPerformed();
-            
-            
-        }else{
-            
-            //draw background
-            g.drawImage(startImages[2],(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            if(menu!=null){
-                menu.draw(g);
-                menu.loopCalculate(keysPressed);
+        if(!dones){
+            g.setColor(Color.black);
+            g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
+            //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
+            //System.out.println(startImages[0]+"  "+startImages[1]+" "+startImages[2]);
+            if(initialImages){
+                //System.out.println(" time oneee :: "+time+" "+GAME_SPAN.getX()+" "+GAME_SPAN.getY()+" "+GAME_SPAN.getWidth()+" "+GAME_SPAN.getHeight());
+                g.drawImage(startImages[instructionsRun?time/(maxInstructions/2):time/(maxIntro/2)],0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+                if((!instructionsRun&&time>maxIntro-2)
+                    ||(instructionsRun&&time>maxInstructions-2)){
+                    //System.out.println("THIS CODE IS AUTISTIC");
+                    initialImages=false;
+                    if(!instructionsRun)
+                        setupMenu();
+                }else
+                    time++;
+
+            } else if(instructionsRun&&!dones){
+                dones=true;
+                done.actionPerformed();
+
+
+            }else{
+
+                //draw background
+                g.drawImage(startImages[2],(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+                if(menu!=null){
+                    menu.draw(g);
+                    menu.loopCalculate(keysPressed);
+                }
             }
+
+            try{
+                Thread.sleep(40);
+            }catch(Exception e){
+
+            }
+            if(!dones)
+                this.repaint();
         }
-            
-        try{
-            Thread.sleep(40);
-        }catch(Exception e){
-            
-        }
-        if(!dones)
-            this.repaint();
     }
     
     private void setupMenu(){
@@ -95,6 +100,7 @@ public class StartPanel extends CPanel{
                                 //done.actionPerformed();
                                 break;
                             case 1://load an old save
+                                dones=true;
                                 boolean a=false;
                                 try{
                                     a=Profile.open();
@@ -135,6 +141,7 @@ public class StartPanel extends CPanel{
         time=0;
         instructionsRun=true;
         menu=null;
+        //done.actionPerformed();
     }
     
     private void keysFlow(){

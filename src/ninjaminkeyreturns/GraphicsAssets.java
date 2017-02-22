@@ -56,7 +56,7 @@ public class GraphicsAssets {
         }
         } catch(Exception e ){
             ErrorLogger.logEvent("GraphicsAssets.importFromString(String) failed to import::  "+loc);
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         //(BufferedImage)(ImageIO.read(GraphicsAssets.class.getResourceAsStream(loc)));
         return null;

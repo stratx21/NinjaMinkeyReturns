@@ -55,11 +55,11 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      *      pressed
      */
     public void loopCalculate(boolean[] keysPressed){
-        System.out.println(cursorLocation);
         
         if(keysPressed[4]&&chooseAgain==0){//selected one
             choices[cursorLocation].activate.actionPerformed();
-            System.out.println("SELECTED ONE!"+cursorLocation);
+            ErrorLogger.logEvent("User chose option #"+cursorLocation);
+            chooseAgain=10;
         }
         
         if(chooseAgain>0)
@@ -123,19 +123,5 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
         if(drawStats)
             Player.drawHealthBar(g);
     }
-    
-//    public void calculateIndent(){
-//        String typicalDraw="";
-//        for(int i=0;i<choices.length;i++)
-//            typicalDraw+=choices[i].getText();
-//        for(int i=0;i<choices.length-1;i++)
-//            typicalDraw+="  ";
-//        typicalDraw+=">";
-//            
-//        indent=(int)((GAME_SPAN.width)-(2*0.05*GAME_SPAN.width)-StringTools.getPixelWidth(typicalDraw, font))/2;
-//        
-//        
-//        System.out.println("indent (prompt):: "+indent);
-//    }
     
 }

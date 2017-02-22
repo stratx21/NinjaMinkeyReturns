@@ -7,6 +7,7 @@ package ninjaminkeyreturns;
 
 import java.util.ArrayList;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -19,6 +20,8 @@ public class TopDownRegion extends Region{
      * The ArrayList of AIs in order to manage the AIs. 
      */
     public ArrayList<TopDownAI> AIs=new ArrayList<>();
+    
+    public ArrayList<Building> buildings=new ArrayList<>();
     
     /**
      * The ArrayList of TriggerSpots in order to manage the TriggerSpots. 
@@ -61,8 +64,7 @@ public class TopDownRegion extends Region{
         }
         triggerSpotsData=Profile.importTriggerSpotsTopDown(newRegion);
         AIs=Profile.importAIDataTopDown(newRegion);
-        for(int i=0;i<AIs.size();i++)
-            System.out.println(AIs.get(i));
+        buildings=Profile.importTopDownBuildings(newRegion);
     }
     
     /**
@@ -72,8 +74,8 @@ public class TopDownRegion extends Region{
      * @param g the java.awt.Graphics object that is used to form the 
      *  graphical representations of the game objects on the frame Container
      *  that holds the game. 
-     * @param x the x location of the tile to start drawing on
-     * @param y the y location of the tile to start drawing on
+     * @param x the x location of the player
+     * @param y the y location of the player
      * @param offX by how many pixels the images should be distorted by in the 
      *      x direction
      * @param offY by how many pixels the images should be distorted by in the
@@ -82,8 +84,15 @@ public class TopDownRegion extends Region{
      public void draw(Graphics g,int x,int y,int offX,int offY){
         drawBackRegion(g,x,y,offX*-1,offY*-1);//invert offX and offY
         
+        System.out.println("X : "+x+"  Y : "+y);
+        
+        for(Building b:buildings){
+            System.out.println("building x : "+b.getX()+" y : "+b.getY());
+            if(new Rectangle(x-9,y-5,19,11).intersects(new Rectangle(b.getX(),b.getY(),b.getWidth(),b.getHeight())))
+                g.drawImage(b.getImage(),(b.getX()-x+7)*SQUARE_SIZE-offX,(b.getY()-y+3)*SQUARE_SIZE-offY,b.getWidth()*SQUARE_SIZE,b.getHeight()*SQUARE_SIZE,null);
+        }
+        
         for(TopDownAI ai:AIs){//draw all AIs
-//            System.out.println("drawing AIs...");
             ai.draw(g,offX,offY);
         }
      }
@@ -103,32 +112,55 @@ public class TopDownRegion extends Region{
      */
      private void drawBackRegion(Graphics g,int xs,int ys,int offX,int offY){
          int t=0;
+         int u,j;
          if(offX==0&&offY==0){//player is still
             for(int x=0;x<17;x++){
                 for(int y=0;y<9;y++){
-                    g.drawImage((((t=types[x+xs-8][y+ys-4])>2)?null:images.get(t)),x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
+                    u=x+xs-8;
+                    j=y+ys-4;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE,null);
                 }
             }
          } else{ //player is not still
             for(int x=0;x<17;x++){//draw images for original rectangle, but modified with the off-setting::
                 for(int y=0;y<9;y++){
-                    g.drawImage((((t=types[x+xs-8][y+ys-4])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                    u=x+xs-8;
+                    j=y+ys-4;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),x*SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
                 }
             }
             
             //drawing parts coming into the visibility range::
             if(offX>0){//player is going left
-                for(int y=0;y<9;y++)//          (V)-1 more because of the x left 1 more,(V)similar here for SQUARE_SIZE
-                    g.drawImage((((t=types[xs-9][y+ys-4])>2)?null:images.get(t)),-SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                for(int y=0;y<9;y++){//          (V)-1 more because of the x left 1 more,(V)similar here for SQUARE_SIZE
+                    u=xs-9;
+                    j=y+ys-4;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),-SQUARE_SIZE+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
             } else if(offX<0){//player is going right
-                for(int y=0;y<9;y++)//remember to put in height***********
-                    g.drawImage((((t=types[xs+9][y+ys-4])>2)?null:images.get(t)),GAME_SPAN.width+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                for(int y=0;y<9;y++){//remember to put in height***********
+                    u=xs+9;
+                    j=y+ys-4;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),GAME_SPAN.width+offX,y*SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
             } else if(offY>0){//player is going up
-                for(int x=0;x<17;x++)
-                    g.drawImage((((t=types[x+xs-8][ys-5])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                for(int x=0;x<17;x++){
+                    u=x+xs-8;
+                    j=ys-5;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),x*SQUARE_SIZE+offX,-SQUARE_SIZE+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
             } else if(offY<0){//player is going down
-                for(int x=0;x<17;x++)
-                    g.drawImage((((t=types[x+xs-8][ys+5])>2)?null:images.get(t)),x*SQUARE_SIZE+offX,GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                for(int x=0;x<17;x++){
+                    u=x+xs-8;
+                    j=ys+5;
+                    if(u>-1&&j>-1)
+                        g.drawImage((((t=types[u][j])>2)?images.get(0):images.get(t)),x*SQUARE_SIZE+offX,GAME_SPAN.height+offY,SQUARE_SIZE,SQUARE_SIZE,null);
+                }
             }
          }
              

@@ -135,7 +135,7 @@ public class TopDownAI extends AI{
         saveIndexToNotTalk=saveIndexNotTalk;
         saveIndexToTalk=saveIndex2Talk;
         SIDEVIEW_REGION_TO_GO_TO_ID=sideViewGoTo;
-        System.out.println("side view region to goo toooooo :: "+sideViewGoTo);
+        ErrorLogger.logEvent("side view region to goo to is "+sideViewGoTo);
     }
     
     /**
@@ -202,7 +202,6 @@ public class TopDownAI extends AI{
                         GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                         SQUARE_SIZE,SQUARE_SIZE,null);
             }else{
-                //System.out.println("drawingIdle.............................................");
                 g.drawImage(images.get(directionFacing*5),
                         GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2-offX,
                         +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2-offY

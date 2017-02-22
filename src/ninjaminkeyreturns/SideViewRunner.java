@@ -166,7 +166,6 @@ public class SideViewRunner extends GameRunner{
         }
         
         if(showingPromptPause&&pausePrompt!=null){
-            System.out.println("PAUSE LOOOPPPPP");
             pausePrompt.loopCalculate(currentKey);
             if(pausePrompt!=null)
                 pausePrompt.draw(g);
@@ -258,7 +257,6 @@ public class SideViewRunner extends GameRunner{
 //                         0   1
 //                         2   3
 //                         4   5
-            //System.out.println("t == "+t+" stuck == "+stuck);
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(player.getX(),player.getY()+player.getYVelocity())){//if there is an obstacle above
@@ -278,17 +276,14 @@ public class SideViewRunner extends GameRunner{
                             player.incrementX(10);
                             player.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                     } else{// is a side collision
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         player.setXVelocity(0);
                     }
                     break;
                 case 1: 
                     if(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()+player.getYVelocity())){//if there is an obstacle above
-                        //System.out.println("is a vertical collision");
                         if(player.getYVelocity()<0){
                             player.incrementY(-1*((player.getY()-10)%20+1));
                         }
@@ -303,15 +298,12 @@ public class SideViewRunner extends GameRunner{
                             player.incrementX(-10);
                             player.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                         
 //                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
 //                            player.incrementY(1);
                     } else{// is a side collision
-                        //System.out.println("is a side collision");
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         player.setXVelocity(-2);
                     }
                     break;
@@ -328,9 +320,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>15){
                             player.incrementX(4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 3: //right
                     player.setXVelocity(0);
@@ -345,9 +335,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>15){
                             player.incrementX(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 
                     if(!region.canMoveToSpace(player.getX(),player.getY()+player.getHeight()+player.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
@@ -371,11 +359,6 @@ public class SideViewRunner extends GameRunner{
                     break;
             }
             last=t;
-//            zeroPlayerVelocity();
-            
-//            player.setXVelocity(0);
-//            player.setYVelocity(0);
-            //System.out.println("would be a collision with current veloicity");
         }
     }
     
@@ -400,7 +383,6 @@ public class SideViewRunner extends GameRunner{
         } else{
             player.endFall();
         }
-        //System.out.println((int)player.span.getHeight());
     }
     
     
@@ -435,9 +417,7 @@ public class SideViewRunner extends GameRunner{
 //                         0   1
 //                         2   3
 //                         4   5
-            //System.out.println("t == "+t+" stuck == "+stuck);
             
-            //System.out.println(" t = "+t+" stuck = "+stuck+" AI:: "+AI+" v:: "+AI.getXVelocity()+","+AI.getYVelocity());
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
@@ -457,18 +437,14 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(10);
                             AI.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                     } else{// is a side collision
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
-                        //System.out.println("set to 0 from 0");
                         AI.setXVelocity(1);
                     }
                     break;
                 case 1: 
                     if(!region.canMoveToSpace(AI.getX()+AI.getWidth(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
-                        //System.out.println("is a vertical collision");
                         if(AI.getYVelocity()<0){
                             AI.incrementY(-1*((AI.getY()-10)%20+1));
                         }
@@ -483,15 +459,12 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-10);
                             AI.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                         
 //                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
 //                            player.incrementY(1);
                     } else{// is a side collision
-                        //System.out.println("is a side collision");
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         AI.setXVelocity(-1);
                     }
                     break;
@@ -506,9 +479,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(4);
                             AI.incrementY(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 3: AI.setXVelocity(-1);
                 
@@ -521,9 +492,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-4);
                             AI.incrementY(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getHeight()+AI.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
@@ -574,11 +543,7 @@ public class SideViewRunner extends GameRunner{
             }
             
             last=t;
-//            zeroPlayerVelocity();
             
-//            player.setXVelocity(0);
-//            player.setYVelocity(0);
-            //System.out.println("would be a collision with current veloicity");
         }
     }
     
@@ -594,14 +559,8 @@ public class SideViewRunner extends GameRunner{
             else 
                 AI.setYVelocity(AI.getJumpVelocity());
             
-//            if(AI.getYVelocity()==0)
-//                AI.setJumping(false);
             
-            //AI.setFalling(true);
-        } else{
-            //AI.endFall();
         }
-        //System.out.println((int)player.span.getHeight());
     }
     
     private byte sequence=0;
@@ -617,13 +576,11 @@ public class SideViewRunner extends GameRunner{
         }if(currentKey[2]){//left
             if(player.getXVelocity()>-1*player.getWalkVeloctiy()){
                 player.incrementXVelocity(-1);
-                //System.out.println("starting to left.................");
             }
             player.facingRight=false;
         }if(currentKey[3]){//right
             if(player.getXVelocity()<player.getWalkVeloctiy()){
                 player.incrementXVelocity(1);
-                //System.out.println("starting to right.................");
             }
             player.facingRight=true;
         }if(currentKey[4]){//attack (melee with swords)                        playerAttacks
@@ -651,15 +608,13 @@ public class SideViewRunner extends GameRunner{
                 ));
             }
         } if(currentKey[6]&&sequencePauseAgain==0){//pause
-            System.out.println("pausing... . .. . ."+showingPromptPause);
             if(!showingPromptPause){
-                System.out.println("-paused-");
+                ErrorLogger.logEvent("Paused");
                 sequencePauseAgain=10;
                 currentKey[6]=false;
                 showingPromptPause=true;
                 setupPausePrompt();
             } else{// is showing the prompt already
-                System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
                 showingPromptPause=false;
                 pausePrompt=null;
                 sequencePauseAgain=0;
@@ -676,7 +631,6 @@ public class SideViewRunner extends GameRunner{
                                 showingPromptPause=false;
                                 pausePrompt=null;
                                 sequencePauseAgain=0;
-                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
                                 break;
                             case 1://options
                                 pausePrompt=new OptionsPrompt(false,new CListener(){
@@ -752,7 +706,6 @@ public class SideViewRunner extends GameRunner{
             }
         }
         
-        //System.out.println("CAMERA:: x: "+camera.x+"  y: "+camera.y+"  PLAYER VELOCITY:: "+player.getXVelocity());
     }
     
     /**

@@ -40,14 +40,10 @@ public class GameFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
 //        this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
-        this.setVisible(true);
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        this.setVisible(true);        
         
         //get the screen resolution::
         Dimension s=Toolkit.getDefaultToolkit().getScreenSize();
-        //CPanel.GAME_SPAN.width=GAME_SPAN.width=(int)s.getWidth();
-        //CPanel.GAME_SPAN.height=GAME_SPAN.height=(int)s.getHeight();
         
         CPanel.calculateTopDownGameSize((int)s.getWidth(),(int)s.getHeight());
         
@@ -73,15 +69,14 @@ public class GameFrame extends JFrame{
         //only here because of testing/developing purposes::
         
         
-//        switchToMainMenuPanel(true);
-        switchToGamePanel();
+        switchToMainMenuPanel(true);
+//        switchToGamePanel();
         
         
         
     }
     
     private void switchToGamePanel(){
-        System.out.println("switch to game panel!krmfkngkdddddddddddddddddddddddddddddddddddd");
         currentPanel=null;
         currentPanel=new GamePanel(new CListener(){
             @Override
@@ -93,23 +88,26 @@ public class GameFrame extends JFrame{
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        currentPanel.repaint();
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up game CPanel");
     }
     
     private void switchToMainMenuPanel(boolean startup){
-        System.out.println("switching to main menu panelllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         currentPanel=null;
         currentPanel=new StartPanel(startup,new CListener(){
             @Override
             public void actionPerformed(){
+                System.out.println("switching to main menu panelllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 switchToGamePanel();
             }
         });
+        currentPanel.setVisible(true);
         this.add(currentPanel);
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        currentPanel.repaint();
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up main menu CPanel");
     }
