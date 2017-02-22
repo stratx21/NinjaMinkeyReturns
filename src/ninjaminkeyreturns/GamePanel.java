@@ -7,15 +7,12 @@ package ninjaminkeyreturns;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.Timer;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class GamePanel extends CPanel implements KeyListener{
     
@@ -28,11 +25,22 @@ public class GamePanel extends CPanel implements KeyListener{
     public final int FRAME_DELAY=20;
     
     /**
+     * This boolean value is used to determine when this class is done
+     *  drawing the visual representation of the game. 
+     */
+    private boolean dones=false;
+    
+    /**
      * This is the CListener that is used to return to the main menu from the 
      *  game. 
      */
     private CListener backToMenu=new CListener();
     
+    /**
+     * This boolean value is used to determine if the player won and needs the
+     *  after prompt from the top down AI, and is used to control the flow 
+     *  concerning if there will be a prompt to the user or not. 
+     */
     private boolean wonAndAfterPrompt=false;
     
 //    private int c=0;
@@ -131,6 +139,7 @@ public class GamePanel extends CPanel implements KeyListener{
             
             @Override
             public void actionPerformed(){//quit the game, go to the main menu
+                dones=true;
                 backToMenu.actionPerformed();
             }
                 
@@ -141,6 +150,7 @@ public class GamePanel extends CPanel implements KeyListener{
         Profile.health=Player.health;
         wonAndAfterPrompt=false;
     }
+    
     /**
      * an integer value that is used for the Y value of the black rectangle
      *  that is used to clear the game span graphical representation. 
@@ -159,46 +169,57 @@ public class GamePanel extends CPanel implements KeyListener{
      */
     @Override
     public void paintComponent(Graphics g){
-        long firstTime=System.currentTimeMillis();
-        
-        g.setColor(Color.black);
-        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
-        
-//        g.setColor(Color.red);   //for testing purposes
-//        g.fillRect(50,50,600+c,120);
-        if(runner!=null)
-            runner.draw(g);
-        
-        //g.setColor(Color.black);
-        //g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
-        //g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
-        
-        try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
-        this.repaint();
-        
+        if(!dones){
+            long firstTime=System.currentTimeMillis();
+
+            g.setColor(Color.black);
+            g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
+
+    //        g.setColor(Color.red);   //for testing purposes
+    //        g.fillRect(50,50,600+c,120);
+            if(runner!=null)
+                runner.draw(g);
+
+            //g.setColor(Color.black);
+            //g.fillRect(0,0,FRAME_SIZE[0],GAME_SPAN.y);
+            //g.fillRect(0,(GAME_SPAN.y+GAME_SPAN.height),FRAME_SIZE[0],yv);
+
+            try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
+            this.repaint();
+        }
     }
-    
     
     /**
-     * This function is used as a local reference to the repaint function that 
-     *  is inherited from parent classes and is used to repaint the 
-     *  graphical representation of the game. 
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
      * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
      */
-    public void rpnt(){
-        this.repaint();
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
         runner.keyTypedFlow(Character.toUpperCase(e.getKeyChar()));
     }
-
+    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         runner.keyPressedFlow(Character.toUpperCase(e.getKeyChar()));
     }
-
+    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         runner.keyReleasedFlow(Character.toUpperCase(e.getKeyChar()));

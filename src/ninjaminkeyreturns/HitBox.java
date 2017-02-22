@@ -16,7 +16,7 @@ public class HitBox extends Rectangle{
     /**
      * The amount of damage that the hitbox causes
      */
-    private double damage=0.0;
+    protected double damage=0.0;
     
     /**
      * This constructor sets up the HitBox using the x and y coordinates
@@ -53,6 +53,15 @@ public class HitBox extends Rectangle{
         return damage;
     }
     
+    /**
+     * This function draws the visual representation of this object. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     * @param camX the x location of the camera (location points)
+     * @param camY the y location of the camera (location points)
+     */
     public void draw(Graphics g, int camX,int camY){}
     
 }

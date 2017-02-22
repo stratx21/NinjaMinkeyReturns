@@ -42,6 +42,15 @@ public class SideViewMeleeEnemy extends SideViewAI{
         
     }
     
+    /**
+     * This function draws the visual representation of this object. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     * @param camX the x location of the camera (location points)
+     * @param camY the y location of the camera (location points)
+     */
     @Override
     public void draw(Graphics g,int camX,int camY){
         

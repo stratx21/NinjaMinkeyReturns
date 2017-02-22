@@ -7,26 +7,28 @@ package ninjaminkeyreturns;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import static ninjaminkeyreturns.GameRunner.controls;
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class SideViewRunner extends GameRunner{
     
     /**
-     * The instance of the mission that is used for information for the flow of
-     *  the side view. 
+     * The player's HitBox objects that are used to damage the AI enemies. 
      */
-    private SideViewMission mission=null;
-    
     private ArrayList<HitBox> playerAttacks=new ArrayList<>();
     
+    /**
+     * The AI projectile objects that are used to damage the player. 
+     */
     private ArrayList<Projectile> AIProjectiles=new ArrayList<>();
     
+    /**
+     * The enemies in side view mode. 
+     */
     private ArrayList<SideViewAI> enemies=new ArrayList<>();
     
     
@@ -41,6 +43,9 @@ public class SideViewRunner extends GameRunner{
     
     NavigablePrompt pausePrompt=null;
     
+    /**
+     * The sequence number used to bring up the pause menu again. 
+     */
     private int sequencePauseAgain=0;
     
     
@@ -166,7 +171,6 @@ public class SideViewRunner extends GameRunner{
         }
         
         if(showingPromptPause&&pausePrompt!=null){
-            System.out.println("PAUSE LOOOPPPPP");
             pausePrompt.loopCalculate(currentKey);
             if(pausePrompt!=null)
                 pausePrompt.draw(g);
@@ -184,6 +188,14 @@ public class SideViewRunner extends GameRunner{
         Player.drawHealthBar(g);
     }
     
+    /**
+     * This function is used in the loop that calculates aspects of the game in
+     *  order to calculate aspects of the region and AIs. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game.  
+     */
     private void calculateAI(Graphics g){
         if(region.AIs!=null)
         for(int i=0;i<region.AIs.size();i++){
@@ -223,14 +235,26 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function removes a certain AI based on the SideViewAI provided. 
+     * 
+     * @param a the instance of the SideViewAI to remove from the ArrayList
+     */
     private void removeAI(SideViewAI a){
         region.AIs.remove(a);
         if(region.AIs.size()==0)
             done.actionPerformed(true);
     }
     
+    /**
+     * This integer is used to keep the objects of the game not stuck. 
+     */
     private int stuck=0;
     
+    /**
+     * This is used as a temporary variable to tell which collision happened 
+     *  last to help the objects of the game not get stuck. 
+     */
     private byte last=0;
     
     /**
@@ -258,7 +282,6 @@ public class SideViewRunner extends GameRunner{
 //                         0   1
 //                         2   3
 //                         4   5
-            //System.out.println("t == "+t+" stuck == "+stuck);
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(player.getX(),player.getY()+player.getYVelocity())){//if there is an obstacle above
@@ -278,17 +301,14 @@ public class SideViewRunner extends GameRunner{
                             player.incrementX(10);
                             player.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                     } else{// is a side collision
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         player.setXVelocity(0);
                     }
                     break;
                 case 1: 
                     if(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()+player.getYVelocity())){//if there is an obstacle above
-                        //System.out.println("is a vertical collision");
                         if(player.getYVelocity()<0){
                             player.incrementY(-1*((player.getY()-10)%20+1));
                         }
@@ -303,15 +323,12 @@ public class SideViewRunner extends GameRunner{
                             player.incrementX(-10);
                             player.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                         
 //                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
 //                            player.incrementY(1);
                     } else{// is a side collision
-                        //System.out.println("is a side collision");
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         player.setXVelocity(-2);
                     }
                     break;
@@ -328,9 +345,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>15){
                             player.incrementX(4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 3: //right
                     player.setXVelocity(0);
@@ -345,9 +360,7 @@ public class SideViewRunner extends GameRunner{
                         if(stuck>15){
                             player.incrementX(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 
                     if(!region.canMoveToSpace(player.getX(),player.getY()+player.getHeight()+player.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
@@ -371,16 +384,15 @@ public class SideViewRunner extends GameRunner{
                     break;
             }
             last=t;
-//            zeroPlayerVelocity();
-            
-//            player.setXVelocity(0);
-//            player.setYVelocity(0);
-            //System.out.println("would be a collision with current veloicity");
         }
     }
     
     
-    
+    /**
+     * This function contains the calculations used to keep the player running
+     *  as it should be, controlled by the user and by the physics of the
+     *  game. 
+     */
     private void playerFallingCalc(){
         //check if the palyer should fall::
         if(//!player.getJumping()&&
@@ -400,10 +412,14 @@ public class SideViewRunner extends GameRunner{
         } else{
             player.endFall();
         }
-        //System.out.println((int)player.span.getHeight());
     }
     
     
+    /**
+     * This function calculates the damage done to a certain AI instance.
+     * 
+     * @param AI the AI to be damaged if it is hit
+     */
     private void AIDamagedCalc(SideViewAI AI){
         for(HitBox a:playerAttacks){
             if(AI.span.intersects(a)){//AI was hit by this hitbox
@@ -419,6 +435,11 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function manages the calculations for the AIs specified. 
+     * 
+     * @param AI The AI to have calculations done concerning it 
+     */
     private void AICalcFlow(SideViewAI AI){
         
         
@@ -435,9 +456,7 @@ public class SideViewRunner extends GameRunner{
 //                         0   1
 //                         2   3
 //                         4   5
-            //System.out.println("t == "+t+" stuck == "+stuck);
             
-            //System.out.println(" t = "+t+" stuck = "+stuck+" AI:: "+AI+" v:: "+AI.getXVelocity()+","+AI.getYVelocity());
             switch(t){
                 case 0: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
@@ -457,18 +476,14 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(10);
                             AI.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                     } else{// is a side collision
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
-                        //System.out.println("set to 0 from 0");
                         AI.setXVelocity(1);
                     }
                     break;
                 case 1: 
                     if(!region.canMoveToSpace(AI.getX()+AI.getWidth(),AI.getY()+AI.getYVelocity())){//if there is an obstacle above
-                        //System.out.println("is a vertical collision");
                         if(AI.getYVelocity()<0){
                             AI.incrementY(-1*((AI.getY()-10)%20+1));
                         }
@@ -483,15 +498,12 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-10);
                             AI.incrementY(10);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
                         
                         
 //                        while(!region.canMoveToSpace(player.getX()+player.getWidth(),player.getY()-1))
 //                            player.incrementY(1);
                     } else{// is a side collision
-                        //System.out.println("is a side collision");
-                        //System.out.println("setting velocity[0] of player to 0 from a side collision");
                         AI.setXVelocity(-1);
                     }
                     break;
@@ -506,9 +518,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(4);
                             AI.incrementY(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 3: AI.setXVelocity(-1);
                 
@@ -521,9 +531,7 @@ public class SideViewRunner extends GameRunner{
                             AI.incrementX(-4);
                             AI.incrementY(-4);
                             stuck=0;
-                            //System.out.println("fixed stuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         }
-                //System.out.println("setting velocity[0] of player to 0 from a side collision");
                     break;
                 case 4: 
                     if(!region.canMoveToSpace(AI.getX(),AI.getY()+AI.getHeight()+AI.getYVelocity())){//if there is an obstacle below that it would hit in this case (not a side collision)
@@ -574,14 +582,15 @@ public class SideViewRunner extends GameRunner{
             }
             
             last=t;
-//            zeroPlayerVelocity();
             
-//            player.setXVelocity(0);
-//            player.setYVelocity(0);
-            //System.out.println("would be a collision with current veloicity");
         }
     }
     
+    /**
+     * Calculations for when an AI is falling (a gravity manager for AIs).
+     * 
+     * @param AI the AI that is possibly falling.
+     */
     private void AIFallingCalc(SideViewAI AI){
         //check if the palyer should fall::
         if(//!player.getJumping()&&
@@ -594,16 +603,13 @@ public class SideViewRunner extends GameRunner{
             else 
                 AI.setYVelocity(AI.getJumpVelocity());
             
-//            if(AI.getYVelocity()==0)
-//                AI.setJumping(false);
             
-            //AI.setFalling(true);
-        } else{
-            //AI.endFall();
         }
-        //System.out.println((int)player.span.getHeight());
     }
     
+    /**
+     * An integer value used for calculations and drawing. 
+     */
     private byte sequence=0;
     
     /**
@@ -617,13 +623,11 @@ public class SideViewRunner extends GameRunner{
         }if(currentKey[2]){//left
             if(player.getXVelocity()>-1*player.getWalkVeloctiy()){
                 player.incrementXVelocity(-1);
-                //System.out.println("starting to left.................");
             }
             player.facingRight=false;
         }if(currentKey[3]){//right
             if(player.getXVelocity()<player.getWalkVeloctiy()){
                 player.incrementXVelocity(1);
-                //System.out.println("starting to right.................");
             }
             player.facingRight=true;
         }if(currentKey[4]){//attack (melee with swords)                        playerAttacks
@@ -651,15 +655,13 @@ public class SideViewRunner extends GameRunner{
                 ));
             }
         } if(currentKey[6]&&sequencePauseAgain==0){//pause
-            System.out.println("pausing... . .. . ."+showingPromptPause);
             if(!showingPromptPause){
-                System.out.println("-paused-");
+                ErrorLogger.logEvent("Paused");
                 sequencePauseAgain=10;
                 currentKey[6]=false;
                 showingPromptPause=true;
                 setupPausePrompt();
             } else{// is showing the prompt already
-                System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
                 showingPromptPause=false;
                 pausePrompt=null;
                 sequencePauseAgain=0;
@@ -667,6 +669,9 @@ public class SideViewRunner extends GameRunner{
         }
     }
     
+    /**
+     * This function sets up the pause prompt. 
+     */
     private void setupPausePrompt(){
         pausePrompt=new PausePrompt(true,new CListener(){
                     @Override
@@ -676,7 +681,6 @@ public class SideViewRunner extends GameRunner{
                                 showingPromptPause=false;
                                 pausePrompt=null;
                                 sequencePauseAgain=0;
-                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
                                 break;
                             case 1://options
                                 pausePrompt=new OptionsPrompt(false,new CListener(){
@@ -752,7 +756,6 @@ public class SideViewRunner extends GameRunner{
             }
         }
         
-        //System.out.println("CAMERA:: x: "+camera.x+"  y: "+camera.y+"  PLAYER VELOCITY:: "+player.getXVelocity());
     }
     
     /**

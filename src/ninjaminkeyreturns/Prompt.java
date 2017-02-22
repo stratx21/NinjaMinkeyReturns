@@ -20,13 +20,13 @@ public class Prompt{
     /**
      * The CListener used to tell when the prompt is done displaying its text.
      */
-    public CListener done=null;
+    protected CListener done=null;
     
     /**
      * This ArrayList contains all the String values of the different lines
      *  of text that will be printed on the prompt.
      */
-    public ArrayList<String> promptShowing=new ArrayList<>();
+    protected ArrayList<String> promptShowing=new ArrayList<>();
     
     /**
      * The common font that is used throughout all Prompts in the game.
@@ -81,7 +81,8 @@ public class Prompt{
      * This sets up the prompt and sets the promptImage to the proper image but
      *  also has an option for showing the statistical data to the user. 
      * 
-     * @param showStats 
+     * @param showStats the boolean value concerning if the Prompt should
+     *      display the player's health bar
      */
     public Prompt(boolean showStats){ 
         this();

@@ -54,6 +54,10 @@ public class Profile {
      */
     public static int lastKnownRegionTopDown=0;
     
+    /**
+     * 
+     * This is a boolean value concerning if sounds should be played by the game. 
+     */
     public static boolean soundOn=true;
     
     /**
@@ -88,25 +92,47 @@ public class Profile {
     */
     public static double money=51.00;
     
+    /**
+     * This function sets up the stats for a new game. 
+     * 
+     */
     public static void startNewGame(){
         health=MAX_HEALTH;
+        lastKnownRegionTopDown=0;
         playerLocation=new int[]{19,20};
     }
     
+    /**
+     * This function is used to turn the sound of the game on or off. 
+     * 
+     * @param a the boolean concerning if the sound should be on or off; true is
+     *      on and false is off 
+     */
     public static void setSound(boolean a){
         soundOn=a;
-        if(!a&&AudioAssets.music!=null)
-            AudioAssets.music.stop();
+        if(!a&&AudioAssets.getMusic()!=null)
+            AudioAssets.stopMusic();
         else if(a)
             AudioAssets.play("MainSong");
     }
     
+    /**
+     * This function sets all the missions to incomplete by setting the values
+     *  of each mission to false.
+     */
     public static void setAllMissionsToFalse(){
         Collections.fill(completedMissions,Boolean.FALSE);
     }
     
+    /**
+     * This function returns a boolean value concerning if the player has
+     *  completed a certain mission. 
+     * 
+     * @param index the index of which mission to check
+     * @return true if the index is invalid or the actual value if it is valid
+     */
     public static boolean getCompletedMission(int index){
-        if(index>=completedMissions.size()){
+        if(index>=completedMissions.size()||index<0){
             System.err.println("|----ERROR:: the save file index provided, "+index+", was invalid... The size is "+completedMissions.size()+"  ---|");
             return true;
         }
@@ -127,24 +153,8 @@ public class Profile {
                 
                 
                 
-                save.write(health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
+                save.write((int)health+":"+lastKnownRegionTopDown+":"+playerLocation[0]+":"+playerLocation[1]+":");
                 
-                
-                
-                
-//                save.write(money+":");
-//                for(int k=0;k<5;k++)
-//                    for(int i=0;i<3;i++){
-//                        for(int j=0;j<6;j++){
-//                            save.write(upgrades[k][i][j]+":");
-//                        }
-//                    }
-//                
-//                for(int i=0;i<5;i++)
-//                    save.write(boughtCars[i]+":");
-//                
-//                for(int i=0;i<completedMissions.length;i++)
-//                    save.write(completedMissions[i]+":");
             } //returns file name and the directory location
             //save.write......
         } catch(Exception ex){
@@ -165,33 +175,21 @@ public class Profile {
     public static boolean open() throws Exception{
         JFileChooser fc=new JFileChooser();
         fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
-        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+        if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
                 inputSaveFile=fc.getSelectedFile();
             }
         if(inputSaveFile!=null){
             String[] in=new Scanner(inputSaveFile).nextLine().split(":");
-
+            health=Integer.parseInt(in[0]);
+            lastKnownRegionTopDown=Integer.parseInt(in[1]);
+            playerLocation=new int[]{Integer.parseInt(in[2]),Integer.parseInt(in[3])};
 //            for(int i=0;i<in.length;i++)
 //                System.out.println(in[i]);
+            for(int i=0;i<in.length;i++)
+                System.out.print("input["+i+"] == "+in[i]);
+            
+            System.out.println();
 
-            money=Double.parseDouble(in[0]);
-
-//            int c=1;
-//            for(int k=0;k<5;k++)
-//                for(int i=0;i<3;i++)
-//                    for(int j=0;j<6;j++){
-//                        upgrades[k][i][j]=Boolean.parseBoolean(in[c]);
-//                        c++;
-//                    }
-//            for(int i=0;i<5;i++){
-//                boughtCars[i]=Boolean.parseBoolean(in[c]);
-//                c++;
-//            }
-//
-//            for(int i=0;i<completedMissions.length;i++){
-//                completedMissions[i]=Boolean.parseBoolean(in[c]);
-//                c++;
-//            }
         return true;
         } else return false;
     }
@@ -238,12 +236,20 @@ public class Profile {
         return null;
     }
     
+    /**
+     * This function imports the data needed to set up the buildings in top down
+     *  game play mode. 
+     * 
+     * @param region the region ID for which the buildings are being imported
+     * @return an ArrayList of Building objects that is used to display the 
+     *      Building objects and make calculations
+     */
     public static ArrayList<Building> importTopDownBuildings(int region){
         try{
             ArrayList<Building> data=new ArrayList<>();
             String[][] input;// note:: [x][y]
             int a,b;
-            inputSaveFile=new File(Profile.class.getResource("RegionData/Buildings/R"+StringTools.numToDigits(region,3)+".txt").toURI());
+            inputSaveFile=new File(Profile.class.getResource("RegionData/Buildings/"+StringTools.numToDigits(region,3)+".txt").toURI());
             Scanner scan=new Scanner(inputSaveFile);
             ErrorLogger.logEvent("importing the data for top down buildings...");
             if(inputSaveFile!=null){

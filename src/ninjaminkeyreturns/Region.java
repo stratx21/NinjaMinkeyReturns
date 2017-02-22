@@ -35,7 +35,7 @@ public class Region {
      * The ArrayList of images that the region uses to draw the graphical 
      *  representation of the region. 
      */
-    public ArrayList<BufferedImage> images=new ArrayList<>();
+    protected ArrayList<BufferedImage> images=new ArrayList<>();
     
     
     /**
@@ -49,6 +49,11 @@ public class Region {
         REGION_ID=regn;
     }
     
+    /**
+     * This function retrieves the integer value of the ID of this region. 
+     * 
+     * @return the ID of this region
+     */
     public int getRegionID(){
         return REGION_ID;
     }

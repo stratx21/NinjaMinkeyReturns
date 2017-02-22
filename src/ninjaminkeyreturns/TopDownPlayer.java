@@ -6,11 +6,10 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class TopDownPlayer extends Player{
     
@@ -25,29 +24,43 @@ public class TopDownPlayer extends Player{
     public int[] location=new int[2];
     
     /**
+     * This function sets the value of which direction the player is facing. 
      *
-     * @param n
+     * @param n which direction the player is facing 
      */
     public void setDirectionFacing(byte n){
         directionFacing=n;
     }
     
     /**
-     *
-     * @return
+     * This function returns the value of which direction the player is facing. 
+     * 
+     * @return the direction that the player is facing
      */
     public byte getDirectionFacing(){
         return directionFacing;
     }
     
+    /**
+     * This boolean value tells if the player is disabled. 
+     */
     private boolean disabled=false;//for AI purposes, but may be used for while the player is moving one square in a direction to keep the player from moving more/glitching the game
     
     /**
-     *
+     *This boolean tells if the player is finished moving to a certain space. 
      */
     public boolean finishedMoving=false;
     
+    /**
+     * This is used for image calculations to tell what the max is that the 
+     *  sequence can reach. 
+     */
     private int IMG_SEQUENCE_MAX=20;//the max index of images used for the walking sequence (including index 0). once imageSequence hits this number or goes over it imageSequence will be set to 0
+    
+    /**
+     * This is used for the image calculations to tell which image to use in  a
+     *  certain sequence. 
+     */
     private int imageSequence=0;
     
     /**
@@ -57,8 +70,9 @@ public class TopDownPlayer extends Player{
     public int[] offCenter=new int[2];
     
     /**
-     *
-     * @param loc
+     * This sets up the player using only the location. 
+     * 
+     * @param loc the location of the player
      */
     public TopDownPlayer(int[] loc) {
         location=loc;
@@ -111,8 +125,10 @@ public class TopDownPlayer extends Player{
     ///////////////////////////////
     
     /**
-     *
-     * @return
+     * This function returns a boolean value concerning if the player is 
+     *  disabled.
+     *  
+     * @return the boolean concerning if the player is disabled
      */
         
     public boolean getDisabled(){
@@ -120,8 +136,9 @@ public class TopDownPlayer extends Player{
     }
     
     /**
-     *
-     * @param a
+     * This function sets the boolean value for if the player is disabled. 
+     * 
+     * @param a if the player should be disabled
      */
     public void setDisabled(boolean a){
         disabled=a;
@@ -130,8 +147,10 @@ public class TopDownPlayer extends Player{
     ///////////////////////////////
     
     /**
+     * This function returns a boolean value concerning if the player is 
+     *  travelling. 
      *
-     * @return
+     * @return if the player is travelling
      */
         
     public boolean getTravelling(){
@@ -139,8 +158,9 @@ public class TopDownPlayer extends Player{
     }
     
     /**
+     * This function sets if the player is travelling. 
      *
-     * @param a
+     * @param a if the player should be travelling
      */
     public void setTravelling(boolean a){
         travelling=a;
@@ -150,14 +170,8 @@ public class TopDownPlayer extends Player{
     
     /**
      *
-     */
-        
-    public void calculate(){
-        
-    }
-    
-    /**
-     *
+     * This function draws the visual representation of the player. 
+     * 
      * @param g the java.awt.Graphics object that is used to form the 
      *  graphical representations of the game objects on the frame Container
      *  that holds the game. 
@@ -174,8 +188,9 @@ public class TopDownPlayer extends Player{
     }
     
     /**
+     * This function starts a move in a certain direction. 
      *
-     * @param direction
+     * @param direction the direction to move in
      */
     public void moveStart(int direction){
         if(!travelling&&!disabled){
@@ -200,6 +215,8 @@ public class TopDownPlayer extends Player{
         }
     }
     /**
+     * This function continues the flow of the move. 
+     * 
      * PRE:: the boolean travelling has been checked as true
      */
     public void continueMove(){
@@ -220,34 +237,7 @@ public class TopDownPlayer extends Player{
     
     /////////////force looks:: (for AI purposes primarily)
     
-    /**
-     *
-     */
-        
-    public void forceLookUp(){
-        
-    }
     
-    /**
-     *
-     */
-    public void forceLookDown(){
-        
-    }
-    
-    /**
-     *
-     */
-    public void forceLookLeft(){
-        
-    }
-    
-    /**
-     *
-     */
-    public void forceLookRight(){
-        
-    }
     ///////////////to move in different directions (one square at a time)
     //^note:: PRE:: (?) not disabled
     
@@ -257,6 +247,9 @@ public class TopDownPlayer extends Player{
     
     private final int frameDivide=24;
     
+    /**
+     * This function starts the flow for the player to move north. 
+     */
     private void moveUp(){
         offCenter[1]-=SQUARE_SIZE/frameDivide;
         if(offCenter[1]<=-1*SQUARE_SIZE){//should stop moving
@@ -272,6 +265,9 @@ public class TopDownPlayer extends Player{
         }
     }
     
+    /**
+     * This function starts the flow for the player to move south. 
+     */
     private void moveDown(){
         offCenter[1]+=SQUARE_SIZE/frameDivide;
         if(offCenter[1]>=SQUARE_SIZE){//should stop moving
@@ -287,6 +283,9 @@ public class TopDownPlayer extends Player{
         }
     }
     
+    /**
+     * This function starts the flow for the player to move west. 
+     */
     private void moveLeft(){
         offCenter[0]-=SQUARE_SIZE/frameDivide;
         if(offCenter[0]<=-1*SQUARE_SIZE){//should stop moving
@@ -302,6 +301,9 @@ public class TopDownPlayer extends Player{
         }
     }
     
+    /**
+     * This function starts the flow for the player to move east. 
+     */
     private void moveRight(){
         offCenter[0]+=SQUARE_SIZE/frameDivide;
         if(offCenter[0]>=SQUARE_SIZE){//should stop moving
@@ -326,18 +328,30 @@ public class TopDownPlayer extends Player{
     
     //add more?
     
+    /**
+     * This function forces the player to look north. 
+     */
     private void lookUp(){
         directionFacing=0;
     }
     
+    /**
+     * This function forces the player to look south. 
+     */
     private void lookDown(){
         directionFacing=3;
     }
     
+    /**
+     * This function forces the player to look west. 
+     */
     private void lookLeft(){
         directionFacing=1;
     }
     
+   /**
+    * This function forces the player to look east. 
+    */ 
     private void lookRight(){
         directionFacing=2;
     }

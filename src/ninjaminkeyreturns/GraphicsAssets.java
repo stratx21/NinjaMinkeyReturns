@@ -22,6 +22,13 @@ public class GraphicsAssets {
     public static ArrayList<BufferedImage> images=new ArrayList<BufferedImage>();//unused later?
     
     
+    /**
+     * This function imports the startup images for the credits when the game
+     *  first starts up. 
+     * 
+     * @return the BufferedImage instances of the images used as the credits
+     *       at the beginning of the game
+     */
     public static BufferedImage[] importStartupImages(){
         return new BufferedImage[]{
             importFromString("Graphics/Startup/1.png"),
@@ -30,6 +37,13 @@ public class GraphicsAssets {
         };
     }
     
+    /**
+     * This function imports the BufferedImage instances that are used as the 
+     *  instructions for a new game. 
+     * 
+     * @return the BufferedImage instance used as the instructions at the   
+     *      beginning of a new game
+     */
     public static BufferedImage[] importInstructionImages(){
         return new BufferedImage[]{
             importFromString("Graphics/Startup/4.png"),
@@ -56,30 +70,21 @@ public class GraphicsAssets {
         }
         } catch(Exception e ){
             ErrorLogger.logEvent("GraphicsAssets.importFromString(String) failed to import::  "+loc);
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         //(BufferedImage)(ImageIO.read(GraphicsAssets.class.getResourceAsStream(loc)));
         return null;
     }
     
+    /**
+     * This function imports the image needed for the specified building. 
+     * 
+     * @param name the ID of the building in the form of a String
+     * @return the BufferedImage instance requested for the name
+     */
     public static BufferedImage importBuildingImage(String name){
         return importFromString("Graphics/Buildings/"+name+".png");
     }
-    
-    
-//////    public static BufferedImage getImage(int index){
-//////        return images.get(index);
-//////    }
-    
-//    public static BufferedImage getIcon(){
-//        BufferedImage i=null;
-////        try{
-////            i=importFromString("Graphics/frameIcon.png");
-////        } catch(IOException e){
-////            ErrorLogger.logIOError(e,"getIcon() - GraphicsAssets");
-////        }
-//        return i;
-//    }
     
     /**
      * This function imports the images for a specified top down region.
@@ -238,11 +243,17 @@ public class GraphicsAssets {
         return img;
     }
     
+    /**
+     * This function imports the BufferedImage used for the background in side
+     *  view game play mode. 
+     * 
+     * @param regionID the ID of the side view region for which the image is
+     *      being imported
+     * @return the BuffferedImage used as the background for the specified side
+     *      view region
+     */
     public static BufferedImage importSideViewBackground(int regionID){
-        
-        String id=StringTools.numToDigits(regionID,3);
-        
-        return importFromString("Graphics/SideView/Background/"+id+".png");
+        return importFromString("Graphics/SideView/Background/"+StringTools.numToDigits(regionID,3)+".png");
     }
     
     /**

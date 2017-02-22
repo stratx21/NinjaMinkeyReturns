@@ -18,8 +18,14 @@ public class SideViewAI extends AI{
      */
     public int MAX_VELOCITY=1;
     
+    /**
+     * The x value, in tiles, at which the user hits in order to spawn this AI.
+     */
     public int startX=2000;
     
+    /**
+     * If this AI is currently active and visible. 
+     */
     public boolean active=false;
     
     //public CListener dead=null;
@@ -34,20 +40,44 @@ public class SideViewAI extends AI{
      */
     public boolean facingRight=false;
     
+    /**
+     * The span of the AI; used for collisions and general drawing. 
+     */
     public Rectangle span=new Rectangle();
     
+    /**
+     * These boolean values concern the AI's attacking status. 
+     */
     public boolean attacking=false,wasAttacking=false,canAttack=true; 
     
+    /**
+     * These boolean values concern the AI's jumping status. 
+     */
     public boolean jumping=false,wasJumping=false;
     
+    /**
+     * An integer used to control the flow of the AI's drawing. 
+     */
     public int sequence=0;
     
+    /**
+     * How much damage the AI deals per attack. 
+     */
     public double damage=2;
     
+    /**
+     * If this AI is defeated. 
+     */
     public boolean defeated=false;
     
+    /**
+     * The CListener instance used to spawn a Projectile object. 
+     */
     public static CListener spawnProjectile=null;
     
+    /**
+     * The HitBox object used for melee attacks in order to attack the player. 
+     */
     public HitBox meleeAttack=null;
     
     /**
@@ -61,6 +91,15 @@ public class SideViewAI extends AI{
      */
     public int[] velocity=new int[]{0,0};
     
+    /**
+     * This function draws the visual representation of this object. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game. 
+     * @param camX the x location of the camera (location points)
+     * @param camY the y location of the camera (location points)
+     */
     public void draw(java.awt.Graphics g,int camX,int camY){}
     
     /**
@@ -158,10 +197,16 @@ public class SideViewAI extends AI{
 //        
 //    }
     
+    /**
+     * This function is used for the flow of the start of an attack. 
+     */
     public void startAttack(){
         
     }
     
+    /**
+     * This function is used for the flow of the end of an attack. 
+     */
     public void endAttack(){
         wasAttacking=false;
         attacking=false;
@@ -268,14 +313,31 @@ public class SideViewAI extends AI{
         velocity[1]+=a;
     }
     
+    /**
+     * This function is used to retrieve the integer value of the height of the 
+     *  SideViewAI object. 
+     * 
+     * @return the height of this SideViewAI object
+     */
     public int getHeight(){
         return span.height;
     }
     
+    /**
+     * This function is used to retrieve the integer value of the width of the 
+     *  SideViewAI object. 
+     * 
+     * @return the width of this SideViewAI object
+     */
     public int getWidth(){
         return span.width;
     }
     
+    /**
+     * This function returns the jump velocity of this AI object. 
+     * 
+     * @return the jump velocity of this AI object
+     */
     public int getJumpVelocity(){
         return 3;
     }

@@ -19,9 +19,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class AudioAssets {
 
     /**
-     *
+     *The Clip instance used to control the music. 
      */
-    public static Clip music=null;
+    private static Clip music=null;
     
     /**
      * This function uses the String input to play a certain requested audio 
@@ -45,5 +45,22 @@ public class AudioAssets {
             ErrorLogger.logError(e,"AudioAssets.play(String)");
         }
         }
+    }
+    
+    /**
+     * This function returns the instance of the Clip that is used for the 
+     *  music.
+     * 
+     * @return 
+     */
+    public static Clip getMusic(){
+        return music;
+    }
+    
+    /**
+     * This function stops the music clip that plays throughout the game. 
+     */
+    public static void stopMusic(){
+        music.stop();
     }
 }

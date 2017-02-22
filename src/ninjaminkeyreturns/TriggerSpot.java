@@ -7,7 +7,7 @@ package ninjaminkeyreturns;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class TriggerSpot {
     
@@ -16,8 +16,14 @@ public class TriggerSpot {
      */
     private int[] location=new int[2];
     
+    /**
+     * The coordinates to go to once triggered (if applicable) 
+     */
     private int[] coordsToGoTo=new int[2];
     
+    /**
+     * The save index to check in order to use this trigger spot. 
+     */
     public int saveCheckIndex=-1;
     
     //public int TYPE_ID=0;
@@ -113,10 +119,24 @@ public class TriggerSpot {
         return location[1];
     }
     
+    /**
+     * This function sets the location of the TriggerSpot object. 
+     * 
+     * @param x the x location (in tiles)
+     * @param y the y location (in tiles)
+     */
     public void setLocation(int x,int y){
         location=new int[]{x,y};
     }
     
+    /**
+     * This function returns the coordinates for the player to go to when going
+     *  to another region. 
+     * 
+     * @return the integer array of x and y coordinates to which the player 
+     *      should go to when going to the next region that this TriggerSpot
+     *      leads it to. 
+     */
     public int[] getCoordsToGoTo(){
         return coordsToGoTo;
     }

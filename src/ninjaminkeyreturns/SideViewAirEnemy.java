@@ -84,6 +84,11 @@ public class SideViewAirEnemy extends SideViewAI{
         meleeAttack=null;
     }
     
+    /**
+     * This function returns the jump velicty of this AI. 
+     * 
+     * @return the jump velocity of this AI
+     */
     @Override
     public int getJumpVelocity(){//so that the enemy does not fall from gravity
         return 0;

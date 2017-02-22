@@ -15,13 +15,30 @@ import java.awt.Graphics;
 public class NavigablePrompt extends Prompt{//this prompt is used for menus and such. It will have different options that the user can choose. It does not have a KeyListener so it requires functions to be called as the keys are pressed in this situation
     
     
-    public CListener done=null;
+    /**
+     * The CListener instance used when the NavigablePrompt is finished. 
+     */
+    protected CListener done=null;
     
-    public static int chooseAgain=10;
+    /**
+     * The integer value concerning the sequence that decreases to zero so that
+     *  the user may choose another option on the menu; this is used so that 
+     *  options cannot be spammed and so that the controls do not move too 
+     *  quickly for the user. 
+     */
+    protected static int chooseAgain=10;
     
+    /**
+     * The integer value concerning the sequence that decreases to zero so that
+     *  the user may move to another option on the menu. 
+     */
+    private int moveAgainSequence=0;
+    
+    /**
+     * The boolean value concerning if the prompt should draw the health bar. 
+     */
     private boolean drawStats=false;
     
-    //private int indent=0;
     
     /**
      * The choice that the user is currently on (the "cursor" is on).
@@ -55,11 +72,11 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
      *      pressed
      */
     public void loopCalculate(boolean[] keysPressed){
-        System.out.println(cursorLocation);
         
         if(keysPressed[4]&&chooseAgain==0){//selected one
             choices[cursorLocation].activate.actionPerformed();
-            System.out.println("SELECTED ONE!"+cursorLocation);
+            ErrorLogger.logEvent("User chose option #"+cursorLocation);
+            chooseAgain=10;
         }
         
         if(chooseAgain>0)
@@ -93,7 +110,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
                 choices[i].setSelected(false);
     }
     
-    private int moveAgainSequence=0;
+    
     
     /**
      * This function draws the graphical representation of the NavigablePrompt
@@ -123,19 +140,5 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
         if(drawStats)
             Player.drawHealthBar(g);
     }
-    
-//    public void calculateIndent(){
-//        String typicalDraw="";
-//        for(int i=0;i<choices.length;i++)
-//            typicalDraw+=choices[i].getText();
-//        for(int i=0;i<choices.length-1;i++)
-//            typicalDraw+="  ";
-//        typicalDraw+=">";
-//            
-//        indent=(int)((GAME_SPAN.width)-(2*0.05*GAME_SPAN.width)-StringTools.getPixelWidth(typicalDraw, font))/2;
-//        
-//        
-//        System.out.println("indent (prompt):: "+indent);
-//    }
     
 }

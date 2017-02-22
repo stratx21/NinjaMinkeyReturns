@@ -5,15 +5,12 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class TopDownRunner extends GameRunner{//in top down mode only one key can be noticed as held
     
@@ -51,6 +48,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     PlainPrompt talkingPrompt=null;
     
+    /**
+     * The prompt used for the pause menu. 
+     */
     NavigablePrompt pausePrompt=null;
     
     /////////////////
@@ -81,7 +81,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         setup(playerStartX,playerStartY);
         region=new TopDownRegion(currentRegion);
         Profile.lastKnownRegionTopDown=currentRegion;
-        //System.out.println("showAfterPrompt:: "+showAfterPrompt);
         if(showAfterPrompt&&lastTriggeredAI>-1)
             comingBackStartPrompt();
         for(TopDownAI ai:region.AIs){//put in player info for all AIs
@@ -102,8 +101,11 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         Prompt.resetFont();
     }
     
+    /**
+     * This function starts up the prompt for the AI to speak to the user when
+     *  coming back from a side view mission. 
+     */
     private void comingBackStartPrompt(){
-        //System.out.println("REACHED COMING BACK THINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         player.setDisabled(true);
         showingPromptTalking=true;
         talkingPrompt=new PlainPrompt(StringTools.formatStringForPrompt(region.getAI(lastTriggeredAI).getAfterPrompt(),Prompt.font,(int)(GAME_SPAN.getWidth()*0.9)),
@@ -163,12 +165,16 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
     
     
     
+    /**
+     * This function includes the flow for triggering a given AI. 
+     * 
+     * @param a the index of the AI to trigger 
+     */
     private void triggeringFlow(int a){
         if(a!=-1){
                 player.setDisabled(true);
                 TriggerSpot hit=region.getTriggerSpot(a);
                 if(hit.toRegion){//is going to a different region
-//                    System.out.println("to region????");
                     //move to another region....
                     Profile.playerLocation=hit.getCoordsToGoTo();//set the new coordinates
                     done.actionPerformed(hit.regionToGoTo,true);
@@ -176,7 +182,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 } else if(hit.AI_Triggered>-1){
                     //call on the triggered AI
                     lastTriggeredAI=hit.AI_Triggered;
-                    System.out.println("triggering AI from runner.... ");
+                    ErrorLogger.logEvent("triggering AI from runner.... ");
                     focusedAI=region.triggerAI(hit.AI_Triggered,player.getX(),player.getY(),AIdone=new CListener(){
                         @Override
                         public void actionPerformed(byte facing){//after the AI has approached the player::
@@ -204,6 +210,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
     }
     
+    /**
+     * This is used for when the user can pause again. 
+     */
     private int sequencePauseAgain=0;
     
     /**
@@ -213,8 +222,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      * PRE: player.travelling is false (player is not already moving between tiles)
      * 
      */
-    private void playerKeysFlow(){//may have other options soon for an alternate menu? may just use another panel for that though..
-        //System.out.println("to playerkeysflow");
+    private void playerKeysFlow(){
         //note:: controls index order - up, down, left, right, attack, other attack
         
         if(currentKey[0]&&!player.getDisabled()){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
@@ -226,7 +234,6 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         }else if(currentKey[2]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()-1,player.getY())){
                 player.moveStart(1);
-//                System.out.println("move");
             }
         }else if(currentKey[3]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
@@ -263,47 +270,39 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
             
             if(!a){
                 AudioAssets.play("Error");
-                System.out.println("PLAYED ERROR SOUND");
             }
         }else if(currentKey[5]){//SETUP   *   future work
             
         } else if(currentKey[6]&&sequencePauseAgain==0){//pause
-            //System.out.println("pausing... . .. . ."+showingPromptPause);
             if(!showingPromptPause){
-                System.out.println("-paused-");
+                ErrorLogger.logEvent("Paused");
                 sequencePauseAgain=10;
                 currentKey[6]=false;
                 showingPromptPause=true;
                 player.setDisabled(true);
                 setupPausePrompt();
             } else{// is showing the prompt already
-                System.out.println("ENDED PAUSE PROMPT BY HITTING THE P KEY");
                 showingPromptPause=false;
                 player.setDisabled(false);
                 pausePrompt=null;
                 sequencePauseAgain=10;
             }
         }
-        
-        //System.out.println("currentKey[6]&&sequencePauseAgain==0 "+currentKey[6]+"  "+sequencePauseAgain);
-        
-        //***** NOTE:: would it be more efficient to pass the array of booleans thru, then
-        // carry on the above process for keys inside the player class? (depends on future
-        // changes)
     }
     
+    /**
+     * This function sets up the pause prompt. 
+     */
     private void setupPausePrompt(){
         pausePrompt=new PausePrompt(true,new CListener(){
                     @Override
                     public void actionPerformed(int choice){//when done
-                        //System.out.println("CHOICE=="+choice);
                         switch(choice){
                             case 0://resume
                                 showingPromptPause=false;
                                 pausePrompt=null;
                                 sequencePauseAgain=0;
                                 player.setDisabled(false);
-                                System.out.println("ENDED PAUSE PROMPT BY CHOOSING THE OPTION IN THE MENU");
                                 break;
                             case 1://options
                                 pausePrompt=new OptionsPrompt(false,new CListener(){
@@ -329,13 +328,21 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                 });
     }
     
+    /**
+     * This function triggers an AI based on the player hitting Select on a 
+     *  certain spot. 
+     * 
+     * @param detectX the x position to detect at
+     * @param detectY the y position to detect at
+     * @return if an AI was triggered
+     */
     private boolean triggerAIFromKey(int detectX,int detectY){
         int triggeredAI=region.getAIAtSpotInteger(detectX,detectY);
         
         if(triggeredAI!=-1&&triggeredAI<region.AIs.size()){
             TopDownAI ai=region.getAI(triggeredAI);
             //call on the triggered AI
-            System.out.println("triggering AI from runner (selected with SELECT function) .... ");
+            ErrorLogger.logEvent("triggering AI from runner (selected with SELECT function) .... ");
             focusedAI=region.triggerAI(triggeredAI,player.getX(),player.getY(),AIdone=new CListener(){
                 @Override
                 public void actionPerformed(byte facing){//after the AI has approached the player::
@@ -373,26 +380,5 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         
         //** code for fading out, then showing the next biome/region pic, then going back....
     }
-    
-    
-    //////////////////
-    
-//    @Override
-//    public void keyTypedFlow(char typed){
-//        
-//    }
-//    
-//    /**
-//     * PRE::
-//     * @param typed 
-//     */
-//    @Override
-//    public void keyPressedFlow(char typed){
-////        System.out.println("key pressed:: "+typed);
-//    }
-//    
-//    @Override
-//    public void keyReleasedFlow(char typed){
-//    }
     
 }

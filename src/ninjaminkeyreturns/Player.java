@@ -27,7 +27,7 @@ public class Player {
      * This tells if the player is travelling, which could be walking or jumping
      *  or falling. 
      */
-    public boolean travelling=false;
+    protected boolean travelling=false;
     
     /**
      * The java.awt.Rectangle object used for the sake of collisions and 
@@ -47,18 +47,17 @@ public class Player {
      * An ArrayList containing all the images that are used to draw the 
      *  graphical representation of the player. 
      */
-    public ArrayList<BufferedImage> images=new ArrayList<>();
+    protected ArrayList<BufferedImage> images=new ArrayList<>();
     
-//    /**
-//     * This sets up the player using a certain location with x and y 
-//     *  coordinates.
-//     * 
-//     * @param loc 
-//     */
-//    public Player(int[] loc){
-//        location=loc;
-//    }
     
+    /**
+     * This function draws the player's health bar to display to the user how 
+     *  much health is remaining. 
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game.  
+     */
     public static void drawHealthBar(Graphics g){
         g.setColor(Color.GRAY);
         g.fillRect(SQUARE_SIZE/4, SQUARE_SIZE/4, SQUARE_SIZE*2, SQUARE_SIZE/2);

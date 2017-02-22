@@ -5,7 +5,6 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -58,12 +57,19 @@ public class SideViewPlayer extends Player{
      */
     private boolean canJump=true;
     
+    /**
+     * If the player is falling.
+     */
     private boolean falling=false;
     
+    /**
+     * The CListener instance used to create a HitBox that will affect the AI
+     *  enemies. 
+     */
     public CListener makeHitBox=null;
     
     /**
-     * This tells if the player is currently jumping.
+     * This tells if the player is currently or was jumping.
      */
     private boolean jumping=false,
             wasJumping=false; 
@@ -101,19 +107,6 @@ public class SideViewPlayer extends Player{
     }
     
     /**
-     * This sets up the SideViewPlayer with an initial location and a size.
-     * 
-     * @param loc the starting location of the player (in location points)
-     * @param spanX the width of the player (in location points)
-     * @param spanY the height of the player (in location points)
-     */ 
-//    public SideViewPlayer(int[] loc,int spanX,int spanY){
-//        this(loc);
-//        span=new Rectangle((int)span.getX(),(int)span.getY(),spanX,spanY);
-//        
-//    }
-    
-    /**
      * This draws the SideViewPlayer.
      * 
      * @param g the java.awt.Graphics object that is used to form the 
@@ -123,10 +116,7 @@ public class SideViewPlayer extends Player{
      * @param camY the y location of the camera
      */
     public void draw(Graphics g,int camX,int camY){
-        //moveByVelocities();
-        //System.out.println("at player drawWWWWwwWWWWwWWwwW!");
-        //System.out.println(GAME_SPAN.width+","+GAME_SPAN.height+"  square size:: "+SQUARE_SIZE+"  MULTIPLIER:: "+POINT_TO_PIXEL_MULTIPLIER);
-        
+        //uncomment to see the hitbox drawn :: 
 //        g.setColor(Color.blue);
 //        g.fillRect((int)((span.getX()-camX+10)*(POINT_TO_PIXEL_MULTIPLIER)-SQUARE_SIZE/2),
 //                (int)((span.getY()-camY-5)*(POINT_TO_PIXEL_MULTIPLIER)),
@@ -146,7 +136,6 @@ public class SideViewPlayer extends Player{
                         (int)((span.getY()-camY-10)*(POINT_TO_PIXEL_MULTIPLIER)),
                         (int)(SQUARE_SIZE*2.5),SQUARE_SIZE*2,null);
             
-//            System.out.println(t+" "+imageSequence);
             
             if(imageSequence==44){
                 imageSequence=0;
@@ -154,7 +143,6 @@ public class SideViewPlayer extends Player{
             }else
                 imageSequence++;
             
-            //System.out.println(imageSequence);
                 
             
         }else if(velocity[0]==0&&velocity[1]==0){
@@ -180,9 +168,7 @@ public class SideViewPlayer extends Player{
             wasJumping=jumping;
         }
             
-        
-        //System.out.println("PLAYER:: x: "+(span.getX())+"  y: "+(span.getY())+"  xV: "+velocity[0]+"  yV: "+velocity[1]+"  jumping: "+jumping+" PLAYEER VELOCITY:: "+velocity[0]);
-        
+                
     }
     
     /**
@@ -234,9 +220,7 @@ public class SideViewPlayer extends Player{
                 25,
                 40,
                 meleeDamage));
-        
-        //System.out.println(facingRight+" = facingRight");
-        
+                
     }
     
     /**

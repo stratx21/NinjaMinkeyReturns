@@ -13,78 +13,141 @@ import static ninjaminkeyreturns.CPanel.GAME_SPAN;
 
 /**
  *
- * @author 0001058857
+ * @author Josh Holland
  */
 public class StartPanel extends CPanel{
+    
+    /**
+     * This is an array of boolean values concerning which keys of which 
+     *  controls are being pressed and is used for the flow of the game and for
+     *  the flow of the menus. 
+     */
     boolean[] keysPressed=new boolean[7];
     
+    /**
+     * This is a boolean value concerning if this class is finished drawing the
+     *  visual display for the user. 
+     */
     boolean dones=false;
     
+    /**
+     * The integer values of the max ping of time that the timePing variable 
+     *  should get to in order to move on. 
+     */
+    private int maxIntro=150,maxInstructions=300;
+    
+    /**
+     * The instance of the Prompt that is used for the main menu and the options
+     *  menu. 
+     */
     NavigablePrompt menu=null;
     
-    private int time=0;
+    /**
+     * This integer value is a sequence value used to tell when to end the sets
+     *  of each image. 
+     */
+    private int timePing=0;
     
+    /**
+     * This boolean value concerns if it is showing the initial images of the 
+     *  credits or the initial images of the instructions. 
+     */
     boolean initialImages=true;
     
+    /**
+     * This is a boolean value concerning if the StartPanel is currently 
+     *  displaying instructions. 
+     */
     boolean instructionsRun=false;
     
+    /**
+     * This is the array of BufferedImage instances that has either the credit
+     *  images for startup or the instruction images for the new game, but also
+     *  has a background image for the menu as the third image. 
+     */
     BufferedImage[] startImages=new BufferedImage[3];//third one is the background for the main menu
     
+    /**
+     * The CListener instance that is used to return back to the GameFrame class
+     *  in order to start the game. 
+     */
     CListener done=null;
     
+    /**
+     * This function sets up the StartPanel.
+     * 
+     * @param startup this is the boolean value concerning if this panel has
+     *      been initialized because the program is starting
+     * @param d the CListener used to return to the GameFrame class in order to
+     *      start the game
+     */
     public StartPanel(boolean startup,CListener d){
         initialImages=startup;
         startImages=GraphicsAssets.importStartupImages();
         
         done=d;
         
-        ErrorLogger.logEvent("Started StartPanel");
+        if(!startup)
+            timePing=maxIntro-2;
         
         this.repaint();
     }
     
+    /**
+     * The function that is used to create a loop for the game's calculations
+     *  and changes in graphics.
+     * 
+     * @param g the java.awt.Graphics object that is used to form the 
+     *  graphical representations of the game objects on the frame Container
+     *  that holds the game.  
+     */
     @Override
     public void paintComponent(Graphics g){
-        g.setColor(Color.black);
-        g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
-        //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
-        //System.out.println(startImages[0]+"  "+startImages[1]+" "+startImages[2]);
-        if(initialImages){
-            //System.out.println(" time oneee :: "+time+" "+GAME_SPAN.getX()+" "+GAME_SPAN.getY()+" "+GAME_SPAN.getWidth()+" "+GAME_SPAN.getHeight());
-            g.drawImage(startImages[instructionsRun?time/150:time/75],0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            if((!instructionsRun&&time>148)
-                ||(instructionsRun&&time>298)){
-                //System.out.println("THIS CODE IS AUTISTIC");
-                initialImages=false;
-                if(!instructionsRun)
-                    setupMenu();
-            }else
-                time++;
-                
-        } else if(instructionsRun&&!dones){
-            dones=true;
-            done.actionPerformed();
-            
-            
-        }else{
-            
-            //draw background
-            g.drawImage(startImages[2],(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            if(menu!=null){
-                menu.draw(g);
-                menu.loopCalculate(keysPressed);
+        if(!dones){
+            g.setColor(Color.black);
+            g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
+            //System.out.println("drawing start panel  "+(instructionsRun?time/75:time/50));
+            //System.out.println(startImages[0]+"  "+startImages[1]+" "+startImages[2]);
+            if(initialImages){
+                //System.out.println(" time oneee :: "+time+" "+GAME_SPAN.getX()+" "+GAME_SPAN.getY()+" "+GAME_SPAN.getWidth()+" "+GAME_SPAN.getHeight());
+                g.drawImage(startImages[instructionsRun?timePing/(maxInstructions/2):timePing/(maxIntro/2)],0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+                if((!instructionsRun&&timePing>maxIntro-2)
+                    ||(instructionsRun&&timePing>maxInstructions-2)){
+                    //System.out.println("THIS CODE IS AUTISTIC");
+                    initialImages=false;
+                    if(!instructionsRun)
+                        setupMenu();
+                }else
+                    timePing++;
+
+            } else if(instructionsRun&&!dones){
+                dones=true;
+                done.actionPerformed();
+
+
+            }else{
+
+                //draw background
+                g.drawImage(startImages[2],(int)GAME_SPAN.getX(),(int)GAME_SPAN.getY(),(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+                if(menu!=null){
+                    menu.draw(g);
+                    menu.loopCalculate(keysPressed);
+                }
             }
+
+            try{
+                Thread.sleep(40);
+            }catch(Exception e){
+
+            }
+            if(!dones)
+                this.repaint();
         }
-            
-        try{
-            Thread.sleep(40);
-        }catch(Exception e){
-            
-        }
-        if(!dones)
-            this.repaint();
     }
     
+    /**
+     * This function sets up the main menu. 
+     */
     private void setupMenu(){
         menu=new StartupPrompt(false,new CListener(){
                     @Override
@@ -95,6 +158,7 @@ public class StartPanel extends CPanel{
                                 //done.actionPerformed();
                                 break;
                             case 1://load an old save
+                                dones=true;
                                 boolean a=false;
                                 try{
                                     a=Profile.open();
@@ -128,19 +192,27 @@ public class StartPanel extends CPanel{
                 });
     }
     
+    /**
+     * This function includes the flow for starting a new instance of the game,
+     *  in which the player has no progress. 
+     */
     private void startNewGame(){
         Profile.startNewGame();         
         startImages=GraphicsAssets.importInstructionImages();
         initialImages=true;
-        time=0;
+        timePing=0;
         instructionsRun=true;
         menu=null;
+        //done.actionPerformed();
     }
     
-    private void keysFlow(){
-        
-    }
-    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyPressed(KeyEvent e){
         char key=Character.toUpperCase(e.getKeyChar());
@@ -154,6 +226,14 @@ public class StartPanel extends CPanel{
         }
     }
     
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
+    @Override
     public void keyReleased(KeyEvent e){
         char key=Character.toUpperCase(e.getKeyChar());
         

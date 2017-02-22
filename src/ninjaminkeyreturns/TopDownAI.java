@@ -6,11 +6,10 @@
 package ninjaminkeyreturns;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class TopDownAI extends AI{
     
@@ -115,13 +114,19 @@ public class TopDownAI extends AI{
      * @param x the x coordinate at which it starts
      * @param y the y coordinate at which it starts
      * @param ID the ID of the AI
-     * @param mssnGivenID the ID of the mission that this AI gives
      * @param vsble if the AI is visible
      * @param prmptBefore the prompt for before the mission (if one at all; if 
      *      there is not one then it is the prompt that will be shown to the 
      *      user when this AI is talked to)
      * @param prmptAfter the prompt for after the mission (if applicable)
      * @param instSideView if the AI forces the user into a side view mission
+     * @param saveIndex the save index for the completed mission that this AI
+     *      gives
+     * @param itemNeeded the ID of the item needed in order to talk to this AI
+     * @param saveIndexNotTalk the save index needed in order to not be able
+     *      to talk to this AI
+     * @param saveIndex2Talk the save index needed to talk to this AI
+     * @param sideViewGoTo the side view region ID to go to (if applicable)
      */
     public TopDownAI(int x,int y,int ID,int vsble,String prmptBefore,String prmptAfter,int instSideView,int saveIndex,int itemNeeded,int saveIndexNotTalk,int saveIndex2Talk,int sideViewGoTo){
         images=GraphicsAssets.importTopDownAIImages(AI_ID=ID);
@@ -135,7 +140,7 @@ public class TopDownAI extends AI{
         saveIndexToNotTalk=saveIndexNotTalk;
         saveIndexToTalk=saveIndex2Talk;
         SIDEVIEW_REGION_TO_GO_TO_ID=sideViewGoTo;
-        System.out.println("side view region to goo toooooo :: "+sideViewGoTo);
+        ErrorLogger.logEvent("side view region to goo to is "+sideViewGoTo);
     }
     
     /**
@@ -202,7 +207,6 @@ public class TopDownAI extends AI{
                         GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2+offCenter[1],
                         SQUARE_SIZE,SQUARE_SIZE,null);
             }else{
-                //System.out.println("drawingIdle.............................................");
                 g.drawImage(images.get(directionFacing*5),
                         GAME_SPAN.width/2-SQUARE_SIZE*(playerLocApproaching[0]-location[0])-SQUARE_SIZE/2-offX,
                         +GAME_SPAN.height/2-SQUARE_SIZE*(playerLocApproaching[1]-location[1])-SQUARE_SIZE/2-offY
@@ -324,6 +328,12 @@ public class TopDownAI extends AI{
         return location[1];
     }
     
+    /**
+     * This function sets the location of the AI. 
+     * 
+     * @param x the x location to set the location to
+     * @param y the y location to set the location to
+     */
     public void setLocation(int x,int y){
         location=new int[]{x,y};
     }

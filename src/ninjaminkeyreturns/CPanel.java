@@ -52,7 +52,7 @@ public class CPanel extends JPanel implements KeyListener{
      * 
      * @param g the java.awt.Graphics object that is used to form the 
      *  graphical representations of the game objects on the frame Container
-     *  that holds the game. 
+     *  that holds the program. 
      */
     @Override
     public void paintComponent(Graphics g){}
@@ -81,17 +81,38 @@ public class CPanel extends JPanel implements KeyListener{
         System.out.println(GAME_SPAN.getWidth()+","+GAME_SPAN.getHeight());
         
     }
-
+    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         
     }
-
+    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         
     }
-
+    
+    /**
+     * This function is overriden from the KeyListener interface in order to 
+     *  control the flow of the user's input. 
+     * 
+     * @param e the KeyEvent instance that is used to determine which key was
+     *      pressed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         

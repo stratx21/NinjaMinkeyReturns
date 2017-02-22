@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Josh
+ * @author Josh Holland
  */
 public class ImageUtils {
     

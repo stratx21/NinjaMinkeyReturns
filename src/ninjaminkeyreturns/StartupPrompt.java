@@ -5,8 +5,6 @@
  */
 package ninjaminkeyreturns;
 
-import java.awt.Graphics;
-
 /**
  *
  * @author Josh Holland

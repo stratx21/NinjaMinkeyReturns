@@ -40,14 +40,10 @@ public class GameFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
 //        this.setSize(FRAME_SIZE[0],FRAME_SIZE[1]);
-        this.setVisible(true);
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        this.setVisible(true);        
         
         //get the screen resolution::
         Dimension s=Toolkit.getDefaultToolkit().getScreenSize();
-        //CPanel.GAME_SPAN.width=GAME_SPAN.width=(int)s.getWidth();
-        //CPanel.GAME_SPAN.height=GAME_SPAN.height=(int)s.getHeight();
         
         CPanel.calculateTopDownGameSize((int)s.getWidth(),(int)s.getHeight());
         
@@ -73,15 +69,18 @@ public class GameFrame extends JFrame{
         //only here because of testing/developing purposes::
         
         
-//        switchToMainMenuPanel(true);
-        switchToGamePanel();
+        switchToMainMenuPanel(true);
+//        switchToGamePanel();
         
         
         
     }
     
+    /**
+     * This function switches the panel type to be the GamePanel in order for 
+     *  the player to play the game. 
+     */
     private void switchToGamePanel(){
-        System.out.println("switch to game panel!krmfkngkdddddddddddddddddddddddddddddddddddd");
         currentPanel=null;
         currentPanel=new GamePanel(new CListener(){
             @Override
@@ -93,23 +92,33 @@ public class GameFrame extends JFrame{
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        currentPanel.repaint();
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up game CPanel");
     }
     
+    /**
+     * This function sets up the main menu and removes the panel and flow of 
+     *  the game.
+     * 
+     * @param startup the boolean value concerning if the program is just 
+     *      starting
+     */
     private void switchToMainMenuPanel(boolean startup){
-        System.out.println("switching to main menu panelllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         currentPanel=null;
         currentPanel=new StartPanel(startup,new CListener(){
             @Override
             public void actionPerformed(){
+                System.out.println("switching to main menu panelllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 switchToGamePanel();
             }
         });
+        currentPanel.setVisible(true);
         this.add(currentPanel);
         this.addKeyListener(currentPanel);
         super.setVisible(true);
         this.repaint();
+        currentPanel.repaint();
         Prompt.resetFont();
         ErrorLogger.logEvent("Finished setting up main menu CPanel");
     }
@@ -120,7 +129,6 @@ public class GameFrame extends JFrame{
      *  accuracy of the code. 
      * 
      */
-    
     private void setSIZE(){
         
         //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
@@ -131,19 +139,4 @@ public class GameFrame extends JFrame{
         //CPanel.FRAME_SIZE=FRAME_SIZE;
         this.setSize(GAME_SPAN.width,GAME_SPAN.height);
     }
-    
-    /**
-     * This removes the old CPanel instance from this Container and adds a new
-     *  one that is specified by the parameter instance of CPanel. 
-     * 
-     * @param cp the instance of CPanel that is used to replace the current 
-     *      instance of CPanel that is added on to this Container
-     */
-//    private void setNewPanelType(CPanel cp){    
-////        this.setVisible(false);
-//        this.remove(currentPanel);
-//        currentPanel=cp;
-//        this.add(currentPanel);
-//        this.setVisible(true);
-//    }
 }
