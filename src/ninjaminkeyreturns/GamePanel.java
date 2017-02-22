@@ -173,7 +173,7 @@ public class GamePanel extends CPanel implements KeyListener{
     public void paintComponent(Graphics g){
         if(!dones){
             long firstTime=System.currentTimeMillis();
-
+            
             g.setColor(Color.black);
             g.fillRect(-1,-1,(int)GAME_SPAN.getWidth()+2,(int)GAME_SPAN.getHeight()+2);
 
