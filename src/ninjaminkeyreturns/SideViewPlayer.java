@@ -205,10 +205,12 @@ public class SideViewPlayer extends Player{
      *      false then it is a ranged attack (with the banana)
      */
     public void startAttack(boolean isMelee){
-        if(isMelee)
+        if(isMelee){
             attacking=true;
-        else
+        }else{
+            AudioAssets.play("Gun");
             shooting=true;
+        }
 
         //for both melee and ranged:: 
         canAttack=false;

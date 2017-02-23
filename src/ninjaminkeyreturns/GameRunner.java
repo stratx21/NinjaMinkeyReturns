@@ -23,6 +23,11 @@ public class GameRunner{
     public static char[] controls=new char[7]; 
     
     /**
+     * The integer value used to tell if the player put in the cheat code. 
+     */
+    private int cheatSequence=0;
+    
+    /**
      * A set of booleans that are used to tell what keys are currently being
      *  pressed. 
      */
@@ -131,6 +136,51 @@ public class GameRunner{
         }else if(typed==controls[6]){
             currentKey[6]=true;
         }
+        //extra easter egg sounds::
+        else if(typed=='V'){
+            AudioAssets.play("Pews");
+        } else if(typed=='H'){
+            AudioAssets.play("Ducks");
+        } else if(typed=='B'){
+            AudioAssets.play("Piggy");
+        } else if(typed=='2'){
+            AudioAssets.play("Sheepz1");
+        } else if(typed=='Q'){
+            AudioAssets.play("Sheepz2");
+        } else if(typed=='='){
+            AudioAssets.play("Sheepz3");
+        } else if(typed=='M'){
+            AudioAssets.play("Torpedo");
+        }
+        
+        switch(cheatSequence){
+            case 0: 
+                if(typed=='2') 
+                    cheatSequence++;
+                else
+                    cheatSequence=0;
+                break;
+            case 1: 
+                if(typed=='Q') 
+                    cheatSequence++;
+                else
+                    cheatSequence=0;
+                break;
+            case 2: 
+                if(typed=='=') 
+                    cheatSequence++;
+                else
+                    cheatSequence=0;
+                break;
+            case 3: 
+                if(typed=='=') {
+                    TopDownRegion.walkThroughWalls=!TopDownRegion.walkThroughWalls;
+                    AudioAssets.play("Ice");
+                } else
+                    cheatSequence=0;
+            break;
+        }
+        
     }
 
     /**

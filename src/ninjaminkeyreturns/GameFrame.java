@@ -152,6 +152,7 @@ public class GameFrame extends JFrame{
      */
     public static void drawLoadingNotification(){
         if(currentPanel!=null){
+            AudioAssets.play("Earth Quake");
             Graphics g=currentPanel.getGraphics();
             
             g.drawImage(loadingImage,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
