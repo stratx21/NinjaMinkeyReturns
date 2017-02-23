@@ -6,8 +6,10 @@
 package ninjaminkeyreturns;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -20,7 +22,13 @@ public class GameFrame extends JFrame{
      * The current instance of CPanel that is added on to this container that
      *  is used to display the graphical representation of the game. 
      */
-    private CPanel currentPanel;
+    private static CPanel currentPanel;
+    
+    /**
+     * The BufferedImage instance that is displayed to the user when the 
+     *  program is taking time to load or the player lost. 
+     */
+    private static BufferedImage loadingImage=null,lostImage;
     
     /**
      * The Rectangle object that represents the area in which the game 
@@ -66,7 +74,9 @@ public class GameFrame extends JFrame{
 //        AudioAssets.play("music");
 //        setNewPanelType(new MainMenu(this));
         
-        //only here because of testing/developing purposes::
+        loadingImage=GraphicsAssets.importLoadingImage();
+        lostImage=GraphicsAssets.importLoadingImage();
+        
         
         
         switchToMainMenuPanel(true);
@@ -82,9 +92,15 @@ public class GameFrame extends JFrame{
      */
     private void switchToGamePanel(){
         currentPanel=null;
+        drawLoadingNotification();
         currentPanel=new GamePanel(new CListener(){
             @Override
             public void actionPerformed(){
+                switchToMainMenuPanel(false);
+            }
+            @Override
+            public void actionPerformed(boolean a){
+                userLost();
                 switchToMainMenuPanel(false);
             }
         });
@@ -130,6 +146,34 @@ public class GameFrame extends JFrame{
         ErrorLogger.logEvent("Finished setting up main menu CPanel");
     }
     
+    
+    /**
+     * This function draws the loading image. 
+     */
+    public static void drawLoadingNotification(){
+        if(currentPanel!=null){
+            Graphics g=currentPanel.getGraphics();
+            
+            g.drawImage(loadingImage,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+        }
+    }
+    
+    /**
+     * The flow for when the user lost in order to draw the image. 
+     */
+    public void userLost(){
+        if(currentPanel!=null){
+            Graphics g=currentPanel.getGraphics();
+            g.drawImage(lostImage,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+            try{Thread.sleep(7500);}
+            catch(Exception e){
+                ErrorLogger.logEvent("Thread.sleep failed in GameFrame.userLost()");
+            }
+            
+            switchToMainMenuPanel(false);
+        }
+    }
+    
     /**
      * This function sets the size of the static variables concerning the 
      *  frame's size both in this class and in CPanel in order to enhance the
@@ -137,13 +181,6 @@ public class GameFrame extends JFrame{
      * 
      */
     private void setSIZE(){
-        
-        //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=(int)CPanel.GAME_SPAN.getWidth();
-        //CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=(int)CPanel.GAME_SPAN.getHeight();
-        
-        //CPanel.FRAME_SIZE[0]=FRAME_SIZE[0]=this.getWidth();
-        //CPanel.FRAME_SIZE[1]=FRAME_SIZE[1]=this.getHeight();
-        //CPanel.FRAME_SIZE=FRAME_SIZE;
         this.setSize(GAME_SPAN.width,GAME_SPAN.height);
     }
 }

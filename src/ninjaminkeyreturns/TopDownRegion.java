@@ -189,8 +189,8 @@ public class TopDownRegion extends Region{
      */
     public boolean canMoveToSpace(int x,int y){
         int t;
-        //return !hasAI(x,y)&&((t=getType(x,y))==00||t==02);
-        return true;
+        return !hasAI(x,y)&&((t=getType(x,y))==00||t==02);
+//        return true;
     }
 
     /**

@@ -19,7 +19,7 @@ public class Player {
     /**
      * The value of health that the player has.
      */
-    public static double health=200.0;
+    public static double health=750.0;
     
     
     

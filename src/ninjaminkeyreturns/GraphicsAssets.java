@@ -38,6 +38,26 @@ public class GraphicsAssets {
     }
     
     /**
+     * This function gets the bufferedImage for when the game is loading.  
+     * 
+     * @return the BufferedImage for when the game is loading
+     */
+    public static BufferedImage importLoadingImage(){
+        return importFromString("Graphics/Loading.png");
+    }
+    
+    /**
+     * This function gets the bufferedImage for when the player has lost. 
+     * 
+     * @return the BufferedImage for when the user lost
+     */
+    public static BufferedImage importLostImage(){
+        return importFromString("Graphics/Lost.png");
+    }
+    
+    
+    
+    /**
      * This function imports the BufferedImage instances that are used as the 
      *  instructions for a new game. 
      * 
