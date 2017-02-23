@@ -1,4 +1,4 @@
 3
-15,14,1000,1,-1,-1,1,-1,-1,"We care about your game playing","Have Fun??",04
+15,14,1000,1,-1,-1,1,-1,-1,"We care about your game playing","Have Fun?? By the way, you don't heal from fight to fight. Play carefully.",04
 18,28,1011,1,-1,-1,1,-1,-1,"This is a Battle.","This was a game sponsored by Josh Holland.",01
 15,27,1000,1,-1,-1,1,-1,-1,"Hello I am Template Character.","Thank you for playing Template Fight.",02
