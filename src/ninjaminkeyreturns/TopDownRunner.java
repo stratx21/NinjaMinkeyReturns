@@ -229,16 +229,23 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
         if(currentKey[0]&&!player.getDisabled()){//0-3 could be run by a loop? not necessarily better in this case except for code condensing ?
             if(region.canMoveToSpace(player.getX(),player.getY()-1))
                 player.moveStart(0);
+            else
+                player.setDirectionFacing((byte)0);
         }else if(currentKey[1]&&!player.getDisabled()){//NOTE:: (KEEP) ALL of these are for STARTING moving (1 square)
             if(region.canMoveToSpace(player.getX(),player.getY()+1))
                 player.moveStart(3);
+            else
+                player.setDirectionFacing((byte)3);
         }else if(currentKey[2]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()-1,player.getY())){
                 player.moveStart(1);
-            }
+            } else
+                player.setDirectionFacing((byte)1);
         }else if(currentKey[3]&&!player.getDisabled()){
             if(region.canMoveToSpace(player.getX()+1,player.getY()))
                 player.moveStart(2);
+            else
+                player.setDirectionFacing((byte)2);
         }else if(currentKey[4]&&!player.getDisabled()){//select
             boolean a=false,b=false;
             switch(player.getDirectionFacing()){
@@ -296,6 +303,9 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
      */
     //private int saveAgainSequence=0;
     
+    /**
+     * The boolean value used to tell if the game is saving. 
+     */
     public static boolean doneSaving=true;
     
     /**
@@ -307,6 +317,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                     public void actionPerformed(int choice){//when done
                         switch(choice){
                             case 0://resume
+                                setKeyPressedToFalse();
                                 showingPromptPause=false;
                                 pausePrompt=null;
                                 sequencePauseAgain=0;
@@ -327,6 +338,7 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                                 done.actionPerformed();
                                 break;
                             case 3://save
+                                setKeyPressedToFalse();
                                 //showingPromptPause=false;
                                 //pausePrompt=null;
                                 //sequencePauseAgain=0;
@@ -338,6 +350,14 @@ public class TopDownRunner extends GameRunner{//in top down mode only one key ca
                         }
                     }
                 });
+    }
+    
+    /**
+     * This function sets all of the keys pressed to false. 
+     */
+    public void setKeyPressedToFalse(){
+        for(int i=0;i<7;i++)
+            currentKey[i]=false;
     }
     
     /**

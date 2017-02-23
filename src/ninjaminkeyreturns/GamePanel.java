@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -29,6 +30,8 @@ public class GamePanel extends CPanel implements KeyListener{
      *  drawing the visual representation of the game. 
      */
     private boolean dones=false;
+    
+    private BufferedImage lostImage=null;
     
     /**
      * This is the CListener that is used to return to the main menu from the 
@@ -57,7 +60,7 @@ public class GamePanel extends CPanel implements KeyListener{
 //        timer.start();
         this.repaint();
         
-        
+        lostImage=GraphicsAssets.importLoadingImage();
         
         switchToTopDown();
         //switchToSideView();
@@ -90,8 +93,13 @@ public class GamePanel extends CPanel implements KeyListener{
         runner=new SideViewRunner(new CListener(){
             @Override
             public void actionPerformed(boolean won){
-                if(!won)
-                    backToMenu.actionPerformed(false);
+                Profile.health=Player.health;
+                if(!won){
+                    dones=true;
+                    userLost();
+                    AudioAssets.play("Death Noise");
+                    backToMenu.actionPerformed();
+                }
                 //if(!won)
                 //Player.health=Profile.MAX_HEALTH;
                 wonAndAfterPrompt=won;//so that it is originally false but if won here
@@ -192,6 +200,19 @@ public class GamePanel extends CPanel implements KeyListener{
             try{Thread.sleep(FRAME_DELAY-(System.currentTimeMillis()-firstTime));}catch(Exception e){}
             this.repaint();
         }
+    }
+    
+    
+    /**
+     * The flow for when the user lost in order to draw the image. 
+     */
+    public void userLost(){
+            Graphics g=this.getGraphics();
+            g.drawImage(lostImage,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
+            try{Thread.sleep(7500);}
+            catch(Exception e){
+                ErrorLogger.logEvent("Thread.sleep failed in GameFrame.userLost()");
+            }
     }
     
     

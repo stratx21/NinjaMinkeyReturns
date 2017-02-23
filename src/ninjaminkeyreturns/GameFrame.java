@@ -28,7 +28,7 @@ public class GameFrame extends JFrame{
      * The BufferedImage instance that is displayed to the user when the 
      *  program is taking time to load or the player lost. 
      */
-    private static BufferedImage loadingImage=null,lostImage;
+    private static BufferedImage loadingImage=null;
     
     /**
      * The Rectangle object that represents the area in which the game 
@@ -75,7 +75,7 @@ public class GameFrame extends JFrame{
 //        setNewPanelType(new MainMenu(this));
         
         loadingImage=GraphicsAssets.importLoadingImage();
-        lostImage=GraphicsAssets.importLoadingImage();
+        
         
         
         
@@ -100,7 +100,7 @@ public class GameFrame extends JFrame{
             }
             @Override
             public void actionPerformed(boolean a){
-                userLost();
+                //userLost();
                 switchToMainMenuPanel(false);
             }
         });
@@ -158,21 +158,7 @@ public class GameFrame extends JFrame{
         }
     }
     
-    /**
-     * The flow for when the user lost in order to draw the image. 
-     */
-    public void userLost(){
-        if(currentPanel!=null){
-            Graphics g=currentPanel.getGraphics();
-            g.drawImage(lostImage,0,0,(int)GAME_SPAN.getWidth(),(int)GAME_SPAN.getHeight(),null);
-            try{Thread.sleep(7500);}
-            catch(Exception e){
-                ErrorLogger.logEvent("Thread.sleep failed in GameFrame.userLost()");
-            }
-            
-            switchToMainMenuPanel(false);
-        }
-    }
+    
     
     /**
      * This function sets the size of the static variables concerning the 
