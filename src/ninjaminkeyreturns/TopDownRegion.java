@@ -282,7 +282,7 @@ public class TopDownRegion extends Region{
             }
         }
 
-        if(!ignoreRandomAIs&&REGION_ID!=103&&(int)(Math.random()*7)==-1&&canMoveToSpace(x,y+3)){
+        if(!ignoreRandomAIs&&REGION_ID!=103&&(int)(Math.random()*7)==1&&canMoveToSpace(x,y+3)){
             r=0;
             AIs.get(0).setLocation(x,y-5);
         }

@@ -27,7 +27,9 @@ Ninja Minkey Returns
 	-If the game's graphical representation seems to be glitching then try moving the window back and forth a couple times. 
 	-The bar in the top left that appears in the in game menu and in side view game play mode is your health. The red part
 		is what is reminaing and the grey is the part that has been lost. 
-	-When the game is won the user will enter a region with unwalkable spaces in the form of the text "YOU WIN". 
+	-There are two cheat codes in top down mode. They are used by typing the given strings while in movement mode.
+		-"2Q==" - > walk through walls
+		-"CUPINE" - > stop random AI spawning
 
 ==================================
 
