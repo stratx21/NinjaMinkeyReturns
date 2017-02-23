@@ -23,6 +23,15 @@ public class GameRunner{
     public static char[] controls=new char[7]; 
     
     /**
+     * The integer value used to tell if the player put in the cheat code. 
+     */
+    private int[] cheatSequence=new int[2];
+    
+    private boolean[] coming=new boolean[]{false,false};
+    
+    private String[] cheats=new String[]{"2Q==","CUPINE"};
+    
+    /**
      * A set of booleans that are used to tell what keys are currently being
      *  pressed. 
      */
@@ -131,6 +140,47 @@ public class GameRunner{
         }else if(typed==controls[6]){
             currentKey[6]=true;
         }
+        //extra easter egg sounds::
+        else if(typed=='V'){
+            AudioAssets.play("Pews");
+        } else if(typed=='H'){
+            AudioAssets.play("Ducks");
+        } else if(typed=='B'){
+            AudioAssets.play("Piggy");
+        } else if(typed=='2'){
+            AudioAssets.play("Sheepz1");
+        } else if(typed=='Q'){
+            AudioAssets.play("Sheepz2");
+        } else if(typed=='='){
+            AudioAssets.play("Sheepz3");
+        } else if(typed=='M'){
+            AudioAssets.play("Torpedo");
+        }
+        
+            for(int i=0;i<cheats.length;i++){
+                System.out.println(cheatSequence[i]);
+                if(cheatSequence[i]==cheats[i].length()-1){//done and successful
+                    switch(i){
+                        case 0: 
+                            TopDownRegion.walkThroughWalls=!TopDownRegion.walkThroughWalls;
+                            AudioAssets.play("Ice");
+                            break;
+                        case 1:
+                            TopDownRegion.ignoreRandomAIs=!TopDownRegion.ignoreRandomAIs;
+                            AudioAssets.play("Earth Quake");
+                            break;
+                    }
+                    cheatSequence[i]=0;
+                } else if(cheats[i].charAt(cheatSequence[i])==typed){
+                    coming[i]=true;
+                    cheatSequence[i]++;
+                } else{
+                    cheatSequence[i]=0;
+                    coming[i]=false;
+                }
+            }
+        
+        
     }
 
     /**

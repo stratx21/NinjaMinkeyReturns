@@ -74,6 +74,7 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
     public void loopCalculate(boolean[] keysPressed){
         
         if(keysPressed[4]&&chooseAgain==0){//selected one
+            AudioAssets.play("Ducks");
             choices[cursorLocation].activate.actionPerformed();
             ErrorLogger.logEvent("User chose option #"+cursorLocation);
             chooseAgain=10;
@@ -88,9 +89,11 @@ public class NavigablePrompt extends Prompt{//this prompt is used for menus and 
             if(keysPressed[2]){//left
                 cursorLocation-=1;
                 moveAgainSequence=10;
+                AudioAssets.play("Sheepz1");
             } else if(keysPressed[3]){//right
                 cursorLocation+=1;
                 moveAgainSequence=10;
+                AudioAssets.play("Sheepz3");
             }
             
         }

@@ -90,9 +90,40 @@ public class StartPanel extends CPanel{
         if(!startup){
             //timePing=maxIntro-2;
             setupMenu();
+        } else{
+            int delay=20;
+            AudioAssets.play("Sheepz2");
+            waitMilliseconds(delay);
+            AudioAssets.play("Error");
+            waitMilliseconds(delay);
+            AudioAssets.play("Banananananana");
+            waitMilliseconds(delay);
+            AudioAssets.play("Sinking");
+            waitMilliseconds(delay);
+            AudioAssets.play("Earth Quake");
+            waitMilliseconds(delay);
+            AudioAssets.play("Sheepz1");
+            waitMilliseconds(delay);
+            AudioAssets.play("Hurt");
+            waitMilliseconds(delay);
+            AudioAssets.play("Ice");
+            waitMilliseconds(delay);
+            AudioAssets.play("torpedo");
+            waitMilliseconds(delay);
+            AudioAssets.play("Sheepz3");
+            waitMilliseconds(delay);
+            AudioAssets.play("Ducks");
+            waitMilliseconds(delay);
+            AudioAssets.play("Piggy");
+            waitMilliseconds(delay);
+            AudioAssets.play("Sheepz2");
         }
         
         this.repaint();
+    }
+    
+    private void waitMilliseconds(int wait){
+        try{Thread.sleep(wait);}catch(Exception e){System.out.println("error sleeping in StartPanel.waitMilliseconds(int)");}
     }
     
     /**

@@ -425,6 +425,7 @@ public class SideViewRunner extends GameRunner{
             if(AI.span.intersects(a)){//AI was hit by this hitbox
                 AI.hit(a.getDamage());
                 if(a instanceof Projectile){
+                    AudioAssets.play("Hurt");
                     AI.setYVelocity(-2);
                     AI.incrementXVelocity(((Projectile)a).getXVelocity()/2);
                 } else{//is a plain hitbox; not a Projectile
