@@ -21,9 +21,10 @@ public class TopDownRegion extends Region{
     public ArrayList<TopDownAI> AIs=new ArrayList<>();
     
     /**
-     * A boolean value concerning if the player can walk through walls.
+     * A boolean value concerning if the player can walk through walls or can 
+     *  ignore the random chance of an AI appearing.
      */
-    public static boolean walkThroughWalls=false;
+    public static boolean walkThroughWalls=false,ignoreRandomAIs=false;
     
     /**
      * The ArrayList of Building objects in order to manage the buildings. 
@@ -281,7 +282,7 @@ public class TopDownRegion extends Region{
             }
         }
 
-        if(REGION_ID!=103&&(int)(Math.random()*7)==-1&&canMoveToSpace(x,y+3)){
+        if(!ignoreRandomAIs&&REGION_ID!=103&&(int)(Math.random()*7)==-1&&canMoveToSpace(x,y+3)){
             r=0;
             AIs.get(0).setLocation(x,y-5);
         }

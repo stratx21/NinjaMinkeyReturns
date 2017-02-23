@@ -25,7 +25,11 @@ public class GameRunner{
     /**
      * The integer value used to tell if the player put in the cheat code. 
      */
-    private int cheatSequence=0;
+    private int[] cheatSequence=new int[2];
+    
+    private boolean[] coming=new boolean[]{false,false};
+    
+    private String[] cheats=new String[]{"2Q==","CUPINE"};
     
     /**
      * A set of booleans that are used to tell what keys are currently being
@@ -153,33 +157,29 @@ public class GameRunner{
             AudioAssets.play("Torpedo");
         }
         
-        switch(cheatSequence){
-            case 0: 
-                if(typed=='2') 
-                    cheatSequence++;
-                else
-                    cheatSequence=0;
-                break;
-            case 1: 
-                if(typed=='Q') 
-                    cheatSequence++;
-                else
-                    cheatSequence=0;
-                break;
-            case 2: 
-                if(typed=='=') 
-                    cheatSequence++;
-                else
-                    cheatSequence=0;
-                break;
-            case 3: 
-                if(typed=='=') {
-                    TopDownRegion.walkThroughWalls=!TopDownRegion.walkThroughWalls;
-                    AudioAssets.play("Ice");
-                } else
-                    cheatSequence=0;
-            break;
-        }
+            for(int i=0;i<cheats.length;i++){
+                System.out.println(cheatSequence[i]);
+                if(cheatSequence[i]==cheats[i].length()-1){//done and successful
+                    switch(i){
+                        case 0: 
+                            TopDownRegion.walkThroughWalls=!TopDownRegion.walkThroughWalls;
+                            AudioAssets.play("Ice");
+                            break;
+                        case 1:
+                            TopDownRegion.ignoreRandomAIs=!TopDownRegion.ignoreRandomAIs;
+                            AudioAssets.play("Earth Quake");
+                            break;
+                    }
+                    cheatSequence[i]=0;
+                } else if(cheats[i].charAt(cheatSequence[i])==typed){
+                    coming[i]=true;
+                    cheatSequence[i]++;
+                } else{
+                    cheatSequence[i]=0;
+                    coming[i]=false;
+                }
+            }
+        
         
     }
 
