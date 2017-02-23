@@ -1,2 +1,2 @@
 1
-17,10,0000,1,-1,-1,1,-1,-1,What...? You're still alive?? This can't be right! I need to finish the job myself!,Dang it! I've gotta go tell the others!,0
+17,10,0000,1,-1,-1,1,-1,-1,What...? You're still alive?? This can't be right! I need to finish the job myself!,Dang it! I've gotta go tell the others!,00
