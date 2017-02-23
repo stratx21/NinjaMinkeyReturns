@@ -85,10 +85,13 @@ public class GamePanel extends CPanel implements KeyListener{
      * 
      */
     private void switchToSideView(){
+        runner=null;
+        GameFrame.drawLoadingNotification();
         runner=new SideViewRunner(new CListener(){
             @Override
             public void actionPerformed(boolean won){
-                
+                if(!won)
+                    backToMenu.actionPerformed(false);
                 //if(!won)
                 //Player.health=Profile.MAX_HEALTH;
                 wonAndAfterPrompt=won;//so that it is originally false but if won here
@@ -115,8 +118,8 @@ public class GamePanel extends CPanel implements KeyListener{
      */
     private void switchToTopDown(){
         
-        
-
+        runner=null;
+        GameFrame.drawLoadingNotification();
         runner=new TopDownRunner(new CListener(){
             @Override
             public void actionPerformed(int sideViewRegionID){//now about to go to a side view mission
@@ -190,6 +193,7 @@ public class GamePanel extends CPanel implements KeyListener{
             this.repaint();
         }
     }
+    
     
     /**
      * This function is overriden from the KeyListener interface in order to 
