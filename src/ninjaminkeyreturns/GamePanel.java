@@ -97,6 +97,7 @@ public class GamePanel extends CPanel implements KeyListener{
                 if(!won){
                     dones=true;
                     userLost();
+                    AudioAssets.play("Death Noise");
                     backToMenu.actionPerformed();
                 }
                 //if(!won)
