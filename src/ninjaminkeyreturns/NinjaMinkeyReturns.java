@@ -7,7 +7,7 @@ package ninjaminkeyreturns;
 
 /**
  *
- * @author Josh Holland
+ * @author Josh Holland and Ethan Dickey
  */
 public class NinjaMinkeyReturns{
 
